@@ -16,4 +16,4 @@ FOUNDATION_EXPORT const unsigned char IrohaSwiftVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <IrohaSwift/PublicHeader.h>
 
-
+int ed25519_create_seed(unsigned char *seed);
