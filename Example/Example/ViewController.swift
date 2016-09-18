@@ -16,7 +16,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         print(createSeed())
         var keyPair = createKeyPair()
+        print(keyPair)
         var sig = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: "Test")
+        print(sig)
         print(verify(keyPair.publicKey, signature: sig, message: "Test"))
     }
 
