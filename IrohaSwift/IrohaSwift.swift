@@ -58,3 +58,15 @@ func base64toArr(base64str:String, count:Int) -> Array<UInt8>{
     
     return decArr
 }
+
+public func connection(){}
+
+public func getAsset(){}
+
+public func assetTransfar(){}
+
+public func createAsset(){}
+
+public func getTransaction(){}
+
+public func getAllTransaction(){}

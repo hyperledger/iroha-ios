@@ -3,9 +3,28 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Item-->
+        <scene sceneID="sfv-gU-HK2">
+            <objects>
+                <navigationController id="dFF-rz-v5k" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="F2B-8N-Pth"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bUz-n2-fDm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="UUF-E7-Khy" kind="relationship" relationship="rootViewController" id="p4C-Qc-o9Q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OJ7-hS-Dhl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-764" y="693"/>
+        </scene>
+        <!--いろは-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -14,13 +33,125 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iroha-main-center" translatesAutoresizingMaskIntoConstraints="NO" id="r0G-9F-Szd">
+                                <rect key="frame" x="0.0" y="130" width="320" height="199.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="r0G-9F-Szd" secondAttribute="height" multiplier="69:43" id="ShJ-ac-E9x"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZE-0I-SAK">
+                                <rect key="frame" x="70" y="429.5" width="180" height="38.5"/>
+                                <color key="backgroundColor" red="0.85490196078431369" green="0.027450980392156862" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dZE-0I-SAK" secondAttribute="height" multiplier="228:49" id="Npe-XP-NcO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="口座作成">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="gyi-bn-sc1" kind="show" id="Xgc-8B-89X"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dZE-0I-SAK" secondAttribute="bottom" constant="100" id="78W-5q-hbb"/>
+                            <constraint firstAttribute="trailing" secondItem="dZE-0I-SAK" secondAttribute="trailing" constant="70" id="dCT-AW-orr"/>
+                            <constraint firstAttribute="trailing" secondItem="r0G-9F-Szd" secondAttribute="trailing" id="fhZ-Zv-VIC"/>
+                            <constraint firstItem="dZE-0I-SAK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="70" id="hcK-6r-MA9"/>
+                            <constraint firstItem="dZE-0I-SAK" firstAttribute="top" secondItem="r0G-9F-Szd" secondAttribute="bottom" constant="100" id="m95-ve-jDX"/>
+                            <constraint firstItem="r0G-9F-Szd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rNU-sR-9bJ"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="いろは" id="RxD-lX-vib"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-739" y="-170"/>
+        </scene>
+        <!--Item 2-->
+        <scene sceneID="pZD-tb-OWw">
+            <objects>
+                <viewController id="eHg-mj-dzl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r8X-SW-VOR"/>
+                        <viewControllerLayoutGuide type="bottom" id="9n8-4x-wwe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K6D-hO-hQg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="X4v-1k-VoS"/>
+                    <navigationItem key="navigationItem" id="nn7-Vs-JIg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mzq-Ed-pP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-194" y="1558"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="xJf-6S-S1l">
+            <objects>
+                <viewController id="UUF-E7-Khy" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aEX-ys-waz"/>
+                        <viewControllerLayoutGuide type="bottom" id="Uam-w1-Q7T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pFq-IM-jJ6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="VE1-Y1-deU"/>
+                    <navigationItem key="navigationItem" id="hs5-v5-4Mm"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2VF-W6-DQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-764" y="1548"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="6up-AN-BCT">
+            <objects>
+                <tabBarController id="gyi-bn-sc1" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="jaQ-a9-yRa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="dFF-rz-v5k" kind="relationship" relationship="viewControllers" id="pJk-xA-VMw"/>
+                        <segue destination="VeS-Vo-B7t" kind="relationship" relationship="viewControllers" id="wn9-Dq-iO7"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RnW-fP-VwL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-283" y="-170"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="VA9-wK-hNJ">
+            <objects>
+                <navigationController id="VeS-Vo-B7t" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="aay-iV-QEg"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5dm-0J-r4D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="eHg-mj-dzl" kind="relationship" relationship="rootViewController" id="aXE-0n-KYa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KYI-ae-woL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-194" y="693"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="iroha-main-center" width="349" height="418"/>
+    </resources>
 </document>
