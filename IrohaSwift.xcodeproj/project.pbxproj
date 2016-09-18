@@ -28,6 +28,8 @@
 		7471C8A01D8D986000C151E8 /* sign.c in Sources */ = {isa = PBXBuildFile; fileRef = 7471C88F1D8D986000C151E8 /* sign.c */; };
 		7471C8A11D8D986000C151E8 /* verify.c in Sources */ = {isa = PBXBuildFile; fileRef = 7471C8901D8D986000C151E8 /* verify.c */; };
 		7471C8A71D8D9AC200C151E8 /* IrohaSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */; };
+		74A816A41D8E415100BFFE17 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 74A816A21D8E415100BFFE17 /* base64.c */; };
+		74A816A51D8E415100BFFE17 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 74A816A31D8E415100BFFE17 /* base64.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		7471C88F1D8D986000C151E8 /* sign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sign.c; path = lib/ed25519/src/sign.c; sourceTree = SOURCE_ROOT; };
 		7471C8901D8D986000C151E8 /* verify.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = verify.c; path = lib/ed25519/src/verify.c; sourceTree = SOURCE_ROOT; };
 		7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IrohaSwift.swift; sourceTree = "<group>"; };
+		74A816A21D8E415100BFFE17 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
+		74A816A31D8E415100BFFE17 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +111,7 @@
 		7471C8661D8D942300C151E8 /* IrohaSwift */ = {
 			isa = PBXGroup;
 			children = (
-				74A8169E1D8E3AD800BFFE17 /* base64 */,
+				74A816A11D8E415100BFFE17 /* base64 */,
 				7471C87F1D8D984D00C151E8 /* ed25519 */,
 				7471C8671D8D942300C151E8 /* IrohaSwift.h */,
 				7471C8691D8D942300C151E8 /* Info.plist */,
@@ -149,12 +153,15 @@
 			name = ed25519;
 			sourceTree = "<group>";
 		};
-		74A8169E1D8E3AD800BFFE17 /* base64 */ = {
+		74A816A11D8E415100BFFE17 /* base64 */ = {
 			isa = PBXGroup;
 			children = (
+				74A816A21D8E415100BFFE17 /* base64.c */,
+				74A816A31D8E415100BFFE17 /* base64.h */,
 			);
 			name = base64;
-			sourceTree = "<group>";
+			path = lib/base64;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -165,6 +172,7 @@
 			files = (
 				7471C8941D8D986000C151E8 /* fe.h in Headers */,
 				7471C89C1D8D986000C151E8 /* sc.h in Headers */,
+				74A816A51D8E415100BFFE17 /* base64.h in Headers */,
 				7471C8921D8D986000C151E8 /* ed25519.h in Headers */,
 				7471C89F1D8D986000C151E8 /* sha3.h in Headers */,
 				7471C8681D8D942300C151E8 /* IrohaSwift.h in Headers */,
@@ -281,6 +289,7 @@
 				7471C8911D8D986000C151E8 /* add_scalar.c in Sources */,
 				7471C89E1D8D986000C151E8 /* sha3.c in Sources */,
 				7471C8A01D8D986000C151E8 /* sign.c in Sources */,
+				74A816A41D8E415100BFFE17 /* base64.c in Sources */,
 				7471C89B1D8D986000C151E8 /* sc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
