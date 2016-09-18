@@ -59,14 +59,79 @@ func base64toArr(_ base64str:String, count:Int) -> Array<UInt8>{
     return decArr
 }
 
-public func connection(){}
+public func register(ip:String, port:Int?, name:String){
+    let req = HttpRequest()
+    let keypair = createKeyPair()
+    
+    var parameter: [String : Any] = [
+        "publicKey": keypair.publicKey,
+        "screen_name": name,
+        "timestamp": Date().toString
+    ]
+    let addr = getAddress()
+    req.postRequest(host: addr.ip, port: addr.port, endpoint: "/account/register", parameters: parameter)
+    
+}
 
-public func getAsset(){}
+public func setAddress(ip:String, port:Int?){
+    let defaults = UserDefaults.standard
+    defaults.set(ip, forKey: "ip")
+    defaults.set(port, forKey: "port")
+}
 
-public func assetTransfar(){}
+public func getAddress() -> (ip:String, port:Int?){
+    let defaults = UserDefaults.standard
+    let ip:String = defaults.object(forKey: "ip") as! String
+    let port:Int? = defaults.object(forKey: "port") as! Int?
+    return (ip, port)
+}
 
-public func createAsset(){}
+public func getAsset() -> [String:Any]{
+    let req = HttpRequest()
+    let addr = getAddress()
+    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "dev/getStoreList")
+}
 
-public func getTransaction(){}
+public func createAsset(name:String, domain:String, amount:String, creator:String, signature:String)-> [String:Any]{
+    let req = HttpRequest()
+    let addr = getAddress()
+    var parameter: [String : Any] = [
+        "asset-create": [
+            "name" : name,
+            "domain" : domain,
+            "amount" : amount,
+            "creator" : creator,
+            "signature" : signature,
+        ]
+    ]
+    
+    return req.postRequest(host: addr.ip, port: addr.port, endpoint: "/asset/create", parameters:parameter)
+}
 
-public func getAllTransaction(){}
+public func assetTransfar(name:String, domain:String, amount:String, sender:String, reciever:String, signature:String) -> [String:Any]{
+    let req = HttpRequest()
+    let addr = getAddress()
+    var parameter: [String : Any] = [
+        "asset-transfer": [
+            "name" : name,
+            "domain" : domain,
+            "amount" : amount,
+            "sender" : sender,
+            "receiver" : reciever,
+            "signature" : signature,
+        ]
+    ]
+    
+    return req.postRequest(host: addr.ip, port: addr.port, endpoint: "/asset/transfer", parameters:parameter)
+}
+
+public func getTransaction() -> [String:Any]{
+    let req = HttpRequest()
+    let addr = getAddress()
+    
+    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/transaction/")
+}
+
+public func getAllTransaction(){
+    
+}

@@ -13,6 +13,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        IrohaSwift.register(ip: "myhostName", port: nil, name: "hoge")
         // Do any additional setup after loading the view, typically from a nib.
         print(createSeed())
         let keyPair = createKeyPair()
@@ -20,6 +21,11 @@ class ViewController: UIViewController {
         let sig = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: "Test")
         print(sig)
         print(verify(keyPair.publicKey, signature: sig, message: "Test"))
+        let assets = IrohaSwift.getAsset()
+        print(assets)
+        IrohaSwift.setAddress(ip: "192.168.1.1", port: nil)
+        print(getAddress())
+
     }
 
     override func didReceiveMemoryWarning() {
