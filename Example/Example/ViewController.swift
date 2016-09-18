@@ -15,6 +15,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         print(createSeed())
+        var keyPair = createKeyPair()
+        var sig = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: "Test")
+        print(verify(keyPair.publicKey, signature: sig, message: "Test"))
     }
 
     override func didReceiveMemoryWarning() {

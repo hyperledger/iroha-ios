@@ -107,6 +107,7 @@
 		7471C8661D8D942300C151E8 /* IrohaSwift */ = {
 			isa = PBXGroup;
 			children = (
+				74A8169E1D8E3AD800BFFE17 /* base64 */,
 				7471C87F1D8D984D00C151E8 /* ed25519 */,
 				7471C8671D8D942300C151E8 /* IrohaSwift.h */,
 				7471C8691D8D942300C151E8 /* Info.plist */,
@@ -146,6 +147,13 @@
 				7471C8901D8D986000C151E8 /* verify.c */,
 			);
 			name = ed25519;
+			sourceTree = "<group>";
+		};
+		74A8169E1D8E3AD800BFFE17 /* base64 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = base64;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
