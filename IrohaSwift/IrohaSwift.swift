@@ -8,14 +8,14 @@
 
 import Foundation
 
-public func createSeed() -> Array<UInt8> {
+func createSeed() -> Array<UInt8> {
     var seed: Array<UInt8> = Array(repeating: 0, count: 32)
     ed25519_create_seed(&seed)
     
     return seed
 }
 
-public func createKeyPair() -> (publicKey:String, privateKey:String){
+func createKeyPair() -> (publicKey:String, privateKey:String){
     var pub: Array<UInt8> = Array(repeating: 0, count: 32)
     var pri: Array<UInt8> = Array(repeating: 0, count: 64)
     var seed: Array<UInt8> = createSeed()
@@ -45,7 +45,7 @@ func createSignature(message:String!)-> String{
     return sig
 }
 
-public func sign(_ publicKey:String,privateKey:String, message:String) -> String{
+func sign(_ publicKey:String,privateKey:String, message:String) -> String{
     var sig: Array<UInt8> = Array(repeating: 0, count: 64)
     var sigMsg: Array<UInt8> = Array(repeating: 0, count: 32)
     sha3_256(Array<UInt8>(message.utf8), Array<UInt8>(message.utf8).count, &sigMsg)
@@ -58,7 +58,7 @@ public func sign(_ publicKey:String,privateKey:String, message:String) -> String
     return base64Sig
 }
 
-public func verify(_ publicKey:String, signature:String, message:String) -> Int{
+func verify(_ publicKey:String, signature:String, message:String) -> Int{
     var sigMsg: Array<UInt8> = Array(repeating: 0, count: 32)
     sha3_256(Array<UInt8>(message.utf8), Array<UInt8>(message.utf8).count, &sigMsg)
     let decPubArr = base64toArr(publicKey, count: 32)
@@ -150,7 +150,6 @@ public func assetTransfar(name:String, domain:String, amount:String, reciever:St
             "signature" : sign
         ]
     ]
-    
     return req.postRequest(host: addr.ip, port: addr.port, endpoint: "/asset/transfer", parameters:parameter)
 }
 
