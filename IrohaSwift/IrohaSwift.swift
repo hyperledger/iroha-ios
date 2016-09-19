@@ -59,18 +59,21 @@ func base64toArr(_ base64str:String, count:Int) -> Array<UInt8>{
     return decArr
 }
 
-public func register(ip:String, port:Int?, name:String){
+public func register(ip:String, port:Int?, name:String) -> [String:Any]{
+    setAddress(ip: ip, port: port)
     let req = HttpRequest()
     let keypair = createKeyPair()
     
-    var parameter: [String : Any] = [
+    let parameter: [String : Any] = [
         "publicKey": keypair.publicKey,
         "screen_name": name,
         "timestamp": Date().toString
     ]
-    let addr = getAddress()
-    req.postRequest(host: addr.ip, port: addr.port, endpoint: "/account/register", parameters: parameter)
-    
+    var res = req.postRequest(host: ip, port: port, endpoint: "/account/register", parameters: parameter)
+    if (res["status"] as! Int) == 200 {
+        let defaults = UserDefaults.standard
+        defaults.set(res["uuid"] as! String, forKey: "uuid")
+    }
 }
 
 public func setAddress(ip:String, port:Int?){
@@ -95,7 +98,7 @@ public func getAsset() -> [String:Any]{
 public func createAsset(name:String, domain:String, amount:String, creator:String, signature:String)-> [String:Any]{
     let req = HttpRequest()
     let addr = getAddress()
-    var parameter: [String : Any] = [
+    let parameter: [String : Any] = [
         "asset-create": [
             "name" : name,
             "domain" : domain,
@@ -111,7 +114,7 @@ public func createAsset(name:String, domain:String, amount:String, creator:Strin
 public func assetTransfar(name:String, domain:String, amount:String, sender:String, reciever:String, signature:String) -> [String:Any]{
     let req = HttpRequest()
     let addr = getAddress()
-    var parameter: [String : Any] = [
+    let parameter: [String : Any] = [
         "asset-transfer": [
             "name" : name,
             "domain" : domain,
@@ -128,8 +131,15 @@ public func assetTransfar(name:String, domain:String, amount:String, sender:Stri
 public func getTransaction() -> [String:Any]{
     let req = HttpRequest()
     let addr = getAddress()
-    
-    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/transaction/")
+    let defaults = UserDefaults.standard
+    let uuid = defaults.object(forKey: "uuid") as! String
+    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/transaction/\(uuid)")
+}
+
+public func getTransaction(uuid:String) -> [String:Any]{
+    let req = HttpRequest()
+    let addr = getAddress()
+    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/transaction/\(uuid)")
 }
 
 public func getAllTransaction(){
