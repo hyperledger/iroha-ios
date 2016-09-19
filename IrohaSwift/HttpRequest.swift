@@ -47,7 +47,7 @@ class HttpRequest{
         } else {
             url = "\(host)\(endpoint)"
         }
-        var request = URLRequest(url: URL(string:"https://faia9q1b3l.execute-api.ap-northeast-1.amazonaws.com/dev/getStoreList")!)
+        var request = URLRequest(url: URL(string:url)!)
         if(parameters != nil){
             print(parameters!)
             let jsonData = try! JSONSerialization.data(withJSONObject: parameters!, options: [])
