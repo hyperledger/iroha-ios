@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7494E0A01D8F99A700F311DA /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; };
+		7494E0A11D8F99A700F311DA /* IrohaSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74F1E36A1D8DA68F0035760E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F1E3691D8DA68F0035760E /* AppDelegate.swift */; };
 		74F1E36C1D8DA68F0035760E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F1E36B1D8DA68F0035760E /* ViewController.swift */; };
 		74F1E36F1D8DA68F0035760E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74F1E36D1D8DA68F0035760E /* Main.storyboard */; };
@@ -18,6 +20,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7494E0A21D8F99A700F311DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 74F1E6621D8DA9AF0035760E /* IrohaSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7471C8631D8D942300C151E8;
+			remoteInfo = IrohaSwift;
+		};
 		74F1E37B1D8DA6900035760E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74F1E35E1D8DA68F0035760E /* Project object */;
@@ -48,7 +57,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7494E0A41D8F99A700F311DA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7494E0A11D8F99A700F311DA /* IrohaSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		74C4336B1D8FA7AB00AEEEBD /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		74F1E3661D8DA68F0035760E /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74F1E3691D8DA68F0035760E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74F1E36B1D8DA68F0035760E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7494E0A01D8F99A700F311DA /* IrohaSwift.framework in Frameworks */,
 				74F1E66D1D8DA9EC0035760E /* IrohaSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +140,7 @@
 		74F1E3681D8DA68F0035760E /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				74C4336B1D8FA7AB00AEEEBD /* Example.entitlements */,
 				74F1E3691D8DA68F0035760E /* AppDelegate.swift */,
 				74F1E36B1D8DA68F0035760E /* ViewController.swift */,
 				74F1E36D1D8DA68F0035760E /* Main.storyboard */,
@@ -162,10 +188,12 @@
 				74F1E3621D8DA68F0035760E /* Sources */,
 				74F1E3631D8DA68F0035760E /* Frameworks */,
 				74F1E3641D8DA68F0035760E /* Resources */,
+				7494E0A41D8F99A700F311DA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7494E0A31D8F99A700F311DA /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -220,7 +248,13 @@
 				TargetAttributes = {
 					74F1E3651D8DA68F0035760E = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = YLWWUD25VZ;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					74F1E3791D8DA6900035760E = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -333,6 +367,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7494E0A31D8F99A700F311DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IrohaSwift;
+			targetProxy = 7494E0A21D8F99A700F311DA /* PBXContainerItemProxy */;
+		};
 		74F1E37C1D8DA6900035760E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 74F1E3651D8DA68F0035760E /* Example */;
@@ -456,9 +495,13 @@
 		74F1E38F1D8DA6900035760E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
+				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jp.soramitsu.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -469,9 +512,13 @@
 		74F1E3901D8DA6900035760E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
+				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jp.soramitsu.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";

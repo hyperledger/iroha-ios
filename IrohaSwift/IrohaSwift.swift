@@ -28,6 +28,13 @@ public func createKeyPair() -> (publicKey:String, privateKey:String){
     return (base64Pub, base64Pri)
 }
 
+func saveKeyPair(){
+    let keyPair = createKeyPair()
+    let defaults = UserDefaults.standard
+    defaults.set(keyPair.publicKey, forKey: "publicKey")
+    Keychain().set(key: "privateKey", value: keyPair.privateKey)
+}
+
 public func sign(_ publicKey:String,privateKey:String, message:String) -> String{
     var sig: Array<UInt8> = Array(repeating: 0, count: 64)
     var sigMsg: Array<UInt8> = Array(repeating: 0, count: 32)
@@ -63,7 +70,6 @@ public func register(ip:String, port:Int?, name:String) -> [String:Any]{
     setAddress(ip: ip, port: port)
     let req = HttpRequest()
     let keypair = createKeyPair()
-    
     let parameter: [String : Any] = [
         "publicKey": keypair.publicKey,
         "screen_name": name,
@@ -74,6 +80,7 @@ public func register(ip:String, port:Int?, name:String) -> [String:Any]{
         let defaults = UserDefaults.standard
         defaults.set(res["uuid"] as! String, forKey: "uuid")
     }
+    return res
 }
 
 public func setAddress(ip:String, port:Int?){
@@ -133,12 +140,14 @@ public func getTransaction() -> [String:Any]{
     let addr = getAddress()
     let defaults = UserDefaults.standard
     let uuid = defaults.object(forKey: "uuid") as! String
+    
     return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/transaction/\(uuid)")
 }
 
 public func getTransaction(uuid:String) -> [String:Any]{
     let req = HttpRequest()
     let addr = getAddress()
+    
     return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/transaction/\(uuid)")
 }
 
