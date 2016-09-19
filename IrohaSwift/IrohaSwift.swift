@@ -28,11 +28,21 @@ public func createKeyPair() -> (publicKey:String, privateKey:String){
     return (base64Pub, base64Pri)
 }
 
-func saveKeyPair(){
+func saveKeyPair() -> String{
     let keyPair = createKeyPair()
     let defaults = UserDefaults.standard
     defaults.set(keyPair.publicKey, forKey: "publicKey")
     Keychain().set(key: "privateKey", value: keyPair.privateKey)
+    return keyPair.publicKey
+}
+
+func createSignature(message:String!)-> String{
+    let defaults = UserDefaults.standard
+    let pub:String = defaults.object(forKey: "publicKey") as! String
+    let pri:String = Keychain().get(key: "privateKey")
+    let sig:String = sign(pub, privateKey: pri, message: message)
+    
+    return sig
 }
 
 public func sign(_ publicKey:String,privateKey:String, message:String) -> String{
@@ -69,9 +79,9 @@ func base64toArr(_ base64str:String, count:Int) -> Array<UInt8>{
 public func register(ip:String, port:Int?, name:String) -> [String:Any]{
     setAddress(ip: ip, port: port)
     let req = HttpRequest()
-    let keypair = createKeyPair()
+    let key = saveKeyPair()
     let parameter: [String : Any] = [
-        "publicKey": keypair.publicKey,
+        "publicKey": key,
         "screen_name": name,
         "timestamp": Date().toString
     ]
@@ -80,6 +90,7 @@ public func register(ip:String, port:Int?, name:String) -> [String:Any]{
         let defaults = UserDefaults.standard
         defaults.set(res["uuid"] as! String, forKey: "uuid")
     }
+    
     return res
 }
 
@@ -102,38 +113,47 @@ public func getAsset() -> [String:Any]{
     return req.getRequest(host: addr.ip, port: addr.port, endpoint: "dev/getStoreList")
 }
 
-public func createAsset(name:String, domain:String, amount:String, creator:String, signature:String)-> [String:Any]{
+public func createAsset(name:String, domain:String, amount:String)-> [String:Any]{
     let req = HttpRequest()
     let addr = getAddress()
+    let defaults = UserDefaults.standard
+    let pub:String = defaults.object(forKey: "publicKey") as! String
+    let message = "name:\(name),domain:\(domain),creator:\(pub),amount:\(amount)"
+    let sign = createSignature(message:message)
     let parameter: [String : Any] = [
         "asset-create": [
             "name" : name,
             "domain" : domain,
             "amount" : amount,
-            "creator" : creator,
-            "signature" : signature,
+            "creator" : pub,
+            "signature" : sign,
         ]
     ]
     
     return req.postRequest(host: addr.ip, port: addr.port, endpoint: "/asset/create", parameters:parameter)
 }
 
-public func assetTransfar(name:String, domain:String, amount:String, sender:String, reciever:String, signature:String) -> [String:Any]{
+public func assetTransfar(name:String, domain:String, amount:String, reciever:String) -> [String:Any]{
     let req = HttpRequest()
     let addr = getAddress()
+    let defaults = UserDefaults.standard
+    let pub:String = defaults.object(forKey: "publicKey") as! String
+    let message = "sender:\(pub),reciever:\(reciever),name:\(name),domain:\(domain),amount:\(amount)"
+    let sign = createSignature(message:message)
     let parameter: [String : Any] = [
         "asset-transfer": [
             "name" : name,
             "domain" : domain,
             "amount" : amount,
-            "sender" : sender,
+            "sender" : pub,
             "receiver" : reciever,
-            "signature" : signature,
+            "signature" : sign
         ]
     ]
     
     return req.postRequest(host: addr.ip, port: addr.port, endpoint: "/asset/transfer", parameters:parameter)
 }
+
 
 public func getTransaction() -> [String:Any]{
     let req = HttpRequest()

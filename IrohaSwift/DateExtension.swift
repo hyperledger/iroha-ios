@@ -10,8 +10,8 @@ import Foundation
 
 extension Date{
     var toString: String {
-        var formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
         return formatter.string(from: Date())
     }
 }
