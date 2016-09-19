@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7413F4221D8FD6D500F4929A /* Ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413F4211D8FD6D500F4929A /* Ed25519.swift */; };
 		7471C8681D8D942300C151E8 /* IrohaSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 7471C8671D8D942300C151E8 /* IrohaSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7471C86F1D8D942300C151E8 /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7471C8641D8D942300C151E8 /* IrohaSwift.framework */; };
 		7471C8741D8D942300C151E8 /* IrohaSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7471C8731D8D942300C151E8 /* IrohaSwiftTests.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7413F4211D8FD6D500F4929A /* Ed25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519.swift; sourceTree = "<group>"; };
 		7471C8641D8D942300C151E8 /* IrohaSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IrohaSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7471C8671D8D942300C151E8 /* IrohaSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IrohaSwift.h; sourceTree = "<group>"; };
 		7471C8691D8D942300C151E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				7494E0971D8EFB0200F311DA /* DateExtension.swift */,
 				7494E0991D8F035600F311DA /* KeychainModel.swift */,
 				74C4336C1D8FA95500AEEEBD /* Keychain.swift */,
+				7413F4211D8FD6D500F4929A /* Ed25519.swift */,
 			);
 			path = IrohaSwift;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				7471C8A71D8D9AC200C151E8 /* IrohaSwift.swift in Sources */,
 				7471C8911D8D986000C151E8 /* add_scalar.c in Sources */,
 				7471C89E1D8D986000C151E8 /* sha3.c in Sources */,
+				7413F4221D8FD6D500F4929A /* Ed25519.swift in Sources */,
 				7471C8A01D8D986000C151E8 /* sign.c in Sources */,
 				74A816A41D8E415100BFFE17 /* base64.c in Sources */,
 				7494E0981D8EFB0200F311DA /* DateExtension.swift in Sources */,
