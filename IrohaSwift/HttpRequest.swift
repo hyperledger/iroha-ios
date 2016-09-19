@@ -58,10 +58,18 @@ class HttpRequest{
         
         let semaphore = DispatchSemaphore(value: 0)
         URLSession.shared.dataTask(with: request) {data, response, err in
-            let json = try! JSONSerialization.jsonObject(with: data!, options: [])
-            print(data)
-            if let dictFromJSON = json as? [String:Any] {
-                d = dictFromJSON
+            if(data != nil){
+                let json = try! JSONSerialization.jsonObject(with: data!, options: [])
+                print(data)
+                if let dictFromJSON = json as? [String:Any] {
+                    d = dictFromJSON
+                    semaphore.signal()
+                }
+            }else{
+                d = [
+                    "status": 404,
+                    "message": "not found"
+                ]
                 semaphore.signal()
             }
             }.resume()
