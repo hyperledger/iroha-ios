@@ -13,8 +13,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        IrohaSwift.register(ip: "myhostName", port: nil, name: "hoge")
         // Do any additional setup after loading the view, typically from a nib.
+        let reg = IrohaSwift.register(ip: "myhostName", port: nil, name: "hoge")
+        print(reg)
         print(createSeed())
         let keyPair = createKeyPair()
         print(keyPair)
