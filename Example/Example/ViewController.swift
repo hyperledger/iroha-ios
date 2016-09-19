@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         let reg = IrohaSwift.register(ip: "myhostName", port: nil, name: "hoge")
         print(reg)
+        IrohaSwift.assetTransfar(name: "a", domain: "a", amount: "100", reciever: "hoge")
         print(createSeed())
         let keyPair = createKeyPair()
         print(keyPair)
