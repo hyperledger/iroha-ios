@@ -30,6 +30,7 @@
 		7471C8A71D8D9AC200C151E8 /* IrohaSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */; };
 		747237A01D8ECB5600D22133 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7472379F1D8ECB5600D22133 /* HttpRequest.swift */; };
 		7494E0981D8EFB0200F311DA /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7494E0971D8EFB0200F311DA /* DateExtension.swift */; };
+		7494E09A1D8F035600F311DA /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7494E0991D8F035600F311DA /* KeychainManager.swift */; };
 		74A816A41D8E415100BFFE17 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 74A816A21D8E415100BFFE17 /* base64.c */; };
 		74A816A51D8E415100BFFE17 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 74A816A31D8E415100BFFE17 /* base64.h */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IrohaSwift.swift; sourceTree = "<group>"; };
 		7472379F1D8ECB5600D22133 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		7494E0971D8EFB0200F311DA /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		7494E0991D8F035600F311DA /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		74A816A21D8E415100BFFE17 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
 		74A816A31D8E415100BFFE17 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +124,7 @@
 				7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */,
 				7472379F1D8ECB5600D22133 /* HttpRequest.swift */,
 				7494E0971D8EFB0200F311DA /* DateExtension.swift */,
+				7494E0991D8F035600F311DA /* KeychainManager.swift */,
 			);
 			path = IrohaSwift;
 			sourceTree = "<group>";
@@ -234,7 +237,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Kaji Satoshi";
 				TargetAttributes = {
 					7471C8631D8D942300C151E8 = {
@@ -290,6 +293,7 @@
 				7471C89D1D8D986000C151E8 /* seed.c in Sources */,
 				7471C8991D8D986000C151E8 /* keypair.c in Sources */,
 				7471C8961D8D986000C151E8 /* ge.c in Sources */,
+				7494E09A1D8F035600F311DA /* KeychainManager.swift in Sources */,
 				7471C8931D8D986000C151E8 /* fe.c in Sources */,
 				747237A01D8ECB5600D22133 /* HttpRequest.swift in Sources */,
 				7471C8981D8D986000C151E8 /* key_exchange.c in Sources */,
@@ -336,8 +340,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -385,8 +391,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -406,6 +414,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -417,6 +426,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -436,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
