@@ -59,7 +59,7 @@ public func getAddress() -> (ip:String, port:Int?){
 public func getAsset() -> [String:Any]{
     let req = HttpRequest()
     let addr = getAddress()
-    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "dev/getStoreList")
+    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/assets/list")
 }
 
 public func createAsset(name:String, domain:String, amount:String)-> [String:Any]{
