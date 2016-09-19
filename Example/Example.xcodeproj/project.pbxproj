@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7458D1191D8FF81D003C3D1D /* AssetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458D1181D8FF81D003C3D1D /* AssetsListViewController.swift */; };
+		7458D11C1D903735003C3D1D /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458D11B1D903735003C3D1D /* TransferViewController.swift */; };
 		7494E0A01D8F99A700F311DA /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; };
 		7494E0A11D8F99A700F311DA /* IrohaSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74F1E36A1D8DA68F0035760E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F1E3691D8DA68F0035760E /* AppDelegate.swift */; };
@@ -72,6 +74,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7458D1181D8FF81D003C3D1D /* AssetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsListViewController.swift; sourceTree = "<group>"; };
+		7458D11B1D903735003C3D1D /* TransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
 		74C4336B1D8FA7AB00AEEEBD /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		74F1E3661D8DA68F0035760E /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74F1E3691D8DA68F0035760E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 				74C4336B1D8FA7AB00AEEEBD /* Example.entitlements */,
 				74F1E3691D8DA68F0035760E /* AppDelegate.swift */,
 				74F1E36B1D8DA68F0035760E /* ViewController.swift */,
+				7458D1181D8FF81D003C3D1D /* AssetsListViewController.swift */,
+				7458D11B1D903735003C3D1D /* TransferViewController.swift */,
 				74F1E36D1D8DA68F0035760E /* Main.storyboard */,
 				74F1E3701D8DA68F0035760E /* Assets.xcassets */,
 				74F1E3721D8DA6900035760E /* LaunchScreen.storyboard */,
@@ -343,8 +349,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7458D1191D8FF81D003C3D1D /* AssetsListViewController.swift in Sources */,
 				74F1E36C1D8DA68F0035760E /* ViewController.swift in Sources */,
 				74F1E36A1D8DA68F0035760E /* AppDelegate.swift in Sources */,
+				7458D11C1D903735003C3D1D /* TransferViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
