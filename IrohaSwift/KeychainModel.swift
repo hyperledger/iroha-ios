@@ -19,7 +19,7 @@ class KeychainModel{
     let kSecMatchLimitOneValue = String(format: kSecMatchLimitOne as String)
     let kSecAttrAccountValue = String(format: kSecAttrAccount as String)
     
-    func set(key: String, value: String) {
+    func save(key: String, value: String) {
         if let dataFromString = value.data(using: String.Encoding.utf8) {
             let keychainQuery = [
                 kSecClassValue: kSecClassGenericPasswordValue,
@@ -31,7 +31,7 @@ class KeychainModel{
         }
     }
     
-    func get(key: String) -> String? {
+    func load(key: String) -> String? {
         let keychainQuery = [
             kSecClassValue: kSecClassGenericPasswordValue,
             kSecAttrServiceValue: key,
