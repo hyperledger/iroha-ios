@@ -122,6 +122,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74C519321D91660E005A335D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				74F1E3691D8DA68F0035760E /* AppDelegate.swift */,
+				74F1E36B1D8DA68F0035760E /* ViewController.swift */,
+				7458D1181D8FF81D003C3D1D /* AssetsListViewController.swift */,
+				7458D11B1D903735003C3D1D /* TransferViewController.swift */,
+				74C5192F1D91034D005A335D /* CreateAssetViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		74F1E35D1D8DA68F0035760E = {
 			isa = PBXGroup;
 			children = (
@@ -146,16 +158,12 @@
 		74F1E3681D8DA68F0035760E /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				74C519321D91660E005A335D /* Controller */,
 				74C4336B1D8FA7AB00AEEEBD /* Example.entitlements */,
-				74F1E3691D8DA68F0035760E /* AppDelegate.swift */,
-				74F1E36B1D8DA68F0035760E /* ViewController.swift */,
-				7458D1181D8FF81D003C3D1D /* AssetsListViewController.swift */,
-				7458D11B1D903735003C3D1D /* TransferViewController.swift */,
 				74F1E36D1D8DA68F0035760E /* Main.storyboard */,
 				74F1E3701D8DA68F0035760E /* Assets.xcassets */,
 				74F1E3721D8DA6900035760E /* LaunchScreen.storyboard */,
 				74F1E3751D8DA6900035760E /* Info.plist */,
-				74C5192F1D91034D005A335D /* CreateAssetViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
