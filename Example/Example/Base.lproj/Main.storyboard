@@ -480,7 +480,7 @@
                         <color key="barTintColor" red="0.85490196080000003" green="0.027450980390000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="1cO-vT-Ukq" kind="relationship" relationship="rootViewController" id="A1Z-xx-VFR"/>
+                        <segue destination="10h-ZQ-VK0" kind="relationship" relationship="rootViewController" id="Lee-RS-NM0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TFC-MO-kgs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -488,33 +488,37 @@
             <point key="canvasLocation" x="1153" y="693"/>
         </scene>
         <!--取引履歴-->
-        <scene sceneID="3cw-m1-3Gy">
+        <scene sceneID="0zJ-hb-6rF">
             <objects>
-                <tableViewController id="1cO-vT-Ukq" customClass="TransactionHistoryViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="anQ-o1-TIa">
+                <viewController id="10h-ZQ-VK0" customClass="TransactionHistoryViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gSz-aP-xHn"/>
+                        <viewControllerLayoutGuide type="bottom" id="Md2-aV-t61"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EeQ-bG-ueo">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Kp0-6t-Xrp">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="T4Q-Cd-RHd">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T4Q-Cd-RHd" id="3Mu-Jg-Js2">
-                                    <frame key="frameInset" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="1cO-vT-Ukq" id="yDo-Pt-pgL"/>
-                            <outlet property="delegate" destination="1cO-vT-Ukq" id="m9q-OY-y3x"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="取引履歴" id="PNI-qC-io2"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b9l-SI-kDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstItem="Md2-aV-t61" firstAttribute="top" secondItem="Kp0-6t-Xrp" secondAttribute="bottom" id="U9o-mB-sK1"/>
+                            <constraint firstItem="Kp0-6t-Xrp" firstAttribute="top" secondItem="gSz-aP-xHn" secondAttribute="bottom" id="VO5-NN-gJ5"/>
+                            <constraint firstAttribute="trailing" secondItem="Kp0-6t-Xrp" secondAttribute="trailing" id="fcM-fz-5fL"/>
+                            <constraint firstItem="Kp0-6t-Xrp" firstAttribute="leading" secondItem="EeQ-bG-ueo" secondAttribute="leading" id="tm6-Nc-O0g"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="取引履歴" id="ebv-b0-qI4"/>
+                    <connections>
+                        <outlet property="historyTableView" destination="Kp0-6t-Xrp" id="t9W-ph-IbQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dSB-RU-H1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1151" y="1448"/>
+            <point key="canvasLocation" x="1194" y="1365"/>
         </scene>
     </scenes>
     <resources>

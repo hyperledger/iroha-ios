@@ -9,18 +9,26 @@
 import Foundation
 import UIKit
 
-class TransactionHistoryViewController: UITableViewController{
+class TransactionHistoryViewController: UIViewController{
+    
+    @IBOutlet weak var historyTableView: UITableView!
+    let historyRefresh = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        historyRefresh.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        historyTableView.addSubview(historyRefresh)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func refresh() {
+        self.historyRefresh.endRefreshing()
+    }
 }

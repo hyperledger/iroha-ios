@@ -12,6 +12,7 @@ import UIKit
 class AssetsListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var assetsTableView: UITableView!
     let texts = ["Assets1", "Assets2", "Assets3", "Assets4", "Assets5", "Assets6", "Assets7"]
+    let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,9 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        assetsTableView.addSubview(refreshControl)
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,6 +50,10 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
         tableView.deselectRow(at: indexPath, animated: true)
         let nextvc = self.storyboard?.instantiateViewController(withIdentifier: "Transfer") as! TransferViewController
         self.navigationController?.pushViewController(nextvc, animated: true)
+    }
+    
+    func refresh() {
+        self.refreshControl.endRefreshing()
     }
 
 }
