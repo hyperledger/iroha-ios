@@ -8,10 +8,10 @@
 
 import Foundation
 
-class AssetsDataModel{
+class AssetsDataManager{
     var assetsDataArray: [Dictionary<String, Any>] = []
     
-    static let sharedManager = AssetsDataModel()
+    static let sharedManager = AssetsDataManager()
     private init() {
         let defaults = UserDefaults.standard
         let assetsDatas = defaults.object(forKey: "Assets")
@@ -19,9 +19,5 @@ class AssetsDataModel{
             self.assetsDataArray = assetsDatas as! [Dictionary<String, Any>]
         }
     }
-    
-    func saveAssetsData(assetsDatas: [Dictionary<String, Any>]) {
-        let defaults = UserDefaults.standard
-        defaults.set(assetsDatas, forKey: "Assets")
-    }
+
 }
