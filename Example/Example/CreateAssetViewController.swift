@@ -30,12 +30,27 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
         assetNameField.delegate = self
         domainNameField.delegate = self
         amountField.delegate = self
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func onClickCreate(_ sender: AnyObject) {
+        var data:Dictionary<String, Any>
+        data = ["domain":domainNameField.text, "asset":assetNameField.text, "amount":Int(amountField.text!)]
+        AssetsDataManager.sharedManager.assetsDataArray.append(data)
+        saveAssetsData(assetsDatas: AssetsDataManager.sharedManager.assetsDataArray)
+    }
+    
+    func saveAssetsData(assetsDatas: [Dictionary<String, Any>]) {
+        let defaults = UserDefaults.standard
+        defaults.set(assetsDatas, forKey: "Assets")
+    }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)

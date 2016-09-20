@@ -34,6 +34,8 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
         // Do any additional setup after loading the view, typically from a nib.
         collectionView.delegate = self
         collectionView.dataSource = self
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
     }
     
     override func didReceiveMemoryWarning() {
