@@ -58,9 +58,9 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let nextvc = self.storyboard?.instantiateViewController(withIdentifier: "Transfer") as! TransferViewController
-        print(texts[indexPath.row]["name"])
         nextvc.assetTxt = texts[indexPath.row]["name"]!
         nextvc.domainTxt = texts[indexPath.row]["domain"]!
+        nextvc.havingVal = Int(texts[indexPath.row]["value"]!)
         self.navigationController?.pushViewController(nextvc, animated: true)
     }
     

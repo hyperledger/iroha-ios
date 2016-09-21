@@ -20,6 +20,7 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
     @IBOutlet weak var domainName: UILabel!
     
     var assetTxt, domainTxt:String!
+    var havingVal : Int!
     
     let cellid: [String] = [
         "7","8","9",
