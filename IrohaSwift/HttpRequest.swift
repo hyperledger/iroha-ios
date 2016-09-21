@@ -9,13 +9,9 @@
 import Foundation
 
 class HttpRequest{
-    func getRequest(host:String, port:Int?, endpoint:String) ->[String:Any] {
+    func getRequest(accessPoint:String, endpoint:String) ->[String:Any] {
         var url : String
-        if(port != nil){
-            url = "\(host):\(port)\(endpoint)"
-        } else {
-            url = "\(host)\(endpoint)"
-        }
+        url = "\(accessPoint)\(endpoint)"
         var request = URLRequest(url: URL(string:url)!)
         request.httpMethod = "GET"
         var d: [String:Any]? = nil
@@ -40,13 +36,10 @@ class HttpRequest{
         return d!
     }
     
-    func postRequest(host:String, port:Int?, endpoint:String, parameters:[String:Any]?) ->[String:Any] {
+    func postRequest(accessPoint:String, endpoint:String, parameters:[String:Any]?) ->[String:Any] {
         var url : String
-        if(port != nil){
-            url = "\(host):\(port)\(endpoint)"
-        } else {
-            url = "\(host)\(endpoint)"
-        }
+        url = "\(accessPoint)\(endpoint)"
+       
         var request = URLRequest(url: URL(string:url)!)
         if(parameters != nil){
             print(parameters!)

@@ -25,8 +25,8 @@ func createSignature(message:String!)-> String{
     return sig
 }
 
-public func register(ip:String, port:Int?, name:String) -> [String:Any]{
-    setAddress(ip: ip, port: port)
+public func register(accessPoint:String, name:String) -> [String:Any]{
+    setAddress(accessPoint: accessPoint)
     let req = HttpRequest()
     let key = saveKeyPair()
     let parameter: [String : Any] = [
@@ -34,7 +34,7 @@ public func register(ip:String, port:Int?, name:String) -> [String:Any]{
         "screen_name": name,
         "timestamp": Date().toString
     ]
-    var res = req.postRequest(host: ip, port: port, endpoint: "/account/register", parameters: parameter)
+    var res = req.postRequest(accessPoint:accessPoint, endpoint: "/account/register", parameters: parameter)
     if (res["status"] as! Int) == 200 {
         let defaults = UserDefaults.standard
         defaults.set(res["uuid"] as! String, forKey: "uuid")
@@ -43,28 +43,26 @@ public func register(ip:String, port:Int?, name:String) -> [String:Any]{
     return res
 }
 
-public func setAddress(ip:String, port:Int?){
+public func setAddress(accessPoint:String){
     let defaults = UserDefaults.standard
-    defaults.set(ip, forKey: "ip")
-    defaults.set(port, forKey: "port")
+    defaults.set(accessPoint, forKey: "accessPoint")
 }
 
-public func getAddress() -> (ip:String, port:Int?){
+public func getAddress() -> (String){
     let defaults = UserDefaults.standard
-    let ip:String = defaults.object(forKey: "ip") as! String
-    let port:Int? = defaults.object(forKey: "port") as! Int?
-    return (ip, port)
+    let ap:String = defaults.object(forKey: "accessPoint") as! String
+    return (ap)
 }
 
 public func getAsset() -> [String:Any]{
     let req = HttpRequest()
-    let addr = getAddress()
-    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/assets/list")
+    let ap = getAddress()
+    return req.getRequest(accessPoint: ap, endpoint: "/assets/list")
 }
 
 public func createAsset(name:String, domain:String, amount:String)-> [String:Any]{
     let req = HttpRequest()
-    let addr = getAddress()
+    let ap = getAddress()
     let defaults = UserDefaults.standard
     let pub:String = defaults.object(forKey: "publicKey") as! String
     let message = "name:\(name),domain:\(domain),creator:\(pub),amount:\(amount)"
@@ -79,12 +77,12 @@ public func createAsset(name:String, domain:String, amount:String)-> [String:Any
         ]
     ]
     
-    return req.postRequest(host: addr.ip, port: addr.port, endpoint: "/asset/create", parameters:parameter)
+    return req.postRequest(accessPoint: ap, endpoint: "/asset/create", parameters:parameter)
 }
 
 public func assetTransfar(name:String, domain:String, amount:String, reciever:String) -> [String:Any]{
     let req = HttpRequest()
-    let addr = getAddress()
+    let ap = getAddress()
     let defaults = UserDefaults.standard
     let pub:String = defaults.object(forKey: "publicKey") as! String
     let message = "sender:\(pub),reciever:\(reciever),name:\(name),domain:\(domain),amount:\(amount)"
@@ -99,24 +97,24 @@ public func assetTransfar(name:String, domain:String, amount:String, reciever:St
             "signature" : sign
         ]
     ]
-    return req.postRequest(host: addr.ip, port: addr.port, endpoint: "/asset/transfer", parameters:parameter)
+    return req.postRequest(accessPoint: ap, endpoint: "/asset/transfer", parameters:parameter)
 }
 
 
 public func getTransaction() -> [String:Any]{
     let req = HttpRequest()
-    let addr = getAddress()
+    let ap = getAddress()
     let defaults = UserDefaults.standard
     let uuid = defaults.object(forKey: "uuid") as! String
     
-    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/transaction/\(uuid)")
+    return req.getRequest(accessPoint: ap, endpoint: "/transaction/\(uuid)")
 }
 
 public func getTransaction(uuid:String) -> [String:Any]{
     let req = HttpRequest()
-    let addr = getAddress()
+    let ap = getAddress()
     
-    return req.getRequest(host: addr.ip, port: addr.port, endpoint: "/transaction/\(uuid)")
+    return req.getRequest(accessPoint: ap, endpoint: "/transaction/\(uuid)")
 }
 
 public func getAllTransaction(){
