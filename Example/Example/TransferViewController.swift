@@ -15,6 +15,12 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
     
     @IBOutlet weak var valueField: UITextField!
     
+    @IBOutlet weak var assetName: UILabel!
+
+    @IBOutlet weak var domainName: UILabel!
+    
+    var assetTxt, domainTxt:String!
+    
     let cellid: [String] = [
         "7","8","9",
         "4","5","6",
@@ -36,6 +42,8 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
         collectionView.dataSource = self
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        assetName.text = assetTxt
+        domainName.text = domainTxt
     }
     
     override func didReceiveMemoryWarning() {

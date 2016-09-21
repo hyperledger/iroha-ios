@@ -11,7 +11,7 @@ import UIKit
 
 class AssetsListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var assetsTableView: UITableView!
-    let texts = ["Assets1", "Assets2", "Assets3", "Assets4", "Assets5", "Assets6", "Assets7"]
+    let texts = [["name":"Asset1", "domain":"ソラミツ株式会社", "value":"100"]]
     let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
@@ -40,8 +40,17 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "assetsCell")
-        cell.textLabel?.text = texts[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "assetsCell", for: indexPath) as UITableViewCell
+
+
+        let name:UILabel = cell.viewWithTag(1) as! UILabel
+        let domain:UILabel = cell.viewWithTag(2) as! UILabel
+        let value:UILabel = cell.viewWithTag(3) as! UILabel
+
+        name.text = texts[indexPath.row]["name"]
+        domain.text = texts[indexPath.row]["domain"]
+        value.text = texts[indexPath.row]["value"]
+
 
         return cell
     }
@@ -49,6 +58,9 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let nextvc = self.storyboard?.instantiateViewController(withIdentifier: "Transfer") as! TransferViewController
+        print(texts[indexPath.row]["name"])
+        nextvc.assetTxt = texts[indexPath.row]["name"]!
+        nextvc.domainTxt = texts[indexPath.row]["domain"]!
         self.navigationController?.pushViewController(nextvc, animated: true)
     }
     

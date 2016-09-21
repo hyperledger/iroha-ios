@@ -80,7 +80,6 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
                 let offsetY: CGFloat =  underActiveFieldRect.maxY - convertedKeyboardFrame.minY
 
                 if offsetY < 0 {
-                    print("minus")
                     return
                 }
                 updateScrollViewSize(moveSize: offsetY, duration: animationDuration as! TimeInterval)

@@ -163,13 +163,13 @@
 		74F1E3681D8DA68F0035760E /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				74C519331D91674D005A335D /* AssetsDataManager.swift */,
 				74C519321D91660E005A335D /* Controller */,
 				74C4336B1D8FA7AB00AEEEBD /* Example.entitlements */,
 				74F1E36D1D8DA68F0035760E /* Main.storyboard */,
 				74F1E3701D8DA68F0035760E /* Assets.xcassets */,
 				74F1E3721D8DA6900035760E /* LaunchScreen.storyboard */,
 				74F1E3751D8DA6900035760E /* Info.plist */,
-				74C519331D91674D005A335D /* AssetsDataManager.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
