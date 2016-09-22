@@ -9,9 +9,11 @@
 import Foundation
 import UIKit
 
-class TransferViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class TransferViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate{
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var toAccountField: UITextField!
     
     @IBOutlet weak var valueField: UITextField!
     
@@ -21,6 +23,7 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
     
     var assetTxt, domainTxt:String!
     var havingVal : Int!
+    var toAccount: String?
     
     let cellid: [String] = [
         "7","8","9",
@@ -45,11 +48,22 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         assetName.text = assetTxt
         domainName.text = domainTxt
+        toAccountField.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        toAccountField.text = toAccount
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
