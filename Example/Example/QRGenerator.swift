@@ -22,11 +22,11 @@ func createQRCode(message: String, correctionLevel: String = "M", moduleSize: CG
     // moduleSize でリサイズ
     let sizeTransform = CGAffineTransform(scaleX: 30 , y: 30)
     let ciImg = qr.outputImage!.applying(sizeTransform)
-    var image:UIImage = UIImage(ciImage: ciImg, scale: 1, orientation: .up)
+    let image:UIImage = UIImage(ciImage: ciImg, scale: 1, orientation: .up)
     let size = CGSize(width: 160, height: 160)
     UIGraphicsBeginImageContext(size)
     image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-    var resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+    let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     return resizeImage!
 }
