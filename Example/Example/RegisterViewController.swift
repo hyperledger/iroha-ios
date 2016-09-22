@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IrohaSwift
 
 class RegisterViewController: UIViewController ,UITextFieldDelegate{
     
@@ -17,6 +18,8 @@ class RegisterViewController: UIViewController ,UITextFieldDelegate{
     
     
     var underActiveFieldRect = CGRect()
+    var alertController = UIAlertController()
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,6 +28,7 @@ class RegisterViewController: UIViewController ,UITextFieldDelegate{
     }
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -53,9 +57,7 @@ class RegisterViewController: UIViewController ,UITextFieldDelegate{
     }
     
     func shownKeyboard(notification: Notification) {
-        print("Shown")
         if let userInfo = notification.userInfo {
-            print(userInfo[UIKeyboardFrameEndUserInfoKey])
             if let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] {
                 wrapperScrollView.contentInset = UIEdgeInsets.zero
                 wrapperScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
@@ -71,7 +73,6 @@ class RegisterViewController: UIViewController ,UITextFieldDelegate{
     }
     
     func hiddenKeyboard(notification: Notification) {
-        print("hide")
         wrapperScrollView.contentInset = UIEdgeInsets.zero
         wrapperScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
@@ -88,6 +89,43 @@ class RegisterViewController: UIViewController ,UITextFieldDelegate{
     }
 
     
+    
+    @IBAction func onClickCreate(_ sender: AnyObject) {
+        if(accessField.text == "" || userNameField.text == ""){
+            alertController = UIAlertController(title: "警告", message: "すべての情報を入力してください", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            present(alertController, animated: true, completion: nil)
+
+        }else{
+            alertController = UIAlertController(title: nil, message: "口座開設中\n\n\n", preferredStyle: UIAlertControllerStyle.alert)
+            let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        
+            spinnerIndicator.center = CGPoint(x:135.0, y:65.5)
+            spinnerIndicator.color = UIColor.black
+            spinnerIndicator.startAnimating()
+        
+            alertController.view.addSubview(spinnerIndicator)
+            self.present(alertController, animated: false, completion: {
+                let res = IrohaSwift.register(accessPoint: self.accessField.text!, name: self.userNameField.text!)
+                if res["status"] as! Int == 200 {
+                    self.alertController.dismiss(animated: false, completion: {() -> Void in
+                        let nextvc = self.storyboard?.instantiateViewController(withIdentifier: "Tabbar")
+                        self.present(nextvc!, animated: true, completion: nil)
+                    })
+                } else {
+                    self.alertController.dismiss(animated: false, completion: {() -> Void in
+
+                        self.alertController = UIAlertController(title: String(describing: res["status"]!) , message: res["message"] as! String?, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        self.alertController.addAction(defaultAction)
+                        self.present(self.alertController, animated: true, completion: nil)
+                    })
+                }
+            })
+        }
+
+    }
 
     /*
     // MARK: - Navigation

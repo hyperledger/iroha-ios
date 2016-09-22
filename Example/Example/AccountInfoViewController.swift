@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import IrohaSwift
 
 class AccountInfoViewController: UIViewController {
+    
+    
+    @IBOutlet weak var QRImage: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +20,9 @@ class AccountInfoViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
+        let qrString = IrohaSwift.getPublicKey()
+        QRImage.image = createQRCode(message: qrString)
     }
 
     override func didReceiveMemoryWarning() {

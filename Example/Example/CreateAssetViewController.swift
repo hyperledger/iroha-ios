@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import IrohaSwift
 
 class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var assetNameField: UITextField!
@@ -16,7 +17,7 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var createButton: UIButton!
     var underActiveFieldRect = CGRect()
-    
+    var creatAssetAlert = UIAlertController()
     @IBOutlet weak var wrapperScrollView: UIScrollView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,10 +41,42 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onClickCreate(_ sender: AnyObject) {
-        var data:Dictionary<String, Any>
-        data = ["domain":domainNameField.text, "asset":assetNameField.text, "amount":Int(amountField.text!)]
-        AssetsDataManager.sharedManager.assetsDataArray.append(data)
-        saveAssetsData(assetsDatas: AssetsDataManager.sharedManager.assetsDataArray)
+        self.view.endEditing(true)
+        if(domainNameField.text == "" || assetNameField.text == "" || amountField.text == ""){
+            creatAssetAlert = UIAlertController(title: "警告", message: "すべての情報を入力してください", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            creatAssetAlert.addAction(defaultAction)
+            present(creatAssetAlert, animated: true, completion: nil)
+            
+        }else{
+            creatAssetAlert = UIAlertController(title: nil, message: "アセット作成中\n\n\n", preferredStyle: UIAlertControllerStyle.alert)
+            let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+            
+            spinnerIndicator.center = CGPoint(x:135.0, y:65.5)
+            spinnerIndicator.color = UIColor.black
+            spinnerIndicator.startAnimating()
+            
+            creatAssetAlert.view.addSubview(spinnerIndicator)
+            self.present(creatAssetAlert, animated: false, completion: { () -> Void in
+                var data:Dictionary<String, String>
+                data = ["domain":self.domainNameField.text!, "name":self.assetNameField.text!, "amount":self.amountField.text!]
+                AssetsDataManager.sharedManager.assetsDataArray.append(data)
+                let res = IrohaSwift.createAsset(name: self.assetNameField.text!, domain: self.domainNameField.text!, amount: self.amountField.text!)
+                if (res["status"] as! Int) == 200{
+                    self.saveAssetsData(assetsDatas: AssetsDataManager.sharedManager.assetsDataArray)
+                }else{
+                    self.creatAssetAlert.dismiss(animated: false, completion: {() -> Void in
+                        self.creatAssetAlert = UIAlertController(title: String(describing: res["status"]!) , message: res["message"] as! String?, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        self.creatAssetAlert.addAction(defaultAction)
+                        self.present(self.creatAssetAlert, animated: true, completion: nil)
+                    })
+                }
+            })
+            //戻れない
+            navigationController?.popViewController(animated: true)
+
+        }
     }
     
     func saveAssetsData(assetsDatas: [Dictionary<String, Any>]) {

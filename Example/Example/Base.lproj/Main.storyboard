@@ -493,7 +493,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="CPM-DN-J9Y" kind="show" id="EH3-rw-Hnm"/>
+                                            <action selector="onClickCreate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nVh-wH-J10"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ユーザー名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JiZ-7D-sxC">
@@ -593,6 +593,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="口座情報" id="3Si-vy-iEl"/>
+                    <connections>
+                        <outlet property="QRImage" destination="kBx-a9-3Tt" id="vHa-b1-zZT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Hw-Vm-1Dl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -601,7 +604,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="doo-mJ-4yP">
             <objects>
-                <tabBarController id="CPM-DN-J9Y" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Tabbar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CPM-DN-J9Y" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="WBR-e6-aag">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -19,15 +19,23 @@ class HttpRequest{
         let semaphore = DispatchSemaphore(value: 0)
         URLSession.shared.dataTask(with: request) {data, response, err in
             if(data != nil){
-                let json = try! JSONSerialization.jsonObject(with: data!, options: [])
-                if let dictFromJSON = json as? [String:Any] {
-                    d = dictFromJSON
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                    if let dictFromJSON = json as? [String:Any] {
+                        d = dictFromJSON
+                        semaphore.signal()
+                    }
+                }catch{
+                    d = [
+                        "status": 500,
+                        "message": "Internal server error."
+                    ]
                     semaphore.signal()
                 }
             }else{
                 d = [
                     "status": 404,
-                    "message": "not found"
+                    "message": "Not found."
                 ]
                 semaphore.signal()
             }
@@ -39,12 +47,15 @@ class HttpRequest{
     func postRequest(accessPoint:String, endpoint:String, parameters:[String:Any]?) ->[String:Any] {
         var url : String
         url = "\(accessPoint)\(endpoint)"
-       
         var request = URLRequest(url: URL(string:url)!)
         if(parameters != nil){
-            print(parameters!)
-            let jsonData = try! JSONSerialization.data(withJSONObject: parameters!, options: [])
-            request.httpBody = jsonData
+            do{
+                let jsonData = try JSONSerialization.data(withJSONObject: parameters!, options: [])
+                
+                request.httpBody = jsonData
+            }catch{
+                print("error")
+            }
         }
         request.httpMethod = "POST"
         var d: [String:Any]? = nil
@@ -52,20 +63,27 @@ class HttpRequest{
         let semaphore = DispatchSemaphore(value: 0)
         URLSession.shared.dataTask(with: request) {data, response, err in
             if(data != nil){
-                let json = try! JSONSerialization.jsonObject(with: data!, options: [])
-                print(data)
-                if let dictFromJSON = json as? [String:Any] {
-                    d = dictFromJSON
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                    if let dictFromJSON = json as? [String:Any] {
+                        d = dictFromJSON
+                        semaphore.signal()
+                    }
+                }catch{
+                    d = [
+                        "status": 500,
+                        "message": "Internal server error."
+                    ]
                     semaphore.signal()
                 }
             }else{
                 d = [
                     "status": 404,
-                    "message": "not found"
+                    "message": "Not found."
                 ]
                 semaphore.signal()
             }
-            }.resume()
+        }.resume()
         semaphore.wait(timeout: .distantFuture)
         return d!
     }

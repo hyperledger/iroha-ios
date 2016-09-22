@@ -9,14 +9,14 @@
 import Foundation
 
 class AssetsDataManager{
-    var assetsDataArray: [Dictionary<String, Any>] = []
+    var assetsDataArray: [Dictionary<String, String>] = []
     
     static let sharedManager = AssetsDataManager()
     private init() {
         let defaults = UserDefaults.standard
         let assetsDatas = defaults.object(forKey: "Assets")
-        if (assetsDatas as? [Dictionary<String, Any>] != nil) {
-            self.assetsDataArray = assetsDatas as! [Dictionary<String, Any>]
+        if (assetsDatas as? [Dictionary<String, String>] != nil) {
+            self.assetsDataArray = assetsDatas as! [Dictionary<String, String>]
         }
     }
 
