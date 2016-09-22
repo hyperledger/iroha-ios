@@ -80,7 +80,7 @@ public func createAsset(name:String, domain:String, amount:String)-> [String:Any
     return req.postRequest(accessPoint: ap, endpoint: "/asset/create", parameters:parameter)
 }
 
-public func assetTransfar(name:String, domain:String, amount:String, reciever:String) -> [String:Any]{
+public func assetTransfer(name:String, domain:String, amount:String, reciever:String) -> [String:Any]{
     let req = HttpRequest()
     let ap = getAddress()
     let defaults = UserDefaults.standard
