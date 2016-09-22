@@ -57,6 +57,7 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
             spinnerIndicator.startAnimating()
             
             creatAssetAlert.view.addSubview(spinnerIndicator)
+            
             self.present(creatAssetAlert, animated: false, completion: { () -> Void in
                 var data:Dictionary<String, String>
                 data = ["domain":self.domainNameField.text!, "name":self.assetNameField.text!, "amount":self.amountField.text!]
@@ -64,17 +65,18 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
                 let res = IrohaSwift.createAsset(name: self.assetNameField.text!, domain: self.domainNameField.text!, amount: self.amountField.text!)
                 if (res["status"] as! Int) == 200{
                     self.saveAssetsData(assetsDatas: AssetsDataManager.sharedManager.assetsDataArray)
+                    self.navigationController?.popViewController(animated: true)
                 }else{
                     self.creatAssetAlert.dismiss(animated: false, completion: {() -> Void in
                         self.creatAssetAlert = UIAlertController(title: String(describing: res["status"]!) , message: res["message"] as! String?, preferredStyle: .alert)
                         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                         self.creatAssetAlert.addAction(defaultAction)
-                        self.present(self.creatAssetAlert, animated: true, completion: nil)
+                        self.present(self.creatAssetAlert, animated: true, completion: {() -> Void in
+                            self.navigationController?.popViewController(animated: true)
+                        })
                     })
                 }
             })
-            //戻れない
-            navigationController?.popViewController(animated: true)
 
         }
     }
