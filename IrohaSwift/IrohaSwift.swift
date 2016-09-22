@@ -32,7 +32,7 @@ public func register(accessPoint:String, name:String) -> [String:Any]{
     let parameter: [String : Any] = [
         "publicKey": key,
         "screen_name": name,
-        "timestamp": Date().toString
+        "timestamp": Date().timeIntervalSince1970
     ]
     var res = req.postRequest(accessPoint:accessPoint, endpoint: "/account/register", parameters: parameter)
     if (res["status"] as! Int) == 200 {
@@ -41,6 +41,11 @@ public func register(accessPoint:String, name:String) -> [String:Any]{
     }
     
     return res
+}
+
+public func getPublicKey() -> String{
+    let defaults = UserDefaults.standard
+    return defaults.object(forKey: "publicKey") as! String
 }
 
 public func setAddress(accessPoint:String){
