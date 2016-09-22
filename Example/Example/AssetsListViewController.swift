@@ -11,7 +11,6 @@ import UIKit
 
 class AssetsListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var assetsTableView: UITableView!
-    let texts = [["name":"Asset1", "domain":"ソラミツ株式会社", "value":"100"]]
     let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
@@ -27,16 +26,20 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
         assetsTableView.addSubview(refreshControl)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        assetsTableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     @IBAction func onClickCreate(_ sender: AnyObject) {
-        print("click")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return texts.count
+        return AssetsDataManager.sharedManager.assetsDataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,10 +49,11 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
         let name:UILabel = cell.viewWithTag(1) as! UILabel
         let domain:UILabel = cell.viewWithTag(2) as! UILabel
         let value:UILabel = cell.viewWithTag(3) as! UILabel
-
-        name.text = texts[indexPath.row]["name"]
-        domain.text = texts[indexPath.row]["domain"]
-        value.text = texts[indexPath.row]["value"]
+        let assetData = AssetsDataManager.sharedManager.assetsDataArray[indexPath.row]
+        print(assetData)
+        name.text = assetData["name"]
+        domain.text = assetData["domain"]
+        value.text = assetData["amount"]
 
 
         return cell
@@ -58,9 +62,9 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let nextvc = self.storyboard?.instantiateViewController(withIdentifier: "Transfer") as! TransferViewController
-        nextvc.assetTxt = texts[indexPath.row]["name"]!
-        nextvc.domainTxt = texts[indexPath.row]["domain"]!
-        nextvc.havingVal = Int(texts[indexPath.row]["value"]!)
+        nextvc.assetTxt = AssetsDataManager.sharedManager.assetsDataArray[indexPath.row]["name"]
+        nextvc.domainTxt = AssetsDataManager.sharedManager.assetsDataArray[indexPath.row]["domain"]
+        nextvc.havingVal = Int(AssetsDataManager.sharedManager.assetsDataArray[indexPath.row]["amount"]!)
         self.navigationController?.pushViewController(nextvc, animated: true)
     }
     
