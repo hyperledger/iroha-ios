@@ -100,7 +100,7 @@ public func createAsset(name:String, domain:String)-> [String:Any]{
     return req.postRequest(accessPoint: ap, endpoint: "/asset/create", parameters:parameter)
 }
 
-public func assetTransfer(assetUuid:String, amount:String, reciever:String) -> [String:Any]{
+public func assetOperation(assetUuid:String, command:String, amount:String, reciever:String) -> [String:Any]{
     let req = HttpRequest()
     let ap = getAddress()
     let defaults = UserDefaults.standard
@@ -108,15 +108,16 @@ public func assetTransfer(assetUuid:String, amount:String, reciever:String) -> [
     let message = "sender:\(pub),reciever:\(reciever),asset-uuid:\(assetUuid),amount:\(amount)"
     let sign = createSignature(message:message)
     let parameter: [String : Any] = [
-        "asset-transfer": [
             "asset-uuid": assetUuid,
-            "amount" : amount,
-            "sender" : pub,
-            "receiver" : reciever,
+            "params" : [
+                "command": command,
+                "amount": Int(amount),
+                "sender" : pub,
+                "receiver" : reciever
+            ],
             "signature" : sign
-        ]
     ]
-    return req.postRequest(accessPoint: ap, endpoint: "/asset/transfer", parameters:parameter)
+    return req.postRequest(accessPoint: ap, endpoint: "/asset/operation", parameters:parameter)
 }
 
 
@@ -126,7 +127,7 @@ public func getTransaction() -> [String:Any]{
     let defaults = UserDefaults.standard
     let uuid = defaults.object(forKey: "uuid") as! String
     
-    return req.getRequest(accessPoint: ap, endpoint: "/transaction/\(uuid)")
+    return req.getRequest(accessPoint: ap, endpoint: "/history/transaction/\(uuid)")
 }
 
 public func getTransaction(uuid:String) -> [String:Any]{
