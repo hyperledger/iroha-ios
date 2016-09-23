@@ -59,13 +59,31 @@ public func getAddress() -> (String){
     return (ap)
 }
 
+public func domainRegister(domain:String) -> [String:Any]{
+    let req = HttpRequest()
+    let ap = getAddress()
+    let defaults = UserDefaults.standard
+    let timestamp = Date().timeIntervalSince1970
+    let pub:String = defaults.object(forKey: "publicKey") as! String
+    let message = "timestamp:\(timestamp),owner:\(pub),name:\(domain)"
+    let sign = createSignature(message:message)
+    let parameter: [String : Any] = [
+        "name" : domain,
+        "owner" : pub,
+        "signature" : sign,
+        "timestamp": timestamp
+        ]
+    
+    return req.postRequest(accessPoint: ap, endpoint: "/domain/register", parameters:parameter)
+}
+
 public func getAssetsList() -> [String:Any]{
     let req = HttpRequest()
     let ap = getAddress()
     return req.getRequest(accessPoint: ap, endpoint: "/assets/list")
 }
 
-public func createAsset(name:String, domain:String, amount:String)-> [String:Any]{
+public func createAsset(name:String, domain:String)-> [String:Any]{
     let req = HttpRequest()
     let ap = getAddress()
     let defaults = UserDefaults.standard
