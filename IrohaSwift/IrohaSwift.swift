@@ -31,7 +31,7 @@ public func register(accessPoint:String, name:String) -> [String:Any]{
     let key = saveKeyPair()
     let parameter: [String : Any] = [
         "publicKey": key,
-        "screen_name": name,
+        "alias": name,
         "timestamp": Date().timeIntervalSince1970
     ]
     var res = req.postRequest(accessPoint:accessPoint, endpoint: "/account/register", parameters: parameter)
