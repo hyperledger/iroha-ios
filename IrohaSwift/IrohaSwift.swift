@@ -59,7 +59,7 @@ public func getAddress() -> (String){
     return (ap)
 }
 
-public func getAsset() -> [String:Any]{
+public func getAssetsList() -> [String:Any]{
     let req = HttpRequest()
     let ap = getAddress()
     return req.getRequest(accessPoint: ap, endpoint: "/assets/list")
