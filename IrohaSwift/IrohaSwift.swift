@@ -70,16 +70,13 @@ public func createAsset(name:String, domain:String, amount:String)-> [String:Any
     let ap = getAddress()
     let defaults = UserDefaults.standard
     let pub:String = defaults.object(forKey: "publicKey") as! String
-    let message = "name:\(name),domain:\(domain),creator:\(pub),amount:\(amount)"
+    let message = "name:\(name),domain:\(domain),creator:\(pub)"
     let sign = createSignature(message:message)
     let parameter: [String : Any] = [
-        "asset-create": [
-            "name" : name,
-            "domain" : domain,
-            "amount" : amount,
-            "creator" : pub,
-            "signature" : sign,
-        ]
+        "name" : name,
+        "domain" : domain,
+        "creator" : pub,
+        "signature" : sign,
     ]
     
     return req.postRequest(accessPoint: ap, endpoint: "/asset/create", parameters:parameter)
