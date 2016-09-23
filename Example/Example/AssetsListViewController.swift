@@ -25,7 +25,18 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         assetsTableView.addSubview(refreshControl)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        assetsTableView.reloadData()
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         listAlert = UIAlertController(title: nil, message: "口座情報取得中\n\n\n", preferredStyle: UIAlertControllerStyle.alert)
         let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         
@@ -51,13 +62,6 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
                 })
             }
         })
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        assetsTableView.reloadData()
 
     }
     

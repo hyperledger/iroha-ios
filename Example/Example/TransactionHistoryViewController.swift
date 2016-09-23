@@ -32,6 +32,10 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         historyRefresh.addTarget(self, action: #selector(refreshHistory), for: UIControlEvents.valueChanged)
         historyTableView.addSubview(historyRefresh)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         historyAlert = UIAlertController(title: nil, message: "履歴情報取得中\n\n\n", preferredStyle: UIAlertControllerStyle.alert)
         let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         
@@ -44,6 +48,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             let res = IrohaSwift.getTransaction()
             if res["status"] as! Int == 200 {
                 self.historyAlert.dismiss(animated: false, completion: {() -> Void in
+                    TransactionHistoryDataManager.sharedManager.transactionHistoryDataArray.removeAll()
                     self.transactionHistories = IrohaSwift.getTransaction()["history"] as! [NSDictionary]
                     for item in self.transactionHistories {
                         let param: Dictionary<String, String> = (item.value(forKey: "params") as! NSDictionary) as! Dictionary<String, String>
@@ -61,8 +66,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
                 })
             }
         })
-
-        
     }
     
     override func didReceiveMemoryWarning() {
