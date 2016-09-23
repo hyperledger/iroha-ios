@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import IrohaSwift
 
 class TransferViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate{
     
@@ -20,6 +21,7 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
     var assetTxt, domainTxt:String!
     var havingVal : Int!
     var toAccount: String?
+    var assetUuid: String!
     
     let cellid: [String] = [
         "7","8","9",
@@ -113,6 +115,12 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
             case 9:
                 if(valueField.text != ""){
                     valueField.text = valueField.text?.substring(to: (valueField.text?.index((valueField.text?.endIndex)!, offsetBy: -1))!)
+                }
+            break
+            
+            case 11:
+                if(valueField.text != "" && toAccountField.text != ""){
+                    IrohaSwift.assetTransfer(assetUuid: assetUuid, amount: valueField.text!, reciever: toAccountField.text!)
                 }
             break
             default:

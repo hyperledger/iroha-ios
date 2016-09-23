@@ -65,7 +65,7 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
                 
                 let res = IrohaSwift.createAsset(name: self.assetNameField.text!, domain: self.domainNameField.text!, amount: self.amountField.text!)
                 if (res["status"] as! Int) == 200{
-                    data = ["domain":self.domainNameField.text!, "name":self.assetNameField.text!, "amount":self.amountField.text!]
+                    data = ["domain":self.domainNameField.text!, "name":self.assetNameField.text!, "amount":self.amountField.text!, "asset-uuid":res["asset-uuid"] as! String]
                     AssetsDataManager.sharedManager.assetsDataArray.append(data)
                     self.saveAssetsData(assetsDatas: AssetsDataManager.sharedManager.assetsDataArray)
                     self.navigationController?.popViewController(animated: true)

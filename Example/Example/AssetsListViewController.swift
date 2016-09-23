@@ -86,7 +86,7 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
         name.text = assetData["name"]
         domain.text = assetData["domain"]
         value.text = assetData["amount"]
-
+        
         return cell
     }
     
@@ -96,6 +96,7 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
         nextvc.assetTxt = AssetsDataManager.sharedManager.assetsDataArray[indexPath.row]["name"]
         nextvc.domainTxt = AssetsDataManager.sharedManager.assetsDataArray[indexPath.row]["domain"]
         nextvc.havingVal = Int(AssetsDataManager.sharedManager.assetsDataArray[indexPath.row]["amount"]!)
+        nextvc.assetUuid = AssetsDataManager.sharedManager.assetsDataArray[indexPath.row]["asset-uuid"]
         self.navigationController?.pushViewController(nextvc, animated: true)
     }
     
