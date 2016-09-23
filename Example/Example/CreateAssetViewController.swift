@@ -8,16 +8,18 @@
 
 import Foundation
 import UIKit
+import IrohaSwift
 
 class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var assetNameField: UITextField!
     @IBOutlet weak var domainNameField: UITextField!
     @IBOutlet weak var amountField: UITextField!
-    
     @IBOutlet weak var createButton: UIButton!
-    var underActiveFieldRect = CGRect()
-    
     @IBOutlet weak var wrapperScrollView: UIScrollView!
+    
+    var underActiveFieldRect = CGRect()
+    var creatAssetAlert = UIAlertController()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(shownKeyboard), name:Notification.Name.UIKeyboardWillShow, object: nil)
@@ -32,6 +34,7 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
         amountField.delegate = self
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,10 +43,45 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onClickCreate(_ sender: AnyObject) {
-        var data:Dictionary<String, Any>
-        data = ["domain":domainNameField.text, "asset":assetNameField.text, "amount":Int(amountField.text!)]
-        AssetsDataManager.sharedManager.assetsDataArray.append(data)
-        saveAssetsData(assetsDatas: AssetsDataManager.sharedManager.assetsDataArray)
+        self.view.endEditing(true)
+        if(domainNameField.text == "" || assetNameField.text == "" || amountField.text == ""){
+            creatAssetAlert = UIAlertController(title: "警告", message: "すべての情報を入力してください", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            creatAssetAlert.addAction(defaultAction)
+            present(creatAssetAlert, animated: true, completion: nil)
+            
+        }else{
+            creatAssetAlert = UIAlertController(title: nil, message: "アセット作成中\n\n\n", preferredStyle: UIAlertControllerStyle.alert)
+            let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+            
+            spinnerIndicator.center = CGPoint(x:135.0, y:65.5)
+            spinnerIndicator.color = UIColor.black
+            spinnerIndicator.startAnimating()
+            
+            creatAssetAlert.view.addSubview(spinnerIndicator)
+            
+            self.present(creatAssetAlert, animated: false, completion: { () -> Void in
+                var data:Dictionary<String, String>
+                
+                let res = IrohaSwift.createAsset(name: self.assetNameField.text!, domain: self.domainNameField.text!, amount: self.amountField.text!)
+                if (res["status"] as! Int) == 200{
+                    data = ["domain":self.domainNameField.text!, "name":self.assetNameField.text!, "amount":self.amountField.text!, "asset-uuid":res["asset-uuid"] as! String]
+                    AssetsDataManager.sharedManager.assetsDataArray.append(data)
+                    self.saveAssetsData(assetsDatas: AssetsDataManager.sharedManager.assetsDataArray)
+                    self.navigationController?.popViewController(animated: true)
+                }else{
+                    self.creatAssetAlert.dismiss(animated: false, completion: {() -> Void in
+                        self.creatAssetAlert = UIAlertController(title: String(describing: res["status"]!) , message: res["message"] as! String?, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        self.creatAssetAlert.addAction(defaultAction)
+                        self.present(self.creatAssetAlert, animated: true, completion: {() -> Void in
+                            self.navigationController?.popViewController(animated: true)
+                        })
+                    })
+                }
+            })
+
+        }
     }
     
     func saveAssetsData(assetsDatas: [Dictionary<String, Any>]) {
@@ -69,11 +107,8 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     }
     
     func shownKeyboard(notification: Notification) {
-        print("Shown")
         if let userInfo = notification.userInfo {
-            print(userInfo[UIKeyboardFrameEndUserInfoKey])
-            print(userInfo[UIKeyboardAnimationDurationUserInfoKey])
-            if let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] {
+                if let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] {
                 wrapperScrollView.contentInset = UIEdgeInsets.zero
                 wrapperScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
                 let convertedKeyboardFrame = wrapperScrollView.convert(keyboardFrame, from: nil)

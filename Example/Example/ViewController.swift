@@ -14,13 +14,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let reg = IrohaSwift.register(accessPoint: "myhostName", name: "hoge")
-        print(reg)
-        IrohaSwift.assetTransfar(name: "a", domain: "a", amount: "100", reciever: "hoge")
-        let assets = IrohaSwift.getAsset()
-        print(assets)
-        IrohaSwift.setAddress(accessPoint: "192.168.1.1")
-        print(getAddress())
+//        let reg = IrohaSwift.register(accessPoint: "myhostName", name: "hoge")
+//        print(reg)
+//        IrohaSwift.assetTransfer(name: "a", domain: "a", amount: "100", reciever: "hoge")
+//        let assets = IrohaSwift.getAsset()
+//        print(assets)
+//        IrohaSwift.setAddress(accessPoint: "192.168.1.1")
+//        print(getAddress())
 
     }
 

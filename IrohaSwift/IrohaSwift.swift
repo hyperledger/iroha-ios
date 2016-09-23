@@ -59,7 +59,7 @@ public func getAddress() -> (String){
     return (ap)
 }
 
-public func getAsset() -> [String:Any]{
+public func getAssetsList() -> [String:Any]{
     let req = HttpRequest()
     let ap = getAddress()
     return req.getRequest(accessPoint: ap, endpoint: "/assets/list")
@@ -85,17 +85,16 @@ public func createAsset(name:String, domain:String, amount:String)-> [String:Any
     return req.postRequest(accessPoint: ap, endpoint: "/asset/create", parameters:parameter)
 }
 
-public func assetTransfer(name:String, domain:String, amount:String, reciever:String) -> [String:Any]{
+public func assetTransfer(assetUuid:String, amount:String, reciever:String) -> [String:Any]{
     let req = HttpRequest()
     let ap = getAddress()
     let defaults = UserDefaults.standard
     let pub:String = defaults.object(forKey: "publicKey") as! String
-    let message = "sender:\(pub),reciever:\(reciever),name:\(name),domain:\(domain),amount:\(amount)"
+    let message = "sender:\(pub),reciever:\(reciever),asset-uuid:\(assetUuid),amount:\(amount)"
     let sign = createSignature(message:message)
     let parameter: [String : Any] = [
         "asset-transfer": [
-            "name" : name,
-            "domain" : domain,
+            "asset-uuid": assetUuid,
             "amount" : amount,
             "sender" : pub,
             "receiver" : reciever,
