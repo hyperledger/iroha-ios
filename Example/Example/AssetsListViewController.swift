@@ -8,10 +8,12 @@
 
 import Foundation
 import UIKit
+import IrohaSwift
 
 class AssetsListViewController : UIViewController, UITableViewDelegate, UITableViewDataSource{
     @IBOutlet weak var assetsTableView: UITableView!
     let refreshControl = UIRefreshControl()
+    var listAlert = UIAlertController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,14 +23,42 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
-        
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         assetsTableView.addSubview(refreshControl)
+
+        listAlert = UIAlertController(title: nil, message: "口座情報取得中\n\n\n", preferredStyle: UIAlertControllerStyle.alert)
+        let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        
+        spinnerIndicator.center = CGPoint(x:135.0, y:65.5)
+        spinnerIndicator.color = UIColor.black
+        spinnerIndicator.startAnimating()
+        
+        listAlert.view.addSubview(spinnerIndicator)
+        self.present(listAlert, animated: false, completion: {
+            let res = IrohaSwift.getAssetsList()
+            if res["status"] as! Int == 200 {
+                self.listAlert.dismiss(animated: false, completion: {() -> Void in
+                    //ここでAssetsDataManager.sharedManager.assetsDataArrayにデータを入れる。
+                    self.assetsTableView.reloadData()
+                })
+            } else {
+                self.listAlert.dismiss(animated: false, completion: {() -> Void in
+                    
+                    self.listAlert = UIAlertController(title: String(describing: res["status"]!) , message: res["message"] as! String?, preferredStyle: .alert)
+                    let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    self.listAlert.addAction(defaultAction)
+                    self.present(self.listAlert, animated: true, completion: nil)
+                })
+            }
+        })
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         assetsTableView.reloadData()
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,16 +75,13 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "assetsCell", for: indexPath) as UITableViewCell
 
-
         let name:UILabel = cell.viewWithTag(1) as! UILabel
         let domain:UILabel = cell.viewWithTag(2) as! UILabel
         let value:UILabel = cell.viewWithTag(3) as! UILabel
         let assetData = AssetsDataManager.sharedManager.assetsDataArray[indexPath.row]
-        print(assetData)
         name.text = assetData["name"]
         domain.text = assetData["domain"]
         value.text = assetData["amount"]
-
 
         return cell
     }

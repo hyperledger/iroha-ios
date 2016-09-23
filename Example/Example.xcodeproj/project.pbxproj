@@ -12,6 +12,7 @@
 		7458D11C1D903735003C3D1D /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458D11B1D903735003C3D1D /* TransferViewController.swift */; };
 		748A95DE1D93CBAC003524FF /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A95DD1D93CBAC003524FF /* QRGenerator.swift */; };
 		748A95E21D93E16B003524FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 748A95E01D93E16B003524FF /* Main.storyboard */; };
+		748A95E41D94D69A003524FF /* TransactionHistoryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A95E31D94D69A003524FF /* TransactionHistoryDataManager.swift */; };
 		748D57D01D92852C00666478 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D57CF1D92852C00666478 /* QRViewController.swift */; };
 		748D57D51D92B48900666478 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D57D41D92B48900666478 /* RegisterViewController.swift */; };
 		748D57D81D92C76D00666478 /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D57D71D92C76D00666478 /* AccountInfoViewController.swift */; };
@@ -86,6 +87,7 @@
 		7458D11B1D903735003C3D1D /* TransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
 		748A95DD1D93CBAC003524FF /* QRGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
 		748A95E11D93E16B003524FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		748A95E31D94D69A003524FF /* TransactionHistoryDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistoryDataManager.swift; sourceTree = "<group>"; };
 		748D57CF1D92852C00666478 /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		748D57D41D92B48900666478 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		748D57D71D92C76D00666478 /* AccountInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountInfoViewController.swift; sourceTree = "<group>"; };
@@ -139,12 +141,12 @@
 			children = (
 				74F1E36B1D8DA68F0035760E /* ViewController.swift */,
 				7458D1181D8FF81D003C3D1D /* AssetsListViewController.swift */,
-				7458D11B1D903735003C3D1D /* TransferViewController.swift */,
-				74C5192F1D91034D005A335D /* CreateAssetViewController.swift */,
-				748D57D41D92B48900666478 /* RegisterViewController.swift */,
-				741943251D91774600B957C4 /* TransactionHistoryViewController.swift */,
-				748D57CF1D92852C00666478 /* QRViewController.swift */,
 				748D57D71D92C76D00666478 /* AccountInfoViewController.swift */,
+				74C5192F1D91034D005A335D /* CreateAssetViewController.swift */,
+				741943251D91774600B957C4 /* TransactionHistoryViewController.swift */,
+				7458D11B1D903735003C3D1D /* TransferViewController.swift */,
+				748D57D41D92B48900666478 /* RegisterViewController.swift */,
+				748D57CF1D92852C00666478 /* QRViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				74C519331D91674D005A335D /* AssetsDataManager.swift */,
+				748A95E31D94D69A003524FF /* TransactionHistoryDataManager.swift */,
 				748A95DD1D93CBAC003524FF /* QRGenerator.swift */,
 				74F1E3691D8DA68F0035760E /* AppDelegate.swift */,
 				74C519321D91660E005A335D /* Controller */,
@@ -381,6 +384,7 @@
 				748D57D81D92C76D00666478 /* AccountInfoViewController.swift in Sources */,
 				748D57D51D92B48900666478 /* RegisterViewController.swift in Sources */,
 				74C519301D91034D005A335D /* CreateAssetViewController.swift in Sources */,
+				748A95E41D94D69A003524FF /* TransactionHistoryDataManager.swift in Sources */,
 				7458D1191D8FF81D003C3D1D /* AssetsListViewController.swift in Sources */,
 				74C519341D91674D005A335D /* AssetsDataManager.swift in Sources */,
 				748D57D01D92852C00666478 /* QRViewController.swift in Sources */,

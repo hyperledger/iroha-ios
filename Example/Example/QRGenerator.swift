@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreImage
 
-func createQRCode(message: String, correctionLevel: String = "M", moduleSize: CGFloat = 1) -> UIImage {
+func createQRCode(message: String, correctionLevel: String = "L", moduleSize: CGFloat = 1) -> UIImage {
     
     let dat = message.data(using: String.Encoding.utf8)!
     
@@ -20,7 +20,7 @@ func createQRCode(message: String, correctionLevel: String = "M", moduleSize: CG
         ])!
     
     // moduleSize でリサイズ
-    let sizeTransform = CGAffineTransform(scaleX: 30 , y: 30)
+    let sizeTransform = CGAffineTransform(scaleX: 100 , y: 100)
     let ciImg = qr.outputImage!.applying(sizeTransform)
     let image:UIImage = UIImage(ciImage: ciImg, scale: 1, orientation: .up)
     let size = CGSize(width: 160, height: 160)

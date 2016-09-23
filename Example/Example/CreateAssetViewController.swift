@@ -14,11 +14,12 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var assetNameField: UITextField!
     @IBOutlet weak var domainNameField: UITextField!
     @IBOutlet weak var amountField: UITextField!
-    
     @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var wrapperScrollView: UIScrollView!
+    
     var underActiveFieldRect = CGRect()
     var creatAssetAlert = UIAlertController()
-    @IBOutlet weak var wrapperScrollView: UIScrollView!
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(shownKeyboard), name:Notification.Name.UIKeyboardWillShow, object: nil)
@@ -33,6 +34,7 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
         amountField.delegate = self
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,11 +106,8 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     }
     
     func shownKeyboard(notification: Notification) {
-        print("Shown")
         if let userInfo = notification.userInfo {
-            print(userInfo[UIKeyboardFrameEndUserInfoKey])
-            print(userInfo[UIKeyboardAnimationDurationUserInfoKey])
-            if let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] {
+                if let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] {
                 wrapperScrollView.contentInset = UIEdgeInsets.zero
                 wrapperScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
                 let convertedKeyboardFrame = wrapperScrollView.convert(keyboardFrame, from: nil)

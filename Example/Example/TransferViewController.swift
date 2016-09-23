@@ -12,13 +12,9 @@ import UIKit
 class TransferViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate{
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var toAccountField: UITextField!
-    
     @IBOutlet weak var valueField: UITextField!
-    
     @IBOutlet weak var assetName: UILabel!
-
     @IBOutlet weak var domainName: UILabel!
     
     var assetTxt, domainTxt:String!
