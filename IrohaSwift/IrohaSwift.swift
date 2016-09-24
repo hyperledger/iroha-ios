@@ -59,32 +59,27 @@ public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:S
     return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/create", parameters:parameter)
 }
 
-public func assetOperation(assetUuid:String, command:String, amount:String, reciever:String) -> [String:Any]{
+public func assetOperation(accessPoint: String, command:String, assetUuid:String, amount:String, keyPair:(publicKey:String, privateKey:String), reciever:String) -> [String:Any]{
     let req = HttpRequest()
-    let ap = getAddress()
-    let pub = Keychain().get(key: "publicKey")
-    let message = "sender:\(pub),reciever:\(reciever),asset-uuid:\(assetUuid),amount:\(amount)"
-    let sign = createSignature(message:message)
+    let message = "sender:\(keyPair.publicKey),reciever:\(reciever),asset-uuid:\(assetUuid),amount:\(amount)"
+    let signature = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
             "asset-uuid": assetUuid,
             "params" : [
                 "command": command,
                 "amount": Int(amount),
-                "sender" : pub,
+                "sender" : keyPair.publicKey,
                 "receiver" : reciever
             ],
-            "signature" : sign
+            "signature" : signature
     ]
-    return req.postRequest(accessPoint: ap, endpoint: "/asset/operation", parameters:parameter)
+    return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/operation", parameters:parameter)
 }
 
 
-public func getTransaction() -> [String:Any]{
+public func getTransaction(accessPoint:String, uuid:String) -> [String:Any]{
     let req = HttpRequest()
-    let ap = getAddress()
-    let uuid = Keychain().get(key: "uuid")
-    
-    return req.getRequest(accessPoint: ap, endpoint: "/history/transaction/\(uuid)")
+    return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(uuid)")
 }
 
 public func getAllTransaction(){
