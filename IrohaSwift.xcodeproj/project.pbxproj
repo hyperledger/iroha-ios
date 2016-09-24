@@ -70,7 +70,6 @@
 		74D56A671D96E079003148D4 /* ge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ge.h; path = lib/ed25519/src/ge.h; sourceTree = SOURCE_ROOT; };
 		74D56A681D96E079003148D4 /* key_exchange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = key_exchange.c; path = lib/ed25519/src/key_exchange.c; sourceTree = SOURCE_ROOT; };
 		74D56A691D96E079003148D4 /* keypair.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = keypair.c; path = lib/ed25519/src/keypair.c; sourceTree = SOURCE_ROOT; };
-		74D56A6A1D96E079003148D4 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = lib/ed25519/src/module.modulemap; sourceTree = SOURCE_ROOT; };
 		74D56A6B1D96E079003148D4 /* precomp_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = precomp_data.h; path = lib/ed25519/src/precomp_data.h; sourceTree = SOURCE_ROOT; };
 		74D56A6C1D96E079003148D4 /* sc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sc.c; path = lib/ed25519/src/sc.c; sourceTree = SOURCE_ROOT; };
 		74D56A6D1D96E079003148D4 /* sc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sc.h; path = lib/ed25519/src/sc.h; sourceTree = SOURCE_ROOT; };
@@ -79,6 +78,7 @@
 		74D56A701D96E079003148D4 /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sha3.h; path = lib/ed25519/src/sha3.h; sourceTree = SOURCE_ROOT; };
 		74D56A711D96E079003148D4 /* sign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sign.c; path = lib/ed25519/src/sign.c; sourceTree = SOURCE_ROOT; };
 		74D56A721D96E079003148D4 /* verify.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = verify.c; path = lib/ed25519/src/verify.c; sourceTree = SOURCE_ROOT; };
+		74D56A841D96EF93003148D4 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = lib/ed25519/src/module.modulemap; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +166,7 @@
 		74D56A601D96E06D003148D4 /* ed25519 */ = {
 			isa = PBXGroup;
 			children = (
-				74D56A6A1D96E079003148D4 /* module.modulemap */,
+				74D56A841D96EF93003148D4 /* module.modulemap */,
 				74D56A611D96E079003148D4 /* add_scalar.c */,
 				74D56A621D96E079003148D4 /* ed25519.h */,
 				74D56A631D96E079003148D4 /* fe.c */,
