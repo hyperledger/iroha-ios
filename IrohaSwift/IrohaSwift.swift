@@ -8,14 +8,6 @@
 
 import Foundation
 
-func saveKeyPair() -> String{
-    let keyPair = createKeyPair()
-    let keychain = Keychain()
-    keychain.set(key: "publicKey", value: keyPair.publicKey)
-    keychain.set(key: "privateKey", value: keyPair.privateKey)
-    return keyPair.publicKey
-}
-
 func createSignature(message:String!)-> String{
     let keychain = Keychain()
     let pub:String = keychain.get(key: "publicKey") 
@@ -31,15 +23,18 @@ public func register(accessPoint:String, name:String) -> [String:Any]{
     let key = saveKeyPair()
     let parameter: [String : Any] = [
         "publicKey": key,
-        "alias": name,
+        "screen_name": name,
         "timestamp": Date().timeIntervalSince1970
     ]
     var res = req.postRequest(accessPoint:accessPoint, endpoint: "/account/register", parameters: parameter)
+    print(res)
     if (res["status"] as! Int) == 200 {
         let keychain = Keychain()
         keychain.set(key: "uuid", value: res["uuid"] as! String)
     }
-    
+    print(Keychain().get(key: "privateKey"))
+    print(Keychain().get(key: "publicKey"))
+    print(Keychain().get(key: "uuid"))
     return res
 }
 

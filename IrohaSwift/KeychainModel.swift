@@ -27,7 +27,7 @@ class KeychainModel{
                 kSecValueDataValue: dataFromString
                 ] as CFDictionary
             SecItemDelete(keychainQuery)
-            print(SecItemAdd(keychainQuery, nil))
+            SecItemAdd(keychainQuery, nil)
         }
     }
     
