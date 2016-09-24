@@ -9,8 +9,8 @@
 import Foundation
 import KeychainAccess
 
-class KeyChainManager{
-    static let sharedManager = KeyChainManager()
+class KeychainManager{
+    static let sharedManager = KeychainManager()
     private init() {}
     let keychain = Keychain(service: "jp.co.soramitsu.Example")    
 }
