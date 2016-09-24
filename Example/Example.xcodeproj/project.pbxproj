@@ -10,15 +10,18 @@
 		0FFD22F4540D9A1191C228B1 /* Pods_ExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62AFA527B97BC1BA125688DA /* Pods_ExampleUITests.framework */; };
 		734F48ABD998D69184CB38AD /* Pods_ExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2BB72EB73D2C1CEDD850C2 /* Pods_ExampleTests.framework */; };
 		741943261D91774600B957C4 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741943251D91774600B957C4 /* TransactionHistoryViewController.swift */; };
+		742891D91D966AB300A222DD /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742891D81D966AB300A222DD /* KeychainManager.swift */; };
 		7458D1191D8FF81D003C3D1D /* AssetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458D1181D8FF81D003C3D1D /* AssetsListViewController.swift */; };
 		7458D11C1D903735003C3D1D /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458D11B1D903735003C3D1D /* TransferViewController.swift */; };
+		7473E7C01D966E290093C872 /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; };
+		7473E7C21D966E300093C872 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7473E7C11D966E300093C872 /* KeychainAccess.framework */; };
+		7473E7C41D966E330093C872 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7473E7C31D966E330093C872 /* SwiftyJSON.framework */; };
 		748A95DE1D93CBAC003524FF /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A95DD1D93CBAC003524FF /* QRGenerator.swift */; };
 		748A95E21D93E16B003524FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 748A95E01D93E16B003524FF /* Main.storyboard */; };
 		748A95E41D94D69A003524FF /* TransactionHistoryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A95E31D94D69A003524FF /* TransactionHistoryDataManager.swift */; };
 		748D57D01D92852C00666478 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D57CF1D92852C00666478 /* QRViewController.swift */; };
 		748D57D51D92B48900666478 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D57D41D92B48900666478 /* RegisterViewController.swift */; };
 		748D57D81D92C76D00666478 /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D57D71D92C76D00666478 /* AccountInfoViewController.swift */; };
-		7494E0A01D8F99A700F311DA /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; };
 		7494E0A11D8F99A700F311DA /* IrohaSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74C519301D91034D005A335D /* CreateAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5192F1D91034D005A335D /* CreateAssetViewController.swift */; };
 		74C519341D91674D005A335D /* AssetsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C519331D91674D005A335D /* AssetsDataManager.swift */; };
@@ -28,8 +31,6 @@
 		74F1E3741D8DA6900035760E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74F1E3721D8DA6900035760E /* LaunchScreen.storyboard */; };
 		74F1E37F1D8DA6900035760E /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F1E37E1D8DA6900035760E /* ExampleTests.swift */; };
 		74F1E38A1D8DA6900035760E /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F1E3891D8DA6900035760E /* ExampleUITests.swift */; };
-		74F1E66D1D8DA9EC0035760E /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; };
-		95F8DA25EF639DCE70F4151A /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC25141DD51D9984797AC3B7 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,8 +92,12 @@
 		5B0F81E87554863D28BD3EA6 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		62AFA527B97BC1BA125688DA /* Pods_ExampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		741943251D91774600B957C4 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
+		742891D81D966AB300A222DD /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		7458D1181D8FF81D003C3D1D /* AssetsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsListViewController.swift; sourceTree = "<group>"; };
 		7458D11B1D903735003C3D1D /* TransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
+		7473E7BE1D966DFB0093C872 /* Pods_Example.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Example.framework; path = "Build/Products/Debug-iphonesimulator/Pods_Example.framework"; sourceTree = "<group>"; };
+		7473E7C11D966E300093C872 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = "Build/Products/Debug-iphonesimulator/KeychainAccess/KeychainAccess.framework"; sourceTree = "<group>"; };
+		7473E7C31D966E330093C872 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "Build/Products/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		748A95DD1D93CBAC003524FF /* QRGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
 		748A95E11D93E16B003524FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		748A95E31D94D69A003524FF /* TransactionHistoryDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistoryDataManager.swift; sourceTree = "<group>"; };
@@ -126,9 +131,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7494E0A01D8F99A700F311DA /* IrohaSwift.framework in Frameworks */,
-				74F1E66D1D8DA9EC0035760E /* IrohaSwift.framework in Frameworks */,
-				95F8DA25EF639DCE70F4151A /* Pods_Example.framework in Frameworks */,
+				7473E7C01D966E290093C872 /* IrohaSwift.framework in Frameworks */,
+				7473E7C21D966E300093C872 /* KeychainAccess.framework in Frameworks */,
+				7473E7C41D966E330093C872 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +199,7 @@
 			children = (
 				74C519331D91674D005A335D /* AssetsDataManager.swift */,
 				748A95E31D94D69A003524FF /* TransactionHistoryDataManager.swift */,
+				742891D81D966AB300A222DD /* KeychainManager.swift */,
 				748A95DD1D93CBAC003524FF /* QRGenerator.swift */,
 				74F1E3691D8DA68F0035760E /* AppDelegate.swift */,
 				74C519321D91660E005A335D /* Controller */,
@@ -249,6 +255,9 @@
 		A28707194C83EE4F15A70E42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7473E7C31D966E330093C872 /* SwiftyJSON.framework */,
+				7473E7C11D966E300093C872 /* KeychainAccess.framework */,
+				7473E7BE1D966DFB0093C872 /* Pods_Example.framework */,
 				DC25141DD51D9984797AC3B7 /* Pods_Example.framework */,
 				CA2BB72EB73D2C1CEDD850C2 /* Pods_ExampleTests.framework */,
 				62AFA527B97BC1BA125688DA /* Pods_ExampleUITests.framework */,
@@ -566,6 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				742891D91D966AB300A222DD /* KeychainManager.swift in Sources */,
 				748D57D81D92C76D00666478 /* AccountInfoViewController.swift in Sources */,
 				748D57D51D92B48900666478 /* RegisterViewController.swift in Sources */,
 				74C519301D91034D005A335D /* CreateAssetViewController.swift in Sources */,
@@ -733,7 +743,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				DEVELOPMENT_TEAM = YLWWUD25VZ;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
+					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/KeychainAccess",
+					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/SwiftyJSON",
+				);
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -751,7 +765,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				DEVELOPMENT_TEAM = YLWWUD25VZ;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator",
+					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/KeychainAccess",
+					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/SwiftyJSON",
+				);
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
