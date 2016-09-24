@@ -25,10 +25,6 @@ public func getAccountInfo(accessPoint:String,uuid:String) -> [String:Any]{
     return req.getRequest(accessPoint: accessPoint, endpoint: "/account",parameters: ["uuid":uuid])
 }
 
-public func getPublicKey() -> String{
-    return Keychain().get(key: "publicKey")
-}
-
 public func setAddress(accessPoint:String){
     Keychain().set(key: "accessPoint", value: accessPoint)
 }
