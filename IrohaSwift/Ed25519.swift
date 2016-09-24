@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 import base64
 import ed25519
 
@@ -30,9 +31,6 @@ public func createKeyPair() -> (publicKey:String, privateKey:String){
     
     return (base64Pub, base64Pri)
 }
-
-
-
 func sign(publicKey:String,privateKey:String, message:String) -> String{
     var sig: Array<UInt8> = Array(repeating: 0, count: 64)
     var sigMsg: Array<UInt8> = Array(repeating: 0, count: 32)

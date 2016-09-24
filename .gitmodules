@@ -1,3 +1,0 @@
-[submodule "lib/ed25519"]
-	path = lib/ed25519
-	url = https://github.com/luca3104/ed25519

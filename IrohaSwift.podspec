@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.source_files = 'lib/**/*.{h,c}','IrohaSwift/*.swift'
   s.module_name = "IrohaSwift"
-  s.preserve_paths  = 'lib/**/module.modulemap'
+  s.preserve_paths  = 'lib/**/*'
   s.pod_target_xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/**' }
   s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/**', 'SWIFT_INCLUDE_PATHS' => '$(PODS_ROOT)/**' }
 end
