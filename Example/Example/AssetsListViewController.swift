@@ -49,7 +49,7 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
             let ap = KeychainManager.sharedManager.keychain["accessPoint"]
             let uuid = KeychainManager.sharedManager.keychain["uuid"]
 
-            let res = IrohaSwift.getAccountInfo(accessPoint: ap, uuid: uuid)
+            let res = IrohaSwift.getAccountInfo(accessPoint: ap!, uuid: uuid!)
             if res["status"] as! Int == 200 {
                 self.listAlert.dismiss(animated: false, completion: {() -> Void in
                     //ここでAssetsDataManager.sharedManager.assetsDataArrayにデータを入れる。
