@@ -8,12 +8,8 @@
 
 import Foundation
 
-func createSignature(message:String!)-> String{
-    let keychain = Keychain()
-    let pub:String = keychain.get(key: "publicKey") 
-    let pri:String = keychain.get(key: "privateKey")
-    let sig:String = sign(pub, privateKey: pri, message: message)
-    
+func createSignature(publicKey: String!, privateKey: String!, message:String!)-> String{
+    let sig:String = sign(publicKey, privateKey: privateKey, message: message)
     return sig
 }
 
