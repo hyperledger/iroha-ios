@@ -15,7 +15,7 @@ func createSeed() -> Array<UInt8> {
     return seed
 }
 
-func createKeyPair() -> (publicKey:String, privateKey:String){
+public func createKeyPair() -> (publicKey:String, privateKey:String){
     var pub: Array<UInt8> = Array(repeating: 0, count: 32)
     var pri: Array<UInt8> = Array(repeating: 0, count: 64)
     var seed: Array<UInt8> = createSeed()
