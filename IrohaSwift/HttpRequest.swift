@@ -9,9 +9,18 @@
 import Foundation
 
 class HttpRequest{
-    func getRequest(accessPoint:String, endpoint:String) ->[String:Any] {
-        var url : String
-        url = "\(accessPoint)\(endpoint)"
+    func getRequest(accessPoint:String, endpoint:String, parameters:[String: Any]? = nil) ->[String:Any] {
+        var url : String = ""
+        if(parameters == nil){
+            url = "\(accessPoint)\(endpoint)"
+        }else{
+            var parameterArray = [String]()
+            for param in parameters! {
+                parameterArray.append("\(param.key)=\(param.value)")
+            }
+            let param = parameterArray.joined(separator: "&")
+            url = "\(accessPoint)\(endpoint)?\(param)"
+        }
         var request = URLRequest(url: URL(string:url)!)
         request.httpMethod = "GET"
         var d: [String:Any]? = nil
