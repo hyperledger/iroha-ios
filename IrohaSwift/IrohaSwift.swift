@@ -16,15 +16,13 @@ public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:
         "screen_name": name,
         "timestamp": Date().timeIntervalSince1970
     ]
-    var res = req.postRequest(accessPoint:accessPoint, endpoint: "/account/register", parameters: parameter)
+    let res = req.postRequest(accessPoint:accessPoint, endpoint: "/account/register", parameters: parameter)
     return res
 }
 
-public func getAccountInfo() -> [String:Any]{
+public func getAccountInfo(accessPoint:String,uuid:String) -> [String:Any]{
     let req = HttpRequest()
-    let ap = getAddress()
-    let uuid = Keychain().get(key: "uuid")
-    return req.getRequest(accessPoint: ap, endpoint: "/account",parameters: ["uuid":uuid])
+    return req.getRequest(accessPoint: accessPoint, endpoint: "/account",parameters: ["uuid":uuid])
 }
 
 public func getPublicKey() -> String{
