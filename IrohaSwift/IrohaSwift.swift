@@ -24,21 +24,19 @@ public func getAccountInfo(accessPoint:String,uuid:String) -> [String:Any]{
     return req.getRequest(accessPoint: accessPoint, endpoint: "/account",parameters: ["uuid":uuid])
 }
 
-public func domainRegister(domain:String) -> [String:Any]{
+public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey:String, privateKey:String)) -> [String:Any]{
     let req = HttpRequest()
-    let ap = getAddress()
     let timestamp = Date().timeIntervalSince1970
-    let pub = Keychain().get(key: "publicKey")
-    let message = "timestamp:\(timestamp),owner:\(pub),name:\(domain)"
-    let sign = createSignature(message:message)
+    let message = "timestamp:\(timestamp),owner:\(keyPair.publicKey),name:\(domain)"
+    let signature = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
         "name" : domain,
-        "owner" : pub,
-        "signature" : sign,
+        "owner" : keyPair.publicKey,
+        "signature" : signature,
         "timestamp": timestamp
         ]
     
-    return req.postRequest(accessPoint: ap, endpoint: "/domain/register", parameters:parameter)
+    return req.postRequest(accessPoint: accessPoint, endpoint: "/domain/register", parameters:parameter)
 }
 
 public func getAssetsList() -> [String:Any]{
