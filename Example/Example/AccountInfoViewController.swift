@@ -8,6 +8,7 @@
 
 import UIKit
 import IrohaSwift
+import KeychainAccess
 
 class AccountInfoViewController: UIViewController {
     
@@ -21,8 +22,8 @@ class AccountInfoViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         
-        let qrString = IrohaSwift.getPublicKey()
-        QRImage.image = createQRCode(message: qrString)
+        let qrString = KeychainManager.sharedManager.keychain["publicKeyQ"]
+        QRImage.image = createQRCode(message: qrString!)
     }
 
     override func didReceiveMemoryWarning() {
