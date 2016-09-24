@@ -13,7 +13,6 @@ import IrohaSwift
 class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var assetNameField: UITextField!
     @IBOutlet weak var domainNameField: UITextField!
-    @IBOutlet weak var amountField: UITextField!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var wrapperScrollView: UIScrollView!
     
@@ -31,7 +30,6 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         assetNameField.delegate = self
         domainNameField.delegate = self
-        amountField.delegate = self
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         
@@ -44,7 +42,7 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
     
     @IBAction func onClickCreate(_ sender: AnyObject) {
         self.view.endEditing(true)
-        if(domainNameField.text == "" || assetNameField.text == "" || amountField.text == ""){
+        if(domainNameField.text == "" || assetNameField.text == ""){
             creatAssetAlert = UIAlertController(title: "警告", message: "すべての情報を入力してください", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             creatAssetAlert.addAction(defaultAction)
@@ -62,25 +60,26 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
             
             self.present(creatAssetAlert, animated: false, completion: { () -> Void in
                 var data:Dictionary<String, String>
-                
-                let res = IrohaSwift.createAsset(name: self.assetNameField.text!, domain: self.domainNameField.text!, amount: self.amountField.text!)
-                if (res["status"] as! Int) == 200{
-                    data = ["domain":self.domainNameField.text!, "name":self.assetNameField.text!, "amount":self.amountField.text!, "asset-uuid":res["asset-uuid"] as! String]
-                    AssetsDataManager.sharedManager.assetsDataArray.append(data)
-                    self.saveAssetsData(assetsDatas: AssetsDataManager.sharedManager.assetsDataArray)
-                    self.navigationController?.popViewController(animated: true)
-                }else{
-                    self.creatAssetAlert.dismiss(animated: false, completion: {() -> Void in
-                        self.creatAssetAlert = UIAlertController(title: String(describing: res["status"]!) , message: res["message"] as! String?, preferredStyle: .alert)
-                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        self.creatAssetAlert.addAction(defaultAction)
-                        self.present(self.creatAssetAlert, animated: true, completion: {() -> Void in
-                            self.navigationController?.popViewController(animated: true)
+                let res = IrohaSwift.domainRegister(domain: self.domainNameField.text!)
+                if (res["status"] as! Int) == 200 {
+                    let res = IrohaSwift.createAsset(name: self.assetNameField.text!, domain: self.domainNameField.text!)
+                    if (res["status"] as! Int) == 200{
+                        data = ["domain":self.domainNameField.text!, "name":self.assetNameField.text!, "asset-uuid":res["asset-uuid"] as! String]
+                        AssetsDataManager.sharedManager.assetsDataArray.append(data)
+                        self.saveAssetsData(assetsDatas: AssetsDataManager.sharedManager.assetsDataArray)
+                        self.navigationController?.popViewController(animated: true)
+                    }else{
+                        self.creatAssetAlert.dismiss(animated: false, completion: {() -> Void in
+                            self.creatAssetAlert = UIAlertController(title: String(describing: res["status"]!) ,    message: res["message"] as! String?, preferredStyle: .alert)
+                            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                            self.creatAssetAlert.addAction(defaultAction)
+                            self.present(self.creatAssetAlert, animated: true, completion: {() -> Void in
+                                self.navigationController?.popViewController(animated: true)
+                            })
                         })
-                    })
+                    }
                 }
             })
-
         }
     }
     
@@ -99,8 +98,6 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
         if textField == domainNameField {
             underActiveFieldRect = (assetNameField.superview?.frame)!
         }else if textField == assetNameField{
-            underActiveFieldRect = (amountField.superview?.frame)!
-        }else{
             underActiveFieldRect = createButton.frame
         }
         return true
