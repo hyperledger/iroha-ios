@@ -8,17 +8,12 @@
 
 import Foundation
 
-func createSignature(publicKey: String!, privateKey: String!, message:String!)-> String{
-    let sig:String = sign(publicKey, privateKey: privateKey, message: message)
-    return sig
-}
-
 public func register(accessPoint:String, name:String) -> [String:Any]{
     setAddress(accessPoint: accessPoint)
     let req = HttpRequest()
-    let key = saveKeyPair()
+    let key = createKeyPair()
     let parameter: [String : Any] = [
-        "publicKey": key,
+        "publicKey": key.publicKey,
         "screen_name": name,
         "timestamp": Date().timeIntervalSince1970
     ]
