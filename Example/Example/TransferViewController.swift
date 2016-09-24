@@ -120,7 +120,7 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
             
             case 11:
                 if(valueField.text != "" && toAccountField.text != ""){
-                    IrohaSwift.assetTransfer(assetUuid: assetUuid, amount: valueField.text!, reciever: toAccountField.text!)
+                    IrohaSwift.assetOperation(assetUuid: assetUuid, command: "Transfer", amount: valueField.text!, reciever: toAccountField.text!)
                 }
             break
             default:

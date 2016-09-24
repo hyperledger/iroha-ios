@@ -32,11 +32,9 @@
 		7471C8A71D8D9AC200C151E8 /* IrohaSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */; };
 		747237A01D8ECB5600D22133 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7472379F1D8ECB5600D22133 /* HttpRequest.swift */; };
 		7494E0981D8EFB0200F311DA /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7494E0971D8EFB0200F311DA /* DateExtension.swift */; };
-		7494E09A1D8F035600F311DA /* KeychainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7494E0991D8F035600F311DA /* KeychainModel.swift */; };
 		7494E09D1D8F961300F311DA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7494E09C1D8F961300F311DA /* Security.framework */; };
 		74A816A41D8E415100BFFE17 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 74A816A21D8E415100BFFE17 /* base64.c */; };
 		74A816A51D8E415100BFFE17 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 74A816A31D8E415100BFFE17 /* base64.h */; };
-		74C4336D1D8FA95500AEEEBD /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C4336C1D8FA95500AEEEBD /* Keychain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,11 +76,9 @@
 		7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IrohaSwift.swift; sourceTree = "<group>"; };
 		7472379F1D8ECB5600D22133 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		7494E0971D8EFB0200F311DA /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		7494E0991D8F035600F311DA /* KeychainModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainModel.swift; sourceTree = "<group>"; };
 		7494E09C1D8F961300F311DA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		74A816A21D8E415100BFFE17 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
 		74A816A31D8E415100BFFE17 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
-		74C4336C1D8FA95500AEEEBD /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,8 +130,6 @@
 				7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */,
 				7472379F1D8ECB5600D22133 /* HttpRequest.swift */,
 				7494E0971D8EFB0200F311DA /* DateExtension.swift */,
-				7494E0991D8F035600F311DA /* KeychainModel.swift */,
-				74C4336C1D8FA95500AEEEBD /* Keychain.swift */,
 				7413F4211D8FD6D500F4929A /* Ed25519.swift */,
 				7458D11D1D903E89003C3D1D /* ColorExtension.swift */,
 			);
@@ -315,8 +309,6 @@
 				7471C8991D8D986000C151E8 /* keypair.c in Sources */,
 				7458D11E1D903E89003C3D1D /* ColorExtension.swift in Sources */,
 				7471C8961D8D986000C151E8 /* ge.c in Sources */,
-				7494E09A1D8F035600F311DA /* KeychainModel.swift in Sources */,
-				74C4336D1D8FA95500AEEEBD /* Keychain.swift in Sources */,
 				7471C8931D8D986000C151E8 /* fe.c in Sources */,
 				747237A01D8ECB5600D22133 /* HttpRequest.swift in Sources */,
 				7471C8981D8D986000C151E8 /* key_exchange.c in Sources */,
