@@ -46,8 +46,7 @@ public func getAssetsList(accessPoint:String) -> [String:Any]{
 
 public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:String, privateKey:String), name:String)-> [String:Any]{
     let req = HttpRequest()
-    let pub = Keychain().get(key: "publicKey")
-    let message = "name:\(name),domain:\(domain),creator:\(pub)"
+    let message = "name:\(name),domain:\(domain),creator:\(keyPair.publicKey)"
     let signature = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
         "name" : name,
