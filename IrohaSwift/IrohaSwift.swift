@@ -8,24 +8,15 @@
 
 import Foundation
 
-public func register(accessPoint:String, name:String) -> [String:Any]{
+public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:String, name:String) -> [String:Any]{
     setAddress(accessPoint: accessPoint)
     let req = HttpRequest()
-    let key = createKeyPair()
     let parameter: [String : Any] = [
-        "publicKey": key.publicKey,
+        "publicKey": keyPair.publicKey,
         "screen_name": name,
         "timestamp": Date().timeIntervalSince1970
     ]
     var res = req.postRequest(accessPoint:accessPoint, endpoint: "/account/register", parameters: parameter)
-    print(res)
-    if (res["status"] as! Int) == 200 {
-        let keychain = Keychain()
-        keychain.set(key: "uuid", value: res["uuid"] as! String)
-    }
-    print(Keychain().get(key: "privateKey"))
-    print(Keychain().get(key: "publicKey"))
-    print(Keychain().get(key: "uuid"))
     return res
 }
 
