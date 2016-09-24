@@ -15,7 +15,7 @@ public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:
         "screen_name": name,
         "timestamp": Date().timeIntervalSince1970
     ]
-    let res = req.postRequest(accessPoint:accessPoint, endpoint: "/account/register", parameters: parameter)
+    let res = req.postRequest(accessPoint: accessPoint, endpoint: "/account/register", parameters: parameter)
     return res
 }
 
@@ -28,7 +28,7 @@ public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey
     let req = HttpRequest()
     let timestamp = Date().timeIntervalSince1970
     let message = "timestamp:\(timestamp),owner:\(keyPair.publicKey),name:\(domain)"
-    let signature = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
+    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
         "name" : domain,
         "owner" : keyPair.publicKey,
@@ -47,7 +47,7 @@ public func getAssetsList(accessPoint:String) -> [String:Any]{
 public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:String, privateKey:String), name:String)-> [String:Any]{
     let req = HttpRequest()
     let message = "name:\(name),domain:\(domain),creator:\(keyPair.publicKey)"
-    let signature = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
+    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
         "name" : name,
         "domain" : domain,
@@ -61,7 +61,7 @@ public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:S
 public func assetOperation(accessPoint: String, command:String, assetUuid:String, amount:String, keyPair:(publicKey:String, privateKey:String), reciever:String) -> [String:Any]{
     let req = HttpRequest()
     let message = "sender:\(keyPair.publicKey),reciever:\(reciever),asset-uuid:\(assetUuid),amount:\(amount)"
-    let signature = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
+    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
             "asset-uuid": assetUuid,
             "params" : [
@@ -84,3 +84,4 @@ public func getTransaction(accessPoint:String, uuid:String) -> [String:Any]{
 public func getAllTransaction(){
     
 }
+

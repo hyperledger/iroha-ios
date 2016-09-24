@@ -9,9 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIColor {
-    
-    // Twitterの水色を返します
+public extension UIColor {
     public class func iroha()->UIColor{
         return UIColor(red: 228/255, green: 35/255, blue: 45/255, alpha: 1)
     }

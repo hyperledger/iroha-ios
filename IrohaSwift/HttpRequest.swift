@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HttpRequest{
+public class HttpRequest{
     func getRequest(accessPoint:String, endpoint:String, parameters:[String: Any]? = nil) ->[String:Any] {
         var url : String = ""
         if(parameters == nil){

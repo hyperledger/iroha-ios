@@ -16,8 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        let appDomain:String = Bundle.main.bundleIdentifier!
-//        UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        //テスト用に毎回削除
+
+        do {
+            try KeychainManager.sharedManager.keychain.remove("privateKey")
+        } catch let error {
+            print("error: \(error)")
+        }
         if (KeychainManager.sharedManager.keychain["privateKey"] != nil){
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
