@@ -60,9 +60,12 @@ class CreateAssetViewController : UIViewController, UITextFieldDelegate {
             
             self.present(creatAssetAlert, animated: false, completion: { () -> Void in
                 var data:Dictionary<String, String>
-                let res = IrohaSwift.domainRegister(domain: self.domainNameField.text!)
+                let keychain = KeychainManager.sharedManager.keychain
+                let ap = keychain["accessPoint"]
+                let keypair = (publicKey: keychain["publicKey"]!, privateKey:keychain["privateKey"]!)
+                let res = IrohaSwift.domainRegister(accessPoint: ap!,domain: self.domainNameField.text!,keyPair: keypair )
                 if (res["status"] as! Int) == 200 {
-                    let res = IrohaSwift.createAsset(name: self.assetNameField.text!, domain: self.domainNameField.text!)
+                    let res = IrohaSwift.createAsset(accessPoint: ap!,domain: self.domainNameField.text!,keyPair: keypair , name: self.assetNameField.text!)
                     if (res["status"] as! Int) == 200{
                         data = ["domain":self.domainNameField.text!, "name":self.assetNameField.text!, "asset-uuid":res["asset-uuid"] as! String]
                         AssetsDataManager.sharedManager.assetsDataArray.append(data)
