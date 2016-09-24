@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 //        let appDomain:String = Bundle.main.bundleIdentifier!
 //        UserDefaults.standard.removePersistentDomain(forName: appDomain)
-        if ((UserDefaults.standard.object(forKey: "publicKey")) != nil){
+        if (KeychainManager.sharedManager.keychain["privateKey"] != nil){
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "Tabbar")
