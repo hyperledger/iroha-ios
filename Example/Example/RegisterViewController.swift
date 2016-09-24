@@ -109,6 +109,7 @@ class RegisterViewController: UIViewController ,UITextFieldDelegate{
             self.present(alertController, animated: false, completion: {
                 let keypair = IrohaSwift.createKeyPair()
                 do{
+                    try KeyChainManager.sharedManager.keychain.set(self.accessField.text!, key: "accessPoint")
                     try KeyChainManager.sharedManager.keychain.set(keypair.publicKey, key: "publicKey")
                     try KeyChainManager.sharedManager.keychain.set(keypair.privateKey, key: "privateKey")
                 }catch{
