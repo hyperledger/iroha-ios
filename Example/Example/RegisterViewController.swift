@@ -107,7 +107,8 @@ class RegisterViewController: UIViewController ,UITextFieldDelegate{
         
             alertController.view.addSubview(spinnerIndicator)
             self.present(alertController, animated: false, completion: {
-                let res = IrohaSwift.register(accessPoint: self.accessField.text!, name: self.userNameField.text!)
+                let keypair = IrohaSwift.createKeyPair()
+                let res = IrohaSwift.register(keyPair:keypair,accessPoint: self.accessField.text!, name: self.userNameField.text!)
                 if res["status"] as! Int == 200 {
                     self.alertController.dismiss(animated: false, completion: {() -> Void in
                         let nextvc = self.storyboard?.instantiateViewController(withIdentifier: "Tabbar")
