@@ -9,7 +9,6 @@
 import Foundation
 
 public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:String, name:String) -> [String:Any]{
-    setAddress(accessPoint: accessPoint)
     let req = HttpRequest()
     let parameter: [String : Any] = [
         "publicKey": keyPair.publicKey,
@@ -23,15 +22,6 @@ public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:
 public func getAccountInfo(accessPoint:String,uuid:String) -> [String:Any]{
     let req = HttpRequest()
     return req.getRequest(accessPoint: accessPoint, endpoint: "/account",parameters: ["uuid":uuid])
-}
-
-public func setAddress(accessPoint:String){
-    Keychain().set(key: "accessPoint", value: accessPoint)
-}
-
-public func getAddress() -> (String){
-    let ap:String = Keychain().get(key: "accessPoint")
-    return ap
 }
 
 public func domainRegister(domain:String) -> [String:Any]{
