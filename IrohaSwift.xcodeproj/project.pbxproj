@@ -60,7 +60,6 @@
 		7494E09C1D8F961300F311DA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		74A816A21D8E415100BFFE17 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
 		74A816A31D8E415100BFFE17 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
-		74D56A3A1D96DD6B003148D4 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		74D56A611D96E079003148D4 /* add_scalar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = add_scalar.c; path = lib/ed25519/src/add_scalar.c; sourceTree = SOURCE_ROOT; };
 		74D56A621D96E079003148D4 /* ed25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ed25519.h; path = lib/ed25519/src/ed25519.h; sourceTree = SOURCE_ROOT; };
 		74D56A631D96E079003148D4 /* fe.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fe.c; path = lib/ed25519/src/fe.c; sourceTree = SOURCE_ROOT; };
@@ -78,7 +77,7 @@
 		74D56A701D96E079003148D4 /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sha3.h; path = lib/ed25519/src/sha3.h; sourceTree = SOURCE_ROOT; };
 		74D56A711D96E079003148D4 /* sign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sign.c; path = lib/ed25519/src/sign.c; sourceTree = SOURCE_ROOT; };
 		74D56A721D96E079003148D4 /* verify.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = verify.c; path = lib/ed25519/src/verify.c; sourceTree = SOURCE_ROOT; };
-		74D56A841D96EF93003148D4 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = lib/ed25519/src/module.modulemap; sourceTree = SOURCE_ROOT; };
+		74D56A851D96F078003148D4 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = lib/module.modulemap; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +122,7 @@
 		7471C8661D8D942300C151E8 /* IrohaSwift */ = {
 			isa = PBXGroup;
 			children = (
+				74D56A851D96F078003148D4 /* module.modulemap */,
 				74D56A601D96E06D003148D4 /* ed25519 */,
 				74A816A11D8E415100BFFE17 /* base64 */,
 				7471C8671D8D942300C151E8 /* IrohaSwift.h */,
@@ -155,7 +155,6 @@
 		74A816A11D8E415100BFFE17 /* base64 */ = {
 			isa = PBXGroup;
 			children = (
-				74D56A3A1D96DD6B003148D4 /* module.modulemap */,
 				74A816A21D8E415100BFFE17 /* base64.c */,
 				74A816A31D8E415100BFFE17 /* base64.h */,
 			);
@@ -166,7 +165,6 @@
 		74D56A601D96E06D003148D4 /* ed25519 */ = {
 			isa = PBXGroup;
 			children = (
-				74D56A841D96EF93003148D4 /* module.modulemap */,
 				74D56A611D96E079003148D4 /* add_scalar.c */,
 				74D56A621D96E079003148D4 /* ed25519.h */,
 				74D56A631D96E079003148D4 /* fe.c */,

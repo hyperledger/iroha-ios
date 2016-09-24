@@ -8,8 +8,7 @@
 
 import Foundation
 
-import base64
-import ed25519
+import IrohaModule
 
 func createSeed() -> Array<UInt8> {
     var seed: Array<UInt8> = Array(repeating: 0, count: 32)

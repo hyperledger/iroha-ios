@@ -1,7 +1,0 @@
-module base64 [system][extern_c]  {
-    header "base64.h"
-//    umbrella header "IrohaModule-umbrella.h"
-//    module * {
-//        export *
-//    }
-}
