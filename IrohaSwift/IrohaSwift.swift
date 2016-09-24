@@ -39,26 +39,24 @@ public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey
     return req.postRequest(accessPoint: accessPoint, endpoint: "/domain/register", parameters:parameter)
 }
 
-public func getAssetsList() -> [String:Any]{
+public func getAssetsList(accessPoint:String) -> [String:Any]{
     let req = HttpRequest()
-    let ap = getAddress()
-    return req.getRequest(accessPoint: ap, endpoint: "/assets/list")
+    return req.getRequest(accessPoint: accessPoint, endpoint: "/assets/list")
 }
 
-public func createAsset(name:String, domain:String)-> [String:Any]{
+public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:String, privateKey:String), name:String)-> [String:Any]{
     let req = HttpRequest()
-    let ap = getAddress()
     let pub = Keychain().get(key: "publicKey")
     let message = "name:\(name),domain:\(domain),creator:\(pub)"
-    let sign = createSignature(message:message)
+    let signature = sign(keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
         "name" : name,
         "domain" : domain,
-        "creator" : pub,
-        "signature" : sign,
+        "creator" : keyPair.publicKey,
+        "signature" : signature,
     ]
     
-    return req.postRequest(accessPoint: ap, endpoint: "/asset/create", parameters:parameter)
+    return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/create", parameters:parameter)
 }
 
 public func assetOperation(assetUuid:String, command:String, amount:String, reciever:String) -> [String:Any]{
