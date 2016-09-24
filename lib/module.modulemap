@@ -1,6 +1,8 @@
 module IrohaModule [system][extern_c]  {
     header "base64/base64.h"
-    header "ed25519/src/ed25519.h"
+    header "ed25519/ed25519.h"
+    header "ed25519/sha3.h"
+
 
 //    umbrella header "IrohaModule-umbrella.h"
 //    module * {
