@@ -43,6 +43,14 @@ public func register(accessPoint:String, name:String) -> [String:Any]{
     return res
 }
 
+public func getAccountInfo() -> [String:Any]{
+    let req = HttpRequest()
+    let ap = getAddress()
+    let defaults = UserDefaults.standard
+    let uuid = defaults.object(forKey: "uuid") as! String
+    return req.getRequest(accessPoint: ap, endpoint: "/account",parameters: ["uuid":uuid])
+}
+
 public func getPublicKey() -> String{
     let defaults = UserDefaults.standard
     return defaults.object(forKey: "publicKey") as! String
@@ -56,7 +64,7 @@ public func setAddress(accessPoint:String){
 public func getAddress() -> (String){
     let defaults = UserDefaults.standard
     let ap:String = defaults.object(forKey: "accessPoint") as! String
-    return (ap)
+    return ap
 }
 
 public func domainRegister(domain:String) -> [String:Any]{
@@ -128,13 +136,6 @@ public func getTransaction() -> [String:Any]{
     let uuid = defaults.object(forKey: "uuid") as! String
     
     return req.getRequest(accessPoint: ap, endpoint: "/history/transaction/\(uuid)")
-}
-
-public func getTransaction(uuid:String) -> [String:Any]{
-    let req = HttpRequest()
-    let ap = getAddress()
-    
-    return req.getRequest(accessPoint: ap, endpoint: "/transaction/\(uuid)")
 }
 
 public func getAllTransaction(){
