@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import IrohaModule
 
 func createSeed() -> Array<UInt8> {
