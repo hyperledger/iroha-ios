@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8CF7A4DB40F5DD2496BD98590CB4AD9655E70561",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8CF7A4DB40F5DD2496BD98590CB4AD9655E70561" : 0,
+    "13811C548DDF1B6866B16DDDA04263527F58A06E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9344BE2D-4EF1-441C-912D-37D6B6EB15A3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8CF7A4DB40F5DD2496BD98590CB4AD9655E70561" : "IrohaSwift\/",
+    "13811C548DDF1B6866B16DDDA04263527F58A06E" : "IrohaSwift\/lib\/ed25519\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "IrohaSwift",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "IrohaSwift.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/luca3104\/ed25519",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "13811C548DDF1B6866B16DDDA04263527F58A06E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/soramitsu\/IrohaSwift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8CF7A4DB40F5DD2496BD98590CB4AD9655E70561"
+    }
+  ]
+}
