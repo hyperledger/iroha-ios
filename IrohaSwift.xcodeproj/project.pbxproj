@@ -17,7 +17,7 @@
 		7494E09D1D8F961300F311DA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7494E09C1D8F961300F311DA /* Security.framework */; };
 		74A816A41D8E415100BFFE17 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 74A816A21D8E415100BFFE17 /* base64.c */; };
 		74A816A51D8E415100BFFE17 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 74A816A31D8E415100BFFE17 /* base64.h */; };
-		74A8F0321D97EFCC008CCF51 /* module.modulemap in Frameworks */ = {isa = PBXBuildFile; fileRef = 74D56A851D96F078003148D4 /* module.modulemap */; };
+		74A8F0321D97EFCC008CCF51 /* module.modulemap in Headers */ = {isa = PBXBuildFile; fileRef = 74D56A851D96F078003148D4 /* module.modulemap */; settings = {ATTRIBUTES = (Public, ); }; };
 		74D56A971D96F263003148D4 /* add_scalar.c in Sources */ = {isa = PBXBuildFile; fileRef = 74D56A861D96F263003148D4 /* add_scalar.c */; };
 		74D56A981D96F263003148D4 /* ed25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 74D56A871D96F263003148D4 /* ed25519.h */; };
 		74D56A991D96F263003148D4 /* fe.c in Sources */ = {isa = PBXBuildFile; fileRef = 74D56A881D96F263003148D4 /* fe.c */; };
@@ -87,7 +87,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7494E09D1D8F961300F311DA /* Security.framework in Frameworks */,
-				74A8F0321D97EFCC008CCF51 /* module.modulemap in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74D56AA21D96F263003148D4 /* sc.h in Headers */,
+				74A8F0321D97EFCC008CCF51 /* module.modulemap in Headers */,
 				74A816A51D8E415100BFFE17 /* base64.h in Headers */,
 				74D56AA01D96F263003148D4 /* precomp_data.h in Headers */,
 				74D56A9B1D96F263003148D4 /* fixedint.h in Headers */,
