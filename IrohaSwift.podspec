@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/soramitsu/IrohaSwift.git", :tag => "#{s.version}" }
   s.ios.deployment_target = '9.0'
   s.source_files = 'lib/**/*.{h,c}','IrohaSwift/*.swift'
-  s.public_header_files = 'lib/*.h','IrohaSwift/*.h'
+  s.public_header_files = 'lib/**/*.h','IrohaSwift/*.h'
   s.preserve_paths  = 'lib/module.modulemap'
   s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/**'}
 end
