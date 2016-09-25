@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IrohaModule
 
 public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:String, name:String) -> [String:Any]{
     let req = HttpRequest()

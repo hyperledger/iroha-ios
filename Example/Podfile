@@ -8,6 +8,7 @@ target 'Example' do
   # Pods for Example
   pod 'KeychainAccess', '3.0.0'
   pod 'SwiftyJSON', '3.0.0'
+  pod 'IrohaSwift', :path => '..'
   target 'ExampleTests' do
     inherit! :search_paths
     # Pods for testing
