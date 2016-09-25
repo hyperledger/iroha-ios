@@ -81,7 +81,3 @@ public func getTransaction(accessPoint:String, uuid:String) -> [String:Any]{
     let req = HttpRequest()
     return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(uuid)")
 }
-
-public func getAllTransaction(){
-
-}
