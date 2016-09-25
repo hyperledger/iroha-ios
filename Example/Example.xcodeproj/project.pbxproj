@@ -13,7 +13,6 @@
 		742891D91D966AB300A222DD /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742891D81D966AB300A222DD /* KeychainManager.swift */; };
 		7458D1191D8FF81D003C3D1D /* AssetsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458D1181D8FF81D003C3D1D /* AssetsListViewController.swift */; };
 		7458D11C1D903735003C3D1D /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458D11B1D903735003C3D1D /* TransferViewController.swift */; };
-		7473E7C01D966E290093C872 /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; };
 		7473E7C21D966E300093C872 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7473E7C11D966E300093C872 /* KeychainAccess.framework */; };
 		7473E7C41D966E330093C872 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7473E7C31D966E330093C872 /* SwiftyJSON.framework */; };
 		748A95DE1D93CBAC003524FF /* QRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748A95DD1D93CBAC003524FF /* QRGenerator.swift */; };
@@ -22,7 +21,6 @@
 		748D57D01D92852C00666478 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D57CF1D92852C00666478 /* QRViewController.swift */; };
 		748D57D51D92B48900666478 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D57D41D92B48900666478 /* RegisterViewController.swift */; };
 		748D57D81D92C76D00666478 /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D57D71D92C76D00666478 /* AccountInfoViewController.swift */; };
-		7494E0A11D8F99A700F311DA /* IrohaSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74C519301D91034D005A335D /* CreateAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C5192F1D91034D005A335D /* CreateAssetViewController.swift */; };
 		74C519341D91674D005A335D /* AssetsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C519331D91674D005A335D /* AssetsDataManager.swift */; };
 		74F1E36A1D8DA68F0035760E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F1E3691D8DA68F0035760E /* AppDelegate.swift */; };
@@ -35,13 +33,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7494E0A21D8F99A700F311DA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74F1E6621D8DA9AF0035760E /* IrohaSwift.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 7471C8631D8D942300C151E8;
-			remoteInfo = IrohaSwift;
-		};
 		74F1E37B1D8DA6900035760E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74F1E35E1D8DA68F0035760E /* Project object */;
@@ -56,20 +47,6 @@
 			remoteGlobalIDString = 74F1E3651D8DA68F0035760E;
 			remoteInfo = Example;
 		};
-		74F1E6671D8DA9AF0035760E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74F1E6621D8DA9AF0035760E /* IrohaSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7471C8641D8D942300C151E8;
-			remoteInfo = IrohaSwift;
-		};
-		74F1E6691D8DA9AF0035760E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 74F1E6621D8DA9AF0035760E /* IrohaSwift.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7471C86E1D8D942300C151E8;
-			remoteInfo = IrohaSwiftTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -79,7 +56,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7494E0A11D8F99A700F311DA /* IrohaSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,7 +96,6 @@
 		74F1E3851D8DA6900035760E /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74F1E3891D8DA6900035760E /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		74F1E38B1D8DA6900035760E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74F1E6621D8DA9AF0035760E /* IrohaSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IrohaSwift.xcodeproj; path = ../IrohaSwift.xcodeproj; sourceTree = "<group>"; };
 		CA2BB72EB73D2C1CEDD850C2 /* Pods_ExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC25141DD51D9984797AC3B7 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFDE7FD58A35EE9A93646092 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7473E7C01D966E290093C872 /* IrohaSwift.framework in Frameworks */,
 				7473E7C21D966E300093C872 /* KeychainAccess.framework in Frameworks */,
 				7473E7C41D966E330093C872 /* SwiftyJSON.framework in Frameworks */,
 				A97AC6E89ED9474E20DBD313 /* Pods_Example.framework in Frameworks */,
@@ -180,7 +154,6 @@
 				74F1E37D1D8DA6900035760E /* ExampleTests */,
 				74F1E3881D8DA6900035760E /* ExampleUITests */,
 				74F1E3671D8DA68F0035760E /* Products */,
-				74F1E6621D8DA9AF0035760E /* IrohaSwift.xcodeproj */,
 				7AE0718400D2042D4E0BF697 /* Pods */,
 				A28707194C83EE4F15A70E42 /* Frameworks */,
 			);
@@ -232,15 +205,6 @@
 			path = ExampleUITests;
 			sourceTree = "<group>";
 		};
-		74F1E6631D8DA9AF0035760E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */,
-				74F1E66A1D8DA9AF0035760E /* IrohaSwiftTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7AE0718400D2042D4E0BF697 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,7 +249,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				7494E0A31D8F99A700F311DA /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -377,12 +340,6 @@
 			mainGroup = 74F1E35D1D8DA68F0035760E;
 			productRefGroup = 74F1E3671D8DA68F0035760E /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 74F1E6631D8DA9AF0035760E /* Products */;
-					ProjectRef = 74F1E6621D8DA9AF0035760E /* IrohaSwift.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				74F1E3651D8DA68F0035760E /* Example */,
@@ -391,23 +348,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		74F1E6681D8DA9AF0035760E /* IrohaSwift.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = IrohaSwift.framework;
-			remoteRef = 74F1E6671D8DA9AF0035760E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		74F1E66A1D8DA9AF0035760E /* IrohaSwiftTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = IrohaSwiftTests.xctest;
-			remoteRef = 74F1E6691D8DA9AF0035760E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		74F1E3641D8DA68F0035760E /* Resources */ = {
@@ -614,11 +554,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7494E0A31D8F99A700F311DA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = IrohaSwift;
-			targetProxy = 7494E0A21D8F99A700F311DA /* PBXContainerItemProxy */;
-		};
 		74F1E37C1D8DA6900035760E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 74F1E3651D8DA68F0035760E /* Example */;

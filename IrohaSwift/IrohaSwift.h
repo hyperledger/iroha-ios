@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Kaji Satoshi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 //! Project version number for IrohaSwift.
 FOUNDATION_EXPORT double IrohaSwiftVersionNumber;
 

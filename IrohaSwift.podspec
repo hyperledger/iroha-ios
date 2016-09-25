@@ -7,10 +7,9 @@ Pod::Spec.new do |s|
   s.author             = { "Soramitsu Co., Ltd." => "info@soramitsu.co.jp" }
   s.source       = { :git => "https://github.com/soramitsu/IrohaSwift.git", :tag => "#{s.version}" }
   s.ios.deployment_target = '9.0'
-  s.source_files = 'IrohaSwift/**/*.{h,swift}'
-  s.public_header_files = 'IrohaSwift/**/*.h'
-  s.preserve_paths  = 'IrohaSwift/module.modulemap'
-  # s.module_map = 'lib/module.modulemap'
+  s.source_files = 'IrohaSwift/**/*.{h,c,swift}'
+  s.public_header_files = 'IrohaSwift/*.h'
+  s.preserve_paths  = 'IrohaSwift/libs/module.modulemap'
 
-  s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/IrohaSwift/IrohaSwift/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/IrohaSwift/IrohaSwift'}
+  s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/**','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/IrohaSwift/**'}
 end

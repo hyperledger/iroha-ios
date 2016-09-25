@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import IrohaModule
+import libs
 
 public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:String, name:String) -> [String:Any]{
     let req = HttpRequest()
@@ -36,7 +36,7 @@ public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey
         "signature" : signature,
         "timestamp": timestamp
         ]
-    
+
     return req.postRequest(accessPoint: accessPoint, endpoint: "/domain/register", parameters:parameter)
 }
 
@@ -55,7 +55,7 @@ public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:S
         "creator" : keyPair.publicKey,
         "signature" : signature,
     ]
-    
+
     return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/create", parameters:parameter)
 }
 
@@ -83,6 +83,5 @@ public func getTransaction(accessPoint:String, uuid:String) -> [String:Any]{
 }
 
 public func getAllTransaction(){
-    
-}
 
+}

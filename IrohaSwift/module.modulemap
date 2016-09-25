@@ -1,6 +1,0 @@
-module IrohaModule {
-    header "base64/base64.h"
-    header "ed25519/ed25519.h"
-    header "ed25519/sha3.h"
-    export *
-}
