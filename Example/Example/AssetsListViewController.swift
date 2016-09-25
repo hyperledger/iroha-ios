@@ -25,9 +25,6 @@ class AssetsListViewController : UIViewController, UITableViewDelegate, UITableV
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         assetsTableView.addSubview(refreshControl)
-        
-        print(KeychainManager.sharedManager.keychain["publicKey"])
-        print(KeychainManager.sharedManager.keychain["privateKey"])
     }
     
     override func viewWillAppear(_ animated: Bool) {

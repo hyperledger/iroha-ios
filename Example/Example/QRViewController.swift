@@ -36,7 +36,6 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraRegion.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        print(cameraRegion.frame)
         cameraSetting()
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,11 +88,9 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
         for data in metadataObjects {
             if (data as AnyObject).type == AVMetadataObjectTypeQRCode {
                 let dataValue: String = (data as! AVMetadataMachineReadableCodeObject).stringValue
-                print(dataValue)
                 self.captureSession.stopRunning()
                 let prevvc = navigationController?.viewControllers[(navigationController?.viewControllers.count)! - 2] as! TransferViewController
                 prevvc.toAccount = dataValue
-                print(prevvc)
                 navigationController?.popViewController(animated: true)
             }
         }
