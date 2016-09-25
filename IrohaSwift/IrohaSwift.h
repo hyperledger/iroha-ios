@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 //! Project version number for IrohaSwift.
 FOUNDATION_EXPORT double IrohaSwiftVersionNumber;
 
