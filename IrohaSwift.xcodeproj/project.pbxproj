@@ -33,7 +33,7 @@
 		74A8F09E1D9819DF008CCF51 /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 74A8F08B1D9819DF008CCF51 /* sha3.h */; };
 		74A8F09F1D9819DF008CCF51 /* sign.c in Sources */ = {isa = PBXBuildFile; fileRef = 74A8F08C1D9819DF008CCF51 /* sign.c */; };
 		74A8F0A01D9819DF008CCF51 /* verify.c in Sources */ = {isa = PBXBuildFile; fileRef = 74A8F08D1D9819DF008CCF51 /* verify.c */; };
-		74A8F0A41D981B92008CCF51 /* IrohaSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 7471C8671D8D942300C151E8 /* IrohaSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		74A8F0AA1D9827E3008CCF51 /* IrohaSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 7471C8671D8D942300C151E8 /* IrohaSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,7 +184,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74A8F0A41D981B92008CCF51 /* IrohaSwift.h in Headers */,
+				74A8F0AA1D9827E3008CCF51 /* IrohaSwift.h in Headers */,
 				74A8F09B1D9819DF008CCF51 /* sc.h in Headers */,
 				74A8F0991D9819DF008CCF51 /* precomp_data.h in Headers */,
 				74A8F0941D9819DF008CCF51 /* fixedint.h in Headers */,
@@ -372,7 +372,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos10.0;
@@ -417,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos10.0;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -444,6 +444,7 @@
 				);
 				INFOPLIST_FILE = IrohaSwift/Info.plist;
 				INSTALL_PATH = "@rpath";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = "";
 				MODULEMAP_FILE = "";
@@ -473,6 +474,7 @@
 				);
 				INFOPLIST_FILE = IrohaSwift/Info.plist;
 				INSTALL_PATH = "@rpath";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = "";
 				MODULEMAP_FILE = "";
