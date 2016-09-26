@@ -40,11 +40,6 @@ public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey
     return req.postRequest(accessPoint: accessPoint, endpoint: "/domain/register", parameters:parameter)
 }
 
-public func getAssetsList(accessPoint:String) -> [String:Any]{
-    let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/assets/list")
-}
-
 public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:String, privateKey:String), name:String)-> [String:Any]{
     let req = HttpRequest()
     let message = "name:\(name),domain:\(domain),creator:\(keyPair.publicKey)"
@@ -54,10 +49,21 @@ public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:S
         "domain" : domain,
         "creator" : keyPair.publicKey,
         "signature" : signature,
-    ]
-
+        ]
+    
     return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/create", parameters:parameter)
 }
+
+public func getDomainList(accessPoint:String) -> [String:Any]{
+    let req = HttpRequest()
+    return req.getRequest(accessPoint: accessPoint, endpoint: "/domain/list")
+}
+
+public func getAssetsList(accessPoint:String) -> [String:Any]{
+    let req = HttpRequest()
+    return req.getRequest(accessPoint: accessPoint, endpoint: "/assets/list")
+}
+
 
 public func assetOperation(accessPoint: String, command:String, assetUuid:String, amount:String, keyPair:(publicKey:String, privateKey:String), reciever:String) -> [String:Any]{
     let req = HttpRequest()
@@ -80,4 +86,9 @@ public func assetOperation(accessPoint: String, command:String, assetUuid:String
 public func getTransaction(accessPoint:String, uuid:String) -> [String:Any]{
     let req = HttpRequest()
     return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(uuid)")
+}
+
+public func getTransactionWithAssetName(accessPoint:String, asset:String, domain:String) -> [String:Any]{
+    let req = HttpRequest()
+    return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(domain).\(asset)")
 }
