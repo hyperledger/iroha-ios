@@ -59,9 +59,9 @@ public func getDomainList(accessPoint:String) -> [String:Any]{
     return req.getRequest(accessPoint: accessPoint, endpoint: "/domain/list")
 }
 
-public func getAssetsList(accessPoint:String) -> [String:Any]{
+public func getAssetsList(accessPoint:String, domain:String) -> [String:Any]{
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/assets/list")
+    return req.getRequest(accessPoint: accessPoint, endpoint: "/assets/list/\(domain)")
 }
 
 
