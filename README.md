@@ -13,7 +13,7 @@ Swift 3.0+
 
 ## Installation  
 *  Clone this repository.
-*  [Download 1.0.0 α version release](https://github.com/soramitsu/IrohaSwift/releases/tag/1.0.0%CE%B1).
+*  [Download 1.0.0 α2 version release](https://github.com/soramitsu/iroha-ios/releases/tag/1.0.0a2).
 *  [Feature]Install with pod.
 
 ## Usage
