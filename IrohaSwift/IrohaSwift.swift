@@ -88,3 +88,7 @@ public func getTransaction(accessPoint:String, uuid:String) -> [String:Any]{
     return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(uuid)")
 }
 
+public func getTransactionWithAssetName(accessPoint:String, asset:String, domain:String) -> [String:Any]{
+    let req = HttpRequest()
+    return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(domain).\(asset)")
+}
