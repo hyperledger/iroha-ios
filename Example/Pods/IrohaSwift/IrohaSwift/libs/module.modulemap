@@ -1,6 +1,0 @@
-module libs [system][extern_c]{
-    header "base64.h"
-    header "ed25519.h"
-    header "sha3.h"
-    export *
-}
