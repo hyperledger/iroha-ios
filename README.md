@@ -7,9 +7,9 @@
 いろはSwift(IrohaSwift) is client swift library for using いろは(iroha).
 
 ## Requirement  
-iOS 8.0+
-Xcode 8.0+
-Swift 3.0+
+iOS 8.0+  
+Xcode 8.0+  
+Swift 3.0+  
 
 ## Installation  
 *  Clone this repository.
@@ -69,9 +69,6 @@ let res = IrohaSwift.domainRegister(
 //          ]
 ```
 
-#### IrohaSwift.getDomainList
-Feature Works!
-
 #### IrohaSwift.createAsset
 
 ```swift
@@ -106,22 +103,24 @@ let res = IrohaSwift.assetOperation(
 //          ]
 ```
 
-#### IrohaSwift.getAssetList
+#### IrohaSwift.getDomainList
 
 ```swift
 let res = IrohaSwift.getAssetList(
 				 accessPoint: ip address or url,
- 				 domainName: domain name
-			)
+         )
+//if get domain list successful
+//===> Feature Works!
 ```
 
 #### iroha.getAssetList
-Feature Works!
 ```swift
-let res = iroha.getAssetList({
+let res = iroha.getAssetList(
  				accessPoint: ip address or url,
  				domainName: domain name
-			});
+        )
+//if get asset list successful
+//===> Feature Works!
 ```
 
 #### IrohaSwift.getTransaction
@@ -130,6 +129,18 @@ let res = iroha.getAssetList({
 let res = IrohaSwift.getTransaction({
             accessPoint: String,
             uuid: String
+          )
+//if get transaction successful
+//===> Feature Works!
+```
+
+#### IrohaSwift.getTransactionWithAssetName
+
+```swift
+let res = IrohaSwift.getTransaction({
+            accessPoint: String,
+            asset:String,
+            domain:String
           )
 //if get transaction successful
 //===> Feature Works!
