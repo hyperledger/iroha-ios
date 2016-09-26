@@ -1,6 +1,6 @@
 {
   "name": "IrohaSwift",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "summary": "Easy create signature of Iroha Blockchain",
   "homepage": "http://www.soramitsu.co.jp/",
   "license": "Apache License Version 2.0",
@@ -9,10 +9,10 @@
   },
   "source": {
     "git": "https://github.com/soramitsu/IrohaSwift.git",
-    "tag": "0.0.11"
+    "tag": "0.0.12"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "8.0"
   },
   "source_files": [
     "IrohaSwift/libs/*.{h,c}",

@@ -1,22 +1,29 @@
 PODS:
-  - IrohaSwift (0.0.11)
+  - IrohaSwift (0.0.12)
   - KeychainAccess (3.0.0)
   - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
-  - IrohaSwift (from `..`)
+  - IrohaSwift (from `https://github.com/soramitsu/iroha-ios.git`)
   - KeychainAccess (= 3.0.0)
   - SwiftyJSON (= 3.0.0)
 
 EXTERNAL SOURCES:
   IrohaSwift:
-    :path: ..
+    :git: https://github.com/soramitsu/iroha-ios.git
+    :submodules: true
+
+CHECKOUT OPTIONS:
+  IrohaSwift:
+    :commit: e865008683914e3c0f839b862cfbe447b3b02296
+    :git: https://github.com/soramitsu/iroha-ios.git
+    :submodules: true
 
 SPEC CHECKSUMS:
-  IrohaSwift: cd46b85b639e791f2ebadc60d956443d21630c03
+  IrohaSwift: 3cbf6f4cd51e77628291a52febe826b77ccda618
   KeychainAccess: 412bf2650d9aebfc8135a58103b90ec38caad7f8
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: 5e0e71a1e25d2b653a939104ba45acde9378ff05
+PODFILE CHECKSUM: 06ed1984339366a3ee87ead2ecbea545dc73fda6
 
 COCOAPODS: 1.1.0.rc.2

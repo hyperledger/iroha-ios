@@ -8,7 +8,7 @@ target 'Example' do
   # Pods for Example
   pod 'KeychainAccess', '3.0.0'
   pod 'SwiftyJSON', '3.0.0'
-  pod 'IrohaSwift', :path => '..'
+  pod 'IrohaSwift', :git => 'https://github.com/soramitsu/iroha-ios.git', :submodules => true
   target 'ExampleTests' do
     inherit! :search_paths
     # Pods for testing
