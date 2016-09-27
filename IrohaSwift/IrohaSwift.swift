@@ -50,6 +50,7 @@ public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:S
         "domain" : domain,
         "creator" : keyPair.publicKey,
         "signature" : signature,
+        "timestamp" : timestamp
         ]
     
     return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/create", parameters:parameter)
@@ -79,7 +80,8 @@ public func assetOperation(accessPoint: String, command:String, assetUuid:String
                 "sender" : keyPair.publicKey,
                 "receiver" : reciever
             ],
-            "signature" : signature
+            "signature" : signature,
+            "timestamp" : timestamp
     ]
     return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/operation", parameters:parameter)
 }
