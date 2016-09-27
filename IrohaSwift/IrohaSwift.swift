@@ -27,9 +27,9 @@ public func getAccountInfo(accessPoint:String,uuid:String) -> [String:Any]{
 
 public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey:String, privateKey:String)) -> [String:Any]{
     let req = HttpRequest()
-    let timestamp = Date().timeIntervalSince1970
+    let timestamp = Int(Date().timeIntervalSince1970)
     let message = "timestamp:\(timestamp),owner:\(keyPair.publicKey),name:\(domain)"
-    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
+    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: sha3_256(message: message))
     let parameter: [String : Any] = [
         "name" : domain,
         "owner" : keyPair.publicKey,
@@ -42,13 +42,15 @@ public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey
 
 public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:String, privateKey:String), name:String)-> [String:Any]{
     let req = HttpRequest()
-    let message = "name:\(name),domain:\(domain),creator:\(keyPair.publicKey)"
-    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
+    let timestamp = Int(Date().timeIntervalSince1970)
+    let message = "timestamp:\(timestamp),name:\(name),domain:\(domain),creator:\(keyPair.publicKey)"
+    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: sha3_256(message: message))
     let parameter: [String : Any] = [
         "name" : name,
         "domain" : domain,
         "creator" : keyPair.publicKey,
         "signature" : signature,
+        "timestamp" : timestamp
         ]
     
     return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/create", parameters:parameter)
@@ -67,8 +69,9 @@ public func getAssetsList(accessPoint:String, domain:String) -> [String:Any]{
 
 public func assetOperation(accessPoint: String, command:String, assetUuid:String, amount:String, keyPair:(publicKey:String, privateKey:String), reciever:String) -> [String:Any]{
     let req = HttpRequest()
-    let message = "sender:\(keyPair.publicKey),reciever:\(reciever),asset-uuid:\(assetUuid),amount:\(amount)"
-    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
+    let timestamp = Int(Date().timeIntervalSince1970)
+    let message = "timestamp:\(timestamp),sender:\(keyPair.publicKey),reciever:\(reciever),command:\(command),amount:\(amount),asset-uuid:\(assetUuid)"
+    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: sha3_256(message: message))
     let parameter: [String : Any] = [
             "asset-uuid": assetUuid,
             "params" : [
@@ -77,7 +80,8 @@ public func assetOperation(accessPoint: String, command:String, assetUuid:String
                 "sender" : keyPair.publicKey,
                 "receiver" : reciever
             ],
-            "signature" : signature
+            "signature" : signature,
+            "timestamp" : timestamp
     ]
     return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/operation", parameters:parameter)
 }
