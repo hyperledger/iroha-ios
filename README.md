@@ -1,6 +1,6 @@
 # いろはSwift(IrohaSwift)
 
-![CocoaPods](https://img.shields.io/cocoapods/v/SwiftyJSON.svg)
+![CocoaPods](https://img.shields.io/cocoapods/v/IrohaSwift.svg)
 ![Platform](https://img.shields.io/cocoapods/p/IrohaSwift.svg?style=flat)
 
 ## What's is いろは(iroha)?  
