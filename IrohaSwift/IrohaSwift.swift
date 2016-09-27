@@ -42,7 +42,8 @@ public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey
 
 public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:String, privateKey:String), name:String)-> [String:Any]{
     let req = HttpRequest()
-    let message = "name:\(name),domain:\(domain),creator:\(keyPair.publicKey)"
+    let timestamp = Int(Date().timeIntervalSince1970)
+    let message = "timestamp:\(timestamp),name:\(name),domain:\(domain),creator:\(keyPair.publicKey)"
     let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
         "name" : name,
