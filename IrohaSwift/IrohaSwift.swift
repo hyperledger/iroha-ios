@@ -67,7 +67,8 @@ public func getAssetsList(accessPoint:String, domain:String) -> [String:Any]{
 
 public func assetOperation(accessPoint: String, command:String, assetUuid:String, amount:String, keyPair:(publicKey:String, privateKey:String), reciever:String) -> [String:Any]{
     let req = HttpRequest()
-    let message = "sender:\(keyPair.publicKey),reciever:\(reciever),asset-uuid:\(assetUuid),amount:\(amount)"
+    let timestamp = Int(Date().timeIntervalSince1970)
+    let message = "timestamp:\(timestamp),sender:\(keyPair.publicKey),reciever:\(reciever),command:\(command),amount:\(amount),asset-uuid:\(assetUuid)"
     let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
             "asset-uuid": assetUuid,
