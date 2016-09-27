@@ -6,15 +6,37 @@
 ## Description  
 いろはSwift(IrohaSwift) is client swift library for using いろは(iroha).
 
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+
 ## Requirement  
 iOS 8.0+  
 Xcode 8.0+  
 Swift 3.0+  
 
 ## Installation  
+### CocoaPods(iOS 8+)
+
+Podfile:
+```ruby
+platform :ios, '8.0'
+use_frameworks!
+
+target 'App Name' do
+    pod 'IrohaSwift'
+end
+```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
 *  Clone this repository.
 *  [Download 1.0.0 α2 version release](https://github.com/soramitsu/iroha-ios/releases/tag/1.0.0a2).
-*  [Feature]Install with pod.
 
 ## Usage
 ### API
