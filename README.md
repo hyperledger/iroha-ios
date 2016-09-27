@@ -1,5 +1,8 @@
 # いろはSwift(IrohaSwift)
 
+![CocoaPods](https://img.shields.io/cocoapods/v/SwiftyJSON.svg)
+![Platform](https://img.shields.io/cocoapods/p/IrohaSwift.svg?style=flat)
+
 ## What's is いろは(iroha)?  
 いろは(iroha) is [this](https://github.com/soramitsu/iroha).
 
@@ -35,6 +38,15 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+### Carthage
+Write in your Cartfile:
+```
+github "soramitsu/iroha-ios.git"
+```
+Run `carthage update`
+
+### Manually
 *  Clone this repository.
 *  [Download 1.0.0 α2 version release](https://github.com/soramitsu/iroha-ios/releases/tag/1.0.0a2).
 
