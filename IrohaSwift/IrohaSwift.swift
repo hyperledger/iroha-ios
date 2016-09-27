@@ -27,7 +27,7 @@ public func getAccountInfo(accessPoint:String,uuid:String) -> [String:Any]{
 
 public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey:String, privateKey:String)) -> [String:Any]{
     let req = HttpRequest()
-    let timestamp = Date().timeIntervalSince1970
+    let timestamp = Int(Date().timeIntervalSince1970)
     let message = "timestamp:\(timestamp),owner:\(keyPair.publicKey),name:\(domain)"
     let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: message)
     let parameter: [String : Any] = [
