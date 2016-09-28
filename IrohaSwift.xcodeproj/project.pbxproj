@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7413F4221D8FD6D500F4929A /* Ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413F4211D8FD6D500F4929A /* Ed25519.swift */; };
+		74298A001D9AC5330074F91D /* Sha3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742989FF1D9AC5330074F91D /* Sha3.swift */; };
 		7458D11E1D903E89003C3D1D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7458D11D1D903E89003C3D1D /* ColorExtension.swift */; };
 		7471C86F1D8D942300C151E8 /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7471C8641D8D942300C151E8 /* IrohaSwift.framework */; };
 		7471C8741D8D942300C151E8 /* IrohaSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7471C8731D8D942300C151E8 /* IrohaSwiftTests.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		7413F4211D8FD6D500F4929A /* Ed25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519.swift; sourceTree = "<group>"; };
+		742989FF1D9AC5330074F91D /* Sha3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sha3.swift; sourceTree = "<group>"; };
 		7458D11D1D903E89003C3D1D /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		7471C8641D8D942300C151E8 /* IrohaSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IrohaSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7471C8671D8D942300C151E8 /* IrohaSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IrohaSwift.h; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				7472379F1D8ECB5600D22133 /* HttpRequest.swift */,
 				7413F4211D8FD6D500F4929A /* Ed25519.swift */,
 				7458D11D1D903E89003C3D1D /* ColorExtension.swift */,
+				742989FF1D9AC5330074F91D /* Sha3.swift */,
 			);
 			path = IrohaSwift;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				74A8F0921D9819DF008CCF51 /* fe.c in Sources */,
 				74A8F0951D9819DF008CCF51 /* ge.c in Sources */,
 				7458D11E1D903E89003C3D1D /* ColorExtension.swift in Sources */,
+				74298A001D9AC5330074F91D /* Sha3.swift in Sources */,
 				747237A01D8ECB5600D22133 /* HttpRequest.swift in Sources */,
 				74A8F09C1D9819DF008CCF51 /* seed.c in Sources */,
 				7471C8A71D8D9AC200C151E8 /* IrohaSwift.swift in Sources */,
