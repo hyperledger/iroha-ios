@@ -12,12 +12,15 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-@import Foundation;
-//! Project version number for IrohaSwift.
-FOUNDATION_EXPORT double IrohaSwiftVersionNumber;
+import Foundation
+import libs
 
-//! Project version string for IrohaSwift.
-FOUNDATION_EXPORT const unsigned char IrohaSwiftVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <IrohaSwift/PublicHeader.h>
-
+func sha3_256(message:String) -> String{
+    var out: Array<UInt8> = Array(repeating: 0, count: 32)
+    let messageArray:Array<UInt8> = Array<UInt8>(message.utf8)
+    sha3_256(messageArray, messageArray.count, &out)
+    var result: String = ""
+    result = out.map{String(format: "%02x", $0)}.joined(separator: "")
+    print(result)
+    return result
+}
