@@ -55,20 +55,21 @@ public func domainRegister(domain:String, privateKey:String) -> [String:Any]{
     return req.postRequest(accessPoint: manager.accessPoint, endpoint: "/domain/register", parameters:parameter)
 }
 
-public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:String, privateKey:String), name:String)-> [String:Any]{
+public func createAsset(domain:String, privateKey:String, name:String)-> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
     let timestamp = Int(Date().timeIntervalSince1970)
-    let message = "timestamp:\(timestamp),name:\(name),domain:\(domain),creator:\(keyPair.publicKey)"
-    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: sha3_256(message: message))
+    let message = "timestamp:\(timestamp),name:\(name),domain:\(domain),creator:\(manager.publicKey)"
+    let signature = sign(publicKey: manager.publicKey, privateKey: privateKey, message: sha3_256(message: message))
     let parameter: [String : Any] = [
         "name" : name,
         "domain" : domain,
-        "creator" : keyPair.publicKey,
+        "creator" : manager.publicKey,
         "signature" : signature,
         "timestamp" : timestamp
         ]
     
-    return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/create", parameters:parameter)
+    return req.postRequest(accessPoint: manager.accessPoint, endpoint: "/asset/create", parameters:parameter)
 }
 
 public func getDomainList(accessPoint:String) -> [String:Any]{
