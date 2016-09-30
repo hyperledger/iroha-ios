@@ -15,6 +15,12 @@
 import Foundation
 import libs
 
+public func setDatas(accessPoint:String, publicKey:String, uuid:String){
+    IrohaDataManager.sharedManager.accessPoint = accessPoint
+    IrohaDataManager.sharedManager.publicKey = publicKey
+    IrohaDataManager.sharedManager.uuid = uuid
+}
+
 public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:String, name:String) -> [String:Any]{
     let req = HttpRequest()
     let parameter: [String : Any] = [
