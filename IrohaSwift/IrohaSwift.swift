@@ -77,9 +77,9 @@ public func getDomainList() -> [String:Any]{
     return req.getRequest(accessPoint: IrohaDataManager.sharedManager.accessPoint, endpoint: "/domain/list")
 }
 
-public func getAssetsList(accessPoint:String, domain:String) -> [String:Any]{
+public func getAssetsList(domain:String) -> [String:Any]{
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/assets/list/\(domain)")
+    return req.getRequest(accessPoint: IrohaDataManager.sharedManager.accessPoint, endpoint: "/assets/list/\(domain)")
 }
 
 
