@@ -104,9 +104,10 @@ public func assetOperation(command:String, assetUuid:String, amount:String, priv
 }
 
 
-public func getTransaction(accessPoint:String, uuid:String) -> [String:Any]{
+public func getTransaction() -> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(uuid)")
+    return req.getRequest(accessPoint: manager.accessPoint, endpoint: "/history/transaction/\(manager.uuid)")
 }
 
 public func getTransactionWithAssetName(accessPoint:String, asset:String, domain:String) -> [String:Any]{
