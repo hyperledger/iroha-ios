@@ -21,14 +21,15 @@ public func setDatas(accessPoint:String, publicKey:String, uuid:String){
     IrohaDataManager.sharedManager.uuid = uuid
 }
 
-public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:String, name:String) -> [String:Any]{
+public func register(name:String) -> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
     let parameter: [String : Any] = [
-        "publicKey": keyPair.publicKey,
+        "publicKey": manager.publicKey,
         "screen_name": name,
         "timestamp": Date().timeIntervalSince1970
     ]
-    let res = req.postRequest(accessPoint: accessPoint, endpoint: "/account/register", parameters: parameter)
+    let res = req.postRequest(accessPoint: manager.accessPoint, endpoint: "/account/register", parameters: parameter)
     return res
 }
 
