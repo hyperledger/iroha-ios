@@ -110,7 +110,7 @@ public func getTransaction() -> [String:Any]{
     return req.getRequest(accessPoint: manager.accessPoint, endpoint: "/history/transaction/\(manager.uuid)")
 }
 
-public func getTransactionWithAssetName(accessPoint:String, asset:String, domain:String) -> [String:Any]{
+public func getTransactionWithAssetName(asset:String, domain:String) -> [String:Any]{
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(domain).\(asset)")
+    return req.getRequest(accessPoint: IrohaDataManager.sharedManager.accessPoint, endpoint: "/history/transaction/\(domain).\(asset)")
 }
