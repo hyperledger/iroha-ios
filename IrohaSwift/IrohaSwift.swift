@@ -83,23 +83,24 @@ public func getAssetsList(domain:String) -> [String:Any]{
 }
 
 
-public func assetOperation(accessPoint: String, command:String, assetUuid:String, amount:String, keyPair:(publicKey:String, privateKey:String), reciever:String) -> [String:Any]{
+public func assetOperation(command:String, assetUuid:String, amount:String, privateKey:String, reciever:String) -> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
     let timestamp = Int(Date().timeIntervalSince1970)
-    let message = "timestamp:\(timestamp),sender:\(keyPair.publicKey),reciever:\(reciever),command:\(command),amount:\(amount),asset-uuid:\(assetUuid)"
-    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: sha3_256(message: message))
+    let message = "timestamp:\(timestamp),sender:\(manager.publicKey),reciever:\(reciever),command:\(command),amount:\(amount),asset-uuid:\(assetUuid)"
+    let signature = sign(publicKey: manager.publicKey, privateKey: privateKey, message: sha3_256(message: message))
     let parameter: [String : Any] = [
             "asset-uuid": assetUuid,
             "params" : [
                 "command": command,
                 "amount": Int(amount),
-                "sender" : keyPair.publicKey,
+                "sender" : manager.publicKey,
                 "receiver" : reciever
             ],
             "signature" : signature,
             "timestamp" : timestamp
     ]
-    return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/operation", parameters:parameter)
+    return req.postRequest(accessPoint: manager.accessPoint, endpoint: "/asset/operation", parameters:parameter)
 }
 
 
