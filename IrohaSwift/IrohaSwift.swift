@@ -33,9 +33,10 @@ public func register(name:String) -> [String:Any]{
     return res
 }
 
-public func getAccountInfo(accessPoint:String,uuid:String) -> [String:Any]{
+public func getAccountInfo() -> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/account",parameters: ["uuid":uuid])
+    return req.getRequest(accessPoint: manager.accessPoint, endpoint: "/account",parameters: ["uuid":manager.uuid])
 }
 
 public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey:String, privateKey:String)) -> [String:Any]{
