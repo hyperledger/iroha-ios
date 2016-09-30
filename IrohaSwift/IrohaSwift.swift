@@ -72,9 +72,9 @@ public func createAsset(domain:String, privateKey:String, name:String)-> [String
     return req.postRequest(accessPoint: manager.accessPoint, endpoint: "/asset/create", parameters:parameter)
 }
 
-public func getDomainList(accessPoint:String) -> [String:Any]{
+public func getDomainList() -> [String:Any]{
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/domain/list")
+    return req.getRequest(accessPoint: IrohaDataManager.sharedManager.accessPoint, endpoint: "/domain/list")
 }
 
 public func getAssetsList(accessPoint:String, domain:String) -> [String:Any]{
