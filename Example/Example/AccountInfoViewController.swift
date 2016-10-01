@@ -22,7 +22,7 @@ class AccountInfoViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         
-        let qrString = KeychainManager.sharedManager.keychain["publicKeyQ"]
+        let qrString = KeychainManager.sharedManager.keychain["publicKey"]
         QRImage.image = createQRCode(message: qrString!)
     }
 
