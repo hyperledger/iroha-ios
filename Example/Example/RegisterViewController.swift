@@ -115,7 +115,8 @@ class RegisterViewController: UIViewController ,UITextFieldDelegate{
                 }catch{
                     print("error")
                 }
-                let res = IrohaSwift.register(keyPair:keypair,accessPoint: self.accessField.text!, name: self.userNameField.text!)
+                IrohaSwift.setDatas(accessPoint: self.accessField.text!, publicKey: keypair.publicKey)
+                let res = IrohaSwift.register(name: self.userNameField.text!)
                 if res["status"] as! Int == 200 {
                     do{
                         try KeychainManager.sharedManager.keychain.set(res["uuid"] as! String, key: "uuid")

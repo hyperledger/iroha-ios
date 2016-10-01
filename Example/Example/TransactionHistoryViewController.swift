@@ -46,9 +46,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         historyAlert.view.addSubview(spinnerIndicator)
         self.present(historyAlert, animated: false, completion: {
             let keychain = KeychainManager.sharedManager.keychain
-            let ap = keychain["accessPoint"]
-            let uuid = keychain["uuid"]
-            let res = IrohaSwift.getTransaction(accessPoint: ap!, uuid: uuid!)
+            let res = IrohaSwift.getTransaction()
             if res["status"] as! Int == 200 {
                 self.historyAlert.dismiss(animated: false, completion: {() -> Void in
                     TransactionHistoryDataManager.sharedManager.transactionHistoryDataArray.removeAll()
@@ -98,9 +96,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     func refreshHistory() {
         
         let keychain = KeychainManager.sharedManager.keychain
-        let ap = keychain["accessPoint"]
-        let uuid = keychain["uuid"]
-        let res = IrohaSwift.getTransaction(accessPoint: ap!, uuid: uuid!)
+        let res = IrohaSwift.getTransaction()
         if (res["status"] as! Int) == 200{
             transactionHistories = res["history"] as! [NSDictionary]
             TransactionHistoryDataManager.sharedManager.transactionHistoryDataArray.removeAll()
