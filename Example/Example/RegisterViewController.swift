@@ -115,20 +115,27 @@ class RegisterViewController: UIViewController ,UITextFieldDelegate{
                 }catch{
                     print("error")
                 }
-                let res = IrohaSwift.register(keyPair:keypair,accessPoint: self.accessField.text!, name: self.userNameField.text!)
+                IrohaSwift.setDatas(accessPoint: self.accessField.text!, publicKey: keypair.publicKey)
+                let res = IrohaSwift.register(name: self.userNameField.text!)
                 if res["status"] as! Int == 200 {
                     do{
                         try KeychainManager.sharedManager.keychain.set(res["uuid"] as! String, key: "uuid")
                     }catch{
                         print("error")
                     }
+                    IrohaSwift.setDatas(uuid: res["uuid"] as! String)
                     self.alertController.dismiss(animated: false, completion: {() -> Void in
                         let nextvc = self.storyboard?.instantiateViewController(withIdentifier: "Tabbar")
                         self.present(nextvc!, animated: true, completion: nil)
                     })
                 } else {
                     self.alertController.dismiss(animated: false, completion: {() -> Void in
-
+                        do {
+                            try KeychainManager.sharedManager.keychain.remove("privateKey")
+                            try KeychainManager.sharedManager.keychain.remove("publicKey")
+                        } catch let error {
+                            print("error: \(error)")
+                        }
                         self.alertController = UIAlertController(title: String(describing: res["status"]!) , message: res["message"] as! String?, preferredStyle: .alert)
                         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                         self.alertController.addAction(defaultAction)

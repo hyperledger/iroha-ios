@@ -34,6 +34,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		747816EB1D9FA5BA00394583 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 747816E61D9FA5BA00394583 /* IrohaSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7471C8641D8D942300C151E8;
+			remoteInfo = IrohaSwift;
+		};
+		747816ED1D9FA5BA00394583 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 747816E61D9FA5BA00394583 /* IrohaSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7471C86E1D8D942300C151E8;
+			remoteInfo = IrohaSwiftTests;
+		};
 		74F1E37B1D8DA6900035760E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 74F1E35E1D8DA68F0035760E /* Project object */;
@@ -76,6 +90,7 @@
 		7473E7BE1D966DFB0093C872 /* Pods_Example.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Example.framework; path = "Build/Products/Debug-iphonesimulator/Pods_Example.framework"; sourceTree = "<group>"; };
 		7473E7C11D966E300093C872 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = "Build/Products/Debug-iphonesimulator/KeychainAccess/KeychainAccess.framework"; sourceTree = "<group>"; };
 		7473E7C31D966E330093C872 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "Build/Products/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework"; sourceTree = "<group>"; };
+		747816E61D9FA5BA00394583 /* IrohaSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IrohaSwift.xcodeproj; path = ../IrohaSwift.xcodeproj; sourceTree = "<group>"; };
 		748A95DD1D93CBAC003524FF /* QRGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGenerator.swift; sourceTree = "<group>"; };
 		748A95E11D93E16B003524FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		748A95E31D94D69A003524FF /* TransactionHistoryDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistoryDataManager.swift; sourceTree = "<group>"; };
@@ -135,6 +150,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		747816E71D9FA5BA00394583 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				747816EC1D9FA5BA00394583 /* IrohaSwift.framework */,
+				747816EE1D9FA5BA00394583 /* IrohaSwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		74C519321D91660E005A335D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +248,7 @@
 		A28707194C83EE4F15A70E42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				747816E61D9FA5BA00394583 /* IrohaSwift.xcodeproj */,
 				74A8F0A81D982580008CCF51 /* IrohaSwift.framework */,
 				7473E7C31D966E330093C872 /* SwiftyJSON.framework */,
 				7473E7C11D966E300093C872 /* KeychainAccess.framework */,
@@ -344,6 +369,12 @@
 			mainGroup = 74F1E35D1D8DA68F0035760E;
 			productRefGroup = 74F1E3671D8DA68F0035760E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 747816E71D9FA5BA00394583 /* Products */;
+					ProjectRef = 747816E61D9FA5BA00394583 /* IrohaSwift.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				74F1E3651D8DA68F0035760E /* Example */,
@@ -352,6 +383,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		747816EC1D9FA5BA00394583 /* IrohaSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IrohaSwift.framework;
+			remoteRef = 747816EB1D9FA5BA00394583 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		747816EE1D9FA5BA00394583 /* IrohaSwiftTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = IrohaSwiftTests.xctest;
+			remoteRef = 747816ED1D9FA5BA00394583 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		74F1E3641D8DA68F0035760E /* Resources */ = {

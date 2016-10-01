@@ -121,9 +121,8 @@ class TransferViewController : UIViewController, UICollectionViewDelegate, UICol
             case 11:
                 if(valueField.text != "" && toAccountField.text != ""){
                     let keychain = KeychainManager.sharedManager.keychain
-                    let keypair = (publicKey: keychain["publicKey"]!, privateKey:keychain["privateKey"]!)
-                    let ap = keychain["accessPoint"]
-                    IrohaSwift.assetOperation(accessPoint: ap!, command: "Transfer", assetUuid: assetUuid, amount: valueField.text!, keyPair: keypair , reciever: toAccountField.text!)
+                    let key = keychain["privateKey"]!
+                    IrohaSwift.assetOperation( command: "Transfer", assetUuid: assetUuid, amount: valueField.text!, privateKey: key , reciever: toAccountField.text!)
                 }
             break
             default:

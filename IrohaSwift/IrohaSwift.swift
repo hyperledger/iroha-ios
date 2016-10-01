@@ -15,90 +15,112 @@
 import Foundation
 import libs
 
-public func register(keyPair:(publicKey:String, privateKey:String), accessPoint:String, name:String) -> [String:Any]{
+public func setDatas(uuid:String){
+    IrohaDataManager.sharedManager.uuid = uuid
+}
+
+public func setDatas(accessPoint:String, publicKey:String){
+    IrohaDataManager.sharedManager.accessPoint = accessPoint
+    IrohaDataManager.sharedManager.publicKey = publicKey
+}
+
+public func setDatas(accessPoint:String, publicKey:String, uuid:String){
+    IrohaDataManager.sharedManager.accessPoint = accessPoint
+    IrohaDataManager.sharedManager.publicKey = publicKey
+    IrohaDataManager.sharedManager.uuid = uuid
+}
+
+public func register(name:String) -> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
     let parameter: [String : Any] = [
-        "publicKey": keyPair.publicKey,
+        "publicKey": manager.publicKey,
         "screen_name": name,
         "timestamp": Date().timeIntervalSince1970
     ]
-    let res = req.postRequest(accessPoint: accessPoint, endpoint: "/account/register", parameters: parameter)
+    let res = req.postRequest(accessPoint: manager.accessPoint, endpoint: "/account/register", parameters: parameter)
+    
     return res
 }
 
-public func getAccountInfo(accessPoint:String,uuid:String) -> [String:Any]{
+public func getAccountInfo() -> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/account",parameters: ["uuid":uuid])
+    return req.getRequest(accessPoint: manager.accessPoint, endpoint: "/account",parameters: ["uuid":manager.uuid])
 }
 
-public func domainRegister(accessPoint:String, domain:String, keyPair:(publicKey:String, privateKey:String)) -> [String:Any]{
+public func domainRegister(domain:String, privateKey:String) -> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
     let timestamp = Int(Date().timeIntervalSince1970)
-    let message = "timestamp:\(timestamp),owner:\(keyPair.publicKey),name:\(domain)"
-    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: sha3_256(message: message))
+    let message = "timestamp:\(timestamp),owner:\(manager.publicKey),name:\(domain)"
+    let signature = sign(publicKey: manager.publicKey, privateKey: privateKey, message: sha3_256(message: message))
     let parameter: [String : Any] = [
         "name" : domain,
-        "owner" : keyPair.publicKey,
+        "owner" : manager.publicKey,
         "signature" : signature,
         "timestamp": timestamp
         ]
 
-    return req.postRequest(accessPoint: accessPoint, endpoint: "/domain/register", parameters:parameter)
+    return req.postRequest(accessPoint: manager.accessPoint, endpoint: "/domain/register", parameters:parameter)
 }
 
-public func createAsset(accessPoint: String, domain:String, keyPair:(publicKey:String, privateKey:String), name:String)-> [String:Any]{
+public func createAsset(domain:String, privateKey:String, name:String)-> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
     let timestamp = Int(Date().timeIntervalSince1970)
-    let message = "timestamp:\(timestamp),name:\(name),domain:\(domain),creator:\(keyPair.publicKey)"
-    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: sha3_256(message: message))
+    let message = "timestamp:\(timestamp),name:\(name),domain:\(domain),creator:\(manager.publicKey)"
+    let signature = sign(publicKey: manager.publicKey, privateKey: privateKey, message: sha3_256(message: message))
     let parameter: [String : Any] = [
         "name" : name,
         "domain" : domain,
-        "creator" : keyPair.publicKey,
+        "creator" : manager.publicKey,
         "signature" : signature,
         "timestamp" : timestamp
         ]
     
-    return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/create", parameters:parameter)
+    return req.postRequest(accessPoint: manager.accessPoint, endpoint: "/asset/create", parameters:parameter)
 }
 
-public func getDomainList(accessPoint:String) -> [String:Any]{
+public func getDomainList() -> [String:Any]{
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/domain/list")
+    return req.getRequest(accessPoint: IrohaDataManager.sharedManager.accessPoint, endpoint: "/domain/list")
 }
 
-public func getAssetsList(accessPoint:String, domain:String) -> [String:Any]{
+public func getAssetsList(domain:String) -> [String:Any]{
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/assets/list/\(domain)")
+    return req.getRequest(accessPoint: IrohaDataManager.sharedManager.accessPoint, endpoint: "/assets/list/\(domain)")
 }
 
 
-public func assetOperation(accessPoint: String, command:String, assetUuid:String, amount:String, keyPair:(publicKey:String, privateKey:String), reciever:String) -> [String:Any]{
+public func assetOperation(command:String, assetUuid:String, amount:String, privateKey:String, reciever:String) -> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
     let timestamp = Int(Date().timeIntervalSince1970)
-    let message = "timestamp:\(timestamp),sender:\(keyPair.publicKey),reciever:\(reciever),command:\(command),amount:\(amount),asset-uuid:\(assetUuid)"
-    let signature = sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: sha3_256(message: message))
+    let message = "timestamp:\(timestamp),sender:\(manager.publicKey),reciever:\(reciever),command:\(command),amount:\(amount),asset-uuid:\(assetUuid)"
+    let signature = sign(publicKey: manager.publicKey, privateKey: privateKey, message: sha3_256(message: message))
     let parameter: [String : Any] = [
             "asset-uuid": assetUuid,
             "params" : [
                 "command": command,
                 "amount": Int(amount),
-                "sender" : keyPair.publicKey,
+                "sender" : manager.publicKey,
                 "receiver" : reciever
             ],
             "signature" : signature,
             "timestamp" : timestamp
     ]
-    return req.postRequest(accessPoint: accessPoint, endpoint: "/asset/operation", parameters:parameter)
+    return req.postRequest(accessPoint: manager.accessPoint, endpoint: "/asset/operation", parameters:parameter)
 }
 
 
-public func getTransaction(accessPoint:String, uuid:String) -> [String:Any]{
+public func getTransaction() -> [String:Any]{
+    let manager = IrohaDataManager.sharedManager
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(uuid)")
+    return req.getRequest(accessPoint: manager.accessPoint, endpoint: "/history/transaction/\(manager.uuid)")
 }
 
-public func getTransactionWithAssetName(accessPoint:String, asset:String, domain:String) -> [String:Any]{
+public func getTransactionWithAssetName(asset:String, domain:String) -> [String:Any]{
     let req = HttpRequest()
-    return req.getRequest(accessPoint: accessPoint, endpoint: "/history/transaction/\(domain).\(asset)")
+    return req.getRequest(accessPoint: IrohaDataManager.sharedManager.accessPoint, endpoint: "/history/transaction/\(domain).\(asset)")
 }
