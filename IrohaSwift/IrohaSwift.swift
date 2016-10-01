@@ -15,9 +15,19 @@
 import Foundation
 import libs
 
+public func setDatas(uuid:String){
+    IrohaDataManager.sharedManager.uuid = uuid
+}
+
 public func setDatas(accessPoint:String, publicKey:String){
     IrohaDataManager.sharedManager.accessPoint = accessPoint
     IrohaDataManager.sharedManager.publicKey = publicKey
+}
+
+public func setDatas(accessPoint:String, publicKey:String, uuid:String){
+    IrohaDataManager.sharedManager.accessPoint = accessPoint
+    IrohaDataManager.sharedManager.publicKey = publicKey
+    IrohaDataManager.sharedManager.uuid = uuid
 }
 
 public func register(name:String) -> [String:Any]{
@@ -29,7 +39,6 @@ public func register(name:String) -> [String:Any]{
         "timestamp": Date().timeIntervalSince1970
     ]
     let res = req.postRequest(accessPoint: manager.accessPoint, endpoint: "/account/register", parameters: parameter)
-    IrohaDataManager.sharedManager.uuid = res["uuid"] as! String
     
     return res
 }
