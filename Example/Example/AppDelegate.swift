@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import IrohaSwift
+import KeychainAccess
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,14 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //テスト用に毎回削除
-
+        let keychain = KeychainManager.sharedManager.keychain
+        
         do {
-            try KeychainManager.sharedManager.keychain.remove("privateKey")
+            try keychain.remove("privateKey")
+            try keychain.remove("publicKey")
+            try keychain.remove("accessPoint")
+            try keychain.remove("uuid")
         } catch let error {
             print("error: \(error)")
         }
+        
         if (KeychainManager.sharedManager.keychain["privateKey"] != nil){
+            IrohaSwift.setDatas(accessPoint: keychain["accessPoint"]!, publicKey: keychain["publicKey"]!, uuid: keychain["uuid"]!)
             self.window = UIWindow(frame: UIScreen.main.bounds)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "Tabbar")
