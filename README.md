@@ -52,6 +52,15 @@ Run `carthage update`
 
 ## Usage
 ### API
+#### IrohaSwift.setData
+This API is set variables on the singleton manager class.
+You can use 3 pattern.
+```swift
+setDatas(uuid:String)
+setDatas(accessPoint:String, publicKey:String)
+setDatas(accessPoint:String, publicKey:String, uuid:String)
+```
+
 #### IrohaSwift.createKeyPair
 ```swift
 import IrohaSwift
@@ -63,8 +72,7 @@ let keypair = IrohaSwift.createKeyPair()
 
 ```swift
 let res = IrohaSwift.register(
-            keyPair: (publicKey:String, privateKey:String),
-            accessPoint: String, //ex)http://hoge.com
+            privateKey:String,
             name: String
           )
 //if connection successful
@@ -78,10 +86,7 @@ let res = IrohaSwift.register(
 #### iroha.getAccountInfo
 
 ```swift
-let res = IrohaSwift.getAccountInfo(
-              accessPoint: String,
-              uuid: String //IrohaSwift.register() returned uuid
-          )
+let res = IrohaSwift.getAccountInfo()
 //if get successful
 //===> res : [
 //            "status": 200,
@@ -92,9 +97,8 @@ let res = IrohaSwift.getAccountInfo(
 
 ```swift
 let res = IrohaSwift.domainRegister(
-            accessPoint: String,
      				domain: String, //ex)ソラミツ株式会社
-     				keyPair: (publicKey:String, privateKey:String)
+     				privateKey:String
           )
 //if domain regist successful
 //===> res : [
@@ -107,9 +111,8 @@ let res = IrohaSwift.domainRegister(
 
 ```swift
 let res = IrohaSwift.createAsset({
-            accessPoint: String,
             domain: String,
-            keyPair: (publicKey:String, privateKey:String),
+            privateKey:String,
             name: String //ex)ソラミツコイン
           )
 //if asset create successful
@@ -123,11 +126,10 @@ let res = IrohaSwift.createAsset({
 
 ```swift
 let res = IrohaSwift.assetOperation(
-            accessPoint: String,
             command: String, //ex)Transfer
             assetUuid: String,
             amount: String,
-            keyPair: (publicKey:String, privateKey:String),
+            privateKey:String,
             receiver: String //receiver public key
 )
 //if asset transfer successful
@@ -140,19 +142,14 @@ let res = IrohaSwift.assetOperation(
 #### IrohaSwift.getDomainList
 
 ```swift
-let res = IrohaSwift.getAssetList(
-				 accessPoint: ip address or url,
-         )
+let res = IrohaSwift.getAssetList()
 //if get domain list successful
 //===> Feature Works!
 ```
 
 #### iroha.getAssetList
 ```swift
-let res = iroha.getAssetList(
- 				accessPoint: ip address or url,
- 				domainName: domain name
-        )
+let res = iroha.getAssetList( domain: String )
 //if get asset list successful
 //===> Feature Works!
 ```
@@ -160,10 +157,7 @@ let res = iroha.getAssetList(
 #### IrohaSwift.getTransaction
 
 ```swift
-let res = IrohaSwift.getTransaction({
-            accessPoint: String,
-            uuid: String
-          )
+let res = IrohaSwift.getTransaction()
 //if get transaction successful
 //===> Feature Works!
 ```
@@ -171,11 +165,7 @@ let res = IrohaSwift.getTransaction({
 #### IrohaSwift.getTransactionWithAssetName
 
 ```swift
-let res = IrohaSwift.getTransaction({
-            accessPoint: String,
-            asset:String,
-            domain:String
-          )
+let res = IrohaSwift.getTransactionWithAssetName( asset:String )
 //if get transaction successful
 //===> Feature Works!
 ```
