@@ -15,12 +15,32 @@
 import Foundation
 import libs
 
-func sha3_256(message:String) -> String{
+public func sha3_256(message:String) -> String{
     var out: Array<UInt8> = Array(repeating: 0, count: 32)
     let messageArray:Array<UInt8> = Array<UInt8>(message.utf8)
     sha3_256(messageArray, messageArray.count, &out)
+    let hash = byteToHexString(hashByte: out)
+    return hash
+}
+
+public func sha3_384(message:String) -> String{
+    var out: Array<UInt8> = Array(repeating: 0, count: 48)
+    let messageArray:Array<UInt8> = Array<UInt8>(message.utf8)
+    sha3_384(messageArray, messageArray.count, &out)
+    let hash = byteToHexString(hashByte: out)
+    return hash
+}
+
+public func sha3_512(message: String) -> String{
+    var out: Array<UInt8> = Array(repeating: 0, count: 64)
+    let messageArray:Array<UInt8> = Array<UInt8>(message.utf8)
+    sha3_512(messageArray, messageArray.count, &out)
+    let hash = byteToHexString(hashByte: out)
+    return hash
+}
+
+func byteToHexString(hashByte:Array<UInt8>) -> String {
     var result: String = ""
-    result = out.map{String(format: "%02x", $0)}.joined(separator: "")
-    print(result)
+    result = hashByte.map{String(format: "%02x", $0)}.joined(separator: "")
     return result
 }

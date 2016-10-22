@@ -34,7 +34,7 @@ public func createKeyPair() -> (publicKey:String, privateKey:String){
 
     return (base64Pub, base64Pri)
 }
-func sign(publicKey:String,privateKey:String, message:String) -> String{
+public func sign(publicKey:String,privateKey:String, message:String) -> String{
     var sig: Array<UInt8> = Array(repeating: 0, count: 64)
     var sigMsg: Array<UInt8> = Array(repeating: 0, count: 32)
     sha3_256(Array<UInt8>(message.utf8), Array<UInt8>(message.utf8).count, &sigMsg)
@@ -47,13 +47,17 @@ func sign(publicKey:String,privateKey:String, message:String) -> String{
     return base64Sig
 }
 
-func verify(publicKey:String, signature:String, message:String) -> Int{
+public func verify(publicKey:String, signature:String, message:String) -> Bool{
     var sigMsg: Array<UInt8> = Array(repeating: 0, count: 32)
     sha3_256(Array<UInt8>(message.utf8), Array<UInt8>(message.utf8).count, &sigMsg)
     let decPubArr = base64toArr(base64str: publicKey, count: 32)
     let decSigArr = base64toArr(base64str: signature, count: 64)
-
-    return Int(ed25519_verify(decSigArr, sigMsg, sigMsg.count, decPubArr))
+    let valid = Int(ed25519_verify(decSigArr, sigMsg, sigMsg.count, decPubArr))
+    if valid == 1 {
+        return true
+    }else{
+        return false
+    }
 }
 
 func base64toArr(base64str:String, count:Int) -> Array<UInt8>{
