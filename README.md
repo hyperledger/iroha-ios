@@ -48,19 +48,10 @@ Run `carthage update`
 
 ### Manually
 *  Clone this repository.
-*  [Download 1.0.0 α2 version release](https://github.com/soramitsu/iroha-ios/releases/tag/1.0.0a2).
+*  [Download 1.0.0 α5 version release](https://github.com/soramitsu/iroha-ios/releases/tag/1.0.0a5).
 
 ## Usage
-### API
-#### IrohaSwift.setData
-This API is set variables on the singleton manager class.
-You can use 3 pattern.
-```swift
-setDatas(uuid:String)
-setDatas(accessPoint:String, publicKey:String)
-setDatas(accessPoint:String, publicKey:String, uuid:String)
-```
-
+### APIs
 #### IrohaSwift.createKeyPair
 ```swift
 import IrohaSwift
@@ -68,106 +59,30 @@ import IrohaSwift
 let keypair = IrohaSwift.createKeyPair()
 //===> keypair : (publicKey:String, privateKey:String)
 ```
-#### IrohaSwift.register
-
+#### IrohaSwift.sign
 ```swift
-let res = IrohaSwift.register(
-            privateKey:String,
-            name: String
-          )
-//if connection successful
-//===> res : [
-//            "message": "successful",
-//            "status": 200,
-//            "uuid": String
-//          ]
+let signature = IrohaSwift.sign(publicKey: publicKey, privateKey: privateKey, message: "MESSAGE")
+//===> signature : String
 ```
-
-#### iroha.getAccountInfo
-
+#### IrohaSwift.verify
 ```swift
-let res = IrohaSwift.getAccountInfo()
-//if get successful
-//===> res : [
-//            "status": 200,
-//            "alias": String
-//          ]
+let verify = IrohaSwift.verify(publicKey: keyPair.publicKey, signature: signature, message: "MESSAGE")
+//===> verify : Bool
 ```
-#### IrohaSwift.domainRegister
-
+#### IrohaSwift.sha3_256
 ```swift
-let res = IrohaSwift.domainRegister(
-     				domain: String, //ex)ソラミツ株式会社
-     				privateKey:String
-          )
-//if domain regist successful
-//===> res : [
-//            "status": 200,
-//            "message": "Domain registered successfully."
-//          ]
+let hash = IrohaSwift.sha3_256(message: "")
+//===> hash : "a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a"
 ```
-
-#### IrohaSwift.createAsset
-
+#### IrohaSwift.sha3_384
 ```swift
-let res = IrohaSwift.createAsset({
-            domain: String,
-            privateKey:String,
-            name: String //ex)ソラミツコイン
-          )
-//if asset create successful
-//===> res : [
-//            "status": 200,
-//            "message": "Asset created successfully."
-//          ]  
+let hash = IrohaSwift.sha3_384(message: "")
+//===> hash : "0c63a75b845e4f7d01107d852e4c2485c51a50aaaa94fc61995e71bbee983a2ac3713831264adb47fb6bd1e058d5f004"
 ```
-
-#### IrohaSwift.assetOperation
-
+#### IrohaSwift.sha3_512
 ```swift
-let res = IrohaSwift.assetOperation(
-            command: String, //ex)Transfer
-            assetUuid: String,
-            amount: String,
-            privateKey:String,
-            receiver: String //receiver public key
-)
-//if asset transfer successful
-//===> res : [
-//            "status": 200,
-//            "message": "Asset transfer successfully."
-//          ]
-```
-
-#### IrohaSwift.getDomainList
-
-```swift
-let res = IrohaSwift.getAssetList()
-//if get domain list successful
-//===> Feature Works!
-```
-
-#### iroha.getAssetList
-```swift
-let res = iroha.getAssetList( domain: String )
-//if get asset list successful
-//===> Feature Works!
-```
-
-#### IrohaSwift.getTransaction
-
-```swift
-let res = IrohaSwift.getTransaction()
-//if get transaction successful
-//===> Feature Works!
-```
-
-#### IrohaSwift.getTransactionWithAssetName
-
-```swift
-let res = IrohaSwift.getTransactionWithAssetName( asset:String )
-//if get transaction successful
-//===> Feature Works!
+let hash = IrohaSwift.sha3_512(message: "")
+//===> hash : "a69f73cca23a9ac5c8b567dc185a756e97c982164fe25859e0d1dcc1475c80a615b2123af1f5f94c11e3e9402c3ac558f500199d95b6d3e301758586281dcd26"
 ```
 
 ## Author  
