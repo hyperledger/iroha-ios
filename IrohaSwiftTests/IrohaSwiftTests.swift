@@ -41,13 +41,10 @@ class IrohaSwiftTests: XCTestCase {
     }
     
     func testSignature() {
-        var isValid = false
         let keyPair = IrohaSwift.createKeyPair()
         let signature = IrohaSwift.sign(publicKey: keyPair.publicKey, privateKey: keyPair.privateKey, message: "test")
-        let verify = IrohaSwift.verify(publicKey: keyPair.publicKey, signature: signature, message: "test")
-        if verify == 1 {
-            isValid = true
-        }
+        let isValid = IrohaSwift.verify(publicKey: keyPair.publicKey, signature: signature, message: "test")
+
         XCTAssert(isValid, "veryfy?")
     }
     
