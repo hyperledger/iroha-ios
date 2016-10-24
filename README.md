@@ -1,14 +1,13 @@
-# いろはSwift(IrohaSwift)
+# いろはSwift (IrohaSwift)
 
 ![CocoaPods](https://img.shields.io/cocoapods/v/IrohaSwift.svg)
 ![Platform](https://img.shields.io/cocoapods/p/IrohaSwift.svg?style=flat)
 
-## What's is いろは(iroha)?  
+## What is いろは(iroha)?  
 いろは(iroha) is [this](https://github.com/soramitsu/iroha).
 
 ## Description  
-いろはSwift(IrohaSwift) is client swift library for using いろは(iroha).
-
+いろはSwift (IrohaSwift) is client swift library for using いろは(iroha).
 
 - [Requirements](#requirements)
 - [Installation](#installation)
@@ -42,13 +41,13 @@ $ pod install
 ### Carthage
 Write in your Cartfile:
 ```
-github "soramitsu/iroha-ios.git"
+github "hyperledger/iroha-ios.git"
 ```
 Run `carthage update`
 
 ### Manually
 *  Clone this repository.
-*  [Download 1.0.0 α5 version release](https://github.com/soramitsu/iroha-ios/releases/tag/1.0.0a5).
+*  [Download 1.0.0 α5 version release](https://github.com/hyperledger/iroha-ios/releases/tag/1.0.0a5).
 
 ## Usage
 ### APIs
@@ -87,7 +86,7 @@ let hash = IrohaSwift.sha3_512(message: "")
 
 ## Author  
 [luca3104](https://github.com/luca3104)
-
+[http://soramitsu.co.jp](http://soramitsu.co.jp)
 
 ## License
 
