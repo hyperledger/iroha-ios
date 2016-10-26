@@ -4,7 +4,7 @@
 ![Platform](https://img.shields.io/cocoapods/p/IrohaSwift.svg?style=flat)
 
 ## What is いろは(iroha)?  
-いろは(iroha) is [this](https://github.com/soramitsu/iroha).
+いろは(iroha) is [this](https://github.com/hyperledger/iroha).
 
 ## Description  
 いろはSwift (IrohaSwift) is client swift library for using いろは(iroha).
