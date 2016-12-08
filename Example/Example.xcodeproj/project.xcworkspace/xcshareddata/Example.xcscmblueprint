@@ -9,7 +9,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C660E322-0336-48BB-9456-6518D3755FE1",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "8CF7A4DB40F5DD2496BD98590CB4AD9655E70561" : "IrohaSwift\/",
+    "8CF7A4DB40F5DD2496BD98590CB4AD9655E70561" : "iroha-ios\/",
     "13811C548DDF1B6866B16DDDA04263527F58A06E" : "IrohaSwift\/lib\/ed25519\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Example",

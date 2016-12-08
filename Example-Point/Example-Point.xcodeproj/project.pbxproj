@@ -34,6 +34,20 @@
 			remoteGlobalIDString = 6DA315211DF979D300C5325E;
 			remoteInfo = "Example-Point";
 		};
+		6DA3155A1DF97C1F00C5325E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DA315551DF97C1F00C5325E /* IrohaSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7471C8641D8D942300C151E8;
+			remoteInfo = IrohaSwift;
+		};
+		6DA3155C1DF97C1F00C5325E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DA315551DF97C1F00C5325E /* IrohaSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7471C86E1D8D942300C151E8;
+			remoteInfo = IrohaSwiftTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +70,7 @@
 		6DA315411DF979D300C5325E /* Example-PointUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Example-PointUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA315451DF979D300C5325E /* Example_PointUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example_PointUITests.swift; sourceTree = "<group>"; };
 		6DA315471DF979D300C5325E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6DA315551DF97C1F00C5325E /* IrohaSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IrohaSwift.xcodeproj; path = ../IrohaSwift.xcodeproj; sourceTree = "<group>"; };
 		8854A9C946B28FF6E57F8C8D /* Pods-Example-PointUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointUITests/Pods-Example-PointUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F24D1BD952579B8FA1394383 /* Pods-Example-PointUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointUITests/Pods-Example-PointUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F79843B0F01F2A7F6DFB56FD /* Pods-Example-PointTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointTests/Pods-Example-PointTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +107,7 @@
 		2E80D7B4FED403F03EB843D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DA315551DF97C1F00C5325E /* IrohaSwift.xcodeproj */,
 				4A577D7F09E9313C38C33393 /* Pods_Example_Point.framework */,
 				533798859D478E7E8744FFE2 /* Pods_Example_PointTests.framework */,
 				2AFCD79830BD7353C2ACB39D /* Pods_Example_PointUITests.framework */,
@@ -150,6 +166,15 @@
 				6DA315471DF979D300C5325E /* Info.plist */,
 			);
 			path = "Example-PointUITests";
+			sourceTree = "<group>";
+		};
+		6DA315561DF97C1F00C5325E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DA3155B1DF97C1F00C5325E /* IrohaSwift.framework */,
+				6DA3155D1DF97C1F00C5325E /* IrohaSwiftTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B3FE195DF81A8B4865E9411C /* Pods */ = {
@@ -267,6 +292,12 @@
 			mainGroup = 6DA315191DF979D300C5325E;
 			productRefGroup = 6DA315231DF979D300C5325E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6DA315561DF97C1F00C5325E /* Products */;
+					ProjectRef = 6DA315551DF97C1F00C5325E /* IrohaSwift.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6DA315211DF979D300C5325E /* Example-Point */,
@@ -275,6 +306,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6DA3155B1DF97C1F00C5325E /* IrohaSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IrohaSwift.framework;
+			remoteRef = 6DA3155A1DF97C1F00C5325E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DA3155D1DF97C1F00C5325E /* IrohaSwiftTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = IrohaSwiftTests.xctest;
+			remoteRef = 6DA3155C1DF97C1F00C5325E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6DA315201DF979D300C5325E /* Resources */ = {
@@ -696,6 +744,7 @@
 				6DA3154C1DF979D300C5325E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6DA3154D1DF979D300C5325E /* Build configuration list for PBXNativeTarget "Example-PointTests" */ = {
 			isa = XCConfigurationList;
@@ -704,6 +753,7 @@
 				6DA3154F1DF979D300C5325E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6DA315501DF979D300C5325E /* Build configuration list for PBXNativeTarget "Example-PointUITests" */ = {
 			isa = XCConfigurationList;
@@ -712,6 +762,7 @@
 				6DA315521DF979D300C5325E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
