@@ -1,0 +1,15 @@
+PODS:
+  - KeychainAccess (3.0.0)
+  - SwiftyJSON (3.0.0)
+
+DEPENDENCIES:
+  - KeychainAccess (= 3.0.0)
+  - SwiftyJSON (= 3.0.0)
+
+SPEC CHECKSUMS:
+  KeychainAccess: 412bf2650d9aebfc8135a58103b90ec38caad7f8
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
+
+PODFILE CHECKSUM: e90b160e62fdcc92c939168cda88c264a94809be
+
+COCOAPODS: 1.1.1

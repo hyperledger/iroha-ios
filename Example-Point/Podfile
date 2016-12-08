@@ -7,6 +7,11 @@ target 'Example-Point' do
 
   # Pods for Example-Point
 
+  pod 'KeychainAccess'
+  pod 'SwiftyJSON'
+  pod 'Alamofire'
+  pod 'TextFieldEffects'
+
   target 'Example-PointTests' do
     inherit! :search_paths
     # Pods for testing
