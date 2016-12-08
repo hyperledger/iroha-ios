@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "IrohaSwift"
-  s.version      = "1.0.0a5"
+  s.version      = "1.0.0"
   s.summary      = "Easy create signature of Iroha Blockchain"
   s.homepage     = "http://www.soramitsu.co.jp/"
   s.license      = "Apache License Version 2.0"
