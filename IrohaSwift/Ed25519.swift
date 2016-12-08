@@ -40,11 +40,9 @@ public func createKeyPair() -> (publicKey:String, privateKey:String){
 }
 public func sign(publicKey:String,privateKey:String, message:String) -> String{
     var sig: Array<UInt8> = Array(repeating: 0, count: 64)
-    var sigMsg: Array<UInt8> = Array(repeating: 0, count: 32)
-    sha3_256(Array<UInt8>(message.utf8), Array<UInt8>(message.utf8).count, &sigMsg)
     var decPubArr = base64toArr(base64str: publicKey, count: 32)
     var decPriArr = base64toArr(base64str: privateKey, count: 64)
-    ed25519_sign(&sig, &sigMsg, sigMsg.count, &decPubArr, &decPriArr)
+    ed25519_sign(&sig, message, message.characters.count, &decPubArr, &decPriArr)
     let encSig = base64_encode(sig, UInt32(sig.count))
     let base64Sig = String(validatingUTF8:UnsafePointer<CChar>(encSig!))!
 
@@ -52,11 +50,9 @@ public func sign(publicKey:String,privateKey:String, message:String) -> String{
 }
 
 public func verify(publicKey:String, signature:String, message:String) -> Bool{
-    var sigMsg: Array<UInt8> = Array(repeating: 0, count: 32)
-    sha3_256(Array<UInt8>(message.utf8), Array<UInt8>(message.utf8).count, &sigMsg)
     let decPubArr = base64toArr(base64str: publicKey, count: 32)
     let decSigArr = base64toArr(base64str: signature, count: 64)
-    let valid = Int(ed25519_verify(decSigArr, sigMsg, sigMsg.count, decPubArr))
+    let valid = Int(ed25519_verify(decSigArr, message, message.characters.count, decPubArr))
     if valid == 1 {
         return true
     }else{
