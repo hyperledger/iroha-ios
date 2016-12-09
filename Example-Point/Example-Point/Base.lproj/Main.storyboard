@@ -216,6 +216,9 @@
                                     <constraint firstAttribute="width" constant="50" id="qmb-2S-PaE"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="icon_qr"/>
+                                <connections>
+                                    <segue destination="6Nj-ry-MSc" kind="show" id="sSA-DG-tl2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -236,6 +239,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d8e-4U-E89" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2412" y="829.83508245877067"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zZL-QI-gPa">
+            <objects>
+                <viewController id="6Nj-ry-MSc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9JL-Xi-6Un"/>
+                        <viewControllerLayoutGuide type="bottom" id="VX7-B5-fqr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nGA-zh-Rlv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZWH-Wf-iZZ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZWH-Wf-iZZ" firstAttribute="leading" secondItem="nGA-zh-Rlv" secondAttribute="leading" id="25P-E6-3uk"/>
+                            <constraint firstAttribute="trailing" secondItem="ZWH-Wf-iZZ" secondAttribute="trailing" id="IiS-gO-OjD"/>
+                            <constraint firstItem="ZWH-Wf-iZZ" firstAttribute="top" secondItem="9JL-Xi-6Un" secondAttribute="bottom" id="uSi-3Z-qEo"/>
+                            <constraint firstItem="VX7-B5-fqr" firstAttribute="top" secondItem="ZWH-Wf-iZZ" secondAttribute="bottom" id="yEJ-5O-RAH"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8p-zj-lkG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3164" y="830"/>
         </scene>
         <!--Item-->
         <scene sceneID="zQE-Z0-yvf">
