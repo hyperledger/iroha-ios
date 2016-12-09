@@ -124,7 +124,6 @@
         <!--Item-->
         <scene sceneID="Ihe-T5-Tob">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rJf-0G-124" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="G6j-FO-4gZ" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nYC-GQ-inE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -148,6 +147,7 @@
                     <tabBarItem key="tabBarItem" title="Item" image="tab_wallet" id="FGf-ta-M0T"/>
                     <navigationItem key="navigationItem" id="cnt-Ij-1VV"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rJf-0G-124" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2412" y="143"/>
         </scene>
@@ -162,14 +162,80 @@
                     <view key="view" contentMode="scaleToFill" id="WbF-sJ-JNT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="to" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DUn-0x-B03" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="30" y="124" width="257" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DUn-0x-B03" secondAttribute="height" multiplier="257:54" id="Vfh-dA-lFh"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.87536782026290894" green="0.0" blue="0.067383036017417908" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.87536782026290894" green="0.0" blue="0.067383036017417908" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fdr-LS-TFB" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                <rect key="frame" x="30" y="186" width="315" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fdr-LS-TFB" secondAttribute="height" multiplier="35:6" id="TZ1-4k-wID"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                        <color key="value" red="0.87536782026290894" green="0.0" blue="0.067383036017417908" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                        <color key="value" red="0.87536782026290894" green="0.0" blue="0.067383036017417908" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWj-S9-1Hk">
+                                <rect key="frame" x="295" y="128" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="uWj-S9-1Hk" secondAttribute="height" multiplier="1:1" id="Qkr-dF-Cv3"/>
+                                    <constraint firstAttribute="width" constant="50" id="qmb-2S-PaE"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="icon_qr"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DUn-0x-B03" firstAttribute="leading" secondItem="WbF-sJ-JNT" secondAttribute="leading" constant="30" id="5ad-Bi-GcB"/>
+                            <constraint firstItem="DUn-0x-B03" firstAttribute="top" secondItem="V45-qj-aCI" secondAttribute="bottom" constant="60" id="7jP-aP-g9M"/>
+                            <constraint firstItem="uWj-S9-1Hk" firstAttribute="leading" secondItem="DUn-0x-B03" secondAttribute="trailing" constant="8" id="CiU-ab-iqP"/>
+                            <constraint firstItem="fdr-LS-TFB" firstAttribute="top" secondItem="uWj-S9-1Hk" secondAttribute="bottom" constant="8" id="Edy-e8-3nD"/>
+                            <constraint firstItem="fdr-LS-TFB" firstAttribute="leading" secondItem="WbF-sJ-JNT" secondAttribute="leading" constant="30" id="d7v-d4-GhI"/>
+                            <constraint firstAttribute="trailing" secondItem="uWj-S9-1Hk" secondAttribute="trailing" constant="30" id="h2c-ci-Xfy"/>
+                            <constraint firstAttribute="trailing" secondItem="fdr-LS-TFB" secondAttribute="trailing" constant="30" id="mXp-BD-igN"/>
+                            <constraint firstItem="fdr-LS-TFB" firstAttribute="top" secondItem="DUn-0x-B03" secondAttribute="bottom" constant="8" id="rxc-QK-oID"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="tab_send" id="Fae-0B-3Oo"/>
                     <navigationItem key="navigationItem" id="zeH-PV-FF2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d8e-4U-E89" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2412" y="830"/>
+            <point key="canvasLocation" x="2412" y="829.83508245877067"/>
         </scene>
         <!--Item-->
         <scene sceneID="zQE-Z0-yvf">
