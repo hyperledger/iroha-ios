@@ -7,3 +7,11 @@
 //
 
 import Foundation
+import KeychainAccess
+
+class KeychainManager{
+    static let sharedManager = KeychainManager()
+    private init() {}
+    let keychain = Keychain(service: "jp.co.soramitsu.irohapoint")
+    
+}
