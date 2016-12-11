@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import TextFieldEffects
 
 class ReceiveViewController: UIViewController {
-
+    
+    @IBOutlet weak var property: UILabel!
+    @IBOutlet weak var qrImg: UIImageView!
+    @IBOutlet weak var pubkey: UITextField!
+    @IBOutlet weak var amountField: HoshiTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

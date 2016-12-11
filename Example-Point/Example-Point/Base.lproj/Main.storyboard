@@ -381,6 +381,12 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="receive" image="tab_receive" id="c1o-G6-DVs"/>
                     <navigationItem key="navigationItem" id="pdw-VC-Xug"/>
+                    <connections>
+                        <outlet property="amountField" destination="fn8-xC-v4W" id="nMU-BO-Sgt"/>
+                        <outlet property="property" destination="np1-kc-Xvv" id="JvQ-hd-epf"/>
+                        <outlet property="pubkey" destination="dpl-XX-eiI" id="DSo-SN-Bhm"/>
+                        <outlet property="qrImg" destination="HhX-lD-UDx" id="v09-ts-ZSE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sAv-Kb-3pi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
