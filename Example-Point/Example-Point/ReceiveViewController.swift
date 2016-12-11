@@ -20,6 +20,8 @@ class ReceiveViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        amountField.text = "\(DataManager.instance.property) IRH"
+        pubkey.text = KeychainManager.sharedManager.keychain["publicKey"]
     }
 
     override func didReceiveMemoryWarning() {
