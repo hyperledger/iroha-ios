@@ -124,7 +124,7 @@
         <!--wallet-->
         <scene sceneID="Ihe-T5-Tob">
             <objects>
-                <tableViewController id="G6j-FO-4gZ" sceneMemberID="viewController">
+                <tableViewController id="G6j-FO-4gZ" customClass="WalletTableViewController" customModule="Example_Point" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nYC-GQ-inE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -154,7 +154,7 @@
         <!--Send-->
         <scene sceneID="eJN-h2-aw7">
             <objects>
-                <viewController id="7xK-2y-eq6" sceneMemberID="viewController">
+                <viewController id="7xK-2y-eq6" customClass="SendViewController" customModule="Example_Point" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="V45-qj-aCI"/>
                         <viewControllerLayoutGuide type="bottom" id="N7i-00-Yx8"/>
@@ -253,7 +253,7 @@
         <!--View Controller-->
         <scene sceneID="zZL-QI-gPa">
             <objects>
-                <viewController id="6Nj-ry-MSc" sceneMemberID="viewController">
+                <viewController id="6Nj-ry-MSc" customClass="QRViewController" customModule="Example_Point" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9JL-Xi-6Un"/>
                         <viewControllerLayoutGuide type="bottom" id="VX7-B5-fqr"/>
@@ -299,7 +299,7 @@
         <!--receive-->
         <scene sceneID="Av6-w8-iSo">
             <objects>
-                <viewController id="2gE-iZ-FMH" sceneMemberID="viewController">
+                <viewController id="2gE-iZ-FMH" customClass="ReceiveViewController" customModule="Example_Point" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cdN-G4-ui9"/>
                         <viewControllerLayoutGuide type="bottom" id="nVk-KR-NHh"/>
