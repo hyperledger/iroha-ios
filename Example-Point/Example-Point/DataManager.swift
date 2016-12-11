@@ -14,4 +14,5 @@ class DataManager {
     }
     var privateKey = ""
     var publicKey = ""
+    var property = 0
 }
