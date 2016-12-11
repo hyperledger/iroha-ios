@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class DataManager {
+    static let instance: DataManager = DataManager()
+    private init() {
+    }
+    var privateKey = ""
+    var publicKey = ""
+}
