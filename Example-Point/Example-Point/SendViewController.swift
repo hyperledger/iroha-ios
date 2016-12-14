@@ -9,7 +9,10 @@
 import UIKit
 
 class SendViewController: UIViewController {
-
+    
+    var to = ""
+    var amount = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
