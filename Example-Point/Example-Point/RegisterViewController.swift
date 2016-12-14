@@ -8,6 +8,7 @@
 
 import UIKit
 import TextFieldEffects
+import IrohaSwift
 
 class RegisterViewController: UIViewController {
 
@@ -28,7 +29,16 @@ class RegisterViewController: UIViewController {
     }
     
     func Register () {
-        
+        if nameField.text == "" {
+            
+        } else {
+            let keychain = KeychainManager.instance.keychain
+            let keypair = IrohaSwift.createKeyPair()
+            keychain["username"] = nameField.text
+            keychain["publicKey"] = keypair.publicKey
+            keychain["privateKey"] = keypair.privateKey
+            
+        }
     }
 
     /*

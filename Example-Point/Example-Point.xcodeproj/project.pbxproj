@@ -56,6 +56,20 @@
 			remoteGlobalIDString = 7471C86E1D8D942300C151E8;
 			remoteInfo = IrohaSwiftTests;
 		};
+		6DF0FF4A1E01950200ABD179 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DF0FF451E01950200ABD179 /* IrohaSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7471C8641D8D942300C151E8;
+			remoteInfo = IrohaSwift;
+		};
+		6DF0FF4C1E01950200ABD179 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DF0FF451E01950200ABD179 /* IrohaSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7471C86E1D8D942300C151E8;
+			remoteInfo = IrohaSwiftTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +101,7 @@
 		6DB47D401DFDD23E00C908E9 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		6DB47D431DFDD5C000C908E9 /* QRImgGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRImgGenerator.swift; sourceTree = "<group>"; };
 		6DF0FF411E01930B00ABD179 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		6DF0FF451E01950200ABD179 /* IrohaSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IrohaSwift.xcodeproj; path = ../IrohaSwift.xcodeproj; sourceTree = "<group>"; };
 		8854A9C946B28FF6E57F8C8D /* Pods-Example-PointUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointUITests/Pods-Example-PointUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F24D1BD952579B8FA1394383 /* Pods-Example-PointUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointUITests/Pods-Example-PointUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F79843B0F01F2A7F6DFB56FD /* Pods-Example-PointTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointTests/Pods-Example-PointTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +138,7 @@
 		2E80D7B4FED403F03EB843D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DF0FF451E01950200ABD179 /* IrohaSwift.xcodeproj */,
 				6DA315551DF97C1F00C5325E /* IrohaSwift.xcodeproj */,
 				4A577D7F09E9313C38C33393 /* Pods_Example_Point.framework */,
 				533798859D478E7E8744FFE2 /* Pods_Example_PointTests.framework */,
@@ -215,6 +231,15 @@
 				6DB47D431DFDD5C000C908E9 /* QRImgGenerator.swift */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		6DF0FF461E01950200ABD179 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DF0FF4B1E01950200ABD179 /* IrohaSwift.framework */,
+				6DF0FF4D1E01950200ABD179 /* IrohaSwiftTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B3FE195DF81A8B4865E9411C /* Pods */ = {
@@ -338,6 +363,10 @@
 					ProductGroup = 6DA315561DF97C1F00C5325E /* Products */;
 					ProjectRef = 6DA315551DF97C1F00C5325E /* IrohaSwift.xcodeproj */;
 				},
+				{
+					ProductGroup = 6DF0FF461E01950200ABD179 /* Products */;
+					ProjectRef = 6DF0FF451E01950200ABD179 /* IrohaSwift.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -361,6 +390,20 @@
 			fileType = wrapper.cfbundle;
 			path = IrohaSwiftTests.xctest;
 			remoteRef = 6DA3155C1DF97C1F00C5325E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DF0FF4B1E01950200ABD179 /* IrohaSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IrohaSwift.framework;
+			remoteRef = 6DF0FF4A1E01950200ABD179 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6DF0FF4D1E01950200ABD179 /* IrohaSwiftTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = IrohaSwiftTests.xctest;
+			remoteRef = 6DF0FF4C1E01950200ABD179 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
