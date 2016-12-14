@@ -97,7 +97,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                 print(cnvData)
                 if let dataDict = cnvData {
                     if(dataDict["account"] != nil){
-                        if(dataDict["account"] as! String == KeychainManager.sharedManager.keychain["publicKey"]){
+                        if(dataDict["account"] as! String == KeychainManager.instance.keychain["publicKey"]){
                             let alertVC = PMAlertController(title: "エラー", description: "自分に送信することはできません", image: UIImage(named: "tibihash3.png"), style: .alert)
                             
                             alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in

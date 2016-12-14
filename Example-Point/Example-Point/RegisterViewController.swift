@@ -37,7 +37,9 @@ class RegisterViewController: UIViewController {
             keychain["username"] = nameField.text
             keychain["publicKey"] = keypair.publicKey
             keychain["privateKey"] = keypair.privateKey
-            
+            let storyboard: UIStoryboard = self.storyboard!
+            let nextVC = storyboard.instantiateViewController(withIdentifier: "Contents")
+            self.present(nextVC, animated: true, completion: nil)
         }
     }
 

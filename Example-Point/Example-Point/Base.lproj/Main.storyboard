@@ -34,14 +34,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8IH-i4-pA9">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reg_logo" translatesAutoresizingMaskIntoConstraints="NO" id="e88-ff-VCA">
-                                                <rect key="frame" x="0.0" y="100" width="375" height="212"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="e88-ff-VCA" secondAttribute="height" multiplier="375:212" id="U5K-Ql-Q9j"/>
-                                                </constraints>
-                                            </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jlm-hu-IxQ">
-                                                <rect key="frame" x="30" y="544.5" width="315" height="52.5"/>
+                                                <rect key="frame" x="30" y="327.5" width="315" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Jlm-hu-IxQ" secondAttribute="height" multiplier="271:45" id="Npo-gb-WxX"/>
                                                 </constraints>
@@ -57,12 +51,9 @@
                                                         <integer key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="Uen-F7-88L" kind="show" id="MlP-pD-cq5"/>
-                                                </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9RD-8F-hCY" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                                <rect key="frame" x="40" y="346" width="295" height="62"/>
+                                                <rect key="frame" x="40" y="235.5" width="295" height="62"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="9RD-8F-hCY" secondAttribute="height" multiplier="62:13" id="dVf-8X-aV1"/>
                                                 </constraints>
@@ -81,17 +72,21 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reg_logo2" translatesAutoresizingMaskIntoConstraints="NO" id="e88-ff-VCA">
+                                                <rect key="frame" x="37" y="60" width="300" height="141.5"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.87536782026290894" green="0.0" blue="0.067383036017417908" alpha="0.46377354450000002" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="Jlm-hu-IxQ" firstAttribute="top" secondItem="9RD-8F-hCY" secondAttribute="bottom" constant="30" id="0kw-UU-66Y"/>
                                             <constraint firstAttribute="trailing" secondItem="9RD-8F-hCY" secondAttribute="trailing" constant="40" id="A4j-Rp-qZy"/>
-                                            <constraint firstAttribute="trailing" secondItem="e88-ff-VCA" secondAttribute="trailing" id="B0r-Mo-4F4"/>
                                             <constraint firstItem="Jlm-hu-IxQ" firstAttribute="leading" secondItem="8IH-i4-pA9" secondAttribute="leading" constant="30" id="BKV-CC-UKR"/>
-                                            <constraint firstAttribute="bottom" secondItem="Jlm-hu-IxQ" secondAttribute="bottom" constant="70" id="CTB-Ug-gEI"/>
-                                            <constraint firstItem="e88-ff-VCA" firstAttribute="leading" secondItem="8IH-i4-pA9" secondAttribute="leading" id="J7x-KR-ZSN"/>
+                                            <constraint firstItem="e88-ff-VCA" firstAttribute="leading" secondItem="8IH-i4-pA9" secondAttribute="leading" constant="37" id="BbH-Hc-bfb"/>
                                             <constraint firstItem="9RD-8F-hCY" firstAttribute="top" secondItem="e88-ff-VCA" secondAttribute="bottom" constant="34" id="MaT-ap-LVF"/>
-                                            <constraint firstItem="e88-ff-VCA" firstAttribute="top" secondItem="8IH-i4-pA9" secondAttribute="top" constant="100" id="bf6-XO-ZrP"/>
+                                            <constraint firstAttribute="trailing" secondItem="e88-ff-VCA" secondAttribute="trailing" constant="38" id="Ycc-nI-hfI"/>
+                                            <constraint firstItem="e88-ff-VCA" firstAttribute="top" secondItem="8IH-i4-pA9" secondAttribute="top" constant="60" id="bf6-XO-ZrP"/>
                                             <constraint firstAttribute="trailing" secondItem="Jlm-hu-IxQ" secondAttribute="trailing" constant="30" id="c60-ur-PRo"/>
+                                            <constraint firstItem="Jlm-hu-IxQ" firstAttribute="centerY" secondItem="8IH-i4-pA9" secondAttribute="centerY" constant="20" id="jn8-6M-MoM"/>
                                             <constraint firstItem="9RD-8F-hCY" firstAttribute="leading" secondItem="8IH-i4-pA9" secondAttribute="leading" constant="40" id="ogm-JG-E5k"/>
                                         </constraints>
                                     </view>
@@ -322,7 +317,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWA-PO-tot">
                                 <rect key="frame" x="0.0" y="153" width="375" height="465"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="2A0EE4D2-3575-48B9-B581-7ADB3DE5E873" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="DBBEA699-784F-4B07-93FB-4C4EB7597958" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
                                         <rect key="frame" x="67" y="-36" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="HhX-lD-UDx" secondAttribute="height" multiplier="1:1" id="jdc-Ty-fHY"/>
@@ -418,7 +413,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="iHP-By-KNT">
             <objects>
-                <tabBarController id="Uen-F7-88L" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Contents" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Uen-F7-88L" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="jTx-Gk-ool">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -470,7 +465,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="2A0EE4D2-3575-48B9-B581-7ADB3DE5E873" width="237" height="237">
+        <image name="DBBEA699-784F-4B07-93FB-4C4EB7597958" width="237" height="237">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4271,7 +4266,7 @@ AAN3+gADd/0AA3gCAAAAAAAABAEAAAAAAAAAQQAAAAAAAAAAAAAAAAADeAQ
         <image name="button_send" width="656" height="91"/>
         <image name="icon_qr" width="237" height="237"/>
         <image name="reg_back" width="765" height="947"/>
-        <image name="reg_logo" width="345" height="405"/>
+        <image name="reg_logo2" width="539" height="140"/>
         <image name="tab_receive" width="30" height="30"/>
         <image name="tab_send" width="30" height="30"/>
         <image name="tab_wallet" width="30" height="30"/>
