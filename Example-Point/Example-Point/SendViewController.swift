@@ -19,6 +19,8 @@ class SendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        toField.text = to
+        amountField.text = amount
     }
     
     override func viewDidLoad() {
