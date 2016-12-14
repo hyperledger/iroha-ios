@@ -20,7 +20,7 @@ class RegisterViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         registerButton.layer.borderColor = UIColor.white.cgColor
-        
+        registerButton.addTarget(self, action: #selector(Register), for: .touchUpInside)
     }
 
     override func didReceiveMemoryWarning() {
