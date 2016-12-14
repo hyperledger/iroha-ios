@@ -1,21 +1,24 @@
 PODS:
   - Alamofire (4.2.0)
   - KeychainAccess (3.0.1)
+  - PMAlertController (2.0.1)
   - SwiftyJSON (3.1.3)
   - TextFieldEffects (1.3.0)
 
 DEPENDENCIES:
   - Alamofire
   - KeychainAccess
+  - PMAlertController
   - SwiftyJSON
   - TextFieldEffects
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   KeychainAccess: 017ea25e313a49eda10bb19b0bb0760fb1edfe1a
+  PMAlertController: 8f809a67e740bd6ce1bb7d6017c12c94e997f64b
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
   TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
 
-PODFILE CHECKSUM: ffcfbc5838398c71ea8e999bcd0573df6e3e57ea
+PODFILE CHECKSUM: 4bbdf4dced18f718e13ece837020adeab6445b43
 
 COCOAPODS: 1.1.1

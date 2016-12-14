@@ -15,6 +15,7 @@ class ReceiveViewController: UIViewController {
     @IBOutlet weak var qrImg: UIImageView!
     @IBOutlet weak var pubkey: UITextField!
     @IBOutlet weak var amountField: HoshiTextField!
+    var qr:UIImage?
     let qrstr = "{account:\(KeychainManager.sharedManager.keychain["publicKey"]),"
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +28,10 @@ class ReceiveViewController: UIViewController {
         let pub = KeychainManager.sharedManager.keychain["publicKey"]
         pubkey.text = pub
         let qrmsg = "\(qrstr),amount:0}"
-        let qr = createQRCode(message: qrmsg)
+        qr = createQRCode(message: qrmsg)
         qrImg.image = qr
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,8 +40,13 @@ class ReceiveViewController: UIViewController {
     func changeTextField (sender: NSNotification) {
         if sender.object as! UITextField == amountField{
             let text = (sender.object as! UITextField).text
-            let qrmsg = "\(qrstr),amount:\(text)}"
-            let qr = createQRCode(message: qrmsg)
+            var qrmsg = ""
+            if text == "" {
+                qrmsg = "\(qrstr),amount:0}"
+            } else {
+                qrmsg = "\(qrstr),amount:\(text)}"
+            }
+            qr = createQRCode(message: qrmsg)
             qrImg.image = qr
         }
     }
