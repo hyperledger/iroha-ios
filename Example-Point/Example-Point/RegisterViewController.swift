@@ -13,10 +13,13 @@ class RegisterViewController: UIViewController {
 
     @IBOutlet weak var nameField: HoshiTextField!
     @IBOutlet weak var registerButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        registerButton.layer.borderColor = UIColor.white.cgColor
+        
     }
 
     override func didReceiveMemoryWarning() {

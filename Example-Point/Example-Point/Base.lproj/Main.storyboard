@@ -322,7 +322,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWA-PO-tot">
                                 <rect key="frame" x="0.0" y="153" width="375" height="465"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="7669A09D-61B8-4DC3-AFEB-780745D4F919" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="2A0EE4D2-3575-48B9-B581-7ADB3DE5E873" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
                                         <rect key="frame" x="67" y="-36" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="HhX-lD-UDx" secondAttribute="height" multiplier="1:1" id="jdc-Ty-fHY"/>
@@ -470,7 +470,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7669A09D-61B8-4DC3-AFEB-780745D4F919" width="237" height="237">
+        <image name="2A0EE4D2-3575-48B9-B581-7ADB3DE5E873" width="237" height="237">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
