@@ -304,6 +304,7 @@
 				TargetAttributes = {
 					6DA315211DF979D300C5325E = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = YLWWUD25VZ;
 						ProvisioningStyle = Automatic;
 					};
 					6DA315351DF979D300C5325E = {
@@ -690,6 +691,7 @@
 			baseConfigurationReference = 008DB154384CEA031C6653C5 /* Pods-Example-Point.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				INFOPLIST_FILE = "Example-Point/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.jp.soramitsu.Example-Point";
@@ -703,6 +705,7 @@
 			baseConfigurationReference = 4ADCDA2AE306BDC7E0564E56 /* Pods-Example-Point.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				INFOPLIST_FILE = "Example-Point/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.jp.soramitsu.Example-Point";

@@ -15,13 +15,20 @@ class ReceiveViewController: UIViewController {
     @IBOutlet weak var qrImg: UIImageView!
     @IBOutlet weak var pubkey: UITextField!
     @IBOutlet weak var amountField: HoshiTextField!
-    
+    let qrstr = "{account:\(KeychainManager.sharedManager.keychain["publicKey"]),"
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        amountField.text = "\(DataManager.instance.property) IRH"
-        pubkey.text = KeychainManager.sharedManager.keychain["publicKey"]
+        amountField.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(changeTextField), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
+
+        property.text = "\(DataManager.instance.property) IRH"
+        let pub = KeychainManager.sharedManager.keychain["publicKey"]
+        pubkey.text = pub
+        let qrmsg = "\(qrstr),amount:0}"
+        let qr = createQRCode(message: qrmsg)
+        qrImg.image = qr
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,6 +36,15 @@ class ReceiveViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func changeTextField (sender: NSNotification) {
+        if sender.object as! UITextField == amountField{
+            let text = (sender.object as! UITextField).text
+            let qrmsg = "\(qrstr),amount:\(text)}"
+            let qr = createQRCode(message: qrmsg)
+            qrImg.image = qr
+        }
+    }
+
 
     /*
     // MARK: - Navigation
@@ -39,5 +55,10 @@ class ReceiveViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+
+extension ReceiveViewController: UITextFieldDelegate {
 
 }
