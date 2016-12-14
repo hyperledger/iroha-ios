@@ -17,6 +17,10 @@ class SendViewController: UIViewController {
     @IBOutlet weak var toField: HoshiTextField!
     @IBOutlet weak var amountField: HoshiTextField!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
