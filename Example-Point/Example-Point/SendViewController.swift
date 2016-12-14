@@ -13,6 +13,9 @@ class SendViewController: UIViewController {
     var to = ""
     var amount = ""
     
+    @IBOutlet weak var toField: HoshiTextField!
+    @IBOutlet weak var amountField: HoshiTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
