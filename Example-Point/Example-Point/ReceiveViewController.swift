@@ -16,7 +16,7 @@ class ReceiveViewController: UIViewController {
     @IBOutlet weak var pubkey: UITextField!
     @IBOutlet weak var amountField: HoshiTextField!
     var qr:UIImage?
-    let qrstr = "{account:\(KeychainManager.sharedManager.keychain["publicKey"]),"
+    let qrstr = "{\"account\":\(KeychainManager.sharedManager.keychain["publicKey"]!),"
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,9 +25,9 @@ class ReceiveViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(changeTextField), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
 
         property.text = "\(DataManager.instance.property) IRH"
-        let pub = KeychainManager.sharedManager.keychain["publicKey"]
+        let pub = KeychainManager.sharedManager.keychain["publicKey"]!
         pubkey.text = pub
-        let qrmsg = "\(qrstr),amount:0}"
+        let qrmsg = "\(qrstr),\"amount\":0}"
         qr = createQRCode(message: qrmsg)
         qrImg.image = qr
     }
@@ -42,9 +42,9 @@ class ReceiveViewController: UIViewController {
             let text = (sender.object as! UITextField).text
             var qrmsg = ""
             if text == "" {
-                qrmsg = "\(qrstr),amount:0}"
+                qrmsg = "\(qrstr),\"amount\":0}"
             } else {
-                qrmsg = "\(qrstr),amount:\(text)}"
+                qrmsg = "\(qrstr),\"amount\":\(text!)}"
             }
             qr = createQRCode(message: qrmsg)
             qrImg.image = qr

@@ -90,12 +90,13 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         self.captureSession.stopRunning()
         for data in metadataObjects {
+            print(data)
             if (data as AnyObject).type == AVMetadataObjectTypeQRCode {
                 let dataValue: String = (data as! AVMetadataMachineReadableCodeObject).stringValue
                 let cnvData = convertStringToDictionary(text: dataValue)
                 print(cnvData)
                 if let dataDict = cnvData {
-                    if(dataDict["type"] as! String == "trans"){
+                    if(dataDict["account"] != nil){
                         if(dataDict["account"] as! String == KeychainManager.sharedManager.keychain["publicKey"]){
                             let alertVC = PMAlertController(title: "エラー", description: "自分に送信することはできません", image: UIImage(named: "tibihash3.png"), style: .alert)
                             
@@ -114,7 +115,8 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                         }else{
                             self.captureSession.stopRunning()
                             let prevvc = navigationController?.viewControllers[(navigationController?.viewControllers.count)! - 1] as! SendViewController
-                            
+                            prevvc.to = dataDict["account"] as! String
+                            prevvc.amount = dataDict["amount"] as! String
                             navigationController?.popViewController(animated: true)
                         }
                     }else{
