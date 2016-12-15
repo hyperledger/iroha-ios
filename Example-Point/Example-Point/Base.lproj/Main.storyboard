@@ -247,6 +247,7 @@
                     <navigationItem key="navigationItem" title="Send" id="zeH-PV-FF2"/>
                     <connections>
                         <outlet property="amountField" destination="fdr-LS-TFB" id="klW-Wr-lVt"/>
+                        <outlet property="sendButton" destination="NF7-b1-4Xu" id="8t5-wh-uOC"/>
                         <outlet property="toField" destination="DUn-0x-B03" id="LPO-EV-AKf"/>
                     </connections>
                 </viewController>
@@ -318,7 +319,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWA-PO-tot">
                                 <rect key="frame" x="0.0" y="153" width="375" height="465"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="54C3816A-CD5A-4BB7-97C6-6E183FD2D39A" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="4C69F1CE-9622-4F9A-8018-E94DD76B4596" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
                                         <rect key="frame" x="67" y="-36" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="HhX-lD-UDx" secondAttribute="height" multiplier="1:1" id="jdc-Ty-fHY"/>
@@ -466,7 +467,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="54C3816A-CD5A-4BB7-97C6-6E183FD2D39A" width="237" height="237">
+        <image name="4C69F1CE-9622-4F9A-8018-E94DD76B4596" width="237" height="237">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

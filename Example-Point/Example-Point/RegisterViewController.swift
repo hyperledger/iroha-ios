@@ -9,6 +9,7 @@
 import UIKit
 import TextFieldEffects
 import IrohaSwift
+import PMAlertController
 
 class RegisterViewController: UIViewController {
     
@@ -33,17 +34,48 @@ class RegisterViewController: UIViewController {
     }
     
     func Register () {
-        if nameField.text == "" {
-            
+        
+        let keychain = KeychainManager.instance.keychain
+        let keypair = IrohaSwift.createKeyPair()
+
+        if nameField.text != "" {
+            if(CheckReachability(host_name: "google.com")){
+                let alertVC = PMAlertController(title: "登録中", description: "登録しています", image: UIImage(named: ""), style: .alert)
+                self.present(alertVC, animated: true, completion: {
+                    APIManager.Register(name: self.nameField.text!, pub: keypair.publicKey, completionHandler: { JSON in
+                        if (JSON["status"] as! Int) == 200 {
+                            keychain["username"] = self.nameField.text
+                            keychain["publicKey"] = keypair.publicKey
+                            keychain["privateKey"] = keypair.privateKey
+                            let storyboard: UIStoryboard = self.storyboard!
+                            let nextVC = storyboard.instantiateViewController(withIdentifier: "Contents")
+                            self.present(nextVC, animated: true, completion: nil)
+                        }else{
+                            alertVC.dismiss(animated: false, completion: {
+                                let alertVC = PMAlertController(title: "エラー", description: "\(JSON["message"]!)", image: UIImage(named: ""), style: .alert)
+                                
+                                alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                                }))
+                                self.present(alertVC, animated: true, completion: nil)
+                            })
+                        }
+                    })
+                })
+            }else{
+                let alertVC = PMAlertController(title: "接続エラー", description: "ネットワークを確認してね", image: UIImage(named: ""), style: .alert)
+                
+                alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                }))
+                
+                self.present(alertVC, animated: true, completion: nil)
+            }
         } else {
-            let keychain = KeychainManager.instance.keychain
-            let keypair = IrohaSwift.createKeyPair()
-            keychain["username"] = nameField.text
-            keychain["publicKey"] = keypair.publicKey
-            keychain["privateKey"] = keypair.privateKey
-            let storyboard: UIStoryboard = self.storyboard!
-            let nextVC = storyboard.instantiateViewController(withIdentifier: "Contents")
-            self.present(nextVC, animated: true, completion: nil)
+            let alertVC = PMAlertController(title: "エラー", description: "ユーザー名を入力してください", image: UIImage(named: ""), style: .alert)
+            
+            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+            }))
+            
+            self.present(alertVC, animated: true, completion: nil)
         }
     }
     
