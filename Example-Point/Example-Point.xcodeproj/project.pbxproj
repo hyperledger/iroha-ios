@@ -116,6 +116,7 @@
 		6DF0FF5A1E028E8B00ABD179 /* TransactionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		6DF0FF5C1E0291B800ABD179 /* CheckReachablility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckReachablility.swift; sourceTree = "<group>"; };
 		6DF0FF5F1E02945400ABD179 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		6DF0FF611E029B1200ABD179 /* Example-Point.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Example-Point.entitlements"; sourceTree = "<group>"; };
 		8854A9C946B28FF6E57F8C8D /* Pods-Example-PointUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointUITests/Pods-Example-PointUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F24D1BD952579B8FA1394383 /* Pods-Example-PointUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointUITests/Pods-Example-PointUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F79843B0F01F2A7F6DFB56FD /* Pods-Example-PointTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointTests/Pods-Example-PointTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +187,8 @@
 		6DA315241DF979D300C5325E /* Example-Point */ = {
 			isa = PBXGroup;
 			children = (
+				6DF0FF621E029CC700ABD179 /* Manager */,
+				6DF0FF611E029B1200ABD179 /* Example-Point.entitlements */,
 				6DB47D421DFDD58D00C908E9 /* Util */,
 				6DB47D351DFDCEE900C908E9 /* ViewController */,
 				6DA315251DF979D300C5325E /* AppDelegate.swift */,
@@ -194,8 +197,6 @@
 				6DA3152C1DF979D300C5325E /* Assets.xcassets */,
 				6DA3152E1DF979D300C5325E /* LaunchScreen.storyboard */,
 				6DA315311DF979D300C5325E /* Info.plist */,
-				6DB47D3E1DFDD16B00C908E9 /* DataManager.swift */,
-				6DB47D401DFDD23E00C908E9 /* KeychainManager.swift */,
 				6DF0FF5A1E028E8B00ABD179 /* TransactionCell.swift */,
 			);
 			path = "Example-Point";
@@ -248,6 +249,15 @@
 				6DF0FF5F1E02945400ABD179 /* ColorExtension.swift */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		6DF0FF621E029CC700ABD179 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6DB47D3E1DFDD16B00C908E9 /* DataManager.swift */,
+				6DB47D401DFDD23E00C908E9 /* KeychainManager.swift */,
+			);
+			name = Manager;
 			sourceTree = "<group>";
 		};
 		B3FE195DF81A8B4865E9411C /* Pods */ = {
@@ -344,6 +354,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = YLWWUD25VZ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					6DA315351DF979D300C5325E = {
 						CreatedOnToolsVersion = 8.1;
@@ -739,6 +754,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Example-Point/Example-Point.entitlements";
 				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				INFOPLIST_FILE = "Example-Point/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/../Frameworks/";
@@ -754,6 +770,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Example-Point/Example-Point.entitlements";
 				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				INFOPLIST_FILE = "Example-Point/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/../Frameworks/";
