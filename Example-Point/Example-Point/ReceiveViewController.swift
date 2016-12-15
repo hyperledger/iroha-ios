@@ -30,6 +30,15 @@ class ReceiveViewController: UIViewController {
         let qrmsg = "\(qrstr),\"amount\":0}"
         qr = createQRCode(message: qrmsg)
         qrImg.image = qr
+        
+        let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
+        kbToolBar.barStyle = UIBarStyle.default
+        kbToolBar.sizeToFit()
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let commitButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: Selector("commitButtonTapped"))
+        kbToolBar.items = [spacer, commitButton]
+        amountField.inputAccessoryView = kbToolBar
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,6 +58,10 @@ class ReceiveViewController: UIViewController {
             qr = createQRCode(message: qrmsg)
             qrImg.image = qr
         }
+    }
+    
+    func commitButtonTapped (){
+        self.view.endEditing(true)
     }
 
 
