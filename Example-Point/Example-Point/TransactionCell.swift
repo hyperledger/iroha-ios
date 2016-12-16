@@ -18,6 +18,7 @@ class TransactionCell: UITableViewCell {
     var label:UILabel?
     var dateLabel:UILabel?
     var oppLabel:UILabel?
+    var typeImg:UIImageView?
     let ovalShapeLayer = CAShapeLayer()
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,15 +26,19 @@ class TransactionCell: UITableViewCell {
         trans!.frame = CGRect(x:0, y: 0, width: UIScreen.main.bounds.size.width, height: 60)
         self.addSubview(trans!)
         
-        // 円のCALayer作成
-        ovalShapeLayer.strokeColor = UIColor.white.cgColor
-        ovalShapeLayer.fillColor = UIColor.white.cgColor
-        ovalShapeLayer.lineWidth = 0.0
-        
-        // 図形は円形
-        ovalShapeLayer.path = UIBezierPath(ovalIn: CGRect(x: 10, y: 22, width: 15.0, height: 15.0)).cgPath
-        self.layer.addSublayer(ovalShapeLayer)
-        
+//        // 円のCALayer作成
+//        ovalShapeLayer.strokeColor = UIColor.white.cgColor
+//        ovalShapeLayer.fillColor = UIColor.white.cgColor
+//        ovalShapeLayer.lineWidth = 0.0
+//        
+//        // 図形は円形
+//        ovalShapeLayer.path = UIBezierPath(ovalIn: CGRect(x: 10, y: 22, width: 15.0, height: 15.0)).cgPath
+//        self.layer.addSublayer(ovalShapeLayer)
+//
+        typeImg = UIImageView(frame: CGRect(x:10, y:10, width:trans!.frame.height-20, height:trans!.frame.height-20))
+        typeImg?.image = UIImage(named: "icon_send")
+        trans!.addSubview(typeImg!)
+
         let lineLeft:CGFloat = trans!.frame.origin.x + trans!.frame.width
         //        let lineMargin:CGFloat = 12
         label = UILabel()
@@ -54,12 +59,12 @@ class TransactionCell: UITableViewCell {
         trans!.addSubview(dateLabel!)
         
         oppLabel = UILabel()
-        oppLabel = UILabel(frame: CGRect(x:30, y:0, width:trans!.frame.width-20, height:trans!.frame.height))
+        oppLabel = UILabel(frame: CGRect(x:trans!.frame.height, y:0, width:trans!.frame.width-100, height:trans!.frame.height))
         oppLabel!.backgroundColor = UIColor.clear
         oppLabel!.textColor = UIColor.gray
         oppLabel!.font = UIFont.boldSystemFont(ofSize: 15)
         oppLabel!.textAlignment = .left
-        oppLabel!.text = "from hoge-chan"
+        oppLabel!.text = "from hoge"
         trans!.addSubview(oppLabel!)
         
         let sepalator = UIView()
@@ -68,20 +73,13 @@ class TransactionCell: UITableViewCell {
         self.addSubview(sepalator)
     }
     
-    func fillWithFulu(backgroundColor: UIColor, textColor: UIColor, isSender:Bool, oppo:String, valueText: String, time: Int) {
-        self.ovalShapeLayer.fillColor = backgroundColor.cgColor
-        self.transLabel?.textColor = textColor
-        oppLabel!.text = "shake \(oppo)"
-        dateLabel?.text = calcTimeDiff(time: time)
-        self.label?.text = valueText
-    }
-    
-    func fillWith(backgroundColor: UIColor, textColor: UIColor, isSender:Bool, oppo:String, valueText: String, time: Int) {
-        self.ovalShapeLayer.fillColor = backgroundColor.cgColor
-        self.transLabel?.textColor = textColor
+    func fillWith(isSender:Bool, oppo:String, valueText: String, time: Int) {
+//        self.transLabel?.textColor = textColor
         if(isSender){
+            self.typeImg?.image = UIImage(named: "icon_send")
             oppLabel!.text = "to \(oppo)"
         }else{
+            self.typeImg?.image = UIImage(named: "icon_receive")
             oppLabel!.text = "from \(oppo)"
         }
         dateLabel?.text = calcTimeDiff(time: time)

@@ -13,7 +13,7 @@ import IrohaSwift
 class APIManager {
     
     
-    static let host = "https://point-demo.iroha.tech"
+    static let host = ""
    
     static func GetUserInfo(userId:String, completionHandler: @escaping ([String : Any])->()){
         //        print(userId)

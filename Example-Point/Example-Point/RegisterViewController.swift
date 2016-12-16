@@ -43,10 +43,12 @@ class RegisterViewController: UIViewController {
                 let alertVC = PMAlertController(title: "登録中", description: "登録しています", image: UIImage(named: ""), style: .alert)
                 self.present(alertVC, animated: true, completion: {
                     APIManager.Register(name: self.nameField.text!, pub: keypair.publicKey, completionHandler: { JSON in
+                        print(JSON["status"] as! Int)
                         if (JSON["status"] as! Int) == 200 {
                             keychain["username"] = self.nameField.text
                             keychain["publicKey"] = keypair.publicKey
                             keychain["privateKey"] = keypair.privateKey
+                            alertVC.dismiss(animated: false, completion: nil)
                             let storyboard: UIStoryboard = self.storyboard!
                             let nextVC = storyboard.instantiateViewController(withIdentifier: "Contents")
                             self.present(nextVC, animated: true, completion: nil)

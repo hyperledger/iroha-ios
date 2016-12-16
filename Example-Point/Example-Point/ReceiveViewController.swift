@@ -23,7 +23,7 @@ class ReceiveViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.iroha
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.topViewController!.navigationItem.title = "Receive"
-        self.tabBarController?.tabBar.tintColor = UIColor.irohaYellow
+        self.tabBarController?.tabBar.tintColor = UIColor.irohaGreen
 
     }
     

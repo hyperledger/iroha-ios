@@ -106,10 +106,10 @@ class WalletTableViewController: UITableViewController {
         let item = myItems[self.myItems.count - indexPath.row - 1]
 
         if((item["sender"] as! String) == KeychainManager.instance.keychain["publicKey"]!){
-            cell.fillWith(backgroundColor: UIColor.green, textColor: UIColor.white, isSender: true, oppo: item["opponent"] as! String, valueText: "\(item["amount"]!)",time: item["timestamp"]! as! Int)
+            cell.fillWith(isSender: true, oppo: item["opponent"] as! String, valueText: "\(item["amount"]!)",time: item["timestamp"]! as! Int)
             
         }else{
-            cell.fillWith(backgroundColor: UIColor(red: 255/255, green: 204/255, blue: 0/255, alpha: 1 ), textColor: UIColor.white,  isSender: false, oppo: item["opponent"] as! String, valueText: "\(item["amount"]!)",time: item["timestamp"]! as! Int)
+            cell.fillWith(isSender: false, oppo: item["opponent"] as! String, valueText: "\(item["amount"]!)",time: item["timestamp"]! as! Int)
             
         }
         return cell
