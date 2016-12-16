@@ -17,6 +17,16 @@ class ReceiveViewController: UIViewController {
     @IBOutlet weak var amountField: HoshiTextField!
     var qr:UIImage?
     let qrstr = "{\"account\":\(KeychainManager.instance.keychain["publicKey"]!),"
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = UIColor.iroha
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.topViewController!.navigationItem.title = "Receive"
+        self.tabBarController?.tabBar.tintColor = UIColor.irohaYellow
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

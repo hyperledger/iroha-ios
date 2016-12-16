@@ -22,6 +22,10 @@ class SendViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = UIColor.iroha
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.topViewController!.navigationItem.title = "Send"
+        self.tabBarController?.tabBar.tintColor = UIColor.irohaGreen
         toField.text = to
         amountField.text = amount
     }

@@ -23,7 +23,8 @@ class WalletTableViewController: UITableViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.iroha
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.topViewController!.navigationItem.title = "Wallet"
-        
+        self.tabBarController?.tabBar.tintColor = UIColor.iroha
+
     }
     
     override func viewDidLoad() {
