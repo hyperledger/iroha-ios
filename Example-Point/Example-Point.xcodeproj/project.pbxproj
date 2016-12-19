@@ -16,6 +16,20 @@
 		6DA315301DF979D300C5325E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA3152E1DF979D300C5325E /* LaunchScreen.storyboard */; };
 		6DA3153B1DF979D300C5325E /* Example_PointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA3153A1DF979D300C5325E /* Example_PointTests.swift */; };
 		6DA315461DF979D300C5325E /* Example_PointUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA315451DF979D300C5325E /* Example_PointUITests.swift */; };
+		6DB47D371DFDCF0800C908E9 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB47D361DFDCF0800C908E9 /* SendViewController.swift */; };
+		6DB47D391DFDCF2900C908E9 /* WalletTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB47D381DFDCF2900C908E9 /* WalletTableViewController.swift */; };
+		6DB47D3B1DFDCF4600C908E9 /* ReceiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB47D3A1DFDCF4600C908E9 /* ReceiveViewController.swift */; };
+		6DB47D3D1DFDCF5500C908E9 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB47D3C1DFDCF5500C908E9 /* QRViewController.swift */; };
+		6DB47D3F1DFDD16B00C908E9 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB47D3E1DFDD16B00C908E9 /* DataManager.swift */; };
+		6DB47D411DFDD23E00C908E9 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB47D401DFDD23E00C908E9 /* KeychainManager.swift */; };
+		6DB47D441DFDD5C000C908E9 /* QRImgGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB47D431DFDD5C000C908E9 /* QRImgGenerator.swift */; };
+		6DF0FF421E01930B00ABD179 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF0FF411E01930B00ABD179 /* RegisterViewController.swift */; };
+		6DF0FF4E1E01997200ABD179 /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA3155B1DF97C1F00C5325E /* IrohaSwift.framework */; };
+		6DF0FF541E019C0F00ABD179 /* IrohaSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA3155B1DF97C1F00C5325E /* IrohaSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6DF0FF5B1E028E8B00ABD179 /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF0FF5A1E028E8B00ABD179 /* TransactionCell.swift */; };
+		6DF0FF5D1E0291B800ABD179 /* CheckReachablility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF0FF5C1E0291B800ABD179 /* CheckReachablility.swift */; };
+		6DF0FF601E02945400ABD179 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF0FF5F1E02945400ABD179 /* ColorExtension.swift */; };
+		6DF0FF641E029DAA00ABD179 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF0FF631E029DAA00ABD179 /* APIManager.swift */; };
 		E85D9EF68021D159116D9841 /* Pods_Example_PointUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFCD79830BD7353C2ACB39D /* Pods_Example_PointUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +62,28 @@
 			remoteGlobalIDString = 7471C86E1D8D942300C151E8;
 			remoteInfo = IrohaSwiftTests;
 		};
+		6DF0FF551E019C0F00ABD179 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DA315551DF97C1F00C5325E /* IrohaSwift.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7471C8631D8D942300C151E8;
+			remoteInfo = IrohaSwift;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6DF0FF571E019C0F00ABD179 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6DF0FF541E019C0F00ABD179 /* IrohaSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008DB154384CEA031C6653C5 /* Pods-Example-Point.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-Point.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example-Point/Pods-Example-Point.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +106,19 @@
 		6DA315451DF979D300C5325E /* Example_PointUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example_PointUITests.swift; sourceTree = "<group>"; };
 		6DA315471DF979D300C5325E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DA315551DF97C1F00C5325E /* IrohaSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IrohaSwift.xcodeproj; path = ../IrohaSwift.xcodeproj; sourceTree = "<group>"; };
+		6DB47D361DFDCF0800C908E9 /* SendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
+		6DB47D381DFDCF2900C908E9 /* WalletTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTableViewController.swift; sourceTree = "<group>"; };
+		6DB47D3A1DFDCF4600C908E9 /* ReceiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiveViewController.swift; sourceTree = "<group>"; };
+		6DB47D3C1DFDCF5500C908E9 /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
+		6DB47D3E1DFDD16B00C908E9 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		6DB47D401DFDD23E00C908E9 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		6DB47D431DFDD5C000C908E9 /* QRImgGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRImgGenerator.swift; sourceTree = "<group>"; };
+		6DF0FF411E01930B00ABD179 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		6DF0FF5A1E028E8B00ABD179 /* TransactionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
+		6DF0FF5C1E0291B800ABD179 /* CheckReachablility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckReachablility.swift; sourceTree = "<group>"; };
+		6DF0FF5F1E02945400ABD179 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		6DF0FF611E029B1200ABD179 /* Example-Point.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Example-Point.entitlements"; sourceTree = "<group>"; };
+		6DF0FF631E029DAA00ABD179 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		8854A9C946B28FF6E57F8C8D /* Pods-Example-PointUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointUITests/Pods-Example-PointUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F24D1BD952579B8FA1394383 /* Pods-Example-PointUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointUITests/Pods-Example-PointUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F79843B0F01F2A7F6DFB56FD /* Pods-Example-PointTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example-PointTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example-PointTests/Pods-Example-PointTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -81,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DF0FF4E1E01997200ABD179 /* IrohaSwift.framework in Frameworks */,
 				33CE66E58C3C05AA1820F31A /* Pods_Example_Point.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,12 +189,17 @@
 		6DA315241DF979D300C5325E /* Example-Point */ = {
 			isa = PBXGroup;
 			children = (
+				6DF0FF621E029CC700ABD179 /* Manager */,
+				6DF0FF611E029B1200ABD179 /* Example-Point.entitlements */,
+				6DB47D421DFDD58D00C908E9 /* Util */,
+				6DB47D351DFDCEE900C908E9 /* ViewController */,
 				6DA315251DF979D300C5325E /* AppDelegate.swift */,
 				6DA315271DF979D300C5325E /* ViewController.swift */,
 				6DA315291DF979D300C5325E /* Main.storyboard */,
 				6DA3152C1DF979D300C5325E /* Assets.xcassets */,
 				6DA3152E1DF979D300C5325E /* LaunchScreen.storyboard */,
 				6DA315311DF979D300C5325E /* Info.plist */,
+				6DF0FF5A1E028E8B00ABD179 /* TransactionCell.swift */,
 			);
 			path = "Example-Point";
 			sourceTree = "<group>";
@@ -177,6 +231,38 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6DB47D351DFDCEE900C908E9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6DB47D361DFDCF0800C908E9 /* SendViewController.swift */,
+				6DB47D381DFDCF2900C908E9 /* WalletTableViewController.swift */,
+				6DB47D3A1DFDCF4600C908E9 /* ReceiveViewController.swift */,
+				6DB47D3C1DFDCF5500C908E9 /* QRViewController.swift */,
+				6DF0FF411E01930B00ABD179 /* RegisterViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		6DB47D421DFDD58D00C908E9 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				6DB47D431DFDD5C000C908E9 /* QRImgGenerator.swift */,
+				6DF0FF5C1E0291B800ABD179 /* CheckReachablility.swift */,
+				6DF0FF5F1E02945400ABD179 /* ColorExtension.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		6DF0FF621E029CC700ABD179 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6DB47D3E1DFDD16B00C908E9 /* DataManager.swift */,
+				6DB47D401DFDD23E00C908E9 /* KeychainManager.swift */,
+				6DF0FF631E029DAA00ABD179 /* APIManager.swift */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
 		B3FE195DF81A8B4865E9411C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,10 +289,12 @@
 				6DA315201DF979D300C5325E /* Resources */,
 				F6F070C60E4AAA2A6AEB093D /* [CP] Embed Pods Frameworks */,
 				5B80D7AFBED67862EB03BB73 /* [CP] Copy Pods Resources */,
+				6DF0FF571E019C0F00ABD179 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6DF0FF561E019C0F00ABD179 /* PBXTargetDependency */,
 			);
 			name = "Example-Point";
 			productName = "Example-Point";
@@ -267,7 +355,13 @@
 				TargetAttributes = {
 					6DA315211DF979D300C5325E = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = YLWWUD25VZ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					6DA315351DF979D300C5325E = {
 						CreatedOnToolsVersion = 8.1;
@@ -495,7 +589,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DA315281DF979D300C5325E /* ViewController.swift in Sources */,
+				6DF0FF421E01930B00ABD179 /* RegisterViewController.swift in Sources */,
+				6DF0FF5D1E0291B800ABD179 /* CheckReachablility.swift in Sources */,
+				6DF0FF5B1E028E8B00ABD179 /* TransactionCell.swift in Sources */,
 				6DA315261DF979D300C5325E /* AppDelegate.swift in Sources */,
+				6DB47D3B1DFDCF4600C908E9 /* ReceiveViewController.swift in Sources */,
+				6DF0FF641E029DAA00ABD179 /* APIManager.swift in Sources */,
+				6DB47D3F1DFDD16B00C908E9 /* DataManager.swift in Sources */,
+				6DB47D391DFDCF2900C908E9 /* WalletTableViewController.swift in Sources */,
+				6DB47D371DFDCF0800C908E9 /* SendViewController.swift in Sources */,
+				6DB47D3D1DFDCF5500C908E9 /* QRViewController.swift in Sources */,
+				6DB47D441DFDD5C000C908E9 /* QRImgGenerator.swift in Sources */,
+				6DB47D411DFDD23E00C908E9 /* KeychainManager.swift in Sources */,
+				6DF0FF601E02945400ABD179 /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +633,11 @@
 			isa = PBXTargetDependency;
 			target = 6DA315211DF979D300C5325E /* Example-Point */;
 			targetProxy = 6DA315421DF979D300C5325E /* PBXContainerItemProxy */;
+		};
+		6DF0FF561E019C0F00ABD179 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IrohaSwift;
+			targetProxy = 6DF0FF551E019C0F00ABD179 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -590,7 +701,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -633,7 +744,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -645,9 +756,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 008DB154384CEA031C6653C5 /* Pods-Example-Point.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Example-Point/Example-Point.entitlements";
+				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				INFOPLIST_FILE = "Example-Point/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/../Frameworks/";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.jp.soramitsu.Example-Point";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -658,9 +772,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4ADCDA2AE306BDC7E0564E56 /* Pods-Example-Point.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Example-Point/Example-Point.entitlements";
+				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				INFOPLIST_FILE = "Example-Point/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/../Frameworks/";
 				PRODUCT_BUNDLE_IDENTIFIER = "co.jp.soramitsu.Example-Point";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

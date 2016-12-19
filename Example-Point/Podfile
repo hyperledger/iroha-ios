@@ -11,6 +11,8 @@ target 'Example-Point' do
   pod 'SwiftyJSON'
   pod 'Alamofire'
   pod 'TextFieldEffects'
+  pod 'PMAlertController'
+  pod 'Toast-Swift'
 
   target 'Example-PointTests' do
     inherit! :search_paths
