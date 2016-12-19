@@ -8,15 +8,19 @@
 
 import UIKit
 import TextFieldEffects
+import IrohaSwift
+import PMAlertController
+import Toast_Swift
 
-class ReceiveViewController: UIViewController {
+class ReceiveViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var accountLabel: UITextField!
     @IBOutlet weak var property: UILabel!
     @IBOutlet weak var qrImg: UIImageView!
     @IBOutlet weak var pubkey: UITextField!
     @IBOutlet weak var amountField: HoshiTextField!
     var qr:UIImage?
-    let qrstr = "{\"account\":\(KeychainManager.instance.keychain["publicKey"]!),"
+    let qrstr = "{\"account\":\"\(KeychainManager.instance.keychain["publicKey"]!)\","
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -24,20 +28,21 @@ class ReceiveViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.topViewController!.navigationItem.title = "Receive"
         self.tabBarController?.tabBar.tintColor = UIColor.irohaGreen
+        property.text = "\(DataManager.instance.property) IRH"
+
 
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(KeychainManager.instance.keychain["uuid"])
         // Do any additional setup after loading the view.
         amountField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(changeTextField), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
 
-        property.text = "\(DataManager.instance.property) IRH"
         let pub = KeychainManager.instance.keychain["publicKey"]!
         pubkey.text = pub
-        let qrmsg = "\(qrstr),\"amount\":0}"
+        let qrmsg = "\(qrstr)\"amount\":0}"
         qr = createQRCode(message: qrmsg)
         qrImg.image = qr
         
@@ -48,7 +53,42 @@ class ReceiveViewController: UIViewController {
         let commitButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: Selector("commitButtonTapped"))
         kbToolBar.items = [spacer, commitButton]
         amountField.inputAccessoryView = kbToolBar
+        GetUserInfo()
+        
+        accountLabel.isUserInteractionEnabled = true
+        accountLabel.delegate = self
 
+    }
+    
+    
+    func GetUserInfo(){
+        //        self.tabBarController?.tabBar.isHidden = true
+        
+        if(CheckReachability(host_name: "google.com")){
+            let alertVC = PMAlertController(title: "通信中", description: "アカウント情報を取得しています", image: UIImage(named: ""), style: .alert)
+            self.present(alertVC, animated: true, completion: {
+                APIManager.GetUserInfo(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
+                    print(JSON)
+                    if (JSON["status"] as! Int) == 200 {
+                        var dicarr: [Dictionary<String, AnyObject>] = (JSON["assets"] as! NSArray) as! [Dictionary<String, AnyObject>]
+                        print(dicarr[0]["value"])
+                        DataManager.instance.property = dicarr[0]["value"] as! Int
+                        self.property.text = "\(DataManager.instance.property) IRH"
+
+                        alertVC.dismiss(animated: false, completion: nil)
+                    }else{
+                        alertVC.dismiss(animated: false, completion: {
+                            let alertVC = PMAlertController(title: "エラー", description: "\(JSON["message"]!)", image: UIImage(named: ""), style: .alert)
+                            
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                            }))
+                            self.present(alertVC, animated: true, completion: nil)
+                        })
+                    }
+                })
+            })
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,9 +101,9 @@ class ReceiveViewController: UIViewController {
             let text = (sender.object as! UITextField).text
             var qrmsg = ""
             if text == "" {
-                qrmsg = "\(qrstr),\"amount\":0}"
+                qrmsg = "\(qrstr)\"amount\":0}"
             } else {
-                qrmsg = "\(qrstr),\"amount\":\(text!)}"
+                qrmsg = "\(qrstr)\"amount\":\(text!)}"
             }
             qr = createQRCode(message: qrmsg)
             qrImg.image = qr
@@ -74,7 +114,22 @@ class ReceiveViewController: UIViewController {
         self.view.endEditing(true)
     }
 
+    @IBAction func OnCopy(_ sender: Any) {
+        var style = ToastStyle()
+        style.shadowColor = UIColor.iroha
+        style.backgroundColor = UIColor.iroha
+        style.messageColor = UIColor.white
+        (sender as! UIButton).makeToast("copy to clipboard!", duration:1.0, position: .center, style: style)
+        let board = UIPasteboard.general.string = "\(KeychainManager.instance.keychain["publicKey"]!)"
 
+    }
+ 
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if amountField.text == "" && string == "0" {
+            return false
+        }
+        return true
+    }
     /*
     // MARK: - Navigation
 
@@ -88,6 +143,3 @@ class ReceiveViewController: UIViewController {
 }
 
 
-extension ReceiveViewController: UITextFieldDelegate {
-
-}

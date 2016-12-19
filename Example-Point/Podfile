@@ -12,6 +12,7 @@ target 'Example-Point' do
   pod 'Alamofire'
   pod 'TextFieldEffects'
   pod 'PMAlertController'
+  pod 'Toast-Swift'
 
   target 'Example-PointTests' do
     inherit! :search_paths

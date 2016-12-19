@@ -76,10 +76,10 @@ class TransactionCell: UITableViewCell {
     func fillWith(isSender:Bool, oppo:String, valueText: String, time: Int) {
 //        self.transLabel?.textColor = textColor
         if(isSender){
-            self.typeImg?.image = UIImage(named: "icon_send")
+            self.typeImg?.image = UIImage(named: "icon_send-2")
             oppLabel!.text = "to \(oppo)"
         }else{
-            self.typeImg?.image = UIImage(named: "icon_receive")
+            self.typeImg?.image = UIImage(named: "icon_receive-2")
             oppLabel!.text = "from \(oppo)"
         }
         dateLabel?.text = calcTimeDiff(time: time)
@@ -91,13 +91,13 @@ class TransactionCell: UITableViewCell {
         if (sec <= 0) {
             return "now";
         } else if (sec < 60) {
-            return "\(sec)秒前";
+            return "\(sec) sec";
         } else if (sec < 3600) {
-            return "\(Int(round(Double(sec/60)))) 分前";
+            return "\(Int(round(Double(sec/60)))) min";
         } else if (sec < 3600 * 24) {
-            return "\(Int(round(Double(sec / (60 * 60))))) 時間前";
+            return "\(Int(round(Double(sec / (60 * 60))))) hour";
         } else if (sec < 3600 * 24 * 31) {
-            return "\(Int(round(Double(sec / (60 * 60 * 24))))) 日前";
+            return "\(Int(round(Double(sec / (60 * 60 * 24))))) day";
         } else {
             let date = Date(timeIntervalSince1970: TimeInterval(time));
             let formatter = DateFormatter()

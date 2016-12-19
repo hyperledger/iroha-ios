@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Uen-F7-88L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Uen-F7-88L">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Register View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="RegisterViewController" customModule="Example_Point" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Register" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="RegisterViewController" customModule="Example_Point" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -342,24 +342,35 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7EA8041B-1B8B-4295-9CBF-5F4690D6F40F" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3BE80FAF-54F3-4F40-BA5F-3610A5910626" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
                                         <rect key="frame" x="67" y="54" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="HhX-lD-UDx" secondAttribute="height" multiplier="1:1" id="jdc-Ty-fHY"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ohfaidfaooahwefavadfvawefgnaeofgnaknvdnandvnadv" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dpl-XX-eiI">
-                                        <rect key="frame" x="30" y="330" width="315" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ohfaidfaooahwefavadfvawefgnaeofgnaknvdnandvnadv" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dpl-XX-eiI">
+                                        <rect key="frame" x="30" y="328" width="315" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WvW-jx-cQ9">
+                                        <rect key="frame" x="30" y="328" width="315" height="30"/>
+                                        <connections>
+                                            <action selector="OnCopy:" destination="2gE-iZ-FMH" eventType="touchUpInside" id="wAK-df-3pD"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="WvW-jx-cQ9" firstAttribute="centerY" secondItem="dpl-XX-eiI" secondAttribute="centerY" id="0T5-fH-3bu"/>
                                     <constraint firstAttribute="width" secondItem="JWA-PO-tot" secondAttribute="height" multiplier="25:31" id="5Gh-WW-iOM"/>
                                     <constraint firstAttribute="bottom" secondItem="HhX-lD-UDx" secondAttribute="bottom" constant="197" id="9cn-3W-hQy"/>
+                                    <constraint firstItem="WvW-jx-cQ9" firstAttribute="width" secondItem="dpl-XX-eiI" secondAttribute="width" id="J1y-Lh-foV"/>
                                     <constraint firstItem="fn8-xC-v4W" firstAttribute="top" secondItem="JWA-PO-tot" secondAttribute="top" constant="-30" id="LzV-3B-jRu"/>
+                                    <constraint firstItem="WvW-jx-cQ9" firstAttribute="leading" secondItem="dpl-XX-eiI" secondAttribute="leading" id="OF6-3O-4Qp"/>
                                     <constraint firstAttribute="trailing" secondItem="dpl-XX-eiI" secondAttribute="trailing" constant="30" id="PFX-Uz-hZC"/>
+                                    <constraint firstItem="WvW-jx-cQ9" firstAttribute="height" secondItem="dpl-XX-eiI" secondAttribute="height" id="UaQ-nh-cxU"/>
+                                    <constraint firstItem="WvW-jx-cQ9" firstAttribute="centerY" secondItem="dpl-XX-eiI" secondAttribute="centerY" id="Zhn-tw-Vbj"/>
                                     <constraint firstAttribute="trailing" secondItem="HhX-lD-UDx" secondAttribute="trailing" constant="68" id="faO-hr-UcC"/>
                                     <constraint firstItem="fn8-xC-v4W" firstAttribute="trailing" secondItem="dpl-XX-eiI" secondAttribute="trailing" id="gWi-dV-nuU"/>
                                     <constraint firstItem="dpl-XX-eiI" firstAttribute="leading" secondItem="JWA-PO-tot" secondAttribute="leading" constant="30" id="hfI-vp-EdJ"/>
@@ -402,6 +413,7 @@
                     <tabBarItem key="tabBarItem" title="receive" image="tab_receive" id="c1o-G6-DVs"/>
                     <navigationItem key="navigationItem" id="pdw-VC-Xug"/>
                     <connections>
+                        <outlet property="accountLabel" destination="dpl-XX-eiI" id="flI-U5-hPA"/>
                         <outlet property="amountField" destination="fn8-xC-v4W" id="nMU-BO-Sgt"/>
                         <outlet property="property" destination="np1-kc-Xvv" id="JvQ-hd-epf"/>
                         <outlet property="pubkey" destination="dpl-XX-eiI" id="DSo-SN-Bhm"/>
@@ -467,7 +479,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7EA8041B-1B8B-4295-9CBF-5F4690D6F40F" width="237" height="237">
+        <image name="3BE80FAF-54F3-4F40-BA5F-3610A5910626" width="237" height="237">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

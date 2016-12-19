@@ -96,6 +96,7 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                 let cnvData = convertStringToDictionary(text: dataValue)
                 print(cnvData)
                 if let dataDict = cnvData {
+                    print(dataDict)
                     if(dataDict["account"] != nil){
                         if(dataDict["account"] as! String == KeychainManager.instance.keychain["publicKey"]){
                             let alertVC = PMAlertController(title: "エラー", description: "自分に送信することはできません", image: UIImage(named: "tibihash3.png"), style: .alert)
@@ -105,20 +106,16 @@ class QRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate
                             }))
                             self.present(alertVC, animated: true, completion: nil)
                         }
-                        if(dataDict["value"]! as! Int == 0){
-                            let alertVC = PMAlertController(title: "エラー", description: "要求額が正しくありません", image: UIImage(named: "tibihash3.png"), style: .alert)
-                            
-                            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
-                                self.captureSession.startRunning()
-                            }))
-                            self.present(alertVC, animated: true, completion: nil)
+
+                        self.captureSession.stopRunning()
+                        let prevvc = navigationController?.viewControllers[(navigationController?.viewControllers.count)! - 2] as! SendViewController
+                        if(dataDict["amount"]! as! Int == 0){
+                            prevvc.amount = ""
                         }else{
-                            self.captureSession.stopRunning()
-                            let prevvc = navigationController?.viewControllers[(navigationController?.viewControllers.count)! - 1] as! SendViewController
-                            prevvc.to = dataDict["account"] as! String
-                            prevvc.amount = dataDict["amount"] as! String
-                            navigationController?.popViewController(animated: true)
+                            prevvc.amount = "\(dataDict["amount"]!)"
                         }
+                        prevvc.to = dataDict["account"] as! String
+                        navigationController?.popViewController(animated: true)
                     }else{
                         let alertVC = PMAlertController(title: "エラー", description: "不正なQRコードです", image: UIImage(named: "tibihash3.png"), style: .alert)
                         

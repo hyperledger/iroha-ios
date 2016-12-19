@@ -10,7 +10,7 @@ import UIKit
 import TextFieldEffects
 import PMAlertController
 
-class SendViewController: UIViewController {
+class SendViewController: UIViewController, UITextFieldDelegate {
     
     var to = ""
     var amount = ""
@@ -25,13 +25,16 @@ class SendViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.iroha
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.topViewController!.navigationItem.title = "Send"
+        self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.tintColor = UIColor.irohaYellow
         toField.text = to
         amountField.text = amount
+        amountField.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
         let kbToolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 40))
@@ -44,6 +47,7 @@ class SendViewController: UIViewController {
         amountField.inputAccessoryView = kbToolBar
         
         sendButton.addTarget(self, action: #selector(Send), for: .touchUpInside)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,48 +60,81 @@ class SendViewController: UIViewController {
     }
 
     func Send(){
-        if toField.text != "" && amountField.text != "" {
-            if(CheckReachability(host_name: "google.com")){
-                let alertVC = PMAlertController(title: "送信中", description: "IRHを送信しています", image: UIImage(named: ""), style: .alert)
-                self.present(alertVC, animated: true, completion: {
-                    APIManager.assetOperation(command: "transfer", amount: self.amountField.text!, privateKey: KeychainManager.instance.keychain["privateKey"]!, receiver: self.toField.text!, completionHandler: {JSON in
-                        if (JSON["status"] as! Int) == 200 {
-                            
-                        }else{
-                            alertVC.dismiss(animated: false, completion: {
-                                let alertVC = PMAlertController(title: "エラー", description: "\(JSON["message"]!)", image: UIImage(named: ""), style: .alert)
-                                
-                                alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
-                                }))
-                                self.present(alertVC, animated: true, completion: nil)
-                            })
-                        }
+        if toField.text == KeychainManager.instance.keychain["publicKey"]! {
+            let alertVC = PMAlertController(title: "エラー", description: "自分に送ることはできません", image: UIImage(named: ""), style: .alert)
+            
+            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                self.toField.text = ""
+                self.amountField.text = ""
+            }))
+            
+            self.present(alertVC, animated: true, completion: nil)
+
+        }else {
+            if toField.text != "" && amountField.text != "" {
+                if(CheckReachability(host_name: "google.com")){
+                    let alertVC = PMAlertController(title: "送信中", description: "IRHを送信しています", image: UIImage(named: ""), style: .alert)
+                    self.present(alertVC, animated: true, completion: {
+                        APIManager.assetOperation(command: "transfer", amount: self.amountField.text!, privateKey: KeychainManager.instance.keychain["privateKey"]!, receiver: self.toField.text!, completionHandler: {JSON in
+                            print(JSON)
+                            if (JSON["status"] as! Int) == 200 {
+                                let parameter = ["asset-uuid":"91f2d81f6008bb98bb79e28b227f02b91b2642ad945213c2c1715d934feace01","name":"iroha", "timestamp": 1482053967, "params": ["command":"Transfer","receiver":self.toField.text!,"sender":KeychainManager.instance.keychain["publicKey"]!,"value":self.amountField.text!]] as [String : Any]
+                                let walletvc = (self.tabBarController?.viewControllers?[1] as! UINavigationController).viewControllers[0] as! WalletTableViewController
+                                walletvc.myItems?.append(parameter as [String : AnyObject])
+                                //                            DataManager.instance.property += (self.amountField.text! as! Int)
+                                alertVC.dismiss(animated: false, completion: {
+                                    let alertVC = PMAlertController(title: "完了", description: "送金が完了しました", image: UIImage(named: ""), style: .alert)
+                                    
+                                    alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                                        self.toField.text = ""
+                                        self.amountField.text = ""
+                                    }))
+                                    self.present(alertVC, animated: true, completion: nil)
+                                })
+                            }else{
+                                alertVC.dismiss(animated: false, completion: {
+                                    let alertVC = PMAlertController(title: "エラー", description: "\(JSON["message"]!)", image: UIImage(named: ""), style: .alert)
+                                    
+                                    alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                                    }))
+                                    self.present(alertVC, animated: true, completion: nil)
+                                })
+                            }
+                        })
                     })
-                })
-            }else{
-                let alertVC = PMAlertController(title: "接続エラー", description: "ネットワークを確認してね", image: UIImage(named: ""), style: .alert)
+                }else{
+                    let alertVC = PMAlertController(title: "接続エラー", description: "ネットワークを確認してね", image: UIImage(named: ""), style: .alert)
+                    
+                    alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                    }))
+                    
+                    self.present(alertVC, animated: true, completion: nil)
+                }
+            } else if toField.text == "" {
+                let alertVC = PMAlertController(title: "エラー", description: "送信先を入力してください", image: UIImage(named: ""), style: .alert)
                 
                 alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
                 }))
                 
                 self.present(alertVC, animated: true, completion: nil)
-            }   
-        } else if toField.text == "" {
-            let alertVC = PMAlertController(title: "エラー", description: "送信先を入力してください", image: UIImage(named: ""), style: .alert)
-            
-            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
-            }))
-            
-            self.present(alertVC, animated: true, completion: nil)
-        } else {
-            let alertVC = PMAlertController(title: "エラー", description: "送信量を入力してください", image: UIImage(named: ""), style: .alert)
-            
-            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
-            }))
-            
-            self.present(alertVC, animated: true, completion: nil)
+            } else {
+                let alertVC = PMAlertController(title: "エラー", description: "送信量を入力してください", image: UIImage(named: ""), style: .alert)
+                
+                alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                }))
+                
+                self.present(alertVC, animated: true, completion: nil)
+            }
         }
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if amountField.text == "" && string == "0" {
+            return false
+        }
+        return true
+    }
+    
     
 
     /*

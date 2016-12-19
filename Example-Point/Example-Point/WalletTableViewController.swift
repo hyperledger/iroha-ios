@@ -13,7 +13,7 @@ import IrohaSwift
 class WalletTableViewController: UITableViewController {
     let historyRefresh = UIRefreshControl()
     
-    var myItems = [["amount":60,"sender":"\(KeychainManager.instance.keychain["publicKey"]!)","opponent":"hogehoge","timestamp":1474],["amount":60,"opponent":"\(KeychainManager.instance.keychain["publicKey"]!)","sender":"hogehoge","timestamp":1474],]
+    var myItems : [Dictionary<String, AnyObject>]?
     
     var labeltxt = "0 IRH";
     var label:UILabel?
@@ -40,28 +40,96 @@ class WalletTableViewController: UITableViewController {
     }
     
     func loadTransaction(){
-//        self.tabBarController?.tabBar.isHidden = true
+        //        self.tabBarController?.tabBar.isHidden = true
         
-        if CheckReachability(host_name: "google.com") {
-            let alertVC = PMAlertController(title: "通信中", description: "口座情報を取得しています", image: UIImage(named: ""), style: .alert)
+        if(CheckReachability(host_name: "google.com")){
+            let alertVC = PMAlertController(title: "通信中", description: "取引履歴を取得しています", image: UIImage(named: ""), style: .alert)
             self.present(alertVC, animated: true, completion: {
-                alertVC.dismiss(animated: false, completion: nil)
+                APIManager.GetUserInfo(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
+                    print(JSON)
+                    if (JSON["status"] as! Int) == 200 {
+                        var dicarr: [Dictionary<String, AnyObject>] = (JSON["assets"] as! NSArray) as! [Dictionary<String, AnyObject>]
+                        print(dicarr[0]["value"])
+                        DataManager.instance.property = dicarr[0]["value"] as! Int
+                        self.label?.text = "\(DataManager.instance.property) IRH"
+                        
+                        
+                        APIManager.GetTransaction(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
+                            print(JSON)
+                            if (JSON["status"] as! Int) == 200 {
+                                var dicarr: [Dictionary<String, AnyObject>] = (JSON["history"] as! NSArray) as! [Dictionary<String, AnyObject>]
+                                print(dicarr)
+                                self.myItems = dicarr
+                                self.tableView.reloadData()
+                                alertVC.dismiss(animated: false, completion:nil)
+                            }else{
+                                alertVC.dismiss(animated: false, completion: {
+                                    let alertVC = PMAlertController(title: "エラー", description: "\(JSON["message"]!)", image: UIImage(named: ""), style: .alert)
+                                    
+                                    alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                                    }))
+                                    self.present(alertVC, animated: true, completion: nil)
+                                })
+                            }
+                        })
+                    }else{
+                        alertVC.dismiss(animated: false, completion: {
+                            let alertVC = PMAlertController(title: "エラー", description: "\(JSON["message"]!)", image: UIImage(named: ""), style: .alert)
+                            
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                            }))
+                            self.present(alertVC, animated: true, completion: nil)
+                        })
+                    }
+                })
             })
-        }else{
-            let alertVC = PMAlertController(title: "接続エラー", description: "ネットワークを確認してね", image: UIImage(named: ""), style: .alert)
-            
-            alertVC.addAction(PMAlertAction(title: "再読み込み", style: .cancel, action: { () -> Void in
-                alertVC.dismiss(animated: false, completion: nil)
-                self.loadTransaction()
-            }))
-            
-            self.present(alertVC, animated: true, completion: nil)
         }
+
     }
     
     func refresh() {
         if CheckReachability(host_name: "google.com") {
+            let alertVC = PMAlertController(title: "通信中", description: "取引履歴を取得しています", image: UIImage(named: ""), style: .alert)
+            self.present(alertVC, animated: true, completion: {
+                APIManager.GetUserInfo(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
+                    print(JSON)
+                    if (JSON["status"] as! Int) == 200 {
+                        var dicarr: [Dictionary<String, AnyObject>] = (JSON["assets"] as! NSArray) as! [Dictionary<String, AnyObject>]
+                        print(dicarr[0]["value"])
+                        DataManager.instance.property = dicarr[0]["value"] as! Int
+                        self.label?.text = "\(DataManager.instance.property) IRH"
+                        
+                APIManager.GetTransaction(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
+                    print(JSON)
+                    if (JSON["status"] as! Int) == 200 {
+                        var dicarr: [Dictionary<String, AnyObject>] = (JSON["history"] as! NSArray) as! [Dictionary<String, AnyObject>]
+                        print(dicarr)
+                        self.myItems = dicarr
+                        alertVC.dismiss(animated: false, completion:nil)
+                        self.tableView.reloadData()
+                        self.historyRefresh.endRefreshing()
+                    }else{
+                        alertVC.dismiss(animated: false, completion: {
+                            let alertVC = PMAlertController(title: "エラー", description: "\(JSON["message"]!)", image: UIImage(named: ""), style: .alert)
+                            
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                            }))
+                            self.present(alertVC, animated: true, completion: nil)
+                        })
+                    }
+                })
+                    }else{
+                        alertVC.dismiss(animated: false, completion: {
+                            let alertVC = PMAlertController(title: "エラー", description: "\(JSON["message"]!)", image: UIImage(named: ""), style: .alert)
+                            
+                            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+                            }))
+                            self.present(alertVC, animated: true, completion: nil)
+                        })
+                    }
+                })
 
+            })
         }else{
             self.tabBarController?.tabBar.isHidden = true
             
@@ -69,6 +137,7 @@ class WalletTableViewController: UITableViewController {
             
             alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
                 alertVC.dismiss(animated: false, completion: nil)
+                self.tableView.reloadData()
                 self.historyRefresh.endRefreshing()
                 self.tabBarController?.tabBar.isHidden = false
                 
@@ -83,7 +152,8 @@ class WalletTableViewController: UITableViewController {
         myView.backgroundColor = UIColor.iroha
         label = UILabel(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height:120))
         label!.backgroundColor = UIColor.clear
-        label!.text = labeltxt
+        label!.text = "\(DataManager.instance.property) IRH"
+
         label!.textColor = UIColor.white
         label!.font = UIFont.systemFont(ofSize: 29)
         label!.textAlignment = .center
@@ -98,18 +168,25 @@ class WalletTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myItems.count
+        if myItems?.count == nil {
+            return 0
+        }
+        return myItems!.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as! TransactionCell
-        let item = myItems[self.myItems.count - indexPath.row - 1]
-
-        if((item["sender"] as! String) == KeychainManager.instance.keychain["publicKey"]!){
-            cell.fillWith(isSender: true, oppo: item["opponent"] as! String, valueText: "\(item["amount"]!)",time: item["timestamp"]! as! Int)
+        let item = myItems?[(self.myItems?.count)! - indexPath.row - 1]
+        let param = item?["params"] as! Dictionary<String, AnyObject>
+//        print(item)
+//        print(param["sender"] as! String)
+//        print(param["receiver"] as! String)
+//        print(KeychainManager.instance.keychain["publicKey"]!)
+        if((param["sender"] as! String) == KeychainManager.instance.keychain["publicKey"]!){
+            cell.fillWith(isSender: true, oppo: param["receiver"] as! String, valueText: "\(param["value"]!)",time: item?["timestamp"]! as! Int)
             
         }else{
-            cell.fillWith(isSender: false, oppo: item["opponent"] as! String, valueText: "\(item["amount"]!)",time: item["timestamp"]! as! Int)
+            cell.fillWith(isSender: false, oppo: param["sender"] as! String, valueText: "\(param["value"]!)",time: item?["timestamp"]! as! Int)
             
         }
         return cell

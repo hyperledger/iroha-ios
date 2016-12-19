@@ -17,12 +17,12 @@ class APIManager {
    
     static func GetUserInfo(userId:String, completionHandler: @escaping ([String : Any])->()){
         //        print(userId)
-        Alamofire.request("\(host)/api/v1/account", method: .get,parameters: ["uuid":userId])
+        Alamofire.request("\(host)/account", method: .get,parameters: ["uuid":userId])
             .responseJSON { response in
                 switch response.result {
                 case .success(let JSON):
                     if let JSON  = response.result.value {
-                        completionHandler(JSON as! [String : Any])
+                        completionHandler(JSON as! Dictionary)
                     }
                     break
                 //do json stuff
@@ -40,12 +40,13 @@ class APIManager {
     }
     
     static func GetTransaction(userId:String, completionHandler: @escaping ([String:Any])->()){
-        Alamofire.request("\(host)/api/v1/history/transaction", method: .get,parameters: ["uuid":userId])
+        Alamofire.request("\(host)/history/transaction", method: .get,parameters: ["uuid":userId])
             .responseJSON { response in
+                print(response.response?.allHeaderFields)
                 switch response.result {
                 case .success(let JSON):
                     if let JSON  = response.result.value {
-                        completionHandler(JSON as! [String : Any])
+                        completionHandler(JSON as! Dictionary)
                     }
                     break
                 //do json stuff
@@ -101,18 +102,20 @@ class APIManager {
                 "command": command,
                 "receiver": receiver,
                 "sender":keychain["publicKey"]!,
-                "value":Int(amount)!
+                "value":amount
             ],
             "signature" : signature,
             "timestamp" : timestamp
         ]
+        print(parameter)
         
         Alamofire.request("\(host)/api/v1/asset/operation", method:.post, parameters: parameter, encoding: JSONEncoding.default)
             .responseJSON { response in
+                print(response)
                 switch response.result {
                 case .success(let JSON):
                     if let JSON  = response.result.value {
-                        completionHandler(JSON as! [String : Any])
+                        completionHandler(JSON as! Dictionary)
                     }
                     break
                 //do json stuff
