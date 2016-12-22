@@ -109,7 +109,7 @@ class APIManager {
         ]
         print(parameter)
         
-        Alamofire.request("\(host)/api/v1/asset/operation", method:.post, parameters: parameter, encoding: JSONEncoding.default)
+        Alamofire.request("\(host)/asset/operation", method:.post, parameters: parameter, encoding: JSONEncoding.default)
             .responseJSON { response in
                 print(response)
                 switch response.result {
