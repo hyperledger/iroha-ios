@@ -130,6 +130,16 @@ class ReceiveViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
+    
+    @IBAction func ResetUserData(_ sender: Any) {
+        let keychain = KeychainManager.instance.keychain
+        keychain["privateKey"] = ""
+        keychain["publicKey"] = ""
+        let storyboard: UIStoryboard = self.storyboard!
+        let nextVC = storyboard.instantiateViewController(withIdentifier: "Register")
+        self.present(nextVC, animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
