@@ -28,11 +28,12 @@ class SendViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var toField: HoshiTextField!
     @IBOutlet weak var amountField: HoshiTextField!
     @IBOutlet weak var sendButton: UIButton!
-    
+    let color = Bundle.main.infoDictionary?["AppColor"] as! String;
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UIColor.iroha
+        self.navigationController?.navigationBar.barTintColor = UIColor.hex(hex: color, alpha: 1)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.topViewController!.navigationItem.title = "Send"
         self.tabBarController?.tabBar.isHidden = false

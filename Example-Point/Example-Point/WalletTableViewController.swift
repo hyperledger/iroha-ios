@@ -25,20 +25,25 @@ class WalletTableViewController: UITableViewController {
     
     var myItems : [Dictionary<String, AnyObject>]?
     
-    var labeltxt = "0 IRH";
+    let unit = Bundle.main.infoDictionary?["Unit"] as! String;
+
+    var labeltxt = "";
     var label:UILabel?
+    let color = Bundle.main.infoDictionary?["AppColor"] as! String;
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UIColor.iroha
+        self.navigationController?.navigationBar.barTintColor = UIColor.hex(hex: color, alpha: 1)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.topViewController!.navigationItem.title = "Wallet"
-        self.tabBarController?.tabBar.tintColor = UIColor.iroha
+        self.tabBarController?.tabBar.tintColor = UIColor.hex(hex: color, alpha: 1)
 
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        labeltxt = "0 \(unit)"
         historyRefresh.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         tableView.addSubview(historyRefresh)
         loadTransaction()
@@ -61,7 +66,7 @@ class WalletTableViewController: UITableViewController {
                         var dicarr: [Dictionary<String, AnyObject>] = (JSON["assets"] as! NSArray) as! [Dictionary<String, AnyObject>]
                         print(dicarr[0]["value"])
                         DataManager.instance.property = dicarr[0]["value"] as! Int
-                        self.label?.text = "\(DataManager.instance.property) IRH"
+                        self.label?.text = "\(DataManager.instance.property) \(self.unit)"
                         
                         
                         APIManager.GetTransaction(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
@@ -107,7 +112,7 @@ class WalletTableViewController: UITableViewController {
                         var dicarr: [Dictionary<String, AnyObject>] = (JSON["assets"] as! NSArray) as! [Dictionary<String, AnyObject>]
                         print(dicarr[0]["value"])
                         DataManager.instance.property = dicarr[0]["value"] as! Int
-                        self.label?.text = "\(DataManager.instance.property) IRH"
+                        self.label?.text = "\(DataManager.instance.property) \(self.unit)"
                         
                 APIManager.GetTransaction(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
                     print(JSON)
@@ -159,10 +164,10 @@ class WalletTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let myView: UIView = UIView()
-        myView.backgroundColor = UIColor.iroha
+        myView.backgroundColor = UIColor.hex(hex: color, alpha: 1)
         label = UILabel(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height:120))
         label!.backgroundColor = UIColor.clear
-        label!.text = "\(DataManager.instance.property) IRH"
+        label!.text = "\(DataManager.instance.property) \(unit)"
 
         label!.textColor = UIColor.white
         label!.font = UIFont.systemFont(ofSize: 29)

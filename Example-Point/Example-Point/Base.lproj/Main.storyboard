@@ -134,7 +134,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eto-8A-W6g" id="pCZ-ae-nks">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -342,7 +342,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="F2E3E3AC-CB1E-4A56-8B30-4702F8DF5E61" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="96F85B43-354E-4613-AB61-07746312C388" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-lD-UDx">
                                         <rect key="frame" x="67" y="54" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="HhX-lD-UDx" secondAttribute="height" multiplier="1:1" id="jdc-Ty-fHY"/>
@@ -415,6 +415,7 @@
                     <connections>
                         <outlet property="accountLabel" destination="dpl-XX-eiI" id="flI-U5-hPA"/>
                         <outlet property="amountField" destination="fn8-xC-v4W" id="nMU-BO-Sgt"/>
+                        <outlet property="headerback" destination="xwM-ID-6aY" id="7UK-v8-cBv"/>
                         <outlet property="property" destination="np1-kc-Xvv" id="JvQ-hd-epf"/>
                         <outlet property="pubkey" destination="dpl-XX-eiI" id="DSo-SN-Bhm"/>
                         <outlet property="qrImg" destination="HhX-lD-UDx" id="v09-ts-ZSE"/>
@@ -479,7 +480,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="F2E3E3AC-CB1E-4A56-8B30-4702F8DF5E61" width="237" height="237">
+        <image name="96F85B43-354E-4613-AB61-07746312C388" width="237" height="237">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

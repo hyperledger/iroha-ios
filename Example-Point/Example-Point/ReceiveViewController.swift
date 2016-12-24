@@ -29,16 +29,22 @@ class ReceiveViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var qrImg: UIImageView!
     @IBOutlet weak var pubkey: UITextField!
     @IBOutlet weak var amountField: HoshiTextField!
+    @IBOutlet weak var headerback: UIView!
+    
     var qr:UIImage?
     let qrstr = "{\"account\":\"\(KeychainManager.instance.keychain["publicKey"]!)\","
+    let unit = Bundle.main.infoDictionary?["Unit"] as! String;
+    let color = Bundle.main.infoDictionary?["AppColor"] as! String;
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.barTintColor = UIColor.iroha
+//        self.navigationController?.navigationBar.barTintColor = UIColor.iroha
+        self.navigationController?.navigationBar.barTintColor = UIColor.hex(hex: color, alpha: 1)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.topViewController!.navigationItem.title = "Receive"
         self.tabBarController?.tabBar.tintColor = UIColor.irohaGreen
-        property.text = "\(DataManager.instance.property) IRH"
+        property.text = "\(DataManager.instance.property) \(unit)"
 
 
     }
@@ -47,6 +53,7 @@ class ReceiveViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         print(KeychainManager.instance.keychain["uuid"])
         // Do any additional setup after loading the view.
+        headerback.backgroundColor = UIColor.hex(hex: color, alpha: 1)
         amountField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(changeTextField), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
 
@@ -83,7 +90,7 @@ class ReceiveViewController: UIViewController, UITextFieldDelegate {
                         var dicarr: [Dictionary<String, AnyObject>] = (JSON["assets"] as! NSArray) as! [Dictionary<String, AnyObject>]
                         print(dicarr[0]["value"])
                         DataManager.instance.property = dicarr[0]["value"] as! Int
-                        self.property.text = "\(DataManager.instance.property) IRH"
+                        self.property.text = "\(DataManager.instance.property) \(self.unit)"
 
                         alertVC.dismiss(animated: false, completion: nil)
                     }else{
@@ -126,8 +133,8 @@ class ReceiveViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func OnCopy(_ sender: Any) {
         var style = ToastStyle()
-        style.shadowColor = UIColor.iroha
-        style.backgroundColor = UIColor.iroha
+        style.shadowColor = UIColor.hex(hex: color, alpha: 1)
+        style.backgroundColor = UIColor.hex(hex: color, alpha: 1)
         style.messageColor = UIColor.white
         (sender as! UIButton).makeToast("copy to clipboard!", duration:1.0, position: .center, style: style)
         let board = UIPasteboard.general.string = "\(KeychainManager.instance.keychain["publicKey"]!)"

@@ -28,6 +28,7 @@ class RegisterViewController: UIViewController {
 
     @IBOutlet weak var nameField: HoshiTextField!
     @IBOutlet weak var registerButton: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
