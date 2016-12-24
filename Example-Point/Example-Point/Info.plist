@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Host</key>
-	<string>https://point-demo.iroha.tech</string>
+	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
