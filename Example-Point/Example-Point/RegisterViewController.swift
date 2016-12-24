@@ -49,7 +49,7 @@ class RegisterViewController: UIViewController {
         let keypair = IrohaSwift.createKeyPair()
 
         if nameField.text != "" {
-            if(CheckReachability(host_name: "google.com")){
+            if CheckReachability(host_name: "google.com") {
                 let alertVC = PMAlertController(title: "登録中", description: "登録しています", image: UIImage(named: ""), style: .alert)
                 self.present(alertVC, animated: true, completion: {
                     APIManager.Register(name: self.nameField.text!, pub: keypair.publicKey, completionHandler: { JSON in
@@ -64,13 +64,7 @@ class RegisterViewController: UIViewController {
                             let nextVC = storyboard.instantiateViewController(withIdentifier: "Contents")
                             self.present(nextVC, animated: true, completion: nil)
                         }else{
-                            alertVC.dismiss(animated: false, completion: {
-                                let alertVC = PMAlertController(title: "エラー", description: "\(JSON["message"]!)", image: UIImage(named: ""), style: .alert)
-                                
-                                alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
-                                }))
-                                self.present(alertVC, animated: true, completion: nil)
-                            })
+                            alertVC.dismiss(animated: false, completion: self.errorCompletion(json: JSON))
                         }
                     })
                 })
@@ -88,6 +82,16 @@ class RegisterViewController: UIViewController {
             alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
             }))
             
+            self.present(alertVC, animated: true, completion: nil)
+        }
+    }
+    
+    func errorCompletion(json: [String:Any]) -> (() -> ()) {
+        return {
+            let alertVC = PMAlertController(title: "エラー", description: "\(json["message"]!)", image: UIImage(named: ""), style: .alert)
+            
+            alertVC.addAction(PMAlertAction(title: "OK", style: .cancel, action: { () -> Void in
+            }))
             self.present(alertVC, animated: true, completion: nil)
         }
     }
