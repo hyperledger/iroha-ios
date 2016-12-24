@@ -23,7 +23,7 @@ import IrohaSwift
 class APIManager {
     
     
-    static let host = ""
+    static let host = Bundle.main.infoDictionary?["Host"] as! String;
    
     static func GetUserInfo(userId:String, completionHandler: @escaping ([String : Any])->()){
         //        print(userId)

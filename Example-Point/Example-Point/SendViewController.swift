@@ -24,6 +24,7 @@ class SendViewController: UIViewController, UITextFieldDelegate {
     var to = ""
     var amount = ""
     
+    // 末尾はUIパーツ名をちゃんとつける
     @IBOutlet weak var toField: HoshiTextField!
     @IBOutlet weak var amountField: HoshiTextField!
     @IBOutlet weak var sendButton: UIButton!
