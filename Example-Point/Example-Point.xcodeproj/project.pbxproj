@@ -164,6 +164,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D025A791E0FC72000C0AD91 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6DF0FF5A1E028E8B00ABD179 /* TransactionCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		6DA315191DF979D300C5325E = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +197,7 @@
 		6DA315241DF979D300C5325E /* Example-Point */ = {
 			isa = PBXGroup;
 			children = (
+				6D025A791E0FC72000C0AD91 /* View */,
 				6DF0FF621E029CC700ABD179 /* Manager */,
 				6DF0FF611E029B1200ABD179 /* Example-Point.entitlements */,
 				6DB47D421DFDD58D00C908E9 /* Util */,
@@ -199,7 +208,6 @@
 				6DA3152C1DF979D300C5325E /* Assets.xcassets */,
 				6DA3152E1DF979D300C5325E /* LaunchScreen.storyboard */,
 				6DA315311DF979D300C5325E /* Info.plist */,
-				6DF0FF5A1E028E8B00ABD179 /* TransactionCell.swift */,
 			);
 			path = "Example-Point";
 			sourceTree = "<group>";
