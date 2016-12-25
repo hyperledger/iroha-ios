@@ -26,7 +26,6 @@ class APIManager {
     static let host = Bundle.main.infoDictionary?["Host"] as! String;
    
     static func GetUserInfo(userId:String, completionHandler: @escaping ([String : Any])->()){
-        //        print(userId)
         Alamofire.request("\(host)/account", method: .get,parameters: ["uuid":userId])
             .responseJSON { response in
                 switch response.result {
@@ -52,7 +51,6 @@ class APIManager {
     static func GetTransaction(userId:String, completionHandler: @escaping ([String:Any])->()){
         Alamofire.request("\(host)/history/transaction", method: .get,parameters: ["uuid":userId])
             .responseJSON { response in
-                print(response.response?.allHeaderFields)
                 switch response.result {
                 case .success(let JSON):
                     if let JSON  = response.result.value {
@@ -78,10 +76,8 @@ class APIManager {
             "alias": name,
             "timestamp": Int(Date().timeIntervalSince1970)
         ]
-        print(parameter)
         Alamofire.request("\(host)/account/register", method:.post, parameters: parameter, encoding: JSONEncoding.default)
             .responseJSON { response in
-                print(response)
                 switch response.result {
                 case .success(let JSON):
                     if let JSON  = response.result.value {
@@ -117,11 +113,9 @@ class APIManager {
             "signature" : signature,
             "timestamp" : timestamp
         ]
-        print(parameter)
         
         Alamofire.request("\(host)/asset/operation", method:.post, parameters: parameter, encoding: JSONEncoding.default)
             .responseJSON { response in
-                print(response)
                 switch response.result {
                 case .success(let JSON):
                     if let JSON  = response.result.value {

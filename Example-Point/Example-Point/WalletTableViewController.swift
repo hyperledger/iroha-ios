@@ -61,19 +61,15 @@ class WalletTableViewController: UITableViewController {
             let alertVC = PMAlertController(title: "通信中", description: "取引履歴を取得しています", image: UIImage(named: ""), style: .alert)
             self.present(alertVC, animated: true, completion: {
                 APIManager.GetUserInfo(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
-                    print(JSON)
                     if (JSON["status"] as! Int) == 200 {
                         var dicarr: [Dictionary<String, AnyObject>] = (JSON["assets"] as! NSArray) as! [Dictionary<String, AnyObject>]
-                        print(dicarr[0]["value"])
                         DataManager.instance.property = dicarr[0]["value"] as! Int
                         self.label?.text = "\(DataManager.instance.property) \(self.unit)"
                         
                         
                         APIManager.GetTransaction(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
-                            print(JSON)
                             if (JSON["status"] as! Int) == 200 {
                                 var dicarr: [Dictionary<String, AnyObject>] = (JSON["history"] as! NSArray) as! [Dictionary<String, AnyObject>]
-                                print(dicarr)
                                 self.myItems = dicarr
                                 self.tableView.reloadData()
                                 alertVC.dismiss(animated: false, completion:nil)
@@ -107,18 +103,14 @@ class WalletTableViewController: UITableViewController {
             let alertVC = PMAlertController(title: "通信中", description: "取引履歴を取得しています", image: UIImage(named: ""), style: .alert)
             self.present(alertVC, animated: true, completion: {
                 APIManager.GetUserInfo(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
-                    print(JSON)
                     if (JSON["status"] as! Int) == 200 {
                         var dicarr: [Dictionary<String, AnyObject>] = (JSON["assets"] as! NSArray) as! [Dictionary<String, AnyObject>]
-                        print(dicarr[0]["value"])
                         DataManager.instance.property = dicarr[0]["value"] as! Int
                         self.label?.text = "\(DataManager.instance.property) \(self.unit)"
                         
                 APIManager.GetTransaction(userId: KeychainManager.instance.keychain["uuid"]!, completionHandler: { JSON in
-                    print(JSON)
                     if (JSON["status"] as! Int) == 200 {
                         var dicarr: [Dictionary<String, AnyObject>] = (JSON["history"] as! NSArray) as! [Dictionary<String, AnyObject>]
-                        print(dicarr)
                         self.myItems = dicarr
                         alertVC.dismiss(animated: false, completion:nil)
                         self.tableView.reloadData()
@@ -197,13 +189,19 @@ class WalletTableViewController: UITableViewController {
 //        print(param["sender"] as! String)
 //        print(param["receiver"] as! String)
 //        print(KeychainManager.instance.keychain["publicKey"]!)
-        if((param["sender"] as! String) == KeychainManager.instance.keychain["publicKey"]!){
-            cell.fillWith(isSender: true, oppo: param["receiver"] as! String, valueText: "\(param["value"]!)",time: item?["timestamp"]! as! Int)
-            
-        }else{
-            cell.fillWith(isSender: false, oppo: param["sender"] as! String, valueText: "\(param["value"]!)",time: item?["timestamp"]! as! Int)
-            
+        if param["command"] as! String == "Transfer"{
+            if((param["sender"] as! String) == KeychainManager.instance.keychain["publicKey"]!){
+                cell.fillWith(isSender: true, oppo: param["receiver"] as! String, valueText: "\(param["value"]!)",time: param["timestamp"]! as! Int)
+                
+            }else{
+                cell.fillWith(isSender: false, oppo: param["sender"] as! String, valueText: "\(param["value"]!)",time: param["timestamp"]! as! Int)
+                
+            }
         }
+        if param["command"] as! String == "Add" && param["object"] as! String == "Account" {
+            cell.fillWithRegister(time: param["timestamp"]! as! Int)
+        }
+
         return cell
     }
     

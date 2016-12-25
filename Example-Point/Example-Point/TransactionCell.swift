@@ -83,7 +83,6 @@ class TransactionCell: UITableViewCell {
     }
     
     func fillWith(isSender:Bool, oppo:String, valueText: String, time: Int) {
-//        self.transLabel?.textColor = textColor
         if(isSender){
             self.typeImg?.image = UIImage(named: "icon_send-2")
             oppLabel!.text = "to \(oppo)"
@@ -93,6 +92,13 @@ class TransactionCell: UITableViewCell {
         }
         dateLabel?.text = calcTimeDiff(time: time)
         self.label?.text = valueText
+    }
+    
+    func fillWithRegister(time: Int) {
+        dateLabel?.text = calcTimeDiff(time: time)
+        oppLabel!.text = "Register"
+        self.typeImg?.image = UIImage(named: "icon_receive-2")
+        self.label?.text = "100"
     }
     
     func calcTimeDiff(time:Int) -> String{
