@@ -24,6 +24,6 @@ let package = Package(
     targets: [
         Target(
             name: "IrohaSwift",
-            dependencies: [])
+            dependencies: ["IrohaSwift"])
             ]
 )
