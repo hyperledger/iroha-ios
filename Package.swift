@@ -20,5 +20,10 @@ limitations under the License.
 import PackageDescription
 
 let package = Package(
-    name: "iroha-ios"
+    name: "iroha-ios",
+    targets: [
+        Target(
+            name: "IrohaSwift",
+            dependencies: [])
+            ]
 )
