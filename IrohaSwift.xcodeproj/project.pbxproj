@@ -7,30 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D712AA71EAF2C760072B13F /* add_scalar.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712A931EAF2C760072B13F /* add_scalar.c */; };
-		6D712AA81EAF2C760072B13F /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712A941EAF2C760072B13F /* base64.c */; };
-		6D712AA91EAF2C760072B13F /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712A951EAF2C760072B13F /* base64.h */; };
-		6D712AAA1EAF2C760072B13F /* ed25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712A961EAF2C760072B13F /* ed25519.h */; };
-		6D712AAB1EAF2C760072B13F /* fe.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712A971EAF2C760072B13F /* fe.c */; };
-		6D712AAC1EAF2C760072B13F /* fe.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712A981EAF2C760072B13F /* fe.h */; };
-		6D712AAD1EAF2C760072B13F /* fixedint.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712A991EAF2C760072B13F /* fixedint.h */; };
-		6D712AAE1EAF2C760072B13F /* ge.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712A9A1EAF2C760072B13F /* ge.c */; };
-		6D712AAF1EAF2C760072B13F /* ge.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712A9B1EAF2C760072B13F /* ge.h */; };
-		6D712AB01EAF2C760072B13F /* key_exchange.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712A9C1EAF2C760072B13F /* key_exchange.c */; };
-		6D712AB11EAF2C760072B13F /* keypair.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712A9D1EAF2C760072B13F /* keypair.c */; };
-		6D712AB21EAF2C760072B13F /* precomp_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712A9F1EAF2C760072B13F /* precomp_data.h */; };
-		6D712AB31EAF2C760072B13F /* sc.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AA01EAF2C760072B13F /* sc.c */; };
-		6D712AB41EAF2C760072B13F /* sc.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712AA11EAF2C760072B13F /* sc.h */; };
-		6D712AB51EAF2C760072B13F /* seed.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AA21EAF2C760072B13F /* seed.c */; };
-		6D712AB61EAF2C760072B13F /* sha3.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AA31EAF2C760072B13F /* sha3.c */; };
-		6D712AB71EAF2C760072B13F /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712AA41EAF2C760072B13F /* sha3.h */; };
-		6D712AB81EAF2C760072B13F /* sign.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AA51EAF2C760072B13F /* sign.c */; };
-		6D712AB91EAF2C760072B13F /* verify.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AA61EAF2C760072B13F /* verify.c */; };
-		7413F4221D8FD6D500F4929A /* Ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7413F4211D8FD6D500F4929A /* Ed25519.swift */; };
-		74298A001D9AC5330074F91D /* Sha3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742989FF1D9AC5330074F91D /* Sha3.swift */; };
+		6D712AD81EAF388B0072B13F /* add_scalar.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AC41EAF388B0072B13F /* add_scalar.c */; };
+		6D712AD91EAF388B0072B13F /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AC51EAF388B0072B13F /* base64.c */; };
+		6D712ADA1EAF388B0072B13F /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712AC61EAF388B0072B13F /* base64.h */; };
+		6D712ADB1EAF388B0072B13F /* ed25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712AC71EAF388B0072B13F /* ed25519.h */; };
+		6D712ADC1EAF388B0072B13F /* fe.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AC81EAF388B0072B13F /* fe.c */; };
+		6D712ADD1EAF388B0072B13F /* fe.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712AC91EAF388B0072B13F /* fe.h */; };
+		6D712ADE1EAF388B0072B13F /* fixedint.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712ACA1EAF388B0072B13F /* fixedint.h */; };
+		6D712ADF1EAF388B0072B13F /* ge.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712ACB1EAF388B0072B13F /* ge.c */; };
+		6D712AE01EAF388B0072B13F /* ge.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712ACC1EAF388B0072B13F /* ge.h */; };
+		6D712AE11EAF388B0072B13F /* key_exchange.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712ACD1EAF388B0072B13F /* key_exchange.c */; };
+		6D712AE21EAF388B0072B13F /* keypair.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712ACE1EAF388B0072B13F /* keypair.c */; };
+		6D712AE31EAF388B0072B13F /* precomp_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712AD01EAF388B0072B13F /* precomp_data.h */; };
+		6D712AE41EAF388B0072B13F /* sc.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AD11EAF388B0072B13F /* sc.c */; };
+		6D712AE51EAF388B0072B13F /* sc.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712AD21EAF388B0072B13F /* sc.h */; };
+		6D712AE61EAF388B0072B13F /* seed.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AD31EAF388B0072B13F /* seed.c */; };
+		6D712AE71EAF388B0072B13F /* sha3.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AD41EAF388B0072B13F /* sha3.c */; };
+		6D712AE81EAF388B0072B13F /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712AD51EAF388B0072B13F /* sha3.h */; };
+		6D712AE91EAF388B0072B13F /* sign.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AD61EAF388B0072B13F /* sign.c */; };
+		6D712AEA1EAF388B0072B13F /* verify.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AD71EAF388B0072B13F /* verify.c */; };
+		6D712AF01EAF38980072B13F /* Ed25519.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AEB1EAF38980072B13F /* Ed25519.swift */; };
+		6D712AF11EAF38980072B13F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D712AEC1EAF38980072B13F /* Info.plist */; };
+		6D712AF21EAF38980072B13F /* IrohaSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D712AED1EAF38980072B13F /* IrohaSwift.h */; };
+		6D712AF31EAF38980072B13F /* IrohaSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AEE1EAF38980072B13F /* IrohaSwift.swift */; };
+		6D712AF41EAF38980072B13F /* Sha3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D712AEF1EAF38980072B13F /* Sha3.swift */; };
 		7471C86F1D8D942300C151E8 /* IrohaSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7471C8641D8D942300C151E8 /* IrohaSwift.framework */; };
 		7471C8741D8D942300C151E8 /* IrohaSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7471C8731D8D942300C151E8 /* IrohaSwiftTests.swift */; };
-		7471C8A71D8D9AC200C151E8 /* IrohaSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */; };
 		7494E09D1D8F961300F311DA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7494E09C1D8F961300F311DA /* Security.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,35 +47,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6D712A931EAF2C760072B13F /* add_scalar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = add_scalar.c; path = include/add_scalar.c; sourceTree = "<group>"; };
-		6D712A941EAF2C760072B13F /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = base64.c; path = include/base64.c; sourceTree = "<group>"; };
-		6D712A951EAF2C760072B13F /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = include/base64.h; sourceTree = "<group>"; };
-		6D712A961EAF2C760072B13F /* ed25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ed25519.h; path = include/ed25519.h; sourceTree = "<group>"; };
-		6D712A971EAF2C760072B13F /* fe.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fe.c; path = include/fe.c; sourceTree = "<group>"; };
-		6D712A981EAF2C760072B13F /* fe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fe.h; path = include/fe.h; sourceTree = "<group>"; };
-		6D712A991EAF2C760072B13F /* fixedint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fixedint.h; path = include/fixedint.h; sourceTree = "<group>"; };
-		6D712A9A1EAF2C760072B13F /* ge.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ge.c; path = include/ge.c; sourceTree = "<group>"; };
-		6D712A9B1EAF2C760072B13F /* ge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ge.h; path = include/ge.h; sourceTree = "<group>"; };
-		6D712A9C1EAF2C760072B13F /* key_exchange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = key_exchange.c; path = include/key_exchange.c; sourceTree = "<group>"; };
-		6D712A9D1EAF2C760072B13F /* keypair.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = keypair.c; path = include/keypair.c; sourceTree = "<group>"; };
-		6D712A9E1EAF2C760072B13F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = include/module.modulemap; sourceTree = "<group>"; };
-		6D712A9F1EAF2C760072B13F /* precomp_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = precomp_data.h; path = include/precomp_data.h; sourceTree = "<group>"; };
-		6D712AA01EAF2C760072B13F /* sc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sc.c; path = include/sc.c; sourceTree = "<group>"; };
-		6D712AA11EAF2C760072B13F /* sc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sc.h; path = include/sc.h; sourceTree = "<group>"; };
-		6D712AA21EAF2C760072B13F /* seed.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = seed.c; path = include/seed.c; sourceTree = "<group>"; };
-		6D712AA31EAF2C760072B13F /* sha3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sha3.c; path = include/sha3.c; sourceTree = "<group>"; };
-		6D712AA41EAF2C760072B13F /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sha3.h; path = include/sha3.h; sourceTree = "<group>"; };
-		6D712AA51EAF2C760072B13F /* sign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sign.c; path = include/sign.c; sourceTree = "<group>"; };
-		6D712AA61EAF2C760072B13F /* verify.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = verify.c; path = include/verify.c; sourceTree = "<group>"; };
-		7413F4211D8FD6D500F4929A /* Ed25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ed25519.swift; sourceTree = "<group>"; };
-		742989FF1D9AC5330074F91D /* Sha3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sha3.swift; sourceTree = "<group>"; };
+		6D712AC41EAF388B0072B13F /* add_scalar.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = add_scalar.c; path = Sources/IrohaSwift/include/add_scalar.c; sourceTree = SOURCE_ROOT; };
+		6D712AC51EAF388B0072B13F /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = base64.c; path = Sources/IrohaSwift/include/base64.c; sourceTree = SOURCE_ROOT; };
+		6D712AC61EAF388B0072B13F /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = Sources/IrohaSwift/include/base64.h; sourceTree = SOURCE_ROOT; };
+		6D712AC71EAF388B0072B13F /* ed25519.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ed25519.h; path = Sources/IrohaSwift/include/ed25519.h; sourceTree = SOURCE_ROOT; };
+		6D712AC81EAF388B0072B13F /* fe.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fe.c; path = Sources/IrohaSwift/include/fe.c; sourceTree = SOURCE_ROOT; };
+		6D712AC91EAF388B0072B13F /* fe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fe.h; path = Sources/IrohaSwift/include/fe.h; sourceTree = SOURCE_ROOT; };
+		6D712ACA1EAF388B0072B13F /* fixedint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fixedint.h; path = Sources/IrohaSwift/include/fixedint.h; sourceTree = SOURCE_ROOT; };
+		6D712ACB1EAF388B0072B13F /* ge.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ge.c; path = Sources/IrohaSwift/include/ge.c; sourceTree = SOURCE_ROOT; };
+		6D712ACC1EAF388B0072B13F /* ge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ge.h; path = Sources/IrohaSwift/include/ge.h; sourceTree = SOURCE_ROOT; };
+		6D712ACD1EAF388B0072B13F /* key_exchange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = key_exchange.c; path = Sources/IrohaSwift/include/key_exchange.c; sourceTree = SOURCE_ROOT; };
+		6D712ACE1EAF388B0072B13F /* keypair.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = keypair.c; path = Sources/IrohaSwift/include/keypair.c; sourceTree = SOURCE_ROOT; };
+		6D712ACF1EAF388B0072B13F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = Sources/IrohaSwift/include/module.modulemap; sourceTree = SOURCE_ROOT; };
+		6D712AD01EAF388B0072B13F /* precomp_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = precomp_data.h; path = Sources/IrohaSwift/include/precomp_data.h; sourceTree = SOURCE_ROOT; };
+		6D712AD11EAF388B0072B13F /* sc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sc.c; path = Sources/IrohaSwift/include/sc.c; sourceTree = SOURCE_ROOT; };
+		6D712AD21EAF388B0072B13F /* sc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sc.h; path = Sources/IrohaSwift/include/sc.h; sourceTree = SOURCE_ROOT; };
+		6D712AD31EAF388B0072B13F /* seed.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = seed.c; path = Sources/IrohaSwift/include/seed.c; sourceTree = SOURCE_ROOT; };
+		6D712AD41EAF388B0072B13F /* sha3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sha3.c; path = Sources/IrohaSwift/include/sha3.c; sourceTree = SOURCE_ROOT; };
+		6D712AD51EAF388B0072B13F /* sha3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sha3.h; path = Sources/IrohaSwift/include/sha3.h; sourceTree = SOURCE_ROOT; };
+		6D712AD61EAF388B0072B13F /* sign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sign.c; path = Sources/IrohaSwift/include/sign.c; sourceTree = SOURCE_ROOT; };
+		6D712AD71EAF388B0072B13F /* verify.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = verify.c; path = Sources/IrohaSwift/include/verify.c; sourceTree = SOURCE_ROOT; };
+		6D712AEB1EAF38980072B13F /* Ed25519.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ed25519.swift; path = Sources/IrohaSwift/Ed25519.swift; sourceTree = SOURCE_ROOT; };
+		6D712AEC1EAF38980072B13F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Sources/IrohaSwift/Info.plist; sourceTree = SOURCE_ROOT; };
+		6D712AED1EAF38980072B13F /* IrohaSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IrohaSwift.h; path = Sources/IrohaSwift/IrohaSwift.h; sourceTree = SOURCE_ROOT; };
+		6D712AEE1EAF38980072B13F /* IrohaSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IrohaSwift.swift; path = Sources/IrohaSwift/IrohaSwift.swift; sourceTree = SOURCE_ROOT; };
+		6D712AEF1EAF38980072B13F /* Sha3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Sha3.swift; path = Sources/IrohaSwift/Sha3.swift; sourceTree = SOURCE_ROOT; };
 		7471C8641D8D942300C151E8 /* IrohaSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IrohaSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7471C8671D8D942300C151E8 /* IrohaSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IrohaSwift.h; sourceTree = "<group>"; };
-		7471C8691D8D942300C151E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7471C86E1D8D942300C151E8 /* IrohaSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IrohaSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7471C8731D8D942300C151E8 /* IrohaSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaSwiftTests.swift; sourceTree = "<group>"; };
 		7471C8751D8D942300C151E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IrohaSwift.swift; sourceTree = "<group>"; };
 		7494E09C1D8F961300F311DA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -100,26 +102,26 @@
 		6D712A921EAF2C690072B13F /* include */ = {
 			isa = PBXGroup;
 			children = (
-				6D712A931EAF2C760072B13F /* add_scalar.c */,
-				6D712A941EAF2C760072B13F /* base64.c */,
-				6D712A951EAF2C760072B13F /* base64.h */,
-				6D712A961EAF2C760072B13F /* ed25519.h */,
-				6D712A971EAF2C760072B13F /* fe.c */,
-				6D712A981EAF2C760072B13F /* fe.h */,
-				6D712A991EAF2C760072B13F /* fixedint.h */,
-				6D712A9A1EAF2C760072B13F /* ge.c */,
-				6D712A9B1EAF2C760072B13F /* ge.h */,
-				6D712A9C1EAF2C760072B13F /* key_exchange.c */,
-				6D712A9D1EAF2C760072B13F /* keypair.c */,
-				6D712A9E1EAF2C760072B13F /* module.modulemap */,
-				6D712A9F1EAF2C760072B13F /* precomp_data.h */,
-				6D712AA01EAF2C760072B13F /* sc.c */,
-				6D712AA11EAF2C760072B13F /* sc.h */,
-				6D712AA21EAF2C760072B13F /* seed.c */,
-				6D712AA31EAF2C760072B13F /* sha3.c */,
-				6D712AA41EAF2C760072B13F /* sha3.h */,
-				6D712AA51EAF2C760072B13F /* sign.c */,
-				6D712AA61EAF2C760072B13F /* verify.c */,
+				6D712AC41EAF388B0072B13F /* add_scalar.c */,
+				6D712AC51EAF388B0072B13F /* base64.c */,
+				6D712AC61EAF388B0072B13F /* base64.h */,
+				6D712AC71EAF388B0072B13F /* ed25519.h */,
+				6D712AC81EAF388B0072B13F /* fe.c */,
+				6D712AC91EAF388B0072B13F /* fe.h */,
+				6D712ACA1EAF388B0072B13F /* fixedint.h */,
+				6D712ACB1EAF388B0072B13F /* ge.c */,
+				6D712ACC1EAF388B0072B13F /* ge.h */,
+				6D712ACD1EAF388B0072B13F /* key_exchange.c */,
+				6D712ACE1EAF388B0072B13F /* keypair.c */,
+				6D712ACF1EAF388B0072B13F /* module.modulemap */,
+				6D712AD01EAF388B0072B13F /* precomp_data.h */,
+				6D712AD11EAF388B0072B13F /* sc.c */,
+				6D712AD21EAF388B0072B13F /* sc.h */,
+				6D712AD31EAF388B0072B13F /* seed.c */,
+				6D712AD41EAF388B0072B13F /* sha3.c */,
+				6D712AD51EAF388B0072B13F /* sha3.h */,
+				6D712AD61EAF388B0072B13F /* sign.c */,
+				6D712AD71EAF388B0072B13F /* verify.c */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -146,12 +148,12 @@
 		7471C8661D8D942300C151E8 /* IrohaSwift */ = {
 			isa = PBXGroup;
 			children = (
+				6D712AEB1EAF38980072B13F /* Ed25519.swift */,
+				6D712AEC1EAF38980072B13F /* Info.plist */,
+				6D712AED1EAF38980072B13F /* IrohaSwift.h */,
+				6D712AEE1EAF38980072B13F /* IrohaSwift.swift */,
+				6D712AEF1EAF38980072B13F /* Sha3.swift */,
 				6D712A921EAF2C690072B13F /* include */,
-				7471C8671D8D942300C151E8 /* IrohaSwift.h */,
-				7471C8691D8D942300C151E8 /* Info.plist */,
-				7471C8A61D8D9AC200C151E8 /* IrohaSwift.swift */,
-				7413F4211D8FD6D500F4929A /* Ed25519.swift */,
-				742989FF1D9AC5330074F91D /* Sha3.swift */,
 			);
 			path = IrohaSwift;
 			sourceTree = "<group>";
@@ -180,14 +182,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D712AAC1EAF2C760072B13F /* fe.h in Headers */,
-				6D712AB41EAF2C760072B13F /* sc.h in Headers */,
-				6D712AAA1EAF2C760072B13F /* ed25519.h in Headers */,
-				6D712AB71EAF2C760072B13F /* sha3.h in Headers */,
-				6D712AA91EAF2C760072B13F /* base64.h in Headers */,
-				6D712AB21EAF2C760072B13F /* precomp_data.h in Headers */,
-				6D712AAF1EAF2C760072B13F /* ge.h in Headers */,
-				6D712AAD1EAF2C760072B13F /* fixedint.h in Headers */,
+				6D712ADD1EAF388B0072B13F /* fe.h in Headers */,
+				6D712AE51EAF388B0072B13F /* sc.h in Headers */,
+				6D712AF21EAF38980072B13F /* IrohaSwift.h in Headers */,
+				6D712ADB1EAF388B0072B13F /* ed25519.h in Headers */,
+				6D712AE81EAF388B0072B13F /* sha3.h in Headers */,
+				6D712ADA1EAF388B0072B13F /* base64.h in Headers */,
+				6D712AE31EAF388B0072B13F /* precomp_data.h in Headers */,
+				6D712AE01EAF388B0072B13F /* ge.h in Headers */,
+				6D712ADE1EAF388B0072B13F /* fixedint.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D712AF11EAF38980072B13F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,20 +294,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D712AB81EAF2C760072B13F /* sign.c in Sources */,
-				6D712AA81EAF2C760072B13F /* base64.c in Sources */,
-				6D712AB91EAF2C760072B13F /* verify.c in Sources */,
-				74298A001D9AC5330074F91D /* Sha3.swift in Sources */,
-				6D712AB01EAF2C760072B13F /* key_exchange.c in Sources */,
-				6D712AAB1EAF2C760072B13F /* fe.c in Sources */,
-				6D712AB11EAF2C760072B13F /* keypair.c in Sources */,
-				7471C8A71D8D9AC200C151E8 /* IrohaSwift.swift in Sources */,
-				6D712AAE1EAF2C760072B13F /* ge.c in Sources */,
-				7413F4221D8FD6D500F4929A /* Ed25519.swift in Sources */,
-				6D712AA71EAF2C760072B13F /* add_scalar.c in Sources */,
-				6D712AB31EAF2C760072B13F /* sc.c in Sources */,
-				6D712AB61EAF2C760072B13F /* sha3.c in Sources */,
-				6D712AB51EAF2C760072B13F /* seed.c in Sources */,
+				6D712AF41EAF38980072B13F /* Sha3.swift in Sources */,
+				6D712AE91EAF388B0072B13F /* sign.c in Sources */,
+				6D712AD91EAF388B0072B13F /* base64.c in Sources */,
+				6D712AEA1EAF388B0072B13F /* verify.c in Sources */,
+				6D712AE11EAF388B0072B13F /* key_exchange.c in Sources */,
+				6D712ADC1EAF388B0072B13F /* fe.c in Sources */,
+				6D712AF31EAF38980072B13F /* IrohaSwift.swift in Sources */,
+				6D712AE21EAF388B0072B13F /* keypair.c in Sources */,
+				6D712ADF1EAF388B0072B13F /* ge.c in Sources */,
+				6D712AD81EAF388B0072B13F /* add_scalar.c in Sources */,
+				6D712AE41EAF388B0072B13F /* sc.c in Sources */,
+				6D712AE71EAF388B0072B13F /* sha3.c in Sources */,
+				6D712AE61EAF388B0072B13F /* seed.c in Sources */,
+				6D712AF01EAF38980072B13F /* Ed25519.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +488,7 @@
 		7471C87C1D8D942300C151E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = IrohaSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jp.soramitsu.IrohaSwiftTests;
@@ -495,6 +500,7 @@
 		7471C87D1D8D942300C151E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = IrohaSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.jp.soramitsu.IrohaSwiftTests;
