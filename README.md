@@ -1,105 +1,249 @@
-# いろはSwift (IrohaSwift)
+# Hyperledger Iroha iOS library
 
-![CocoaPods](https://img.shields.io/cocoapods/v/IrohaSwift.svg)
-![Platform](https://img.shields.io/cocoapods/p/IrohaSwift.svg?style=flat)
 
-## What is いろは(iroha)?  
-いろは(iroha) is [this](https://github.com/hyperledger/iroha).
+This library was implemented in order to provide key generation and signing logic for queries and transactions passed to Hyperledger Iroha
 
-## Description  
-いろはSwift (IrohaSwift) is client swift library for using いろは(iroha).
+For establishing connection with [Hyperledger Iroha](https://github.com/hyperledger/iroha) by this library you need to import the following modules into your swift project:
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [License](#license)
+* [SwiftGRPC ](https://github.com/grpc/grpc-swift)
+* [SwiftProtobuf](https://github.com/apple/swift-protobuf)
+* [SwiftyIroha](https://github.com/soramitsu/iroha-ios)
 
-## Requirement  
-iOS 8.0+  
-Xcode 8.0+  
-Swift 3.0+  
 
-## Installation  
-### CocoaPods(iOS 8+)
+## How to start with example project
 
-Podfile:
-```ruby
-platform :ios, '8.0'
-use_frameworks!
+In this repository you can find an example project called `SwiftyIrohaExample.xcodeproj`. 
+This project can help you to see how to establish connection with [Hyperledger Iroha](https://github.com/hyperledger/iroha)  by using this library 
 
-target 'App Name' do
-    pod 'IrohaSwift'
-end
+### Preparing example project
+
+Before starting you need to install the following software on you mac:
+* [XCode](https://developer.apple.com/xcode/)
+* [Carthage](https://github.com/Carthage/Carthage)
+* [Git](https://git-scm.com/)
+
+#### Instruction:
+
+0. Go into folder you want to download example project: 
+```
+    $cd path/to/your/folder/for/example/iroha-ios/project/
+```
+1. Clone iroha-ios repository: 
+```
+    $git clone https://github.com/soramitsu/iroha-ios.git
+```
+2. Go inside project folder:
+```
+    $cd SwiftyIroha
+```
+3. Install all usefull dependencies:
+```
+    $carthage update --platform iOS
+```
+4. Go inside example project: 
+```
+    $cd SwiftyIrohaExample
+```
+5. Go inside `SwiftGRPC.xcodeproj` subproject folder: 
+```
+    $cd grpc-swift
+```
+6. Build GRPC framework for using it in you ios application:
+```
+    $make
+```
+7. Open `SwiftyIroha.xcodeproj` project in Xcode
+8. Go to `SwiftyIrohaExample.xcodeproj` subproject
+9. Go to `SwiftGRPC.xcodeproj` subproject
+10. Go to targets and remove `czlib` targets from there
+
+### Preparing Hyperledger Iroha instance launched in Docker
+
+Before starting you need to install the following software on you mac:
+* [Docker](https://www.docker.com)
+
+#### Instruction:
+
+0. Go to folder you want to download [Hyperledger Iroha](https://github.com/hyperledger/iroha)  to: 
+```
+    $cd path/to/your/folder/for/example/iroha/project/
+```
+1. Download [Hyperledger Iroha](https://github.com/hyperledger/iroha)  on you mac: 
+```
+    git clone -b develop --depth=1 https://github.com/hyperledger/iroha
+```
+2. Run script: 
+```
+    ./run-iroha-dev.sh
 ```
 
-Then, run the following command:
+## How to import this library into your project
 
-```bash
-$ pod install
-```
+### Install via Carthage
 
-### Carthage
-Write in your Cartfile:
-```
-github "hyperledger/iroha-ios.git"
-```
-Run `carthage update`
 
-### Manually
-*  Clone this repository.
-*  [Download 1.0.0 α5 version release](https://github.com/hyperledger/iroha-ios/releases/tag/1.0.0a5).
+### Install via CocoaPods
 
-## Usage
-### APIs
-#### IrohaSwift.createKeyPair
+
+## How to use this library
+
+### Keypair
+
+#### Generating new keypair
+
 ```swift
-import IrohaSwift
+let modelCrypto = IrohaModelCrypto()
 
-let keypair = IrohaSwift.createKeyPair()
-//===> keypair : (publicKey:String, privateKey:String)
-```
-#### IrohaSwift.sign
-```swift
-let signature = IrohaSwift.sign(publicKey: publicKey, privateKey: privateKey, message: "MESSAGE")
-//===> signature : String
-```
-#### IrohaSwift.verify
-```swift
-let verify = IrohaSwift.verify(publicKey: keyPair.publicKey, signature: signature, message: "MESSAGE")
-//===> verify : Bool
-```
-#### IrohaSwift.sha3_256
-```swift
-let hash = IrohaSwift.sha3_256(message: "")
-//===> hash : "a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a"
-```
-#### IrohaSwift.sha3_384
-```swift
-let hash = IrohaSwift.sha3_384(message: "")
-//===> hash : "0c63a75b845e4f7d01107d852e4c2485c51a50aaaa94fc61995e71bbee983a2ac3713831264adb47fb6bd1e058d5f004"
-```
-#### IrohaSwift.sha3_512
-```swift
-let hash = IrohaSwift.sha3_512(message: "")
-//===> hash : "a69f73cca23a9ac5c8b567dc185a756e97c982164fe25859e0d1dcc1475c80a615b2123af1f5f94c11e3e9402c3ac558f500199d95b6d3e301758586281dcd26"
+// Generating new keypair object
+let newKeypair = modelCrypto.generateKeypair()
 ```
 
-## Author  
-[luca3104](https://github.com/luca3104)
-[http://soramitsu.co.jp](http://soramitsu.co.jp)
+#### Generating new keypair from existing one
+
+```swift
+// Setting keypair
+let publicKey = IrohaPublicKey(value: "407e57f50ca48969b08ba948171bb2435e035d82cec417e18e4a38f5fb113f83")
+let privateKey = IrohaPrivateKey(value: "1d7e0a32ee0affeb4d22acd73c2c6fb6bd58e266c8c2ce4fa0ffe3dd6a253ffb")
+
+// Initializing keypair object
+let existingKeypair = IrohaKeypair(publicKey: publicKey,
+                                   privateKey: privateKey)
+
+let modelCrypto = IrohaModelCrypto()
+
+// Generating keypair object from excisting keypair object
+let newKeypair = modelCrypto.generateNewKeypair(from: existingKeypair)
+```
+
+### Transactions
+
+#### Creating transaction object
+```swift
+let irohaTransactionBuilder = IrohaTransactionBuilder()
+
+// Creating transaction object for Iroha
+let unsignedTransaction =
+    try irohaTransactionBuilder
+        .creatorAccountId("admin@test")
+        .createdTime(Date())
+        .transactionCounter(1)
+        .createDomain(withDomainId: "ru", withDefaultRole: "user")
+        .createAssets(withAssetName: "dollar", domainId: "ru", percision: 0.1)
+        .build()
+```
+
+#### Signing transaction object
+```swift
+// Creating helper class for signing unsigned transaction object
+let irohaTransactionPreparation = IrohaTransactionPreparation()
+
+// Signing transaction and getting object which is ready for converting to GRPC object
+let irohaSignedTransactionReadyForConvertingToGRPC =
+    irohaTransactionPreparation.sign(unsignedTransaction,
+                                     with: keypair)
+```
+
+#### Creating GRPC transaction object
+```swift
+// Creating GRPC transaction object from signed transaction
+var irohaGRPCTransaction = Iroha_Protocol_Transaction()
+
+do {
+    try irohaGRPCTransaction.merge(serializedData: irohaSignedTransactionReadyForConvertingToGRPC)
+
+    // Checking that transaction is excactly transaction that was created
+    print("Transaction to Iroha: \n")
+    print("\(try irohaGRPCTransaction.payload.jsonString()) \n")
+} catch {
+    let nsError = error as NSError
+    print("\(nsError.localizedDescription) \n")
+}
+```
+
+#### Sending transaction object to Hyperledger Iroha
+
+```swift
+let serviceForSendingTransaction = Iroha_Protocol_CommandServiceService(address: "127.0.0.1:50051")
+
+do {
+    try serviceForSendingTransaction.torii(irohaGRPCTransaction)
+} catch {
+    let nsError = error as NSError
+    print("\(nsError.localizedDescription) \n")
+}
+```
+
+### Queries
+
+#### Creating query object
+```swift
+// Creating unsigned query object
+let queryBuilder = IrohaQueryBuilder()
+
+let unsignedQuery =
+    try queryBuilder
+        .creatorAccountId("admin@test")
+        .createdTime(Date())
+        .queryCounter(1)
+        .getAssetInfo(byAssetsId: "dollar#ru")
+        .build()
+```
+
+#### Signing query object
+```swift
+// Creating helper class for signing unsigned query
+let irohaQueryPreparation = IrohaQueryPreparation()
+        
+let irohaSignedQueryReadyForConvertingToGRPC =
+    irohaQueryPreparation.sign(unsignedQuery,
+                               with: keypair)
+```
+
+#### Creating GRPC query object
+```swift
+var irohaGRPCQuery = Iroha_Protocol_Query()
+        
+do {
+    try irohaGRPCQuery.merge(serializedData: irohaSignedQueryReadyForConvertingToGRPC)
+
+    // Checking that query is excactly query that was created
+    print("Query to Iroha: \n")
+    print("\(try irohaGRPCQuery.payload.jsonString()) \n")
+} catch {
+    let nsError = error as NSError
+    print("\(nsError.localizedDescription) \n")
+}
+```
+
+#### Sending query object to Hyperledger Iroha
+
+```swift
+let serviceForSendingQuery = Iroha_Protocol_QueryServiceService(address: "127.0.0.1:50051")
+
+do {
+    let result = try serviceForSendingQuery.find(irohaGRPCQuery)
+    (result)
+} catch {
+    let nsError = error as NSError
+    print("\(nsError.localizedDescription) \n")
+}
+```
+
+## Author
+
+AlexeyMukhin
+
+* telegram: @AlexeyMukhin
+* email: info@soramistu.co.jp
 
 ## License
 
-Copyright 2016 Soramitsu Co., Ltd.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Copyright 2018 Soramitsu Co., Ltd.
 
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+```
     http://www.apache.org/licenses/LICENSE-2.0
+```
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.

@@ -1,0 +1,11 @@
+framework module SwiftyIroha {
+  umbrella header "SwiftyIroha.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftyIroha.Swift {
+    header "SwiftyIroha-Swift.h"
+    requires objc
+}
