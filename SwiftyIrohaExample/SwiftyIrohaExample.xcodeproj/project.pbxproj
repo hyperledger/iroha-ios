@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A28A5C22034E56D00E900F5 /* block.proto in Resources */ = {isa = PBXBuildFile; fileRef = 8A28A5C02034E56D00E900F5 /* block.proto */; };
-		8A28A5C32034E56D00E900F5 /* endpoint.proto in Resources */ = {isa = PBXBuildFile; fileRef = 8A28A5C12034E56D00E900F5 /* endpoint.proto */; };
 		8A28A5D72034EB1200E900F5 /* primitive.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A28A5C62034EB1200E900F5 /* primitive.pb.swift */; };
 		8A28A5D82034EB1200E900F5 /* responses.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A28A5C72034EB1200E900F5 /* responses.pb.swift */; };
 		8A28A5DA2034EB1200E900F5 /* endpoint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A28A5C92034EB1200E900F5 /* endpoint.pb.swift */; };
@@ -177,8 +175,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8A28A5C02034E56D00E900F5 /* block.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = block.proto; sourceTree = "<group>"; };
-		8A28A5C12034E56D00E900F5 /* endpoint.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = endpoint.proto; sourceTree = "<group>"; };
 		8A28A5C62034EB1200E900F5 /* primitive.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = primitive.pb.swift; sourceTree = "<group>"; };
 		8A28A5C72034EB1200E900F5 /* responses.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = responses.pb.swift; sourceTree = "<group>"; };
 		8A28A5C92034EB1200E900F5 /* endpoint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = endpoint.pb.swift; sourceTree = "<group>"; };
@@ -223,18 +219,8 @@
 			isa = PBXGroup;
 			children = (
 				8A28A5C42034EB1200E900F5 /* ProtoClasses */,
-				8A28A5BF2034E55200E900F5 /* Proto */,
 			);
 			path = GRPC;
-			sourceTree = "<group>";
-		};
-		8A28A5BF2034E55200E900F5 /* Proto */ = {
-			isa = PBXGroup;
-			children = (
-				8A28A5C02034E56D00E900F5 /* block.proto */,
-				8A28A5C12034E56D00E900F5 /* endpoint.proto */,
-			);
-			path = Proto;
 			sourceTree = "<group>";
 		};
 		8A28A5C42034EB1200E900F5 /* ProtoClasses */ = {
@@ -459,11 +445,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A28A5E82034F3A600E900F5 /* Cartfile in Resources */,
-				8A28A5C22034E56D00E900F5 /* block.proto in Resources */,
 				8A7FE0A9202A22EC009A12FD /* LaunchScreen.storyboard in Resources */,
 				8A7FE0A6202A22EC009A12FD /* Assets.xcassets in Resources */,
 				8A7FE0A4202A22EC009A12FD /* Main.storyboard in Resources */,
-				8A28A5C32034E56D00E900F5 /* endpoint.proto in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
