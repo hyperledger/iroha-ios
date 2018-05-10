@@ -19,7 +19,7 @@ This project can help you to see how to establish connection with [Hyperledger I
 
 Before starting you need to install the following software on you mac:
 * [XCode](https://developer.apple.com/xcode/)
-* [Carthage](https://github.com/Carthage/Carthage)
+* [CocoaPods](https://cocoapods.org/)
 * [Git](https://git-scm.com/)
 
 #### Instruction:
@@ -30,32 +30,21 @@ Before starting you need to install the following software on you mac:
 ```
 1. Clone iroha-ios repository: 
 ```
-    $git clone https://github.com/soramitsu/iroha-ios.git
+    $git clone https://github.com/hyperledger/iroha-ios.git
 ```
 2. Go inside project folder:
 ```
-    $cd SwiftyIroha
+    $cd iroha-ios
 ```
-3. Install all usefull dependencies:
+3. Install all dependencies:
 ```
-    $carthage update --platform iOS
+    $pod install
 ```
-4. Go inside example project: 
+4. Open project in Xcode:
 ```
-    $cd SwiftyIrohaExample
+    open SwiftyIroha.xcworkspace
 ```
-5. Go inside `SwiftGRPC.xcodeproj` subproject folder: 
-```
-    $cd grpc-swift
-```
-6. Build GRPC framework for using it in you ios application:
-```
-    $make
-```
-7. Open `SwiftyIroha.xcodeproj` project in Xcode
-8. Go to `SwiftyIrohaExample.xcodeproj` subproject
-9. Go to `SwiftGRPC.xcodeproj` subproject
-10. Go to targets and remove `czlib` targets from there
+5. Run target SwiftyIrohaExample
 
 ### Preparing Hyperledger Iroha instance launched in Docker
 
@@ -64,25 +53,26 @@ Before starting you need to install the following software on you mac:
 
 #### Instruction:
 
-0. Go to folder you want to download [Hyperledger Iroha](https://github.com/hyperledger/iroha)  to: 
-```
-    $cd path/to/your/folder/for/example/iroha/project/
-```
-1. Download [Hyperledger Iroha](https://github.com/hyperledger/iroha)  on you mac: 
-```
-    git clone -b develop --depth=1 https://github.com/hyperledger/iroha
-```
-2. Run script: 
-```
-    ./run-iroha-dev.sh
-```
+0. Launch Hyperledger Iroha instance according to this instruction:
+* [Launching Hyperledger Iroha](http://iroha.readthedocs.io/en/latest/getting_started/)
 
 ## How to import this library into your project
 
-### Install via Carthage
+### Install manually
+```
+    Please import generated framework form this project (SwiftyIroha targer) into your project
+    or start modyfying this project (SwiftyIrohaExample target) it is already working with library
+```
 
+### Install via Carthage
+```
+    Currently not available, please inport framework manually
+```
 
 ### Install via CocoaPods
+```
+    Currently not available, please inport framework manually
+```
 
 
 ## How to use this library
@@ -122,14 +112,13 @@ let newKeypair = modelCrypto.generateNewKeypair(from: existingKeypair)
 let irohaTransactionBuilder = IrohaTransactionBuilder()
 
 // Creating transaction object for Iroha
-let unsignedTransaction =
-    try irohaTransactionBuilder
-        .creatorAccountId("admin@test")
-        .createdTime(Date())
-        .transactionCounter(1)
-        .createDomain(withDomainId: "ru", withDefaultRole: "user")
-        .createAssets(withAssetName: "dollar", domainId: "ru", percision: 0.1)
-        .build()
+let unsignedTransaction = try irohaTransactionBuilder
+                                    .creatorAccountId("admin@test")
+                                    .createdTime(Date())
+                                    .transactionCounter(1)
+                                    .createDomain(withDomainId: "ru", withDefaultRole: "user")
+                                    .createAssets(withAssetName: "dollar", domainId: "ru", percision: 0.1)
+                                    .build()
 ```
 
 #### Signing transaction object
@@ -138,9 +127,8 @@ let unsignedTransaction =
 let irohaTransactionPreparation = IrohaTransactionPreparation()
 
 // Signing transaction and getting object which is ready for converting to GRPC object
-let irohaSignedTransactionReadyForConvertingToGRPC =
-    irohaTransactionPreparation.sign(unsignedTransaction,
-                                     with: keypair)
+let irohaSignedTransactionReadyForConvertingToGRPC = 
+        irohaTransactionPreparation.sign(unsignedTransaction, with: keypair)
 ```
 
 #### Creating GRPC transaction object
@@ -180,13 +168,12 @@ do {
 // Creating unsigned query object
 let queryBuilder = IrohaQueryBuilder()
 
-let unsignedQuery =
-    try queryBuilder
-        .creatorAccountId("admin@test")
-        .createdTime(Date())
-        .queryCounter(1)
-        .getAssetInfo(byAssetsId: "dollar#ru")
-        .build()
+let unsignedQuery = try queryBuilder
+                            .creatorAccountId("admin@test")
+                            .createdTime(Date())
+                            .queryCounter(1)
+                            .getAssetInfo(byAssetsId: "dollar#ru")
+                            .build()
 ```
 
 #### Signing query object
@@ -194,9 +181,7 @@ let unsignedQuery =
 // Creating helper class for signing unsigned query
 let irohaQueryPreparation = IrohaQueryPreparation()
         
-let irohaSignedQueryReadyForConvertingToGRPC =
-    irohaQueryPreparation.sign(unsignedQuery,
-                               with: keypair)
+let irohaSignedQueryReadyForConvertingToGRPC = irohaQueryPreparation.sign(unsignedQuery, with: keypair)
 ```
 
 #### Creating GRPC query object
@@ -222,7 +207,6 @@ let serviceForSendingQuery = Iroha_Protocol_QueryServiceService(address: "127.0.
 
 do {
     let result = try serviceForSendingQuery.find(irohaGRPCQuery)
-    (result)
 } catch {
     let nsError = error as NSError
     print("\(nsError.localizedDescription) \n")
