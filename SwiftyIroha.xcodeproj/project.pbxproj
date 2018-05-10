@@ -7,34 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06DCBD973B179EDB065DE282 /* Pods_SwiftyIroha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A39CA2F52249F2DA1F43AA1 /* Pods_SwiftyIroha.framework */; };
+		8A37473820A0E14F005D623F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37473720A0E14F005D623F /* AppDelegate.swift */; };
+		8A37473A20A0E14F005D623F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37473920A0E14F005D623F /* ViewController.swift */; };
+		8A37473F20A0E14F005D623F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A37473E20A0E14F005D623F /* Assets.xcassets */; };
+		8A37474220A0E14F005D623F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A37474020A0E14F005D623F /* LaunchScreen.storyboard */; };
+		8A37477020A0E297005D623F /* block.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37476720A0E297005D623F /* block.pb.swift */; };
+		8A37477120A0E297005D623F /* iroha.protocol.client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37476820A0E297005D623F /* iroha.protocol.client.pb.swift */; };
+		8A37477220A0E297005D623F /* endpoint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37476920A0E297005D623F /* endpoint.pb.swift */; };
+		8A37477320A0E297005D623F /* ordering.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37476A20A0E297005D623F /* ordering.pb.swift */; };
+		8A37477420A0E297005D623F /* primitive.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37476B20A0E297005D623F /* primitive.pb.swift */; };
+		8A37477520A0E297005D623F /* commands.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37476C20A0E297005D623F /* commands.pb.swift */; };
+		8A37477620A0E297005D623F /* loader.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37476D20A0E297005D623F /* loader.pb.swift */; };
+		8A37477720A0E297005D623F /* queries.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37476E20A0E297005D623F /* queries.pb.swift */; };
+		8A37477820A0E297005D623F /* responses.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37476F20A0E297005D623F /* responses.pb.swift */; };
+		8A52511120A4D38500ED2309 /* SwiftyIroha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDF20D203CA1AF001D7448 /* SwiftyIroha.framework */; };
+		8A52511220A4D38500ED2309 /* SwiftyIroha.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDF20D203CA1AF001D7448 /* SwiftyIroha.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8A5EFCE320487764004ACDD4 /* SwiftyIroha.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8A5EFCE220487764004ACDD4 /* SwiftyIroha.podspec */; };
-		8A79EB66205D1D8C00C197F9 /* IrohaQueryBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A79EB65205D1D8C00C197F9 /* IrohaQueryBuilderTests.swift */; };
+		8A7F6DBE20A0E85A0083FFC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A7F6DBD20A0E85A0083FFC0 /* Main.storyboard */; };
 		8A9B9F0A206ACC0E0052CAD4 /* ObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A9B9F07206ACC0E0052CAD4 /* ObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8A9B9F0B206ACC0E0052CAD4 /* ObjC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A9B9F09206ACC0E0052CAD4 /* ObjC.mm */; };
 		8AB823DC20403B11001FF63C /* IRPrivateKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AEDF252203CA205001D7448 /* IRPrivateKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AB823E220403C24001FF63C /* IRUnsignedQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AEDF245203CA205001D7448 /* IRUnsignedQuery.mm */; };
 		8AB823E320403C24001FF63C /* IRModelCrypto.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AEDF248203CA205001D7448 /* IRModelCrypto.mm */; };
-		8AB82497204049D2001FF63C /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 8AB82496204049D2001FF63C /* Cartfile */; };
-		8AE1AFCE206197D100F412E4 /* IrohaTransactionBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE1AFCD206197D100F412E4 /* IrohaTransactionBuilderTests.swift */; };
-		8AE1B0112064CA3000F412E4 /* libprotobufd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B00D2064CA3000F412E4 /* libprotobufd.a */; };
-		8AE1B0122064CA3000F412E4 /* libed25519_crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B00E2064CA3000F412E4 /* libed25519_crypto.a */; };
-		8AE1B0132064CA3000F412E4 /* libshared_model_cryptography.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B00F2064CA3000F412E4 /* libshared_model_cryptography.a */; };
-		8AE1B0142064CA3000F412E4 /* libshared_model_cryptography_model.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B0102064CA3000F412E4 /* libshared_model_cryptography_model.a */; };
-		8AE1B0202064CE3E00F412E4 /* libbindings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B0152064CE3D00F412E4 /* libbindings.a */; };
-		8AE1B0212064CE3E00F412E4 /* libshared_model_cryptography.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B0162064CE3E00F412E4 /* libshared_model_cryptography.a */; };
-		8AE1B0222064CE3E00F412E4 /* libgenerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B0172064CE3E00F412E4 /* libgenerator.a */; };
-		8AE1B0232064CE3E00F412E4 /* libed25519.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B0182064CE3E00F412E4 /* libed25519.a */; };
-		8AE1B0242064CE3E00F412E4 /* libshared_model_stateless_validation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B0192064CE3E00F412E4 /* libshared_model_stateless_validation.a */; };
-		8AE1B0252064CE3E00F412E4 /* libiroha_amount.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B01A2064CE3E00F412E4 /* libiroha_amount.a */; };
-		8AE1B0262064CE3E00F412E4 /* libschema.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B01B2064CE3E00F412E4 /* libschema.a */; };
-		8AE1B0272064CE3E00F412E4 /* libhash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B01C2064CE3E00F412E4 /* libhash.a */; };
-		8AE1B0282064CE3E00F412E4 /* libed25519_crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B01D2064CE3E00F412E4 /* libed25519_crypto.a */; };
-		8AE1B0292064CE3E00F412E4 /* libprotobufd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B01E2064CE3E00F412E4 /* libprotobufd.a */; };
-		8AE1B02A2064CE3E00F412E4 /* libshared_model_cryptography_model.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE1B01F2064CE3E00F412E4 /* libshared_model_cryptography_model.a */; };
-		8AE1B0312066C05600F412E4 /* IrohaModelCryptoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE1B0302066C05600F412E4 /* IrohaModelCryptoTests.swift */; };
 		8AE1B0432066DCED00F412E4 /* IrohaTransactionBuilderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE1B0422066DCED00F412E4 /* IrohaTransactionBuilderError.swift */; };
 		8AE1B0462066E22E00F412E4 /* IrohaQueryBuilderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE1B0452066E22E00F412E4 /* IrohaQueryBuilderError.swift */; };
-		8AEDF217203CA1AF001D7448 /* SwiftyIroha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AEDF20D203CA1AF001D7448 /* SwiftyIroha.framework */; };
 		8AEDF21E203CA1AF001D7448 /* SwiftyIroha.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AEDF210203CA1AF001D7448 /* SwiftyIroha.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AEDF25D203CA205001D7448 /* IrohaTransactionPreparation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEDF22C203CA205001D7448 /* IrohaTransactionPreparation.swift */; };
 		8AEDF25E203CA205001D7448 /* IrohaTransactionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEDF22E203CA205001D7448 /* IrohaTransactionBuilder.swift */; };
@@ -62,17 +59,11 @@
 		8AEDF277203CA205001D7448 /* IRUnsignedtransaction.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AEDF25A203CA205001D7448 /* IRUnsignedtransaction.mm */; };
 		8AEDF278203CA205001D7448 /* IRUnsignedtransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AEDF25B203CA205001D7448 /* IRUnsignedtransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AF2C8BF205D18B2001288C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8AF2C8BD205D18B2001288C6 /* README.md */; };
+		AF5E3A015950A1EB5D5A34D4 /* Pods_SwiftyIrohaExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A6A03A28B2094268D1A0CA /* Pods_SwiftyIrohaExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8A5EFCC420487091004ACDD4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A5EFCB520487091004ACDD4 /* SwiftyIrohaExample.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8A7FE09B202A22EC009A12FD;
-			remoteInfo = SwiftyIrohaExample;
-		};
-		8AEDF218203CA1AF001D7448 /* PBXContainerItemProxy */ = {
+		8A52511320A4D38500ED2309 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8AEDF204203CA1AF001D7448 /* Project object */;
 			proxyType = 1;
@@ -81,44 +72,75 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8A52511520A4D38500ED2309 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8A52511220A4D38500ED2309 /* SwiftyIroha.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		8A5EFCB520487091004ACDD4 /* SwiftyIrohaExample.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyIrohaExample.xcodeproj; path = SwiftyIrohaExample/SwiftyIrohaExample.xcodeproj; sourceTree = "<group>"; };
+		3310E2100DABACD5CD563F10 /* Pods-SwiftyIrohaExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyIrohaExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyIrohaExample/Pods-SwiftyIrohaExample.release.xcconfig"; sourceTree = "<group>"; };
+		4A39CA2F52249F2DA1F43AA1 /* Pods_SwiftyIroha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyIroha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B276009DC1259ADE96BDC36 /* Pods-SwiftyIroha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyIroha.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyIroha/Pods-SwiftyIroha.release.xcconfig"; sourceTree = "<group>"; };
+		88A6A03A28B2094268D1A0CA /* Pods_SwiftyIrohaExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyIrohaExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A374652209E399C005D623F /* libshared_model_cryptography.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography.a; sourceTree = "<group>"; };
+		8A374653209E399C005D623F /* libgenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgenerator.a; sourceTree = "<group>"; };
+		8A374654209E399C005D623F /* libschema.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libschema.a; sourceTree = "<group>"; };
+		8A374655209E399C005D623F /* libbindings.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbindings.a; sourceTree = "<group>"; };
+		8A374656209E399C005D623F /* libed25519_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_crypto.a; sourceTree = "<group>"; };
+		8A374657209E399C005D623F /* libshared_model_cryptography_model.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography_model.a; sourceTree = "<group>"; };
+		8A374658209E399C005D623F /* libshared_model_stateless_validation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_stateless_validation.a; sourceTree = "<group>"; };
+		8A374659209E399C005D623F /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobuf.a; sourceTree = "<group>"; };
+		8A37465A209E399C005D623F /* libhash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhash.a; sourceTree = "<group>"; };
+		8A37465B209E399C005D623F /* libiroha_amount.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiroha_amount.a; sourceTree = "<group>"; };
+		8A37465C209E399C005D623F /* libed25519.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519.a; sourceTree = "<group>"; };
+		8A374669209E427F005D623F /* libshared_model_cryptography.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography.a; sourceTree = "<group>"; };
+		8A37466A209E427F005D623F /* libgenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgenerator.a; sourceTree = "<group>"; };
+		8A37466B209E427F005D623F /* libschema.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libschema.a; sourceTree = "<group>"; };
+		8A37466C209E427F005D623F /* libbindings.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbindings.a; sourceTree = "<group>"; };
+		8A37466D209E427F005D623F /* libed25519_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_crypto.a; sourceTree = "<group>"; };
+		8A37466E209E427F005D623F /* libshared_model_cryptography_model.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography_model.a; sourceTree = "<group>"; };
+		8A37466F209E427F005D623F /* libshared_model_stateless_validation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_stateless_validation.a; sourceTree = "<group>"; };
+		8A374670209E427F005D623F /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobuf.a; sourceTree = "<group>"; };
+		8A374671209E427F005D623F /* libhash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhash.a; sourceTree = "<group>"; };
+		8A374672209E427F005D623F /* libiroha_amount.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiroha_amount.a; sourceTree = "<group>"; };
+		8A374673209E427F005D623F /* libed25519.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519.a; sourceTree = "<group>"; };
+		8A37473520A0E14F005D623F /* SwiftyIrohaExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyIrohaExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A37473720A0E14F005D623F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8A37473920A0E14F005D623F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8A37473E20A0E14F005D623F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8A37474120A0E14F005D623F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8A37474320A0E14F005D623F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A37476720A0E297005D623F /* block.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = block.pb.swift; sourceTree = "<group>"; };
+		8A37476820A0E297005D623F /* iroha.protocol.client.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iroha.protocol.client.pb.swift; sourceTree = "<group>"; };
+		8A37476920A0E297005D623F /* endpoint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = endpoint.pb.swift; sourceTree = "<group>"; };
+		8A37476A20A0E297005D623F /* ordering.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ordering.pb.swift; sourceTree = "<group>"; };
+		8A37476B20A0E297005D623F /* primitive.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = primitive.pb.swift; sourceTree = "<group>"; };
+		8A37476C20A0E297005D623F /* commands.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commands.pb.swift; sourceTree = "<group>"; };
+		8A37476D20A0E297005D623F /* loader.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loader.pb.swift; sourceTree = "<group>"; };
+		8A37476E20A0E297005D623F /* queries.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = queries.pb.swift; sourceTree = "<group>"; };
+		8A37476F20A0E297005D623F /* responses.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = responses.pb.swift; sourceTree = "<group>"; };
 		8A5EFCE220487764004ACDD4 /* SwiftyIroha.podspec */ = {isa = PBXFileReference; fileEncoding = 1; lastKnownFileType = text; path = SwiftyIroha.podspec; sourceTree = "<group>"; };
 		8A79EB65205D1D8C00C197F9 /* IrohaQueryBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaQueryBuilderTests.swift; sourceTree = "<group>"; };
+		8A7F6DBD20A0E85A0083FFC0 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8A9B9F07206ACC0E0052CAD4 /* ObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjC.h; sourceTree = "<group>"; };
 		8A9B9F09206ACC0E0052CAD4 /* ObjC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjC.mm; sourceTree = "<group>"; };
-		8AAE72F6204DFDCB00C39147 /* libbindings.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbindings.a; sourceTree = "<group>"; };
-		8AAE72F7204DFDCB00C39147 /* libshared_model_stateless_validation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_stateless_validation.a; sourceTree = "<group>"; };
-		8AAE72FA204DFDCB00C39147 /* libiroha_amount.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiroha_amount.a; sourceTree = "<group>"; };
-		8AAE72FC204DFDCC00C39147 /* libhash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhash.a; sourceTree = "<group>"; };
-		8AAE72FD204DFDCC00C39147 /* libgenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgenerator.a; sourceTree = "<group>"; };
-		8AAE72FE204DFDCC00C39147 /* libschema.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libschema.a; sourceTree = "<group>"; };
-		8AAE72FF204DFDCC00C39147 /* libed25519.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519.a; sourceTree = "<group>"; };
-		8AB82496204049D2001FF63C /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 1; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		8AB8249820404AD8001FF63C /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftProtobuf.framework; sourceTree = "<group>"; };
 		8AE1AFCD206197D100F412E4 /* IrohaTransactionBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaTransactionBuilderTests.swift; sourceTree = "<group>"; };
-		8AE1B00D2064CA3000F412E4 /* libprotobufd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobufd.a; sourceTree = "<group>"; };
-		8AE1B00E2064CA3000F412E4 /* libed25519_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_crypto.a; sourceTree = "<group>"; };
-		8AE1B00F2064CA3000F412E4 /* libshared_model_cryptography.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography.a; sourceTree = "<group>"; };
-		8AE1B0102064CA3000F412E4 /* libshared_model_cryptography_model.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography_model.a; sourceTree = "<group>"; };
-		8AE1B0152064CE3D00F412E4 /* libbindings.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbindings.a; sourceTree = "<group>"; };
-		8AE1B0162064CE3E00F412E4 /* libshared_model_cryptography.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography.a; sourceTree = "<group>"; };
-		8AE1B0172064CE3E00F412E4 /* libgenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgenerator.a; sourceTree = "<group>"; };
-		8AE1B0182064CE3E00F412E4 /* libed25519.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519.a; sourceTree = "<group>"; };
-		8AE1B0192064CE3E00F412E4 /* libshared_model_stateless_validation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_stateless_validation.a; sourceTree = "<group>"; };
-		8AE1B01A2064CE3E00F412E4 /* libiroha_amount.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiroha_amount.a; sourceTree = "<group>"; };
-		8AE1B01B2064CE3E00F412E4 /* libschema.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libschema.a; sourceTree = "<group>"; };
-		8AE1B01C2064CE3E00F412E4 /* libhash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhash.a; sourceTree = "<group>"; };
-		8AE1B01D2064CE3E00F412E4 /* libed25519_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_crypto.a; sourceTree = "<group>"; };
-		8AE1B01E2064CE3E00F412E4 /* libprotobufd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobufd.a; sourceTree = "<group>"; };
-		8AE1B01F2064CE3E00F412E4 /* libshared_model_cryptography_model.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography_model.a; sourceTree = "<group>"; };
 		8AE1B0302066C05600F412E4 /* IrohaModelCryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaModelCryptoTests.swift; sourceTree = "<group>"; };
 		8AE1B0422066DCED00F412E4 /* IrohaTransactionBuilderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaTransactionBuilderError.swift; sourceTree = "<group>"; };
 		8AE1B0452066E22E00F412E4 /* IrohaQueryBuilderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaQueryBuilderError.swift; sourceTree = "<group>"; };
 		8AEDF20D203CA1AF001D7448 /* SwiftyIroha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyIroha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AEDF210203CA1AF001D7448 /* SwiftyIroha.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyIroha.h; sourceTree = "<group>"; };
 		8AEDF211203CA1AF001D7448 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8AEDF216203CA1AF001D7448 /* SwiftyIrohaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyIrohaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AEDF21D203CA1AF001D7448 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AEDF22C203CA205001D7448 /* IrohaTransactionPreparation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IrohaTransactionPreparation.swift; sourceTree = "<group>"; };
 		8AEDF22E203CA205001D7448 /* IrohaTransactionBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IrohaTransactionBuilder.swift; sourceTree = "<group>"; };
@@ -149,48 +171,117 @@
 		8AEDF25A203CA205001D7448 /* IRUnsignedtransaction.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IRUnsignedtransaction.mm; sourceTree = "<group>"; };
 		8AEDF25B203CA205001D7448 /* IRUnsignedtransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRUnsignedtransaction.h; sourceTree = "<group>"; };
 		8AF2C8BD205D18B2001288C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C34751E70B833A4A0B0C6926 /* Pods-SwiftyIroha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyIroha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyIroha/Pods-SwiftyIroha.debug.xcconfig"; sourceTree = "<group>"; };
+		E4D7177616472BCBD8779315 /* Pods_SwiftyIrohaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyIrohaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4F0B471CB95C7DE614A1318 /* Pods-SwiftyIrohaExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyIrohaExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyIrohaExample/Pods-SwiftyIrohaExample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8A37473220A0E14F005D623F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A52511120A4D38500ED2309 /* SwiftyIroha.framework in Frameworks */,
+				AF5E3A015950A1EB5D5A34D4 /* Pods_SwiftyIrohaExample.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AEDF209203CA1AF001D7448 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AE1B0142064CA3000F412E4 /* libshared_model_cryptography_model.a in Frameworks */,
-				8AE1B0252064CE3E00F412E4 /* libiroha_amount.a in Frameworks */,
-				8AE1B0282064CE3E00F412E4 /* libed25519_crypto.a in Frameworks */,
-				8AE1B0232064CE3E00F412E4 /* libed25519.a in Frameworks */,
-				8AE1B0222064CE3E00F412E4 /* libgenerator.a in Frameworks */,
-				8AE1B0122064CA3000F412E4 /* libed25519_crypto.a in Frameworks */,
-				8AE1B0212064CE3E00F412E4 /* libshared_model_cryptography.a in Frameworks */,
-				8AE1B0292064CE3E00F412E4 /* libprotobufd.a in Frameworks */,
-				8AE1B0262064CE3E00F412E4 /* libschema.a in Frameworks */,
-				8AE1B0112064CA3000F412E4 /* libprotobufd.a in Frameworks */,
-				8AE1B0132064CA3000F412E4 /* libshared_model_cryptography.a in Frameworks */,
-				8AE1B0202064CE3E00F412E4 /* libbindings.a in Frameworks */,
-				8AE1B02A2064CE3E00F412E4 /* libshared_model_cryptography_model.a in Frameworks */,
-				8AE1B0242064CE3E00F412E4 /* libshared_model_stateless_validation.a in Frameworks */,
-				8AE1B0272064CE3E00F412E4 /* libhash.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8AEDF213203CA1AF001D7448 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8AEDF217203CA1AF001D7448 /* SwiftyIroha.framework in Frameworks */,
+				06DCBD973B179EDB065DE282 /* Pods_SwiftyIroha.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8A5EFCB620487091004ACDD4 /* Products */ = {
+		21A5AE2EB4B7B8E3CFC32366 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8A5EFCC520487091004ACDD4 /* SwiftyIrohaExample.app */,
+				C34751E70B833A4A0B0C6926 /* Pods-SwiftyIroha.debug.xcconfig */,
+				6B276009DC1259ADE96BDC36 /* Pods-SwiftyIroha.release.xcconfig */,
+				E4F0B471CB95C7DE614A1318 /* Pods-SwiftyIrohaExample.debug.xcconfig */,
+				3310E2100DABACD5CD563F10 /* Pods-SwiftyIrohaExample.release.xcconfig */,
 			);
-			name = Products;
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8A374650209E399C005D623F /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				8A374668209E427F005D623F /* iOS */,
+				8A374651209E399C005D623F /* Simulator */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		8A374651209E399C005D623F /* Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				8A374652209E399C005D623F /* libshared_model_cryptography.a */,
+				8A374653209E399C005D623F /* libgenerator.a */,
+				8A374654209E399C005D623F /* libschema.a */,
+				8A374655209E399C005D623F /* libbindings.a */,
+				8A374656209E399C005D623F /* libed25519_crypto.a */,
+				8A374657209E399C005D623F /* libshared_model_cryptography_model.a */,
+				8A374658209E399C005D623F /* libshared_model_stateless_validation.a */,
+				8A374659209E399C005D623F /* libprotobuf.a */,
+				8A37465A209E399C005D623F /* libhash.a */,
+				8A37465B209E399C005D623F /* libiroha_amount.a */,
+				8A37465C209E399C005D623F /* libed25519.a */,
+			);
+			path = Simulator;
+			sourceTree = "<group>";
+		};
+		8A374668209E427F005D623F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8A374669209E427F005D623F /* libshared_model_cryptography.a */,
+				8A37466A209E427F005D623F /* libgenerator.a */,
+				8A37466B209E427F005D623F /* libschema.a */,
+				8A37466C209E427F005D623F /* libbindings.a */,
+				8A37466D209E427F005D623F /* libed25519_crypto.a */,
+				8A37466E209E427F005D623F /* libshared_model_cryptography_model.a */,
+				8A37466F209E427F005D623F /* libshared_model_stateless_validation.a */,
+				8A374670209E427F005D623F /* libprotobuf.a */,
+				8A374671209E427F005D623F /* libhash.a */,
+				8A374672209E427F005D623F /* libiroha_amount.a */,
+				8A374673209E427F005D623F /* libed25519.a */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		8A37473620A0E14F005D623F /* SwiftyIrohaExample */ = {
+			isa = PBXGroup;
+			children = (
+				8A37476620A0E227005D623F /* GRPC */,
+				8A37473720A0E14F005D623F /* AppDelegate.swift */,
+				8A37473920A0E14F005D623F /* ViewController.swift */,
+				8A37473E20A0E14F005D623F /* Assets.xcassets */,
+				8A37474020A0E14F005D623F /* LaunchScreen.storyboard */,
+				8A37474320A0E14F005D623F /* Info.plist */,
+				8A7F6DBD20A0E85A0083FFC0 /* Main.storyboard */,
+			);
+			path = SwiftyIrohaExample;
+			sourceTree = "<group>";
+		};
+		8A37476620A0E227005D623F /* GRPC */ = {
+			isa = PBXGroup;
+			children = (
+				8A37476720A0E297005D623F /* block.pb.swift */,
+				8A37476C20A0E297005D623F /* commands.pb.swift */,
+				8A37476920A0E297005D623F /* endpoint.pb.swift */,
+				8A37476820A0E297005D623F /* iroha.protocol.client.pb.swift */,
+				8A37476D20A0E297005D623F /* loader.pb.swift */,
+				8A37476A20A0E297005D623F /* ordering.pb.swift */,
+				8A37476B20A0E297005D623F /* primitive.pb.swift */,
+				8A37476E20A0E297005D623F /* queries.pb.swift */,
+				8A37476F20A0E297005D623F /* responses.pb.swift */,
+			);
+			name = GRPC;
+			path = SwiftyIrohaExample/../GRPC;
 			sourceTree = "<group>";
 		};
 		8A79EB6A205D21BA00C197F9 /* QueryBuilder */ = {
@@ -201,28 +292,13 @@
 			path = QueryBuilder;
 			sourceTree = "<group>";
 		};
-		8A79EB6E205D22A700C197F9 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				8AAE72F6204DFDCB00C39147 /* libbindings.a */,
-				8AAE72FF204DFDCC00C39147 /* libed25519.a */,
-				8AE1B00E2064CA3000F412E4 /* libed25519_crypto.a */,
-				8AAE72FD204DFDCC00C39147 /* libgenerator.a */,
-				8AAE72FC204DFDCC00C39147 /* libhash.a */,
-				8AAE72FA204DFDCB00C39147 /* libiroha_amount.a */,
-				8AE1B00D2064CA3000F412E4 /* libprotobufd.a */,
-				8AAE72FE204DFDCC00C39147 /* libschema.a */,
-				8AE1B00F2064CA3000F412E4 /* libshared_model_cryptography.a */,
-				8AE1B0102064CA3000F412E4 /* libshared_model_cryptography_model.a */,
-				8AAE72F7204DFDCB00C39147 /* libshared_model_stateless_validation.a */,
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
 		8AB823DD20403BFF001FF63C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				8AB8249820404AD8001FF63C /* SwiftProtobuf.framework */,
+				4A39CA2F52249F2DA1F43AA1 /* Pods_SwiftyIroha.framework */,
+				E4D7177616472BCBD8779315 /* Pods_SwiftyIrohaTests.framework */,
+				88A6A03A28B2094268D1A0CA /* Pods_SwiftyIrohaExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -241,24 +317,6 @@
 				8AE1AFCD206197D100F412E4 /* IrohaTransactionBuilderTests.swift */,
 			);
 			path = TransactionBuilder;
-			sourceTree = "<group>";
-		};
-		8AE1AFCF2061AE1100F412E4 /* Simulator */ = {
-			isa = PBXGroup;
-			children = (
-				8AE1B0152064CE3D00F412E4 /* libbindings.a */,
-				8AE1B0182064CE3E00F412E4 /* libed25519.a */,
-				8AE1B01D2064CE3E00F412E4 /* libed25519_crypto.a */,
-				8AE1B0172064CE3E00F412E4 /* libgenerator.a */,
-				8AE1B01C2064CE3E00F412E4 /* libhash.a */,
-				8AE1B01A2064CE3E00F412E4 /* libiroha_amount.a */,
-				8AE1B01E2064CE3E00F412E4 /* libprotobufd.a */,
-				8AE1B01B2064CE3E00F412E4 /* libschema.a */,
-				8AE1B0162064CE3E00F412E4 /* libshared_model_cryptography.a */,
-				8AE1B01F2064CE3E00F412E4 /* libshared_model_cryptography_model.a */,
-				8AE1B0192064CE3E00F412E4 /* libshared_model_stateless_validation.a */,
-			);
-			path = Simulator;
 			sourceTree = "<group>";
 		};
 		8AE1B02B2066B0A400F412E4 /* Crypto */ = {
@@ -294,27 +352,18 @@
 			path = Exception;
 			sourceTree = "<group>";
 		};
-		8AED5C42203CA2D3001D7448 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				8AE1AFCF2061AE1100F412E4 /* Simulator */,
-				8A79EB6E205D22A700C197F9 /* iOS */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
 		8AEDF203203CA1AF001D7448 = {
 			isa = PBXGroup;
 			children = (
+				8A374650209E399C005D623F /* libs */,
+				8A37473620A0E14F005D623F /* SwiftyIrohaExample */,
 				8AB823DD20403BFF001FF63C /* Frameworks */,
 				8AEDF20E203CA1AF001D7448 /* Products */,
 				8AEDF20F203CA1AF001D7448 /* SwiftyIroha */,
 				8AEDF21A203CA1AF001D7448 /* SwiftyIrohaTests */,
-				8AED5C42203CA2D3001D7448 /* libs */,
-				8AB82496204049D2001FF63C /* Cartfile */,
 				8AF2C8BD205D18B2001288C6 /* README.md */,
 				8A5EFCE220487764004ACDD4 /* SwiftyIroha.podspec */,
-				8A5EFCB520487091004ACDD4 /* SwiftyIrohaExample.xcodeproj */,
+				21A5AE2EB4B7B8E3CFC32366 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -322,7 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				8AEDF20D203CA1AF001D7448 /* SwiftyIroha.framework */,
-				8AEDF216203CA1AF001D7448 /* SwiftyIrohaTests.xctest */,
+				8A37473520A0E14F005D623F /* SwiftyIrohaExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -610,10 +659,32 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		8A37473420A0E14F005D623F /* SwiftyIrohaExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A37474420A0E14F005D623F /* Build configuration list for PBXNativeTarget "SwiftyIrohaExample" */;
+			buildPhases = (
+				130C3E3F391CB360811EFA1F /* [CP] Check Pods Manifest.lock */,
+				8A37473120A0E14F005D623F /* Sources */,
+				8A37473220A0E14F005D623F /* Frameworks */,
+				8A37473320A0E14F005D623F /* Resources */,
+				01A9A06A8D0C662638720A0E /* [CP] Embed Pods Frameworks */,
+				8A52511520A4D38500ED2309 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A52511420A4D38500ED2309 /* PBXTargetDependency */,
+			);
+			name = SwiftyIrohaExample;
+			productName = SwiftyIrohaExample;
+			productReference = 8A37473520A0E14F005D623F /* SwiftyIrohaExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8AEDF20C203CA1AF001D7448 /* SwiftyIroha */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8AEDF221203CA1AF001D7448 /* Build configuration list for PBXNativeTarget "SwiftyIroha" */;
 			buildPhases = (
+				0FFBA7E518B10B6E93493744 /* [CP] Check Pods Manifest.lock */,
 				8AEDF208203CA1AF001D7448 /* Sources */,
 				8AEDF209203CA1AF001D7448 /* Frameworks */,
 				8AEDF20A203CA1AF001D7448 /* Headers */,
@@ -628,39 +699,21 @@
 			productReference = 8AEDF20D203CA1AF001D7448 /* SwiftyIroha.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8AEDF215203CA1AF001D7448 /* SwiftyIrohaTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8AEDF224203CA1AF001D7448 /* Build configuration list for PBXNativeTarget "SwiftyIrohaTests" */;
-			buildPhases = (
-				8AEDF212203CA1AF001D7448 /* Sources */,
-				8AEDF213203CA1AF001D7448 /* Frameworks */,
-				8AEDF214203CA1AF001D7448 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8AEDF219203CA1AF001D7448 /* PBXTargetDependency */,
-			);
-			name = SwiftyIrohaTests;
-			productName = SwiftyIrohaTests;
-			productReference = 8AEDF216203CA1AF001D7448 /* SwiftyIrohaTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8AEDF204203CA1AF001D7448 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Soramitsu;
 				TargetAttributes = {
-					8AEDF20C203CA1AF001D7448 = {
-						CreatedOnToolsVersion = 9.2;
+					8A37473420A0E14F005D623F = {
+						CreatedOnToolsVersion = 9.3;
 						ProvisioningStyle = Automatic;
 					};
-					8AEDF215203CA1AF001D7448 = {
+					8AEDF20C203CA1AF001D7448 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
@@ -677,51 +730,120 @@
 			mainGroup = 8AEDF203203CA1AF001D7448;
 			productRefGroup = 8AEDF20E203CA1AF001D7448 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 8A5EFCB620487091004ACDD4 /* Products */;
-					ProjectRef = 8A5EFCB520487091004ACDD4 /* SwiftyIrohaExample.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8AEDF20C203CA1AF001D7448 /* SwiftyIroha */,
-				8AEDF215203CA1AF001D7448 /* SwiftyIrohaTests */,
+				8A37473420A0E14F005D623F /* SwiftyIrohaExample */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		8A5EFCC520487091004ACDD4 /* SwiftyIrohaExample.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = SwiftyIrohaExample.app;
-			remoteRef = 8A5EFCC420487091004ACDD4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
+		8A37473320A0E14F005D623F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A7F6DBE20A0E85A0083FFC0 /* Main.storyboard in Resources */,
+				8A37474220A0E14F005D623F /* LaunchScreen.storyboard in Resources */,
+				8A37473F20A0E14F005D623F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AEDF20B203CA1AF001D7448 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8AF2C8BF205D18B2001288C6 /* README.md in Resources */,
 				8A5EFCE320487764004ACDD4 /* SwiftyIroha.podspec in Resources */,
-				8AB82497204049D2001FF63C /* Cartfile in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8AEDF214203CA1AF001D7448 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		01A9A06A8D0C662638720A0E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyIrohaExample/Pods-SwiftyIrohaExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftGRPC/SwiftGRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftGRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyIrohaExample/Pods-SwiftyIrohaExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0FFBA7E518B10B6E93493744 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftyIroha-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		130C3E3F391CB360811EFA1F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftyIrohaExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		8A37473120A0E14F005D623F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A37473A20A0E14F005D623F /* ViewController.swift in Sources */,
+				8A37477120A0E297005D623F /* iroha.protocol.client.pb.swift in Sources */,
+				8A37477220A0E297005D623F /* endpoint.pb.swift in Sources */,
+				8A37477020A0E297005D623F /* block.pb.swift in Sources */,
+				8A37477420A0E297005D623F /* primitive.pb.swift in Sources */,
+				8A37477820A0E297005D623F /* responses.pb.swift in Sources */,
+				8A37477320A0E297005D623F /* ordering.pb.swift in Sources */,
+				8A37477520A0E297005D623F /* commands.pb.swift in Sources */,
+				8A37477720A0E297005D623F /* queries.pb.swift in Sources */,
+				8A37473820A0E14F005D623F /* AppDelegate.swift in Sources */,
+				8A37477620A0E297005D623F /* loader.pb.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AEDF208203CA1AF001D7448 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -751,27 +873,70 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8AEDF212203CA1AF001D7448 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8A79EB66205D1D8C00C197F9 /* IrohaQueryBuilderTests.swift in Sources */,
-				8AE1B0312066C05600F412E4 /* IrohaModelCryptoTests.swift in Sources */,
-				8AE1AFCE206197D100F412E4 /* IrohaTransactionBuilderTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8AEDF219203CA1AF001D7448 /* PBXTargetDependency */ = {
+		8A52511420A4D38500ED2309 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8AEDF20C203CA1AF001D7448 /* SwiftyIroha */;
-			targetProxy = 8AEDF218203CA1AF001D7448 /* PBXContainerItemProxy */;
+			targetProxy = 8A52511320A4D38500ED2309 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		8A37474020A0E14F005D623F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A37474120A0E14F005D623F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		8A37474520A0E14F005D623F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4F0B471CB95C7DE614A1318 /* Pods-SwiftyIrohaExample.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YLWWUD25VZ;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = SwiftyIrohaExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.jp.soramitsu.SwiftyIrohaExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8A37474620A0E14F005D623F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3310E2100DABACD5CD563F10 /* Pods-SwiftyIrohaExample.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YLWWUD25VZ;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = SwiftyIrohaExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.jp.soramitsu.SwiftyIrohaExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		8AEDF21F203CA1AF001D7448 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -831,7 +996,7 @@
 					"$(PROJECT_DIR)/headers/spdlog/include",
 					"$(PROJECT_DIR)/headers/old_model",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -895,7 +1060,7 @@
 					"$(PROJECT_DIR)/headers/spdlog/include",
 					"$(PROJECT_DIR)/headers/old_model",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -907,6 +1072,7 @@
 		};
 		8AEDF222203CA1AF001D7448 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C34751E70B833A4A0B0C6926 /* Pods-SwiftyIroha.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -943,7 +1109,7 @@
 					"$(PROJECT_DIR)/libs/iOS/libgenerator.a",
 					"$(PROJECT_DIR)/libs/iOS/libhash.a",
 					"$(PROJECT_DIR)/libs/iOS/libiroha_amount.a",
-					"$(PROJECT_DIR)/libs/iOS/libprotobufd.a",
+					"$(PROJECT_DIR)/libs/iOS/libprotobuf.a",
 					"$(PROJECT_DIR)/libs/iOS/libschema.a",
 					"$(PROJECT_DIR)/libs/iOS/libshared_model_cryptography_model.a",
 					"$(PROJECT_DIR)/libs/iOS/libshared_model_stateless_validation.a",
@@ -954,7 +1120,7 @@
 					"$(PROJECT_DIR)/libs/Simulator/libshared_model_cryptography_model.a",
 					"$(PROJECT_DIR)/libs/Simulator/libschema.a",
 					"$(PROJECT_DIR)/libs/Simulator/libed25519_crypto.a",
-					"$(PROJECT_DIR)/libs/Simulator/libprotobufd.a",
+					"$(PROJECT_DIR)/libs/Simulator/libprotobuf.a",
 					"$(PROJECT_DIR)/libs/Simulator/libiroha_amount.a",
 					"$(PROJECT_DIR)/libs/Simulator/libhash.a",
 					"$(PROJECT_DIR)/libs/Simulator/libgenerator.a",
@@ -974,6 +1140,7 @@
 		};
 		8AEDF223203CA1AF001D7448 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B276009DC1259ADE96BDC36 /* Pods-SwiftyIroha.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -1009,7 +1176,7 @@
 					"$(PROJECT_DIR)/libs/iOS/libgenerator.a",
 					"$(PROJECT_DIR)/libs/iOS/libhash.a",
 					"$(PROJECT_DIR)/libs/iOS/libiroha_amount.a",
-					"$(PROJECT_DIR)/libs/iOS/libprotobufd.a",
+					"$(PROJECT_DIR)/libs/iOS/libprotobuf.a",
 					"$(PROJECT_DIR)/libs/iOS/libschema.a",
 					"$(PROJECT_DIR)/libs/iOS/libshared_model_cryptography_model.a",
 					"$(PROJECT_DIR)/libs/iOS/libshared_model_stateless_validation.a",
@@ -1019,7 +1186,7 @@
 					"$(PROJECT_DIR)/libs/Simulator/libshared_model_stateless_validation.a",
 					"$(PROJECT_DIR)/libs/Simulator/libshared_model_cryptography_model.a",
 					"$(PROJECT_DIR)/libs/Simulator/libschema.a",
-					"$(PROJECT_DIR)/libs/Simulator/libprotobufd.a",
+					"$(PROJECT_DIR)/libs/Simulator/libprotobuf.a",
 					"$(PROJECT_DIR)/libs/Simulator/libiroha_amount.a",
 					"$(PROJECT_DIR)/libs/Simulator/libhash.a",
 					"$(PROJECT_DIR)/libs/Simulator/libgenerator.a",
@@ -1038,39 +1205,18 @@
 			};
 			name = Release;
 		};
-		8AEDF225203CA1AF001D7448 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YLWWUD25VZ;
-				INFOPLIST_FILE = SwiftyIrohaTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.jp.soramitsu.SwiftyIrohaTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		8AEDF226203CA1AF001D7448 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YLWWUD25VZ;
-				INFOPLIST_FILE = SwiftyIrohaTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.jp.soramitsu.SwiftyIrohaTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8A37474420A0E14F005D623F /* Build configuration list for PBXNativeTarget "SwiftyIrohaExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A37474520A0E14F005D623F /* Debug */,
+				8A37474620A0E14F005D623F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8AEDF207203CA1AF001D7448 /* Build configuration list for PBXProject "SwiftyIroha" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1085,15 +1231,6 @@
 			buildConfigurations = (
 				8AEDF222203CA1AF001D7448 /* Debug */,
 				8AEDF223203CA1AF001D7448 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8AEDF224203CA1AF001D7448 /* Build configuration list for PBXNativeTarget "SwiftyIrohaTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8AEDF225203CA1AF001D7448 /* Debug */,
-				8AEDF226203CA1AF001D7448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

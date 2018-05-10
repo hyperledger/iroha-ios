@@ -39,8 +39,8 @@ namespace shared_model {
 
       Transaction(const Transaction &o) : Transaction(o.proto_) {}
 
-      Transaction(Transaction &&o) noexcept : Transaction(std::move(o.proto_)) {
-      }
+      Transaction(Transaction &&o) noexcept
+          : Transaction(std::move(o.proto_)) {}
 
       const interface::types::AccountIdType &creatorAccountId() const override {
         return payload_.creator_account_id();
@@ -62,22 +62,27 @@ namespace shared_model {
         return *blobTypePayload_;
       }
 
-      const interface::types::HashType &hash() const override {
-        return *txhash_;
-      }
-
       const interface::SignatureSetType &signatures() const override {
         return *signatures_;
       }
 
-      bool addSignature(
-          const interface::types::SignatureType &signature) override {
-        if (signatures_->count(signature) > 0) {
+      bool addSignature(const crypto::Signed &signed_blob,
+                        const crypto::PublicKey &public_key) override {
+        // if already has such signature
+        if (std::find_if(signatures_->begin(),
+                         signatures_->end(),
+                         [&signed_blob, &public_key](auto signature) {
+                           return signature->signedData() == signed_blob
+                               and signature->publicKey() == public_key;
+                         })
+            != signatures_->end()) {
           return false;
         }
+
         auto sig = proto_->add_signature();
-        sig->set_pubkey(crypto::toBinaryString(signature->publicKey()));
-        sig->set_signature(crypto::toBinaryString(signature->signedData()));
+        sig->set_signature(crypto::toBinaryString(signed_blob));
+        sig->set_pubkey(crypto::toBinaryString(public_key));
+
         signatures_.invalidate();
         return true;
       }
@@ -121,9 +126,6 @@ namespace shared_model {
                                    return std::forward<decltype(acc)>(acc);
                                  });
       }};
-
-      const Lazy<interface::types::HashType> txhash_{
-          [this] { return HashProviderType::makeHash(payload()); }};
     };
   }  // namespace proto
 }  // namespace shared_model
