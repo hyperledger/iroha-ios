@@ -26,12 +26,12 @@ public class IrohaTransactionPreparation {
     }
 
     public func sign(_ unsignedTransaction: IrohaUnsignedTransaction,
-              with keypair: IrohaKeypair) -> Data {
+                     with keypair: IrohaKeypair) -> Data {
         let objectForSigningObjC = unsignedTransaction.getObjectForSigning()
 
         // TODO: Implement better mapping
         let keypairObjC: IRKeypair = keypair.getKeypairObjC()
-
+        
         let data = modelProto.signTransaction(objectForSigningObjC, with: keypairObjC)
         return data!
     }

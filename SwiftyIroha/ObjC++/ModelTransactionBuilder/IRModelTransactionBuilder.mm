@@ -114,13 +114,13 @@ struct TransactionBuilderImpl {
                                             withPublicKey:(IRPublicKey*)publicKey {
     string accountNameCpp = [self getStringCppFromStringObjC:accountName];
     string domainIdCpp = [self getStringCppFromStringObjC:domainId];
-    NSData *data = [self dataFromHexString:publicKey.value];
+    string publicKeyCpp = [self getStringCppFromStringObjC:publicKey.value];
 
-    PublicKey publicKeyCpp = PublicKey((char*)([data bytes]));
     transactionBuilderImpl->transactionBuilderCpp =
     transactionBuilderImpl->transactionBuilderCpp.createAccount(accountNameCpp,
                                                                 domainIdCpp,
-                                                                publicKeyCpp);
+                                                                PublicKey(Blob::fromHexString(publicKeyCpp)));
+    // NSLog(@"%@", data);
     return self;
 }
 
@@ -287,7 +287,7 @@ struct TransactionBuilderImpl {
     return stringCpp;
 }
 
-- (NSData *)dataFromHexString:(NSString *) string {
+- (NSData*)dataFromHexString:(NSString*) string {
     [string stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSMutableData* dataValue = [[NSMutableData alloc] init];
     unsigned char byte;
