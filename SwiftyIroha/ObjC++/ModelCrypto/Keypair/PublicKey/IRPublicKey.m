@@ -19,4 +19,12 @@
 
 @implementation IRPublicKey
 
+- (id)init:(NSString*) value {
+    self = [super init];
+    if (self) {
+        self.value = value;
+    }
+    return self;
+}
+
 @end

@@ -82,7 +82,8 @@ struct ModelProtoImpl {
               withKeypair:(KeypairObjC*)keypair {
     UnsignedTransactionImpl unsignedTransactionImpl = [transactionForSigning getUnsignedTransaction];
     KeypairImpl keypairImpl = [keypair getKeypair];
-    Blob blob = modelProtoImpl->transactionForSigningCpp.signAndAddSignature(*unsignedTransactionImpl.unsignedTransactionCpp, keypairImpl.keypairCpp);
+    Blob blob = modelProtoImpl->transactionForSigningCpp.signAndAddSignature(*unsignedTransactionImpl.unsignedTransactionCpp,
+                                                                             keypairImpl.keypairCpp);
     return [[NSData alloc] initWithBytes:blob.blob().data()
                                   length:blob.size()];
 }

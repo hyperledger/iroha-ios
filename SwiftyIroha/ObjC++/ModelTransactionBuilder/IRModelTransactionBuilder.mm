@@ -58,18 +58,21 @@ struct TransactionBuilderImpl {
 -(IRModelTransactionBuilder*)creatorAccountId:(NSString*)creatorAccountId {
     string creatorAccountIdCpp = string([creatorAccountId UTF8String],
                                         [creatorAccountId lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.creatorAccountId(creatorAccountIdCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.creatorAccountId(creatorAccountIdCpp);
     return self;
 }
 
 -(IRModelTransactionBuilder*)createdTime:(NSDate*)creationTime {
     UInt64 timestamp = (UInt64)([creationTime timeIntervalSince1970]) * 1000;
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.createdTime(timestamp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.createdTime(timestamp);
     return self;
 }
 
 -(IRModelTransactionBuilder*)transactionCounter:(int)transactionCounter {
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.txCounter(transactionCounter);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.txCounter(transactionCounter);
     return self;
 }
 
@@ -79,27 +82,30 @@ struct TransactionBuilderImpl {
     string accountIdCpp = [self getStringCppFromStringObjC:accountId];
     string assetIdCpp = [self getStringCppFromStringObjC:assetId];
     string amountCpp = [self getStringCppFromStringObjC:amount];
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.addAssetQuantity(accountIdCpp, assetIdCpp, amountCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.addAssetQuantity(accountIdCpp, assetIdCpp, amountCpp);
     return self;
 }
 
 -(IRModelTransactionBuilder*)addPeerWithAddress:(NSString*)address
                                   withPublicKey:(IRPublicKey*)peerPublicKey {
     string addressCpp = [self getStringCppFromStringObjC:address];
-    string publicKeyValueCpp = [self getStringCppFromStringObjC:peerPublicKey.value];
+    NSData *data = [self dataFromHexString:peerPublicKey.value];
 
-    PublicKey publicKeyCpp = PublicKey(publicKeyValueCpp);
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.addPeer(addressCpp, publicKeyCpp);
+    PublicKey publicKeyCpp = PublicKey((char*)([data bytes]));
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.addPeer(addressCpp, publicKeyCpp);
     return self;
 }
 
 -(IRModelTransactionBuilder*)addSignatoryWithAccountId:(NSString*)accountId
                                          withPublicKey:(IRPublicKey*)publicKey {
     string accountIdCpp = [self getStringCppFromStringObjC:accountId];
-    string publicKeyValueCpp = [self getStringCppFromStringObjC:publicKey.value];
+    NSData *data = [self dataFromHexString:publicKey.value];
 
-    PublicKey publicKeyCpp = PublicKey(publicKeyValueCpp);
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.addSignatory(accountIdCpp, publicKeyCpp);
+    PublicKey publicKeyCpp = PublicKey((char*)([data bytes]));
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.addSignatory(accountIdCpp, publicKeyCpp);
     return self;
 }
 
@@ -108,12 +114,13 @@ struct TransactionBuilderImpl {
                                             withPublicKey:(IRPublicKey*)publicKey {
     string accountNameCpp = [self getStringCppFromStringObjC:accountName];
     string domainIdCpp = [self getStringCppFromStringObjC:domainId];
-    string publicKeyValueCpp = [self getStringCppFromStringObjC:publicKey.value];
+    NSData *data = [self dataFromHexString:publicKey.value];
 
-    PublicKey publicKeyCpp = PublicKey(publicKeyValueCpp);
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.createAccount(accountNameCpp,
-                                                                                                                domainIdCpp,
-                                                                                                                publicKeyCpp);
+    PublicKey publicKeyCpp = PublicKey((char*)([data bytes]));
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.createAccount(accountNameCpp,
+                                                                domainIdCpp,
+                                                                publicKeyCpp);
     return self;
 }
 
@@ -121,8 +128,9 @@ struct TransactionBuilderImpl {
                                                 withQuorum:(int)quorum {
     string accountIdCpp = [self getStringCppFromStringObjC:accountId];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.setAccountQuorum(accountIdCpp,
-                                                                                                                   quorum);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.setAccountQuorum(accountIdCpp,
+                                                                   quorum);
     return self;
 }
 
@@ -131,8 +139,9 @@ struct TransactionBuilderImpl {
     string domainIdCpp = [self getStringCppFromStringObjC:domainId];
     string defaultRoleCpp = [self getStringCppFromStringObjC:defaultRole];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.createDomain(domainIdCpp,
-                                                                                                               defaultRoleCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.createDomain(domainIdCpp,
+                                                               defaultRoleCpp);
     return self;
 }
 
@@ -142,19 +151,21 @@ struct TransactionBuilderImpl {
     string assetNameCpp = [self getStringCppFromStringObjC:assetName];
     string domainIdCpp = [self getStringCppFromStringObjC:domainId];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.createAsset(assetNameCpp,
-                                                                                                              domainIdCpp,
-                                                                                                              precision);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.createAsset(assetNameCpp,
+                                                              domainIdCpp,
+                                                              precision);
     return self;
 }
 
 -(IRModelTransactionBuilder*)appendRoleToAccountId:(NSString*)accountId
-                                   withRoleName:(NSString*)roleName {
+                                      withRoleName:(NSString*)roleName {
     string accountIdCpp = [self getStringCppFromStringObjC:accountId];
     string roleNameCpp = [self getStringCppFromStringObjC:roleName];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.appendRole(accountIdCpp,
-                                                                                                             roleNameCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.appendRole(accountIdCpp,
+                                                             roleNameCpp);
     return self;
 }
 
@@ -168,7 +179,9 @@ struct TransactionBuilderImpl {
         permissionsVectorCpp.push_back(permissionCpp);
     }
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.createRole(roleNameCpp, permissionsVectorCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.createRole(roleNameCpp,
+                                                             permissionsVectorCpp);
     return self;
 }
 
@@ -177,18 +190,20 @@ struct TransactionBuilderImpl {
     string accountIdCpp = [self getStringCppFromStringObjC:accountId];
     string roleNameCpp = [self getStringCppFromStringObjC:roleName];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.detachRole(accountIdCpp,
-                                                                                                             roleNameCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.detachRole(accountIdCpp,
+                                                             roleNameCpp);
     return self;
 }
 
 -(IRModelTransactionBuilder*)grantPermissionToAccountId:(NSString*)accountId
-                              withPermission:(NSString*)permission {
+                                         withPermission:(NSString*)permission {
     string accountIdCpp = [self getStringCppFromStringObjC:accountId];
     string permissionCpp = [self getStringCppFromStringObjC:permission];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.grantPermission(accountIdCpp,
-                                                                                                                  permissionCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.grantPermission(accountIdCpp,
+                                                                  permissionCpp);
     return self;
 }
 
@@ -197,8 +212,9 @@ struct TransactionBuilderImpl {
     string accountIdCpp = [self getStringCppFromStringObjC:accountId];
     string permissionCpp = [self getStringCppFromStringObjC:permission];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.revokePermission(accountIdCpp,
-                                                                                                                   permissionCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.revokePermission(accountIdCpp,
+                                                                   permissionCpp);
     return self;
 }
 
@@ -209,9 +225,10 @@ struct TransactionBuilderImpl {
     string keyCpp = [self getStringCppFromStringObjC:key];
     string valueCpp = [self getStringCppFromStringObjC:value];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.setAccountDetail(accountIdCpp,
-                                                                                                                   keyCpp,
-                                                                                                                   valueCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.setAccountDetail(accountIdCpp,
+                                                                   keyCpp,
+                                                                   valueCpp);
     return self;
 }
 
@@ -222,9 +239,10 @@ struct TransactionBuilderImpl {
     string assetIdCpp = [self getStringCppFromStringObjC:assetId];
     string amountCpp = [self getStringCppFromStringObjC:amount];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.subtractAssetQuantity(accountIdCpp,
-                                                                                                                        assetIdCpp,
-                                                                                                                        amountCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.subtractAssetQuantity(accountIdCpp,
+                                                                        assetIdCpp,
+                                                                        amountCpp);
     return self;
 }
 
@@ -239,11 +257,12 @@ struct TransactionBuilderImpl {
     string descriptionCpp = [self getStringCppFromStringObjC:description];
     string amountCpp = [self getStringCppFromStringObjC:amount];
 
-    transactionBuilderImpl->transactionBuilderCpp = transactionBuilderImpl->transactionBuilderCpp.transferAsset(sourceAccountIdCpp,
-                                                                                                                destinationAccountIdCpp,
-                                                                                                                assetIdCpp,
-                                                                                                                descriptionCpp,
-                                                                                                                amountCpp);
+    transactionBuilderImpl->transactionBuilderCpp =
+    transactionBuilderImpl->transactionBuilderCpp.transferAsset(sourceAccountIdCpp,
+                                                                destinationAccountIdCpp,
+                                                                assetIdCpp,
+                                                                descriptionCpp,
+                                                                amountCpp);
     return self;
 }
 
@@ -266,6 +285,26 @@ struct TransactionBuilderImpl {
     string stringCpp = string([stringObjC UTF8String],
                               [stringObjC lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
     return stringCpp;
+}
+
+- (NSData *)dataFromHexString:(NSString *) string {
+    if ([string length] % 2 == 1){
+        string = [@"0" stringByAppendingString:string];
+    }
+    const char *chars = [string UTF8String];
+    int i = 0, len = (int)[string length];
+
+    NSMutableData *data = [NSMutableData dataWithCapacity:len / 2];
+    char byteChars[3] = {'\0','\0','\0'};
+    unsigned long wholeByte;
+
+    while (i < len) {
+        byteChars[0] = chars[i++];
+        byteChars[1] = chars[i++];
+        wholeByte = strtoul(byteChars, NULL, 16);
+        [data appendBytes:&wholeByte length:1];
+    }
+    return data;
 }
 
 @end
