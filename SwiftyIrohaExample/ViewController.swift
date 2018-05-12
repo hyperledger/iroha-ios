@@ -68,11 +68,12 @@ class ViewController: UIViewController {
         // Creating transaction for iroha
         let unsignedTransaction =
             try irohaTransactionBuilder
-                .creatorAccountId(creatorAcountId)
+                .creatorAccountId("admin@test")
                 .createdTime(Date())
                 .transactionCounter(1)
-                .createDomain(withDomainId: "ru", withDefaultRole: "user")
-                .createAssets(withAssetName: "dollar", domainId: "ru", percision: 0.1)
+                .createAccount(withAccountName: "testuser",
+                               withDomainId: "test",
+                               withPublicKey: keypair.getPublicKey())
                 .build()
 
         // Creating helper class for signing unsigned transaction
