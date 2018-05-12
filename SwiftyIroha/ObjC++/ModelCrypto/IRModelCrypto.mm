@@ -133,11 +133,6 @@ struct KeypairImpl {
 -(string)getStringCppWithString:(NSString*)stringObjC {
     string stringCpp = string([stringObjC UTF8String],
                               [stringObjC lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
-    cout << stringCpp;
-    cout << "\n";
-    cout << stringCpp.length();
-    cout << "\n";
-    cout << "\n";
     return stringCpp;
 }
 

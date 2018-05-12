@@ -288,23 +288,18 @@ struct TransactionBuilderImpl {
 }
 
 - (NSData *)dataFromHexString:(NSString *) string {
-    if ([string length] % 2 == 1){
-        string = [@"0" stringByAppendingString:string];
+    [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSMutableData* dataValue = [[NSMutableData alloc] init];
+    unsigned char byte;
+    char byte_chars[3] = {'\0','\0','\0'};
+    int i;
+    for (i=0; i < [string length]/2; i++) {
+        byte_chars[0] = [string characterAtIndex:i*2];
+        byte_chars[1] = [string characterAtIndex:i*2+1];
+        byte = strtol(byte_chars, NULL, 16);
+        [dataValue appendBytes:&byte length:1];
     }
-    const char *chars = [string UTF8String];
-    int i = 0, len = (int)[string length];
-
-    NSMutableData *data = [NSMutableData dataWithCapacity:len / 2];
-    char byteChars[3] = {'\0','\0','\0'};
-    unsigned long wholeByte;
-
-    while (i < len) {
-        byteChars[0] = chars[i++];
-        byteChars[1] = chars[i++];
-        wholeByte = strtoul(byteChars, NULL, 16);
-        [data appendBytes:&wholeByte length:1];
-    }
-    return data;
+    return dataValue;
 }
 
 @end
