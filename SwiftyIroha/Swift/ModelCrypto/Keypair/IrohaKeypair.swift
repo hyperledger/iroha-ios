@@ -25,7 +25,7 @@ public class IrohaKeypair {
     fileprivate var privateKey: IrohaPrivateKey
 
     public init(publicKey: IrohaPublicKey,
-         privateKey: IrohaPrivateKey) {
+                privateKey: IrohaPrivateKey) {
         self.keypairObjC = IRKeypair(publicKey: publicKey.getValue(),
                                      withPrivateKey: privateKey.getValue())
         self.publicKey = publicKey
