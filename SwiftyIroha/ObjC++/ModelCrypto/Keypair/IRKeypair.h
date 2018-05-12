@@ -19,7 +19,7 @@
 
 @interface IRKeypair : NSObject {
 @private
-    struct KeypairImpl* keypairImpl;
+    struct KeypairImpl *keypairImpl;
 }
 
 @property NSString* privateKey;

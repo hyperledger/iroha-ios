@@ -71,7 +71,7 @@ class ViewController: UIViewController {
                 .creatorAccountId("admin@test")
                 .createdTime(Date())
                 .transactionCounter(1)
-                .createAccount(withAccountName: "testuser",
+                .createAccount(withAccountName: "agggggg",
                                withDomainId: "test",
                                withPublicKey: keypair.getPublicKey())
                 .build()
