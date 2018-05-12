@@ -25,6 +25,7 @@ using namespace shared_model::proto;
 
 typedef UnsignedWrapper<proto::Transaction> UnsignedTransactionCpp;
 
+// TODO: Redesign like in IRKeypair.mm
 struct UnsignedTransactionImpl {
     UnsignedTransactionCpp* unsignedTransactionCpp;
 

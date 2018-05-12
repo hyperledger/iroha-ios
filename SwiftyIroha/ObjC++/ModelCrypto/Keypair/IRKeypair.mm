@@ -41,21 +41,31 @@ struct KeypairImpl {
 @implementation IRKeypair
 
 - (id)initWithPublicKey: (NSString*)publicKey
-          withPrivateKey: (NSString*)privateKey {
+         withPrivateKey: (NSString*)privateKey {
     self = [super init];
     if (self) {
-        self.privateKey = privateKey;
         self.publicKey = publicKey;
+        self.privateKey = privateKey;
+        string publicKeyCpp = [self getStringCppFromStringObjC:publicKey];
+        string privateKeyCpp = [self getStringCppFromStringObjC:privateKey];
+        self->keypairImpl = new KeypairImpl(Keypair(PublicKey(Blob::fromHexString(publicKeyCpp)),
+                                                    PrivateKey(Blob::fromHexString(privateKeyCpp))));
     }
     return self;
 }
 
 -(void)setKeypair:(struct KeypairImpl*)keypair {
-    keypairImpl = keypair;
+    keypairImpl = new KeypairImpl(keypair->keypairCpp);
 }
 
 -(struct KeypairImpl)getKeypair {
     return *(keypairImpl);
+}
+
+-(string)getStringCppFromStringObjC:(NSString*)stringObjC {
+    string stringCpp = string([stringObjC UTF8String],
+                              [stringObjC lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+    return stringCpp;
 }
 
 @end
