@@ -21,4 +21,6 @@
 
 @property NSString* value;
 
+- (id)init:(NSString*) value;
+
 @end

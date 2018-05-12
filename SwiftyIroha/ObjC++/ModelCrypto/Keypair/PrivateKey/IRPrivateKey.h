@@ -19,4 +19,6 @@
 
 @interface IRPrivateKey : NSObject
 
+@property NSString* value;
+
 @end
