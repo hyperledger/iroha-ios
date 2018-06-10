@@ -116,7 +116,7 @@ class ViewController: UIViewController {
             print("\(nsError.localizedDescription) \n")
         }
 
-        let serviceForSendingTransaction = Iroha_Protocol_CommandServiceService(address: IROHA_ADDRESS)
+        let serviceForSendingTransaction = Iroha_Protocol_CommandServiceServiceClient(address: IROHA_ADDRESS)
 
         do {
             let result = try serviceForSendingTransaction.torii(irohaGRPCTransaction)
@@ -161,7 +161,7 @@ class ViewController: UIViewController {
             print("\(nsError.localizedDescription) \n")
         }
 
-        let serviceForSendingQuery = Iroha_Protocol_QueryServiceService(address: IROHA_ADDRESS)
+        let serviceForSendingQuery = Iroha_Protocol_QueryServiceServiceClient(address: IROHA_ADDRESS)
 
         do {
             let result = try serviceForSendingQuery.find(irohaGRPCQuery)
