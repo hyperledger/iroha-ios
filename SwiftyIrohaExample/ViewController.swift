@@ -21,12 +21,25 @@ import SwiftyIroha
 
 class ViewController: UIViewController {
 
+    // ================================[Settings]===========================================
+    // Remember to change ACCOUNT_NAME_TO_CREATE after you launch an app once
+    // Code below creates a new account in Iroha
+    // If you do not change ACCOUNT_NAME_TO_CREATE after first succesfull excecution then you will get an error
+    // Iroha won't let you to create two account with a same name, so please change it after success
+    // =====================================================================================
+    private final let ACCOUNT_NAME_TO_CREATE = "alex2"
+    private final let ADMIN_ACCOUNT_ID = "admin"
+    private final let TEST_DOMAIN_ID = "test"
+    private final let IROHA_ADDRESS = "127.0.0.1:50051"
+
+
+    // Example of how to create a new account in Iroha
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Setting keypair
-        let publicKey = IrohaPublicKey(value: "407e57f50ca48969b08ba948171bb2435e035d82cec417e18e4a38f5fb113f83")
-        let privateKey = IrohaPrivateKey(value: "1d7e0a32ee0affeb4d22acd73c2c6fb6bd58e266c8c2ce4fa0ffe3dd6a253ffb")
+        let publicKey = IrohaPublicKey(value: "889f6b881e331be21487db77dcf32c5f8d3d5e8066e78d2feac4239fe91d416f")
+        let privateKey = IrohaPrivateKey(value: "0f0ce16d2afbb8eca23c7d8c2724f0c257a800ee2bbd54688cec6b898e3f7e33")
 
         // Initializing keypair object
         let existingKeypair = IrohaKeypair(publicKey: publicKey,
@@ -50,7 +63,7 @@ class ViewController: UIViewController {
         // Waiting 5 seconds to be sure that transaction is processed
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
             do {
-                try self.sendQuery(signingWith: newKeypair)
+                 try self.sendQuery(signingWith: newKeypair)
             } catch {
                 if let error = error as? IrohaQueryBuilderError {
                     print(error.errorDescription)
@@ -61,19 +74,23 @@ class ViewController: UIViewController {
 
     func sendTransaction(signingWith keypair: IrohaKeypair) throws {
         // Data for testing
-        let creatorAcountId = "admin@test"
+        let creatorAcountId = ADMIN_ACCOUNT_ID + "@" + TEST_DOMAIN_ID
 
         let irohaTransactionBuilder = IrohaTransactionBuilder()
 
-        // Creating transaction for iroha
+        let modelCrypto = IrohaModelCrypto()
+
+        // Initializing new user keypair object
+        let newUserKeypair = modelCrypto.generateKeypair()
+
+        // Creating transaction for Iroha to create new user
         let unsignedTransaction =
             try irohaTransactionBuilder
-                .creatorAccountId("admin@test")
+                .creatorAccountId(creatorAcountId)
                 .createdTime(Date())
-                .transactionCounter(1)
-                .createAccount(withAccountName: "agggggg",
-                               withDomainId: "test",
-                               withPublicKey: keypair.getPublicKey())
+                .createAccount(withAccountName: ACCOUNT_NAME_TO_CREATE,
+                               withDomainId: TEST_DOMAIN_ID,
+                               withPublicKey: newUserKeypair.getPublicKey())
                 .build()
 
         // Creating helper class for signing unsigned transaction
@@ -99,10 +116,11 @@ class ViewController: UIViewController {
             print("\(nsError.localizedDescription) \n")
         }
 
-        let serviceForSendingTransaction = Iroha_Protocol_CommandServiceService(address: "127.0.0.1:50051")
+        let serviceForSendingTransaction = Iroha_Protocol_CommandServiceService(address: IROHA_ADDRESS)
 
         do {
-            try serviceForSendingTransaction.torii(irohaGRPCTransaction)
+            let result = try serviceForSendingTransaction.torii(irohaGRPCTransaction)
+            print(try result.jsonString())
         } catch {
             let nsError = error as NSError
             print("\(nsError.localizedDescription) \n")
@@ -111,7 +129,7 @@ class ViewController: UIViewController {
 
     func sendQuery(signingWith keypair: IrohaKeypair) throws {
         // Data for testing
-        let creatorAcountId = "admin@test"
+        let creatorAcountId = ADMIN_ACCOUNT_ID + "@" + TEST_DOMAIN_ID
 
         let queryBuilder = IrohaQueryBuilder()
         let unsignedQuery =
@@ -119,7 +137,7 @@ class ViewController: UIViewController {
                 .creatorAccountId(creatorAcountId)
                 .createdTime(Date())
                 .queryCounter(1)
-                .getAssetInfo(byAssetsId: "dollar#ru")
+                .getAccount(byAccountId: ACCOUNT_NAME_TO_CREATE + "@" + TEST_DOMAIN_ID)
                 .build()
 
         // Creating helper class for signing unsigned query
@@ -143,7 +161,7 @@ class ViewController: UIViewController {
             print("\(nsError.localizedDescription) \n")
         }
 
-        let serviceForSendingQuery = Iroha_Protocol_QueryServiceService(address: "127.0.0.1:50051")
+        let serviceForSendingQuery = Iroha_Protocol_QueryServiceService(address: IROHA_ADDRESS)
 
         do {
             let result = try serviceForSendingQuery.find(irohaGRPCQuery)
