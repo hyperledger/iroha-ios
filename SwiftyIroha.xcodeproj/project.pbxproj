@@ -27,6 +27,19 @@
 		8A287EA720CD4FDA009D7E7B /* mst.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9D20CD4FDA009D7E7B /* mst.pb.swift */; };
 		8A287EA820CD4FDA009D7E7B /* primitive.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9E20CD4FDA009D7E7B /* primitive.pb.swift */; };
 		8A287EA920CD4FDA009D7E7B /* loader.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9F20CD4FDA009D7E7B /* loader.pb.swift */; };
+		8A287EBA20CD62BB009D7E7B /* libhash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EAD20CD62B9009D7E7B /* libhash.a */; };
+		8A287EBB20CD62BB009D7E7B /* libiroha_amount.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EAE20CD62BA009D7E7B /* libiroha_amount.a */; };
+		8A287EBC20CD62BB009D7E7B /* libshared_model_stateless_validation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EAF20CD62BA009D7E7B /* libshared_model_stateless_validation.a */; };
+		8A287EBD20CD62BB009D7E7B /* libed25519.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB020CD62BA009D7E7B /* libed25519.a */; };
+		8A287EBE20CD62BB009D7E7B /* libgenerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB120CD62BA009D7E7B /* libgenerator.a */; };
+		8A287EBF20CD62BB009D7E7B /* libprotobuf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB220CD62BA009D7E7B /* libprotobuf.a */; };
+		8A287EC020CD62BB009D7E7B /* libed25519_crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB320CD62BA009D7E7B /* libed25519_crypto.a */; };
+		8A287EC120CD62BB009D7E7B /* libshared_model_interfaces.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB420CD62BA009D7E7B /* libshared_model_interfaces.a */; };
+		8A287EC220CD62BB009D7E7B /* libschema.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB520CD62BA009D7E7B /* libschema.a */; };
+		8A287EC320CD62BB009D7E7B /* libshared_model_proto_backend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB620CD62BA009D7E7B /* libshared_model_proto_backend.a */; };
+		8A287EC420CD62BB009D7E7B /* libbindings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB720CD62BB009D7E7B /* libbindings.a */; };
+		8A287EC520CD62BB009D7E7B /* libshared_model_cryptography.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB820CD62BB009D7E7B /* libshared_model_cryptography.a */; };
+		8A287EC620CD62BB009D7E7B /* libshared_model_cryptography_model.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EB920CD62BB009D7E7B /* libshared_model_cryptography_model.a */; };
 		8A37473820A0E14F005D623F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37473720A0E14F005D623F /* AppDelegate.swift */; };
 		8A37473A20A0E14F005D623F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A37473920A0E14F005D623F /* ViewController.swift */; };
 		8A37473F20A0E14F005D623F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A37473E20A0E14F005D623F /* Assets.xcassets */; };
@@ -117,6 +130,19 @@
 		8A287E9D20CD4FDA009D7E7B /* mst.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mst.pb.swift; sourceTree = "<group>"; };
 		8A287E9E20CD4FDA009D7E7B /* primitive.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = primitive.pb.swift; sourceTree = "<group>"; };
 		8A287E9F20CD4FDA009D7E7B /* loader.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loader.pb.swift; sourceTree = "<group>"; };
+		8A287EAD20CD62B9009D7E7B /* libhash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhash.a; sourceTree = "<group>"; };
+		8A287EAE20CD62BA009D7E7B /* libiroha_amount.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiroha_amount.a; sourceTree = "<group>"; };
+		8A287EAF20CD62BA009D7E7B /* libshared_model_stateless_validation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_stateless_validation.a; sourceTree = "<group>"; };
+		8A287EB020CD62BA009D7E7B /* libed25519.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519.a; sourceTree = "<group>"; };
+		8A287EB120CD62BA009D7E7B /* libgenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgenerator.a; sourceTree = "<group>"; };
+		8A287EB220CD62BA009D7E7B /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobuf.a; sourceTree = "<group>"; };
+		8A287EB320CD62BA009D7E7B /* libed25519_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_crypto.a; sourceTree = "<group>"; };
+		8A287EB420CD62BA009D7E7B /* libshared_model_interfaces.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_interfaces.a; sourceTree = "<group>"; };
+		8A287EB520CD62BA009D7E7B /* libschema.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libschema.a; sourceTree = "<group>"; };
+		8A287EB620CD62BA009D7E7B /* libshared_model_proto_backend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_proto_backend.a; sourceTree = "<group>"; };
+		8A287EB720CD62BB009D7E7B /* libbindings.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbindings.a; sourceTree = "<group>"; };
+		8A287EB820CD62BB009D7E7B /* libshared_model_cryptography.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography.a; sourceTree = "<group>"; };
+		8A287EB920CD62BB009D7E7B /* libshared_model_cryptography_model.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography_model.a; sourceTree = "<group>"; };
 		8A374652209E399C005D623F /* libshared_model_cryptography.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography.a; sourceTree = "<group>"; };
 		8A374653209E399C005D623F /* libgenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgenerator.a; sourceTree = "<group>"; };
 		8A374654209E399C005D623F /* libschema.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libschema.a; sourceTree = "<group>"; };
@@ -128,17 +154,6 @@
 		8A37465A209E399C005D623F /* libhash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhash.a; sourceTree = "<group>"; };
 		8A37465B209E399C005D623F /* libiroha_amount.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiroha_amount.a; sourceTree = "<group>"; };
 		8A37465C209E399C005D623F /* libed25519.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519.a; sourceTree = "<group>"; };
-		8A374669209E427F005D623F /* libshared_model_cryptography.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography.a; sourceTree = "<group>"; };
-		8A37466A209E427F005D623F /* libgenerator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgenerator.a; sourceTree = "<group>"; };
-		8A37466B209E427F005D623F /* libschema.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libschema.a; sourceTree = "<group>"; };
-		8A37466C209E427F005D623F /* libbindings.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbindings.a; sourceTree = "<group>"; };
-		8A37466D209E427F005D623F /* libed25519_crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519_crypto.a; sourceTree = "<group>"; };
-		8A37466E209E427F005D623F /* libshared_model_cryptography_model.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_cryptography_model.a; sourceTree = "<group>"; };
-		8A37466F209E427F005D623F /* libshared_model_stateless_validation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_stateless_validation.a; sourceTree = "<group>"; };
-		8A374670209E427F005D623F /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobuf.a; sourceTree = "<group>"; };
-		8A374671209E427F005D623F /* libhash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhash.a; sourceTree = "<group>"; };
-		8A374672209E427F005D623F /* libiroha_amount.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiroha_amount.a; sourceTree = "<group>"; };
-		8A374673209E427F005D623F /* libed25519.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libed25519.a; sourceTree = "<group>"; };
 		8A37473520A0E14F005D623F /* SwiftyIrohaExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyIrohaExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A37473720A0E14F005D623F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A37473920A0E14F005D623F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -204,9 +219,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A287EC020CD62BB009D7E7B /* libed25519_crypto.a in Frameworks */,
 				8A287E4620CD34D0009D7E7B /* libshared_model_proto_backend.a in Frameworks */,
+				8A287EC520CD62BB009D7E7B /* libshared_model_cryptography.a in Frameworks */,
+				8A287EBF20CD62BB009D7E7B /* libprotobuf.a in Frameworks */,
+				8A287EBB20CD62BB009D7E7B /* libiroha_amount.a in Frameworks */,
+				8A287EBC20CD62BB009D7E7B /* libshared_model_stateless_validation.a in Frameworks */,
+				8A287EBE20CD62BB009D7E7B /* libgenerator.a in Frameworks */,
+				8A287EBD20CD62BB009D7E7B /* libed25519.a in Frameworks */,
 				06DCBD973B179EDB065DE282 /* Pods_SwiftyIroha.framework in Frameworks */,
+				8A287EC320CD62BB009D7E7B /* libshared_model_proto_backend.a in Frameworks */,
 				8A287E4720CD34D0009D7E7B /* libshared_model_interfaces.a in Frameworks */,
+				8A287EC120CD62BB009D7E7B /* libshared_model_interfaces.a in Frameworks */,
+				8A287EC620CD62BB009D7E7B /* libshared_model_cryptography_model.a in Frameworks */,
+				8A287EC220CD62BB009D7E7B /* libschema.a in Frameworks */,
+				8A287EBA20CD62BB009D7E7B /* libhash.a in Frameworks */,
+				8A287EC420CD62BB009D7E7B /* libbindings.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,17 +292,19 @@
 		8A374668209E427F005D623F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8A374669209E427F005D623F /* libshared_model_cryptography.a */,
-				8A37466A209E427F005D623F /* libgenerator.a */,
-				8A37466B209E427F005D623F /* libschema.a */,
-				8A37466C209E427F005D623F /* libbindings.a */,
-				8A37466D209E427F005D623F /* libed25519_crypto.a */,
-				8A37466E209E427F005D623F /* libshared_model_cryptography_model.a */,
-				8A37466F209E427F005D623F /* libshared_model_stateless_validation.a */,
-				8A374670209E427F005D623F /* libprotobuf.a */,
-				8A374671209E427F005D623F /* libhash.a */,
-				8A374672209E427F005D623F /* libiroha_amount.a */,
-				8A374673209E427F005D623F /* libed25519.a */,
+				8A287EB720CD62BB009D7E7B /* libbindings.a */,
+				8A287EB320CD62BA009D7E7B /* libed25519_crypto.a */,
+				8A287EB020CD62BA009D7E7B /* libed25519.a */,
+				8A287EB120CD62BA009D7E7B /* libgenerator.a */,
+				8A287EAD20CD62B9009D7E7B /* libhash.a */,
+				8A287EAE20CD62BA009D7E7B /* libiroha_amount.a */,
+				8A287EB220CD62BA009D7E7B /* libprotobuf.a */,
+				8A287EB520CD62BA009D7E7B /* libschema.a */,
+				8A287EB920CD62BB009D7E7B /* libshared_model_cryptography_model.a */,
+				8A287EB820CD62BB009D7E7B /* libshared_model_cryptography.a */,
+				8A287EB420CD62BA009D7E7B /* libshared_model_interfaces.a */,
+				8A287EB620CD62BA009D7E7B /* libshared_model_proto_backend.a */,
+				8A287EAF20CD62BA009D7E7B /* libshared_model_stateless_validation.a */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1189,6 +1219,8 @@
 					"$(PROJECT_DIR)/libs/iOS/libshared_model_cryptography_model.a",
 					"$(PROJECT_DIR)/libs/iOS/libshared_model_stateless_validation.a",
 					"$(PROJECT_DIR)/libs/iOS/libed25519_crypto.a",
+					"$(PROJECT_DIR)/libs/iOS/libshared_model_interfaces.a",
+					"$(PROJECT_DIR)/libs/iOS/libshared_model_proto_backend.a",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
 					"$(PROJECT_DIR)/libs/Simulator/libshared_model_stateless_validation.a",
@@ -1259,6 +1291,8 @@
 					"$(PROJECT_DIR)/libs/iOS/libshared_model_cryptography_model.a",
 					"$(PROJECT_DIR)/libs/iOS/libshared_model_stateless_validation.a",
 					"$(PROJECT_DIR)/libs/iOS/libed25519_crypto.a",
+					"$(PROJECT_DIR)/libs/iOS/libshared_model_interfaces.a",
+					"$(PROJECT_DIR)/libs/iOS/libshared_model_proto_backend.a",
 				);
 				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
 					"$(PROJECT_DIR)/libs/Simulator/libshared_model_stateless_validation.a",
@@ -1272,6 +1306,8 @@
 					"$(PROJECT_DIR)/libs/Simulator/libshared_model_cryptography.a",
 					"$(PROJECT_DIR)/libs/Simulator/libbindings.a",
 					"$(PROJECT_DIR)/libs/Simulator/libed25519_crypto.a",
+					"$(PROJECT_DIR)/libs/Simulator/libshared_model_proto_backend.a",
+					"$(PROJECT_DIR)/libs/Simulator/libshared_model_interfaces.a",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.jp.soramitsu.SwiftyIroha;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
