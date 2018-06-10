@@ -20,7 +20,6 @@
 		8A287EA020CD4FDA009D7E7B /* ordering.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9620CD4FDA009D7E7B /* ordering.pb.swift */; };
 		8A287EA120CD4FDA009D7E7B /* commands.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9720CD4FDA009D7E7B /* commands.pb.swift */; };
 		8A287EA220CD4FDA009D7E7B /* queries.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9820CD4FDA009D7E7B /* queries.pb.swift */; };
-		8A287EA320CD4FDA009D7E7B /* iroha.protocol.client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9920CD4FDA009D7E7B /* iroha.protocol.client.pb.swift */; };
 		8A287EA420CD4FDA009D7E7B /* responses.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9A20CD4FDA009D7E7B /* responses.pb.swift */; };
 		8A287EA520CD4FDA009D7E7B /* block.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9B20CD4FDA009D7E7B /* block.pb.swift */; };
 		8A287EA620CD4FDA009D7E7B /* endpoint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9C20CD4FDA009D7E7B /* endpoint.pb.swift */; };
@@ -54,6 +53,7 @@
 		8AB823DC20403B11001FF63C /* IRPrivateKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AEDF252203CA205001D7448 /* IRPrivateKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8AB823E220403C24001FF63C /* IRUnsignedQuery.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AEDF245203CA205001D7448 /* IRUnsignedQuery.mm */; };
 		8AB823E320403C24001FF63C /* IRModelCrypto.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AEDF248203CA205001D7448 /* IRModelCrypto.mm */; };
+		8ADAC1F320CDD42D008C9DFA /* endpoint.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADAC1F220CDD42D008C9DFA /* endpoint.grpc.swift */; };
 		8AE1B0432066DCED00F412E4 /* IrohaTransactionBuilderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE1B0422066DCED00F412E4 /* IrohaTransactionBuilderError.swift */; };
 		8AE1B0462066E22E00F412E4 /* IrohaQueryBuilderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE1B0452066E22E00F412E4 /* IrohaQueryBuilderError.swift */; };
 		8AEDF21E203CA1AF001D7448 /* SwiftyIroha.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AEDF210203CA1AF001D7448 /* SwiftyIroha.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -123,7 +123,6 @@
 		8A287E9620CD4FDA009D7E7B /* ordering.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ordering.pb.swift; sourceTree = "<group>"; };
 		8A287E9720CD4FDA009D7E7B /* commands.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commands.pb.swift; sourceTree = "<group>"; };
 		8A287E9820CD4FDA009D7E7B /* queries.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = queries.pb.swift; sourceTree = "<group>"; };
-		8A287E9920CD4FDA009D7E7B /* iroha.protocol.client.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iroha.protocol.client.pb.swift; sourceTree = "<group>"; };
 		8A287E9A20CD4FDA009D7E7B /* responses.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = responses.pb.swift; sourceTree = "<group>"; };
 		8A287E9B20CD4FDA009D7E7B /* block.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = block.pb.swift; sourceTree = "<group>"; };
 		8A287E9C20CD4FDA009D7E7B /* endpoint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = endpoint.pb.swift; sourceTree = "<group>"; };
@@ -167,6 +166,7 @@
 		8A9B9F07206ACC0E0052CAD4 /* ObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjC.h; sourceTree = "<group>"; };
 		8A9B9F09206ACC0E0052CAD4 /* ObjC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjC.mm; sourceTree = "<group>"; };
 		8AB8249820404AD8001FF63C /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftProtobuf.framework; sourceTree = "<group>"; };
+		8ADAC1F220CDD42D008C9DFA /* endpoint.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = endpoint.grpc.swift; sourceTree = "<group>"; };
 		8AE1AFCD206197D100F412E4 /* IrohaTransactionBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaTransactionBuilderTests.swift; sourceTree = "<group>"; };
 		8AE1B0302066C05600F412E4 /* IrohaModelCryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaModelCryptoTests.swift; sourceTree = "<group>"; };
 		8AE1B0422066DCED00F412E4 /* IrohaTransactionBuilderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaTransactionBuilderError.swift; sourceTree = "<group>"; };
@@ -327,10 +327,10 @@
 		8A37476620A0E227005D623F /* GRPC */ = {
 			isa = PBXGroup;
 			children = (
+				8ADAC1F220CDD42D008C9DFA /* endpoint.grpc.swift */,
 				8A287E9B20CD4FDA009D7E7B /* block.pb.swift */,
 				8A287E9720CD4FDA009D7E7B /* commands.pb.swift */,
 				8A287E9C20CD4FDA009D7E7B /* endpoint.pb.swift */,
-				8A287E9920CD4FDA009D7E7B /* iroha.protocol.client.pb.swift */,
 				8A287E9F20CD4FDA009D7E7B /* loader.pb.swift */,
 				8A287E9D20CD4FDA009D7E7B /* mst.pb.swift */,
 				8A287E9620CD4FDA009D7E7B /* ordering.pb.swift */,
@@ -927,7 +927,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A37473A20A0E14F005D623F /* ViewController.swift in Sources */,
-				8A287EA320CD4FDA009D7E7B /* iroha.protocol.client.pb.swift in Sources */,
+				8ADAC1F320CDD42D008C9DFA /* endpoint.grpc.swift in Sources */,
 				8A287EA020CD4FDA009D7E7B /* ordering.pb.swift in Sources */,
 				8A287EA820CD4FDA009D7E7B /* primitive.pb.swift in Sources */,
 				8A287EA220CD4FDA009D7E7B /* queries.pb.swift in Sources */,
