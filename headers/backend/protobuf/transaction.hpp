@@ -20,7 +20,7 @@
 
 #include "interfaces/transaction.hpp"
 
-#include <boost/range/numeric.hpp>
+#include <boost/range/adaptor/transformed.hpp>
 
 #include "backend/protobuf/commands/proto_command.hpp"
 #include "backend/protobuf/common_objects/signature.hpp"
@@ -46,11 +46,7 @@ namespace shared_model {
         return payload_.creator_account_id();
       }
 
-      interface::types::CounterType transactionCounter() const override {
-        return payload_.tx_counter();
-      }
-
-      const Transaction::CommandsType &commands() const override {
+      Transaction::CommandsType commands() const override {
         return *commands_;
       }
 
@@ -62,7 +58,7 @@ namespace shared_model {
         return *blobTypePayload_;
       }
 
-      const interface::SignatureSetType &signatures() const override {
+      interface::types::SignatureRangeType signatures() const override {
         return *signatures_;
       }
 
@@ -71,15 +67,14 @@ namespace shared_model {
         // if already has such signature
         if (std::find_if(signatures_->begin(),
                          signatures_->end(),
-                         [&signed_blob, &public_key](auto signature) {
-                           return signature->signedData() == signed_blob
-                               and signature->publicKey() == public_key;
+                         [&public_key](const auto &signature) {
+                           return signature.publicKey() == public_key;
                          })
             != signatures_->end()) {
           return false;
         }
 
-        auto sig = proto_->add_signature();
+        auto sig = proto_->add_signatures();
         sig->set_signature(crypto::toBinaryString(signed_blob));
         sig->set_pubkey(crypto::toBinaryString(public_key));
 
@@ -87,13 +82,12 @@ namespace shared_model {
         return true;
       }
 
-      bool clearSignatures() override {
-        signatures_->clear();
-        return (signatures_->size() == 0);
-      }
-
       interface::types::TimestampType createdTime() const override {
         return payload_.created_time();
+      }
+
+      Transaction::QuorumType quorum() const override {
+        return payload_.quorum();
       }
 
      private:
@@ -103,13 +97,9 @@ namespace shared_model {
 
       const iroha::protocol::Transaction::Payload &payload_{proto_->payload()};
 
-      const Lazy<CommandsType> commands_{[this] {
-        return boost::accumulate(payload_.commands(),
-                                 CommandsType{},
-                                 [](auto &&acc, const auto &cmd) {
-                                   acc.emplace_back(new Command(cmd));
-                                   return std::forward<decltype(acc)>(acc);
-                                 });
+      const Lazy<std::vector<proto::Command>> commands_{[this] {
+        return std::vector<proto::Command>(payload_.commands().begin(),
+                                           payload_.commands().end());
       }};
 
       const Lazy<interface::types::BlobType> blob_{
@@ -118,13 +108,13 @@ namespace shared_model {
       const Lazy<interface::types::BlobType> blobTypePayload_{
           [this] { return makeBlob(payload_); }};
 
-      const Lazy<interface::SignatureSetType> signatures_{[this] {
-        return boost::accumulate(proto_->signature(),
-                                 interface::SignatureSetType{},
-                                 [](auto &&acc, const auto &sig) {
-                                   acc.emplace(new Signature(sig));
-                                   return std::forward<decltype(acc)>(acc);
-                                 });
+      const Lazy<SignatureSetType<proto::Signature>> signatures_{[this] {
+        auto signatures = proto_->signatures()
+            | boost::adaptors::transformed([](const auto &x) {
+                            return proto::Signature(x);
+                          });
+        return SignatureSetType<proto::Signature>(signatures.begin(),
+                                                  signatures.end());
       }};
     };
   }  // namespace proto
