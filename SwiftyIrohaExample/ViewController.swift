@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     // If you do not change ACCOUNT_NAME_TO_CREATE after first succesfull excecution then you will get an error
     // Iroha won't let you to create two account with a same name, so please change it after success
     // =====================================================================================
-    private final let ACCOUNT_NAME_TO_CREATE = "alex2"
+    private final let ACCOUNT_NAME_TO_CREATE = "alex"
     private final let ADMIN_ACCOUNT_ID = "admin"
     private final let TEST_DOMAIN_ID = "test"
     private final let IROHA_ADDRESS = "127.0.0.1:50051"
