@@ -47,20 +47,19 @@ namespace shared_model {
           const interface::types::AccountIdType &account_id);
 
       /**
-       * Sets transaction counter field
-       * @param tx_counter - transaction counter
-       * @return builder with tx_counter field appended
-       */
-      ModelTransactionBuilder txCounter(
-          interface::types::CounterType tx_counter);
-
-      /**
        * Sets time of creation
        * @param created_time - time of creation
        * @return builder with created_time field appended
        */
       ModelTransactionBuilder createdTime(
           interface::types::TimestampType created_time);
+
+      /**
+       * Sets transaction quorum
+       * @param quorum to set
+       * @return builder with quorum field appended
+       */
+      ModelTransactionBuilder quorum(interface::types::QuorumType quorum);
 
       /**
        * Adds given quantity of given asset to account
