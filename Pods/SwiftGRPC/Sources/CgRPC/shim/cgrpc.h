@@ -118,6 +118,31 @@ typedef struct grpc_event {
   void *tag;
 } grpc_event;
 
+typedef enum grpc_arg_type {
+  GRPC_ARG_STRING,
+  GRPC_ARG_INTEGER,
+  GRPC_ARG_POINTER
+} grpc_arg_type;
+
+typedef struct grpc_arg_pointer_vtable {
+  void *(*copy)(void *p);
+  void (*destroy)(void *p);
+  int (*cmp)(void *p, void *q);
+} grpc_arg_pointer_vtable;
+
+typedef struct grpc_arg {
+  grpc_arg_type type;
+  char *key;
+  union grpc_arg_value {
+    char *string;
+    int integer;
+    struct grpc_arg_pointer {
+      void *p;
+      const grpc_arg_pointer_vtable *vtable;
+    } pointer;
+  } value;
+} grpc_arg;
+
 #endif
 
 // directly expose a few grpc library functions
@@ -126,6 +151,9 @@ void grpc_shutdown(void);
 const char *grpc_version_string(void);
 const char *grpc_g_stands_for(void);
 
+char *gpr_strdup(const char *src);
+void gpr_free(void *p);
+
 void cgrpc_completion_queue_drain(cgrpc_completion_queue *cq);
 void grpc_completion_queue_destroy(cgrpc_completion_queue *cq);
 
@@ -133,10 +161,13 @@ void grpc_completion_queue_destroy(cgrpc_completion_queue *cq);
 void cgrpc_free_copied_string(char *string);
 
 // channel support
-cgrpc_channel *cgrpc_channel_create(const char *address);
+cgrpc_channel *cgrpc_channel_create(const char *address,
+                                    grpc_arg *args,
+                                    int num_args);
 cgrpc_channel *cgrpc_channel_create_secure(const char *address,
                                            const char *pem_root_certs,
-                                           const char *host);
+                                           grpc_arg *args,
+                                           int num_args);
 
 void cgrpc_channel_destroy(cgrpc_channel *channel);
 cgrpc_call *cgrpc_channel_create_call(cgrpc_channel *channel,
@@ -191,10 +222,12 @@ void cgrpc_operations_add_operation(cgrpc_operations *call, cgrpc_observer *obse
 // metadata support
 cgrpc_metadata_array *cgrpc_metadata_array_create(void);
 void cgrpc_metadata_array_destroy(cgrpc_metadata_array *array);
+void cgrpc_metadata_array_unref_fields(cgrpc_metadata_array *array);
 size_t cgrpc_metadata_array_get_count(cgrpc_metadata_array *array);
 char *cgrpc_metadata_array_copy_key_at_index(cgrpc_metadata_array *array, size_t index);
 char *cgrpc_metadata_array_copy_value_at_index(cgrpc_metadata_array *array, size_t index);
 void cgrpc_metadata_array_move_metadata(cgrpc_metadata_array *dest, cgrpc_metadata_array *src);
+cgrpc_metadata_array *cgrpc_metadata_array_copy(cgrpc_metadata_array *src);
 void cgrpc_metadata_array_append_metadata(cgrpc_metadata_array *metadata, const char *key, const char *value);
 
 // mutex support

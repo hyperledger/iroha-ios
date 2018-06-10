@@ -259,6 +259,16 @@ Before starting you need to install the following software on you mac:
     }
 ```
 
+## Having build problems?
+
+This library was build with the following dependencies:
+
+* BoringSSL 10.0.3
+* SwiftGRPC 0.4.3
+* SwiftProtobuf 1.0.3
+* gRPC-Core 1.11.0
+* nanopb 0.3.8
+
 ## Author
 
 AlexeyMukhin
