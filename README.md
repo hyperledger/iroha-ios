@@ -1,6 +1,6 @@
 # Hyperledger Iroha iOS library
 
-## Please pay attention!!! Master branch of [this](https://github.com/soramitsu/iroha-ios) repository works with master branch of [Hyperledger Iroha repository](https://github.com/hyperledger/iroha) !!! Commands listed in readme file depends on branch!!! 
+### Please pay attention!!! Master branch of [this](https://github.com/soramitsu/iroha-ios) library works with develop branch of [Hyperledger Iroha](https://github.com/hyperledger/iroha) !!! Commands listed in this README.md file depends on Hyperledger Iroha branch!!! 
 
 This library was implemented in order to provide key generation and signing logic for queries and transactions passed to Hyperledger Iroha
 
@@ -78,12 +78,12 @@ Before starting you need to install the following software on you mac:
     $docker volume create blockstore
 ```
 
-4. Download Hyperledger Iroha (master branch):
+4. Download Hyperledger Iroha (develop branch):
 ```
-    $git clone -b master https://github.com/hyperledger/iroha --depth=1
+    $git clone -b develop https://github.com/hyperledger/iroha --depth=1
 ```
 
-5. Start Hyperledger Iroha (master branch):
+5. Start Hyperledger Iroha (develop branch):
 ```
     $docker run -it --name iroha \
     -p 50051:50051 \
@@ -91,7 +91,7 @@ Before starting you need to install the following software on you mac:
     -v blockstore:/tmp/block_store \
     --network=iroha-network \
     --entrypoint=/bin/bash \
-    hyperledger/iroha:latest
+    hyperledger/iroha:develop
 ```
 
 6. Launch Iroha Daemon:
