@@ -53,8 +53,8 @@ namespace shared_model {
       enum RequiredFields {
         Command,
         CreatorAccountId,
-        TxCounter,
         CreatedTime,
+        Quorum,
         TOTAL
       };
 
@@ -107,16 +107,15 @@ namespace shared_model {
         });
       }
 
-      auto txCounter(interface::types::CounterType tx_counter) const {
-        return transform<TxCounter>([&](auto &tx) {
-          tx.mutable_payload()->set_tx_counter(tx_counter);
-        });
-      }
-
       auto createdTime(interface::types::TimestampType created_time) const {
         return transform<CreatedTime>([&](auto &tx) {
           tx.mutable_payload()->set_created_time(created_time);
         });
+      }
+
+      auto quorum(interface::types::QuorumType quorum) const {
+        return transform<Quorum>(
+            [&](auto &tx) { tx.mutable_payload()->set_quorum(quorum); });
       }
 
       auto addAssetQuantity(const interface::types::AccountIdType &account_id,

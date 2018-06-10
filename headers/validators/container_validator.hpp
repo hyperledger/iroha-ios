@@ -17,11 +17,11 @@
 
 #ifndef IROHA_CONTAINER_VALIDATOR_HPP
 #define IROHA_CONTAINER_VALIDATOR_HPP
+
 #include <boost/format.hpp>
 #include "datetime/time.hpp"
 #include "interfaces/common_objects/types.hpp"
 #include "interfaces/iroha_internal/block.hpp"
-#include "utils/polymorphic_wrapper.hpp"
 #include "validators/answer.hpp"
 
 // TODO 22/01/2018 x3medima17: write stateless validator IR-837
@@ -30,28 +30,19 @@ namespace shared_model {
   namespace validation {
 
     /**
-     * Class that validates blocks and proposal common fieds
+     * Class that validates blocks and proposal common fields
      */
-    template <typename Iface, typename FieldValidator, typename TransactionValidator>
+    template <typename Iface,
+              typename FieldValidator,
+              typename TransactionValidator>
     class ContainerValidator {
      protected:
-      void validateHeight(ReasonsGroupType &reason,
-                          const interface::types::HeightType &height) const {
-        if (height <= 0) {
-          auto message =
-              (boost::format("Height should be > 0, passed value: %d") % height)
-                  .str();
-          reason.second.push_back(message);
-        }
-      }
       void validateTransaction(
           ReasonsGroupType &reason,
           const interface::Transaction &transaction) const {
         auto answer = transaction_validator_.validate(transaction);
         if (answer.hasErrors()) {
-          auto message = (boost::format("Tx #%d: %s")
-                          % transaction.transactionCounter() % answer.reason())
-                             .str();
+          auto message = (boost::format("Tx: %s") % answer.reason()).str();
           reason.second.push_back(message);
         }
       }
@@ -60,7 +51,7 @@ namespace shared_model {
           const interface::types::TransactionsCollectionType &transactions)
           const {
         for (const auto &tx : transactions) {
-          validateTransaction(reason, *tx);
+          validateTransaction(reason, tx);
         }
       }
 
@@ -76,15 +67,17 @@ namespace shared_model {
         ReasonsGroupType reason;
         reason.first = reason_name;
         field_validator_.validateCreatedTime(reason, cont.createdTime());
-        validateHeight(reason, cont.height());
+        field_validator_.validateHeight(reason, cont.height());
         validateTransactions(reason, cont.transactions());
         if (not reason.second.empty()) {
           answer.addReason(std::move(reason));
         }
         return answer;
       }
+
      private:
       TransactionValidator transaction_validator_;
+
      protected:
       FieldValidator field_validator_;
     };
