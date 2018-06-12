@@ -25,7 +25,6 @@
 		8A287EA620CD4FDA009D7E7B /* endpoint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9C20CD4FDA009D7E7B /* endpoint.pb.swift */; };
 		8A287EA720CD4FDA009D7E7B /* mst.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9D20CD4FDA009D7E7B /* mst.pb.swift */; };
 		8A287EA820CD4FDA009D7E7B /* primitive.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9E20CD4FDA009D7E7B /* primitive.pb.swift */; };
-		8A287EA920CD4FDA009D7E7B /* loader.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A287E9F20CD4FDA009D7E7B /* loader.pb.swift */; };
 		8A287EBA20CD62BB009D7E7B /* libhash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EAD20CD62B9009D7E7B /* libhash.a */; };
 		8A287EBB20CD62BB009D7E7B /* libiroha_amount.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EAE20CD62BA009D7E7B /* libiroha_amount.a */; };
 		8A287EBC20CD62BB009D7E7B /* libshared_model_stateless_validation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A287EAF20CD62BA009D7E7B /* libshared_model_stateless_validation.a */; };
@@ -128,7 +127,6 @@
 		8A287E9C20CD4FDA009D7E7B /* endpoint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = endpoint.pb.swift; sourceTree = "<group>"; };
 		8A287E9D20CD4FDA009D7E7B /* mst.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mst.pb.swift; sourceTree = "<group>"; };
 		8A287E9E20CD4FDA009D7E7B /* primitive.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = primitive.pb.swift; sourceTree = "<group>"; };
-		8A287E9F20CD4FDA009D7E7B /* loader.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loader.pb.swift; sourceTree = "<group>"; };
 		8A287EAD20CD62B9009D7E7B /* libhash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhash.a; sourceTree = "<group>"; };
 		8A287EAE20CD62BA009D7E7B /* libiroha_amount.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libiroha_amount.a; sourceTree = "<group>"; };
 		8A287EAF20CD62BA009D7E7B /* libshared_model_stateless_validation.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libshared_model_stateless_validation.a; sourceTree = "<group>"; };
@@ -171,6 +169,7 @@
 		8AE1B0302066C05600F412E4 /* IrohaModelCryptoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaModelCryptoTests.swift; sourceTree = "<group>"; };
 		8AE1B0422066DCED00F412E4 /* IrohaTransactionBuilderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaTransactionBuilderError.swift; sourceTree = "<group>"; };
 		8AE1B0452066E22E00F412E4 /* IrohaQueryBuilderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrohaQueryBuilderError.swift; sourceTree = "<group>"; };
+		8AE283EA20CE749600E6D8A1 /* SwiftyIroha copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SwiftyIroha copy-Info.plist"; path = "/Users/alexey/Documents/projects/iroha-ios-main/iroha-ios/SwiftyIroha copy-Info.plist"; sourceTree = "<absolute>"; };
 		8AEDF20D203CA1AF001D7448 /* SwiftyIroha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyIroha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AEDF210203CA1AF001D7448 /* SwiftyIroha.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyIroha.h; sourceTree = "<group>"; };
 		8AEDF211203CA1AF001D7448 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -331,7 +330,6 @@
 				8A287E9B20CD4FDA009D7E7B /* block.pb.swift */,
 				8A287E9720CD4FDA009D7E7B /* commands.pb.swift */,
 				8A287E9C20CD4FDA009D7E7B /* endpoint.pb.swift */,
-				8A287E9F20CD4FDA009D7E7B /* loader.pb.swift */,
 				8A287E9D20CD4FDA009D7E7B /* mst.pb.swift */,
 				8A287E9620CD4FDA009D7E7B /* ordering.pb.swift */,
 				8A287E9E20CD4FDA009D7E7B /* primitive.pb.swift */,
@@ -452,6 +450,7 @@
 				8AF2C8BD205D18B2001288C6 /* README.md */,
 				8A5EFCE220487764004ACDD4 /* SwiftyIroha.podspec */,
 				21A5AE2EB4B7B8E3CFC32366 /* Pods */,
+				8AE283EA20CE749600E6D8A1 /* SwiftyIroha copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -931,7 +930,6 @@
 				8A287EA020CD4FDA009D7E7B /* ordering.pb.swift in Sources */,
 				8A287EA820CD4FDA009D7E7B /* primitive.pb.swift in Sources */,
 				8A287EA220CD4FDA009D7E7B /* queries.pb.swift in Sources */,
-				8A287EA920CD4FDA009D7E7B /* loader.pb.swift in Sources */,
 				8A287EA520CD4FDA009D7E7B /* block.pb.swift in Sources */,
 				8A287EA120CD4FDA009D7E7B /* commands.pb.swift in Sources */,
 				8A287EA620CD4FDA009D7E7B /* endpoint.pb.swift in Sources */,

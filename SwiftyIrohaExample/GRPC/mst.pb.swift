@@ -20,8 +20,10 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// TODO: @l4l (04/05/18) remove in favor of primitive.proto IR-1321
-struct Iroha_Network_Transport_Peer: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".Peer"
+struct Iroha_Network_Transport_Peer {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var pubkey: Data = SwiftProtobuf.Internal.emptyData
 
@@ -30,38 +32,12 @@ struct Iroha_Network_Transport_Peer: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.pubkey)
-      case 2: try decoder.decodeSingularStringField(value: &self.address)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.pubkey.isEmpty {
-      try visitor.visitSingularBytesField(value: self.pubkey, fieldNumber: 1)
-    }
-    if !self.address.isEmpty {
-      try visitor.visitSingularStringField(value: self.address, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Network_Transport_MstState: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".MstState"
+struct Iroha_Network_Transport_MstState {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var transactions: [Iroha_Protocol_Transaction] {
     get {return _storage._transactions}
@@ -81,39 +57,6 @@ struct Iroha_Network_Transport_MstState: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeRepeatedMessageField(value: &_storage._transactions)
-        case 2: try decoder.decodeSingularMessageField(value: &_storage._peer)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._transactions.isEmpty {
-        try visitor.visitRepeatedMessageField(value: _storage._transactions, fieldNumber: 1)
-      }
-      if let v = _storage._peer {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
@@ -121,11 +64,32 @@ struct Iroha_Network_Transport_MstState: SwiftProtobuf.Message {
 
 fileprivate let _protobuf_package = "iroha.network.transport"
 
-extension Iroha_Network_Transport_Peer: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Network_Transport_Peer: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Peer"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "pubkey"),
     2: .same(proto: "address"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.pubkey)
+      case 2: try decoder.decodeSingularStringField(value: &self.address)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.pubkey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.pubkey, fieldNumber: 1)
+    }
+    if !self.address.isEmpty {
+      try visitor.visitSingularStringField(value: self.address, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Network_Transport_Peer) -> Bool {
     if self.pubkey != other.pubkey {return false}
@@ -135,7 +99,8 @@ extension Iroha_Network_Transport_Peer: SwiftProtobuf._MessageImplementationBase
   }
 }
 
-extension Iroha_Network_Transport_MstState: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Network_Transport_MstState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MstState"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "transactions"),
     2: .same(proto: "peer"),
@@ -160,6 +125,31 @@ extension Iroha_Network_Transport_MstState: SwiftProtobuf._MessageImplementation
       _storage = _StorageClass(copying: _storage)
     }
     return _storage
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeRepeatedMessageField(value: &_storage._transactions)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._peer)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._transactions.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._transactions, fieldNumber: 1)
+      }
+      if let v = _storage._peer {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
   }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Network_Transport_MstState) -> Bool {
