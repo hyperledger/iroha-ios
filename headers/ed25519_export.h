@@ -39,4 +39,4 @@
 #  endif
 #endif
 
-#endif
+#endif /* ED25519_EXPORT_H */
