@@ -6,6 +6,12 @@
 // For information on using the generated types, please see the documenation:
 //   https://github.com/apple/swift-protobuf/
 
+//*
+// Messages related to primitive types, used in Commands and Queries
+//
+// Contains RolePermission, GrantablePermission, Signature,
+// uint256, Amount, and Peer.
+
 import Foundation
 import SwiftProtobuf
 
@@ -19,48 +25,67 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+///*
+/// Represents any possible value for permission field,
+/// then the account is capable of performing such action.
+///
+/// Command and Query related permissions are included in the role,
+/// which an Account can have.
+///
+/// Grantable permission is set as a relation between two accounts:
+/// Account A is granting Permission to Account B,
+/// so that Account B can perform actions over Account A.
 enum Iroha_Protocol_RolePermission: SwiftProtobuf.Enum {
   typealias RawValue = Int
 
   /// Command Permissions
   case canAppendRole // = 0
-  case canDetachRole // = 31
   case canCreateRole // = 1
-  case canAddAssetQty // = 2
-  case canAddPeer // = 3
-  case canAddSignatory // = 4
-  case canCreateAccount // = 5
-  case canCreateAsset // = 6
-  case canCreateDomain // = 7
-  case canRemoveSignatory // = 8
-  case canSetQuorum // = 9
-  case canTransfer // = 10
-  case canReceive // = 11
-  case canSubtractAssetQty // = 12
+  case canDetachRole // = 2
+  case canAddAssetQty // = 3
+  case canSubtractAssetQty // = 4
+  case canAddPeer // = 5
+  case canAddSignatory // = 6
+  case canRemoveSignatory // = 7
+  case canSetQuorum // = 8
+  case canCreateAccount // = 9
+  case canSetDetail // = 10
+  case canCreateAsset // = 11
+  case canTransfer // = 12
+  case canReceive // = 13
+  case canCreateDomain // = 14
 
   /// Query permissions
-  case canReadAssets // = 13
-  case canGetRoles // = 14
-  case canGetMyAccount // = 15
-  case canGetAllAccounts // = 16
-  case canGetMySignatories // = 17
-  case canGetAllSignatories // = 18
-  case canGetMyAccAst // = 19
-  case canGetMyAccDetail // = 20
-  case canGetAllAccAst // = 21
-  case canGetMyAccTxs // = 22
-  case canGetAllAccTxs // = 23
-  case canGetMyAccAstTxs // = 24
-  case canGetAllAccAstTxs // = 25
-  case canGetMyTxs // = 32
-  case canGetAllTxs // = 33
+  case canReadAssets // = 15
+  case canGetRoles // = 16
+  case canGetMyAccount // = 17
+  case canGetAllAccounts // = 18
+  case canGetDomainAccounts // = 19
+  case canGetMySignatories // = 20
+  case canGetAllSignatories // = 21
+  case canGetDomainSignatories // = 22
+  case canGetMyAccAst // = 23
+  case canGetAllAccAst // = 24
+  case canGetDomainAccAst // = 25
+  case canGetMyAccDetail // = 26
+  case canGetAllAccDetail // = 27
+  case canGetDomainAccDetail // = 28
+  case canGetMyAccTxs // = 29
+  case canGetAllAccTxs // = 30
+  case canGetDomainAccTxs // = 31
+  case canGetMyAccAstTxs // = 32
+  case canGetAllAccAstTxs // = 33
+  case canGetDomainAccAstTxs // = 34
+  case canGetMyTxs // = 35
+  case canGetAllTxs // = 36
+  case canGetBlocks // = 42
 
   /// Grant permissions
-  case canGrantAddSignatory // = 26
-  case canGrantRemoveSignatory // = 27
-  case canGrantSetQuorum // = 28
-  case canGrantCanTransfer // = 29
-  case canGrantCanSetDetail // = 30
+  case canGrantCanSetMyQuorum // = 37
+  case canGrantCanAddMySignatory // = 38
+  case canGrantCanRemoveMySignatory // = 39
+  case canGrantCanTransferMyAssets // = 40
+  case canGrantCanSetMyAccountDetail // = 41
   case UNRECOGNIZED(Int)
 
   init() {
@@ -71,38 +96,47 @@ enum Iroha_Protocol_RolePermission: SwiftProtobuf.Enum {
     switch rawValue {
     case 0: self = .canAppendRole
     case 1: self = .canCreateRole
-    case 2: self = .canAddAssetQty
-    case 3: self = .canAddPeer
-    case 4: self = .canAddSignatory
-    case 5: self = .canCreateAccount
-    case 6: self = .canCreateAsset
-    case 7: self = .canCreateDomain
-    case 8: self = .canRemoveSignatory
-    case 9: self = .canSetQuorum
-    case 10: self = .canTransfer
-    case 11: self = .canReceive
-    case 12: self = .canSubtractAssetQty
-    case 13: self = .canReadAssets
-    case 14: self = .canGetRoles
-    case 15: self = .canGetMyAccount
-    case 16: self = .canGetAllAccounts
-    case 17: self = .canGetMySignatories
-    case 18: self = .canGetAllSignatories
-    case 19: self = .canGetMyAccAst
-    case 20: self = .canGetMyAccDetail
-    case 21: self = .canGetAllAccAst
-    case 22: self = .canGetMyAccTxs
-    case 23: self = .canGetAllAccTxs
-    case 24: self = .canGetMyAccAstTxs
-    case 25: self = .canGetAllAccAstTxs
-    case 26: self = .canGrantAddSignatory
-    case 27: self = .canGrantRemoveSignatory
-    case 28: self = .canGrantSetQuorum
-    case 29: self = .canGrantCanTransfer
-    case 30: self = .canGrantCanSetDetail
-    case 31: self = .canDetachRole
-    case 32: self = .canGetMyTxs
-    case 33: self = .canGetAllTxs
+    case 2: self = .canDetachRole
+    case 3: self = .canAddAssetQty
+    case 4: self = .canSubtractAssetQty
+    case 5: self = .canAddPeer
+    case 6: self = .canAddSignatory
+    case 7: self = .canRemoveSignatory
+    case 8: self = .canSetQuorum
+    case 9: self = .canCreateAccount
+    case 10: self = .canSetDetail
+    case 11: self = .canCreateAsset
+    case 12: self = .canTransfer
+    case 13: self = .canReceive
+    case 14: self = .canCreateDomain
+    case 15: self = .canReadAssets
+    case 16: self = .canGetRoles
+    case 17: self = .canGetMyAccount
+    case 18: self = .canGetAllAccounts
+    case 19: self = .canGetDomainAccounts
+    case 20: self = .canGetMySignatories
+    case 21: self = .canGetAllSignatories
+    case 22: self = .canGetDomainSignatories
+    case 23: self = .canGetMyAccAst
+    case 24: self = .canGetAllAccAst
+    case 25: self = .canGetDomainAccAst
+    case 26: self = .canGetMyAccDetail
+    case 27: self = .canGetAllAccDetail
+    case 28: self = .canGetDomainAccDetail
+    case 29: self = .canGetMyAccTxs
+    case 30: self = .canGetAllAccTxs
+    case 31: self = .canGetDomainAccTxs
+    case 32: self = .canGetMyAccAstTxs
+    case 33: self = .canGetAllAccAstTxs
+    case 34: self = .canGetDomainAccAstTxs
+    case 35: self = .canGetMyTxs
+    case 36: self = .canGetAllTxs
+    case 37: self = .canGrantCanSetMyQuorum
+    case 38: self = .canGrantCanAddMySignatory
+    case 39: self = .canGrantCanRemoveMySignatory
+    case 40: self = .canGrantCanTransferMyAssets
+    case 41: self = .canGrantCanSetMyAccountDetail
+    case 42: self = .canGetBlocks
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -111,38 +145,47 @@ enum Iroha_Protocol_RolePermission: SwiftProtobuf.Enum {
     switch self {
     case .canAppendRole: return 0
     case .canCreateRole: return 1
-    case .canAddAssetQty: return 2
-    case .canAddPeer: return 3
-    case .canAddSignatory: return 4
-    case .canCreateAccount: return 5
-    case .canCreateAsset: return 6
-    case .canCreateDomain: return 7
-    case .canRemoveSignatory: return 8
-    case .canSetQuorum: return 9
-    case .canTransfer: return 10
-    case .canReceive: return 11
-    case .canSubtractAssetQty: return 12
-    case .canReadAssets: return 13
-    case .canGetRoles: return 14
-    case .canGetMyAccount: return 15
-    case .canGetAllAccounts: return 16
-    case .canGetMySignatories: return 17
-    case .canGetAllSignatories: return 18
-    case .canGetMyAccAst: return 19
-    case .canGetMyAccDetail: return 20
-    case .canGetAllAccAst: return 21
-    case .canGetMyAccTxs: return 22
-    case .canGetAllAccTxs: return 23
-    case .canGetMyAccAstTxs: return 24
-    case .canGetAllAccAstTxs: return 25
-    case .canGrantAddSignatory: return 26
-    case .canGrantRemoveSignatory: return 27
-    case .canGrantSetQuorum: return 28
-    case .canGrantCanTransfer: return 29
-    case .canGrantCanSetDetail: return 30
-    case .canDetachRole: return 31
-    case .canGetMyTxs: return 32
-    case .canGetAllTxs: return 33
+    case .canDetachRole: return 2
+    case .canAddAssetQty: return 3
+    case .canSubtractAssetQty: return 4
+    case .canAddPeer: return 5
+    case .canAddSignatory: return 6
+    case .canRemoveSignatory: return 7
+    case .canSetQuorum: return 8
+    case .canCreateAccount: return 9
+    case .canSetDetail: return 10
+    case .canCreateAsset: return 11
+    case .canTransfer: return 12
+    case .canReceive: return 13
+    case .canCreateDomain: return 14
+    case .canReadAssets: return 15
+    case .canGetRoles: return 16
+    case .canGetMyAccount: return 17
+    case .canGetAllAccounts: return 18
+    case .canGetDomainAccounts: return 19
+    case .canGetMySignatories: return 20
+    case .canGetAllSignatories: return 21
+    case .canGetDomainSignatories: return 22
+    case .canGetMyAccAst: return 23
+    case .canGetAllAccAst: return 24
+    case .canGetDomainAccAst: return 25
+    case .canGetMyAccDetail: return 26
+    case .canGetAllAccDetail: return 27
+    case .canGetDomainAccDetail: return 28
+    case .canGetMyAccTxs: return 29
+    case .canGetAllAccTxs: return 30
+    case .canGetDomainAccTxs: return 31
+    case .canGetMyAccAstTxs: return 32
+    case .canGetAllAccAstTxs: return 33
+    case .canGetDomainAccAstTxs: return 34
+    case .canGetMyTxs: return 35
+    case .canGetAllTxs: return 36
+    case .canGrantCanSetMyQuorum: return 37
+    case .canGrantCanAddMySignatory: return 38
+    case .canGrantCanRemoveMySignatory: return 39
+    case .canGrantCanTransferMyAssets: return 40
+    case .canGrantCanSetMyAccountDetail: return 41
+    case .canGetBlocks: return 42
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -155,6 +198,9 @@ enum Iroha_Protocol_GrantablePermission: SwiftProtobuf.Enum {
   case canRemoveMySignatory // = 1
   case canSetMyQuorum // = 2
   case canSetMyAccountDetail // = 3
+
+  /// not implemented now
+  case canTransferMyAssets // = 4
   case UNRECOGNIZED(Int)
 
   init() {
@@ -167,6 +213,7 @@ enum Iroha_Protocol_GrantablePermission: SwiftProtobuf.Enum {
     case 1: self = .canRemoveMySignatory
     case 2: self = .canSetMyQuorum
     case 3: self = .canSetMyAccountDetail
+    case 4: self = .canTransferMyAssets
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -177,14 +224,17 @@ enum Iroha_Protocol_GrantablePermission: SwiftProtobuf.Enum {
     case .canRemoveMySignatory: return 1
     case .canSetMyQuorum: return 2
     case .canSetMyAccountDetail: return 3
+    case .canTransferMyAssets: return 4
     case .UNRECOGNIZED(let i): return i
     }
   }
 
 }
 
-struct Iroha_Protocol_Signature: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".Signature"
+struct Iroha_Protocol_Signature {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var pubkey: Data = SwiftProtobuf.Internal.emptyData
 
@@ -193,38 +243,12 @@ struct Iroha_Protocol_Signature: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.pubkey)
-      case 2: try decoder.decodeSingularBytesField(value: &self.signature)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.pubkey.isEmpty {
-      try visitor.visitSingularBytesField(value: self.pubkey, fieldNumber: 1)
-    }
-    if !self.signature.isEmpty {
-      try visitor.visitSingularBytesField(value: self.signature, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_uint256: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".uint256"
+struct Iroha_Protocol_uint256 {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var first: UInt64 = 0
 
@@ -237,46 +261,12 @@ struct Iroha_Protocol_uint256: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt64Field(value: &self.first)
-      case 2: try decoder.decodeSingularUInt64Field(value: &self.second)
-      case 3: try decoder.decodeSingularUInt64Field(value: &self.third)
-      case 4: try decoder.decodeSingularUInt64Field(value: &self.fourth)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.first != 0 {
-      try visitor.visitSingularUInt64Field(value: self.first, fieldNumber: 1)
-    }
-    if self.second != 0 {
-      try visitor.visitSingularUInt64Field(value: self.second, fieldNumber: 2)
-    }
-    if self.third != 0 {
-      try visitor.visitSingularUInt64Field(value: self.third, fieldNumber: 3)
-    }
-    if self.fourth != 0 {
-      try visitor.visitSingularUInt64Field(value: self.fourth, fieldNumber: 4)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_Amount: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".Amount"
+struct Iroha_Protocol_Amount {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var value: Iroha_Protocol_uint256 {
     get {return _storage._value ?? Iroha_Protocol_uint256()}
@@ -296,44 +286,13 @@ struct Iroha_Protocol_Amount: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularMessageField(value: &_storage._value)
-        case 2: try decoder.decodeSingularUInt32Field(value: &_storage._precision)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._value {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      }
-      if _storage._precision != 0 {
-        try visitor.visitSingularUInt32Field(value: _storage._precision, fieldNumber: 2)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Iroha_Protocol_Peer: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".Peer"
+struct Iroha_Protocol_Peer {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var address: String = String()
 
@@ -342,34 +301,6 @@ struct Iroha_Protocol_Peer: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.address)
-      case 2: try decoder.decodeSingularBytesField(value: &self.peerKey)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.address.isEmpty {
-      try visitor.visitSingularStringField(value: self.address, fieldNumber: 1)
-    }
-    if !self.peerKey.isEmpty {
-      try visitor.visitSingularBytesField(value: self.peerKey, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -380,38 +311,47 @@ extension Iroha_Protocol_RolePermission: SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "can_append_role"),
     1: .same(proto: "can_create_role"),
-    2: .same(proto: "can_add_asset_qty"),
-    3: .same(proto: "can_add_peer"),
-    4: .same(proto: "can_add_signatory"),
-    5: .same(proto: "can_create_account"),
-    6: .same(proto: "can_create_asset"),
-    7: .same(proto: "can_create_domain"),
-    8: .same(proto: "can_remove_signatory"),
-    9: .same(proto: "can_set_quorum"),
-    10: .same(proto: "can_transfer"),
-    11: .same(proto: "can_receive"),
-    12: .same(proto: "can_subtract_asset_qty"),
-    13: .same(proto: "can_read_assets"),
-    14: .same(proto: "can_get_roles"),
-    15: .same(proto: "can_get_my_account"),
-    16: .same(proto: "can_get_all_accounts"),
-    17: .same(proto: "can_get_my_signatories"),
-    18: .same(proto: "can_get_all_signatories"),
-    19: .same(proto: "can_get_my_acc_ast"),
-    20: .same(proto: "can_get_my_acc_detail"),
-    21: .same(proto: "can_get_all_acc_ast"),
-    22: .same(proto: "can_get_my_acc_txs"),
-    23: .same(proto: "can_get_all_acc_txs"),
-    24: .same(proto: "can_get_my_acc_ast_txs"),
-    25: .same(proto: "can_get_all_acc_ast_txs"),
-    26: .same(proto: "can_grant_add_signatory"),
-    27: .same(proto: "can_grant_remove_signatory"),
-    28: .same(proto: "can_grant_set_quorum"),
-    29: .same(proto: "can_grant_can_transfer"),
-    30: .same(proto: "can_grant_can_set_detail"),
-    31: .same(proto: "can_detach_role"),
-    32: .same(proto: "can_get_my_txs"),
-    33: .same(proto: "can_get_all_txs"),
+    2: .same(proto: "can_detach_role"),
+    3: .same(proto: "can_add_asset_qty"),
+    4: .same(proto: "can_subtract_asset_qty"),
+    5: .same(proto: "can_add_peer"),
+    6: .same(proto: "can_add_signatory"),
+    7: .same(proto: "can_remove_signatory"),
+    8: .same(proto: "can_set_quorum"),
+    9: .same(proto: "can_create_account"),
+    10: .same(proto: "can_set_detail"),
+    11: .same(proto: "can_create_asset"),
+    12: .same(proto: "can_transfer"),
+    13: .same(proto: "can_receive"),
+    14: .same(proto: "can_create_domain"),
+    15: .same(proto: "can_read_assets"),
+    16: .same(proto: "can_get_roles"),
+    17: .same(proto: "can_get_my_account"),
+    18: .same(proto: "can_get_all_accounts"),
+    19: .same(proto: "can_get_domain_accounts"),
+    20: .same(proto: "can_get_my_signatories"),
+    21: .same(proto: "can_get_all_signatories"),
+    22: .same(proto: "can_get_domain_signatories"),
+    23: .same(proto: "can_get_my_acc_ast"),
+    24: .same(proto: "can_get_all_acc_ast"),
+    25: .same(proto: "can_get_domain_acc_ast"),
+    26: .same(proto: "can_get_my_acc_detail"),
+    27: .same(proto: "can_get_all_acc_detail"),
+    28: .same(proto: "can_get_domain_acc_detail"),
+    29: .same(proto: "can_get_my_acc_txs"),
+    30: .same(proto: "can_get_all_acc_txs"),
+    31: .same(proto: "can_get_domain_acc_txs"),
+    32: .same(proto: "can_get_my_acc_ast_txs"),
+    33: .same(proto: "can_get_all_acc_ast_txs"),
+    34: .same(proto: "can_get_domain_acc_ast_txs"),
+    35: .same(proto: "can_get_my_txs"),
+    36: .same(proto: "can_get_all_txs"),
+    37: .same(proto: "can_grant_can_set_my_quorum"),
+    38: .same(proto: "can_grant_can_add_my_signatory"),
+    39: .same(proto: "can_grant_can_remove_my_signatory"),
+    40: .same(proto: "can_grant_can_transfer_my_assets"),
+    41: .same(proto: "can_grant_can_set_my_account_detail"),
+    42: .same(proto: "can_get_blocks"),
   ]
 }
 
@@ -421,14 +361,36 @@ extension Iroha_Protocol_GrantablePermission: SwiftProtobuf._ProtoNameProviding 
     1: .same(proto: "can_remove_my_signatory"),
     2: .same(proto: "can_set_my_quorum"),
     3: .same(proto: "can_set_my_account_detail"),
+    4: .same(proto: "can_transfer_my_assets"),
   ]
 }
 
-extension Iroha_Protocol_Signature: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_Signature: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Signature"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "pubkey"),
     2: .same(proto: "signature"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.pubkey)
+      case 2: try decoder.decodeSingularBytesField(value: &self.signature)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.pubkey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.pubkey, fieldNumber: 1)
+    }
+    if !self.signature.isEmpty {
+      try visitor.visitSingularBytesField(value: self.signature, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_Signature) -> Bool {
     if self.pubkey != other.pubkey {return false}
@@ -438,13 +400,42 @@ extension Iroha_Protocol_Signature: SwiftProtobuf._MessageImplementationBase, Sw
   }
 }
 
-extension Iroha_Protocol_uint256: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_uint256: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".uint256"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "first"),
     2: .same(proto: "second"),
     3: .same(proto: "third"),
     4: .same(proto: "fourth"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularUInt64Field(value: &self.first)
+      case 2: try decoder.decodeSingularUInt64Field(value: &self.second)
+      case 3: try decoder.decodeSingularUInt64Field(value: &self.third)
+      case 4: try decoder.decodeSingularUInt64Field(value: &self.fourth)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.first != 0 {
+      try visitor.visitSingularUInt64Field(value: self.first, fieldNumber: 1)
+    }
+    if self.second != 0 {
+      try visitor.visitSingularUInt64Field(value: self.second, fieldNumber: 2)
+    }
+    if self.third != 0 {
+      try visitor.visitSingularUInt64Field(value: self.third, fieldNumber: 3)
+    }
+    if self.fourth != 0 {
+      try visitor.visitSingularUInt64Field(value: self.fourth, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_uint256) -> Bool {
     if self.first != other.first {return false}
@@ -456,7 +447,8 @@ extension Iroha_Protocol_uint256: SwiftProtobuf._MessageImplementationBase, Swif
   }
 }
 
-extension Iroha_Protocol_Amount: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_Amount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Amount"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "value"),
     2: .same(proto: "precision"),
@@ -483,9 +475,36 @@ extension Iroha_Protocol_Amount: SwiftProtobuf._MessageImplementationBase, Swift
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._value)
+        case 2: try decoder.decodeSingularUInt32Field(value: &_storage._precision)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._value {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if _storage._precision != 0 {
+        try visitor.visitSingularUInt32Field(value: _storage._precision, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_Amount) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._value != other_storage._value {return false}
         if _storage._precision != other_storage._precision {return false}
         return true
@@ -497,11 +516,32 @@ extension Iroha_Protocol_Amount: SwiftProtobuf._MessageImplementationBase, Swift
   }
 }
 
-extension Iroha_Protocol_Peer: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_Peer: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Peer"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "address"),
     2: .standard(proto: "peer_key"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.address)
+      case 2: try decoder.decodeSingularBytesField(value: &self.peerKey)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.address.isEmpty {
+      try visitor.visitSingularStringField(value: self.address, fieldNumber: 1)
+    }
+    if !self.peerKey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.peerKey, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_Peer) -> Bool {
     if self.address != other.address {return false}

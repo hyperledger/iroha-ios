@@ -19,110 +19,46 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-struct Iroha_Protocol_GetAccount: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetAccount"
+struct Iroha_Protocol_GetAccount {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var accountID: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.accountID.isEmpty {
-      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_GetSignatories: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetSignatories"
+struct Iroha_Protocol_GetSignatories {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var accountID: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.accountID.isEmpty {
-      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_GetAccountTransactions: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetAccountTransactions"
+struct Iroha_Protocol_GetAccountTransactions {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var accountID: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.accountID.isEmpty {
-      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_GetAccountAssetTransactions: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetAccountAssetTransactions"
+struct Iroha_Protocol_GetAccountAssetTransactions {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var accountID: String = String()
 
@@ -131,245 +67,99 @@ struct Iroha_Protocol_GetAccountAssetTransactions: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
-      case 2: try decoder.decodeSingularStringField(value: &self.assetID)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.accountID.isEmpty {
-      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
-    }
-    if !self.assetID.isEmpty {
-      try visitor.visitSingularStringField(value: self.assetID, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_GetTransactions: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetTransactions"
+struct Iroha_Protocol_GetTransactions {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var txHashes: [Data] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeRepeatedBytesField(value: &self.txHashes)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.txHashes.isEmpty {
-      try visitor.visitRepeatedBytesField(value: self.txHashes, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_GetAccountAssets: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetAccountAssets"
+struct Iroha_Protocol_GetAccountAssets {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var accountID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Iroha_Protocol_GetAccountDetail {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var accountID: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Iroha_Protocol_GetAssetInfo {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var assetID: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
-      case 2: try decoder.decodeSingularStringField(value: &self.assetID)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.accountID.isEmpty {
-      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
-    }
-    if !self.assetID.isEmpty {
-      try visitor.visitSingularStringField(value: self.assetID, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_GetAccountDetail: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetAccountDetail"
-
-  var accountID: String = String()
-
-  var detail: String = String()
+struct Iroha_Protocol_GetRoles {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
-      case 2: try decoder.decodeSingularStringField(value: &self.detail)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.accountID.isEmpty {
-      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
-    }
-    if !self.detail.isEmpty {
-      try visitor.visitSingularStringField(value: self.detail, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_GetAssetInfo: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetAssetInfo"
-
-  var assetID: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.assetID)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.assetID.isEmpty {
-      try visitor.visitSingularStringField(value: self.assetID, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-}
-
-struct Iroha_Protocol_GetRoles: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetRoles"
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-}
-
-struct Iroha_Protocol_GetRolePermissions: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetRolePermissions"
+struct Iroha_Protocol_GetRolePermissions {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var roleID: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.roleID)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.roleID.isEmpty {
-      try visitor.visitSingularStringField(value: self.roleID, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Iroha_Protocol_Query: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".Query"
+struct Iroha_Protocol_QueryPayloadMeta {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var createdTime: UInt64 = 0
+
+  var creatorAccountID: String = String()
+
+  /// used to prevent replay attacks.
+  var queryCounter: UInt64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Iroha_Protocol_Query {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var payload: Iroha_Protocol_Query.Payload {
     get {return _storage._payload ?? Iroha_Protocol_Query.Payload()}
@@ -391,18 +181,19 @@ struct Iroha_Protocol_Query: SwiftProtobuf.Message {
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  struct Payload: SwiftProtobuf.Message {
-    static let protoMessageName: String = Iroha_Protocol_Query.protoMessageName + ".Payload"
+  struct Payload {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
 
-    var createdTime: UInt64 {
-      get {return _storage._createdTime}
-      set {_uniqueStorage()._createdTime = newValue}
+    var meta: Iroha_Protocol_QueryPayloadMeta {
+      get {return _storage._meta ?? Iroha_Protocol_QueryPayloadMeta()}
+      set {_uniqueStorage()._meta = newValue}
     }
-
-    var creatorAccountID: String {
-      get {return _storage._creatorAccountID}
-      set {_uniqueStorage()._creatorAccountID = newValue}
-    }
+    /// Returns true if `meta` has been explicitly set.
+    var hasMeta: Bool {return _storage._meta != nil}
+    /// Clears the value of `meta`. Subsequent reads from it will return its default value.
+    mutating func clearMeta() {_storage._meta = nil}
 
     var query: OneOf_Query? {
       get {return _storage._query}
@@ -489,12 +280,6 @@ struct Iroha_Protocol_Query: SwiftProtobuf.Message {
       set {_uniqueStorage()._query = .getAssetInfo(newValue)}
     }
 
-    /// used to prevent replay attacks.
-    var queryCounter: UInt64 {
-      get {return _storage._queryCounter}
-      set {_uniqueStorage()._queryCounter = newValue}
-    }
-
     var unknownFields = SwiftProtobuf.UnknownStorage()
 
     enum OneOf_Query: Equatable {
@@ -528,183 +313,40 @@ struct Iroha_Protocol_Query: SwiftProtobuf.Message {
 
     init() {}
 
-    /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-    /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-    /// initializers are defined in the SwiftProtobuf library. See the Message and
-    /// Message+*Additions` files.
-    mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-      _ = _uniqueStorage()
-      try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        while let fieldNumber = try decoder.nextFieldNumber() {
-          switch fieldNumber {
-          case 1: try decoder.decodeSingularUInt64Field(value: &_storage._createdTime)
-          case 2: try decoder.decodeSingularStringField(value: &_storage._creatorAccountID)
-          case 3:
-            var v: Iroha_Protocol_GetAccount?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getAccount(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getAccount(v)}
-          case 4:
-            var v: Iroha_Protocol_GetSignatories?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getAccountSignatories(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getAccountSignatories(v)}
-          case 5:
-            var v: Iroha_Protocol_GetAccountTransactions?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getAccountTransactions(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getAccountTransactions(v)}
-          case 6:
-            var v: Iroha_Protocol_GetAccountAssetTransactions?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getAccountAssetTransactions(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getAccountAssetTransactions(v)}
-          case 7:
-            var v: Iroha_Protocol_GetTransactions?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getTransactions(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getTransactions(v)}
-          case 8:
-            var v: Iroha_Protocol_GetAccountAssets?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getAccountAssets(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getAccountAssets(v)}
-          case 9:
-            var v: Iroha_Protocol_GetAccountDetail?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getAccountDetail(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getAccountDetail(v)}
-          case 10:
-            var v: Iroha_Protocol_GetRoles?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getRoles(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getRoles(v)}
-          case 11:
-            var v: Iroha_Protocol_GetRolePermissions?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getRolePermissions(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getRolePermissions(v)}
-          case 12:
-            var v: Iroha_Protocol_GetAssetInfo?
-            if let current = _storage._query {
-              try decoder.handleConflictingOneOf()
-              if case .getAssetInfo(let m) = current {v = m}
-            }
-            try decoder.decodeSingularMessageField(value: &v)
-            if let v = v {_storage._query = .getAssetInfo(v)}
-          case 13: try decoder.decodeSingularUInt64Field(value: &_storage._queryCounter)
-          default: break
-          }
-        }
-      }
-    }
-
-    /// Used by the encoding methods of the SwiftProtobuf library, not generally
-    /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-    /// other serializer methods are defined in the SwiftProtobuf library. See the
-    /// `Message` and `Message+*Additions` files.
-    func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-      try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-        if _storage._createdTime != 0 {
-          try visitor.visitSingularUInt64Field(value: _storage._createdTime, fieldNumber: 1)
-        }
-        if !_storage._creatorAccountID.isEmpty {
-          try visitor.visitSingularStringField(value: _storage._creatorAccountID, fieldNumber: 2)
-        }
-        switch _storage._query {
-        case .getAccount(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-        case .getAccountSignatories(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-        case .getAccountTransactions(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-        case .getAccountAssetTransactions(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-        case .getTransactions(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
-        case .getAccountAssets(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
-        case .getAccountDetail(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
-        case .getRoles(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
-        case .getRolePermissions(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
-        case .getAssetInfo(let v)?:
-          try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
-        case nil: break
-        }
-        if _storage._queryCounter != 0 {
-          try visitor.visitSingularUInt64Field(value: _storage._queryCounter, fieldNumber: 13)
-        }
-      }
-      try unknownFields.traverse(visitor: &visitor)
-    }
-
     fileprivate var _storage = _StorageClass.defaultInstance
   }
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularMessageField(value: &_storage._payload)
-        case 2: try decoder.decodeSingularMessageField(value: &_storage._signature)
-        default: break
-        }
-      }
-    }
-  }
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
 
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._payload {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      }
-      if let v = _storage._signature {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
+struct Iroha_Protocol_BlocksQuery {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var meta: Iroha_Protocol_QueryPayloadMeta {
+    get {return _storage._meta ?? Iroha_Protocol_QueryPayloadMeta()}
+    set {_uniqueStorage()._meta = newValue}
   }
+  /// Returns true if `meta` has been explicitly set.
+  var hasMeta: Bool {return _storage._meta != nil}
+  /// Clears the value of `meta`. Subsequent reads from it will return its default value.
+  mutating func clearMeta() {_storage._meta = nil}
+
+  var signature: Iroha_Protocol_Signature {
+    get {return _storage._signature ?? Iroha_Protocol_Signature()}
+    set {_uniqueStorage()._signature = newValue}
+  }
+  /// Returns true if `signature` has been explicitly set.
+  var hasSignature: Bool {return _storage._signature != nil}
+  /// Clears the value of `signature`. Subsequent reads from it will return its default value.
+  mutating func clearSignature() {_storage._signature = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
 }
@@ -713,10 +355,27 @@ struct Iroha_Protocol_Query: SwiftProtobuf.Message {
 
 fileprivate let _protobuf_package = "iroha.protocol"
 
-extension Iroha_Protocol_GetAccount: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetAccount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetAccount"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "account_id"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.accountID.isEmpty {
+      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetAccount) -> Bool {
     if self.accountID != other.accountID {return false}
@@ -725,10 +384,27 @@ extension Iroha_Protocol_GetAccount: SwiftProtobuf._MessageImplementationBase, S
   }
 }
 
-extension Iroha_Protocol_GetSignatories: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetSignatories: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetSignatories"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "account_id"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.accountID.isEmpty {
+      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetSignatories) -> Bool {
     if self.accountID != other.accountID {return false}
@@ -737,10 +413,27 @@ extension Iroha_Protocol_GetSignatories: SwiftProtobuf._MessageImplementationBas
   }
 }
 
-extension Iroha_Protocol_GetAccountTransactions: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetAccountTransactions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetAccountTransactions"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "account_id"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.accountID.isEmpty {
+      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetAccountTransactions) -> Bool {
     if self.accountID != other.accountID {return false}
@@ -749,11 +442,32 @@ extension Iroha_Protocol_GetAccountTransactions: SwiftProtobuf._MessageImplement
   }
 }
 
-extension Iroha_Protocol_GetAccountAssetTransactions: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetAccountAssetTransactions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetAccountAssetTransactions"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "account_id"),
     2: .standard(proto: "asset_id"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
+      case 2: try decoder.decodeSingularStringField(value: &self.assetID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.accountID.isEmpty {
+      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
+    }
+    if !self.assetID.isEmpty {
+      try visitor.visitSingularStringField(value: self.assetID, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetAccountAssetTransactions) -> Bool {
     if self.accountID != other.accountID {return false}
@@ -763,10 +477,27 @@ extension Iroha_Protocol_GetAccountAssetTransactions: SwiftProtobuf._MessageImpl
   }
 }
 
-extension Iroha_Protocol_GetTransactions: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetTransactions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetTransactions"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "tx_hashes"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeRepeatedBytesField(value: &self.txHashes)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.txHashes.isEmpty {
+      try visitor.visitRepeatedBytesField(value: self.txHashes, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetTransactions) -> Bool {
     if self.txHashes != other.txHashes {return false}
@@ -775,38 +506,85 @@ extension Iroha_Protocol_GetTransactions: SwiftProtobuf._MessageImplementationBa
   }
 }
 
-extension Iroha_Protocol_GetAccountAssets: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetAccountAssets: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetAccountAssets"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "account_id"),
-    2: .standard(proto: "asset_id"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.accountID.isEmpty {
+      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetAccountAssets) -> Bool {
     if self.accountID != other.accountID {return false}
-    if self.assetID != other.assetID {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
 }
 
-extension Iroha_Protocol_GetAccountDetail: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetAccountDetail: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetAccountDetail"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "account_id"),
-    2: .same(proto: "detail"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.accountID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.accountID.isEmpty {
+      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetAccountDetail) -> Bool {
     if self.accountID != other.accountID {return false}
-    if self.detail != other.detail {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
 }
 
-extension Iroha_Protocol_GetAssetInfo: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetAssetInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetAssetInfo"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "asset_id"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.assetID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.assetID.isEmpty {
+      try visitor.visitSingularStringField(value: self.assetID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetAssetInfo) -> Bool {
     if self.assetID != other.assetID {return false}
@@ -815,8 +593,18 @@ extension Iroha_Protocol_GetAssetInfo: SwiftProtobuf._MessageImplementationBase,
   }
 }
 
-extension Iroha_Protocol_GetRoles: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetRoles: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetRoles"
   static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetRoles) -> Bool {
     if unknownFields != other.unknownFields {return false}
@@ -824,10 +612,27 @@ extension Iroha_Protocol_GetRoles: SwiftProtobuf._MessageImplementationBase, Swi
   }
 }
 
-extension Iroha_Protocol_GetRolePermissions: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_GetRolePermissions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetRolePermissions"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "role_id"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.roleID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.roleID.isEmpty {
+      try visitor.visitSingularStringField(value: self.roleID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_GetRolePermissions) -> Bool {
     if self.roleID != other.roleID {return false}
@@ -836,7 +641,49 @@ extension Iroha_Protocol_GetRolePermissions: SwiftProtobuf._MessageImplementatio
   }
 }
 
-extension Iroha_Protocol_Query: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_QueryPayloadMeta: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryPayloadMeta"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "created_time"),
+    2: .standard(proto: "creator_account_id"),
+    3: .standard(proto: "query_counter"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularUInt64Field(value: &self.createdTime)
+      case 2: try decoder.decodeSingularStringField(value: &self.creatorAccountID)
+      case 3: try decoder.decodeSingularUInt64Field(value: &self.queryCounter)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.createdTime != 0 {
+      try visitor.visitSingularUInt64Field(value: self.createdTime, fieldNumber: 1)
+    }
+    if !self.creatorAccountID.isEmpty {
+      try visitor.visitSingularStringField(value: self.creatorAccountID, fieldNumber: 2)
+    }
+    if self.queryCounter != 0 {
+      try visitor.visitSingularUInt64Field(value: self.queryCounter, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: Iroha_Protocol_QueryPayloadMeta) -> Bool {
+    if self.createdTime != other.createdTime {return false}
+    if self.creatorAccountID != other.creatorAccountID {return false}
+    if self.queryCounter != other.queryCounter {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Iroha_Protocol_Query: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".Query"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "payload"),
     2: .same(proto: "signature"),
@@ -863,9 +710,36 @@ extension Iroha_Protocol_Query: SwiftProtobuf._MessageImplementationBase, SwiftP
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._payload)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._signature)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._payload {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if let v = _storage._signature {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_Query) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
         if _storage._payload != other_storage._payload {return false}
         if _storage._signature != other_storage._signature {return false}
         return true
@@ -877,10 +751,10 @@ extension Iroha_Protocol_Query: SwiftProtobuf._MessageImplementationBase, SwiftP
   }
 }
 
-extension Iroha_Protocol_Query.Payload: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Iroha_Protocol_Query.Payload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = Iroha_Protocol_Query.protoMessageName + ".Payload"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "created_time"),
-    2: .standard(proto: "creator_account_id"),
+    1: .same(proto: "meta"),
     3: .standard(proto: "get_account"),
     4: .standard(proto: "get_account_signatories"),
     5: .standard(proto: "get_account_transactions"),
@@ -891,24 +765,19 @@ extension Iroha_Protocol_Query.Payload: SwiftProtobuf._MessageImplementationBase
     10: .standard(proto: "get_roles"),
     11: .standard(proto: "get_role_permissions"),
     12: .standard(proto: "get_asset_info"),
-    13: .standard(proto: "query_counter"),
   ]
 
   fileprivate class _StorageClass {
-    var _createdTime: UInt64 = 0
-    var _creatorAccountID: String = String()
+    var _meta: Iroha_Protocol_QueryPayloadMeta? = nil
     var _query: Iroha_Protocol_Query.Payload.OneOf_Query?
-    var _queryCounter: UInt64 = 0
 
     static let defaultInstance = _StorageClass()
 
     private init() {}
 
     init(copying source: _StorageClass) {
-      _createdTime = source._createdTime
-      _creatorAccountID = source._creatorAccountID
+      _meta = source._meta
       _query = source._query
-      _queryCounter = source._queryCounter
     }
   }
 
@@ -919,13 +788,206 @@ extension Iroha_Protocol_Query.Payload: SwiftProtobuf._MessageImplementationBase
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._meta)
+        case 3:
+          var v: Iroha_Protocol_GetAccount?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getAccount(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getAccount(v)}
+        case 4:
+          var v: Iroha_Protocol_GetSignatories?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getAccountSignatories(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getAccountSignatories(v)}
+        case 5:
+          var v: Iroha_Protocol_GetAccountTransactions?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getAccountTransactions(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getAccountTransactions(v)}
+        case 6:
+          var v: Iroha_Protocol_GetAccountAssetTransactions?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getAccountAssetTransactions(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getAccountAssetTransactions(v)}
+        case 7:
+          var v: Iroha_Protocol_GetTransactions?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getTransactions(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getTransactions(v)}
+        case 8:
+          var v: Iroha_Protocol_GetAccountAssets?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getAccountAssets(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getAccountAssets(v)}
+        case 9:
+          var v: Iroha_Protocol_GetAccountDetail?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getAccountDetail(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getAccountDetail(v)}
+        case 10:
+          var v: Iroha_Protocol_GetRoles?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getRoles(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getRoles(v)}
+        case 11:
+          var v: Iroha_Protocol_GetRolePermissions?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getRolePermissions(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getRolePermissions(v)}
+        case 12:
+          var v: Iroha_Protocol_GetAssetInfo?
+          if let current = _storage._query {
+            try decoder.handleConflictingOneOf()
+            if case .getAssetInfo(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._query = .getAssetInfo(v)}
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._meta {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      switch _storage._query {
+      case .getAccount(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      case .getAccountSignatories(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      case .getAccountTransactions(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      case .getAccountAssetTransactions(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      case .getTransactions(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      case .getAccountAssets(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      case .getAccountDetail(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      case .getRoles(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+      case .getRolePermissions(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+      case .getAssetInfo(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+      case nil: break
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Iroha_Protocol_Query.Payload) -> Bool {
     if _storage !== other._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_storage, other_storage) in
-        if _storage._createdTime != other_storage._createdTime {return false}
-        if _storage._creatorAccountID != other_storage._creatorAccountID {return false}
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._meta != other_storage._meta {return false}
         if _storage._query != other_storage._query {return false}
-        if _storage._queryCounter != other_storage._queryCounter {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Iroha_Protocol_BlocksQuery: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".BlocksQuery"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "meta"),
+    2: .same(proto: "signature"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _meta: Iroha_Protocol_QueryPayloadMeta? = nil
+    var _signature: Iroha_Protocol_Signature? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _meta = source._meta
+      _signature = source._signature
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._meta)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._signature)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._meta {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if let v = _storage._signature {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: Iroha_Protocol_BlocksQuery) -> Bool {
+    if _storage !== other._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._meta != other_storage._meta {return false}
+        if _storage._signature != other_storage._signature {return false}
         return true
       }
       if !storagesAreEqual {return false}
