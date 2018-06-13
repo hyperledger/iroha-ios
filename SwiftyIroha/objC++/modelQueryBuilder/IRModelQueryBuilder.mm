@@ -118,7 +118,7 @@ struct QueryBuilderImpl {
 
 -(ModelQueryBuilderObjC*)getAssetInfoByAssetId:(NSString*)assetId {
     string assetIdCpp = [self getStringCppFromStringObjC:assetId];
-    queryBuilderImpl->queryBuilderCpp = queryBuilderImpl->queryBuilderCpp.getRoles();
+    queryBuilderImpl->queryBuilderCpp = queryBuilderImpl->queryBuilderCpp.getAssetInfo(assetIdCpp);
     return self;
 }
 
