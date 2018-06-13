@@ -71,8 +71,8 @@ public class IrohaQueryBuilder {
         return self
     }
 
-    public func getAssetInfo(byAssetsId assetsId: String) -> IrohaQueryBuilder {
-        modelQueryBuilder = modelQueryBuilder.getAssetInfo(byAssetId: assetsId)
+    public func getAssetInfo(byAssetId assetId: String) -> IrohaQueryBuilder {
+        modelQueryBuilder = modelQueryBuilder.getAssetInfo(byAssetId: assetId)
         return self
     }
 
