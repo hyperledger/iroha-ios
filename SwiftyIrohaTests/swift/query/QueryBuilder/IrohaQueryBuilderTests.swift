@@ -34,7 +34,7 @@ class IrohaQueryBuilderTests: XCTestCase {
             .creatorAccountId(creatorAcountId)
             .createdTime(Date())
             .queryCounter(1)
-            .getAssetInfo(byAssetsId: "dollar#ru")
+            .getAssetInfo(byAssetId: "dollar#ru")
             .build()
         print(unsignedQuery)
         XCTAssertEqual(true, true, "Score computed from guess is wrong")
@@ -91,7 +91,7 @@ class IrohaQueryBuilderTests: XCTestCase {
 
     func testGetAssetInfo() {
         let query = queryBuilder
-            .getAssetInfo(byAssetsId: "AssetsID")
+            .getAssetInfo(byAssetId: "AssetsID")
             .build()
     }
 
