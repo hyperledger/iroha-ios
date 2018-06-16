@@ -1,8 +1,8 @@
 # Hyperledger Iroha iOS library
 
-### Please pay attention!!! Master branch of [this](https://github.com/soramitsu/iroha-ios) library works with develop branch of [Hyperledger Iroha](https://github.com/hyperledger/iroha) !!! Commands listed in this README.md file depends on Hyperledger Iroha branch!!! 
+### Please pay attention! Master branch of [this](https://github.com/hyperledger/iroha-ios) library works with develop branch of [Hyperledger Iroha project](https://github.com/hyperledger/iroha)! Commands listed in this README.md file depends on Hyperledger Iroha branch!
 
-This library was implemented in order to provide key generation and signing logic for queries and transactions passed to Hyperledger Iroha
+This library was implemented in order to provide key generation and signing logic for queries and transactions passed to Hyperledger Iroha. In example application you can see the way of how to use this library with grpc generated services.
 
 For establishing connection with [Hyperledger Iroha](https://github.com/hyperledger/iroha) by this library you need to import the following modules into your swift project:
 
