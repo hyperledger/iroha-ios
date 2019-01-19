@@ -1,0 +1,17 @@
+use_frameworks!
+
+target 'IrohaExample' do
+    pod 'SwiftyIroha', :path => '../'
+end
+
+target 'IntegrationTestHost' do
+    pod 'SwiftyIroha', :path => '../'
+
+    target 'UnitTests' do
+        inherit! :search_paths
+    end
+
+    target 'IntegrationTests' do
+        inherit! :search_paths
+    end
+end

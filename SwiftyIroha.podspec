@@ -1,20 +1,31 @@
 Pod::Spec.new do |s|
-s.name             = 'SwiftyIroha'
-s.version          = '0.0.7-alpha'
-s.summary          = 'Hyperledger Iroha iOS library'
-s.homepage         = 'http://www.soramitsu.co.jp/'
-s.license          = 'Apache License Version 2.0'
-s.author           = { 'Soramitsu Co., Ltd.' => 'alexey@soramitsu.co.jp' }
+  s.name             = 'SwiftyIroha'
+  s.version          = '0.1.0-rc2'
+  s.summary          = 'Helper classes to use for communication with Iroha blockchain.'
 
-s.homepage         = 'https://github.com/soramitsu/iroha-ios'
-s.license          = { :type => 'MIT', :file => 'LICENSE' }
-s.source           = { :git => 'https://github.com/soramitsu/iroha-ios.git', :tag => s.version.to_s }
+  s.homepage         = 'https://github.com/soramitsu/iroha-ios'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.author           = { 'Russel' => 'emkil.russel@gmail.com' }
+  s.source           = { :git => 'https://github.com/soramitsu/iroha-ios.git', :tag => s.version.to_s }
 
-s.ios.deployment_target = '10.0'
-s.source_files = 'SwiftyIroha/Swift/**/*.swift','SwiftyIroha/ObjC++/**/*.{h,mm}','SwiftyIroha/headers/**/*.{hpp}'
+  s.ios.deployment_target = '9.0'
 
-s.dependency 'SwiftProtobuf', '~> 1.0'
-s.compiler_flags = '-DDISABLE_BACKWARD'
-s.header_dir = 'SwiftyIroha'
-s.header_mappings_dir = 'SwiftyIroha'
+  s.requires_arc = 'IrohaCommunication/Classes/**/*'
+  s.source_files = 'IrohaCommunication/Classes/**/*', 'ProtoGen/*.{h,m}'
+  s.public_header_files = 'IrohaCommunication/Classes/Public/**/*.h'
+  s.private_header_files = 'IrohaCommunication/Classes/Private/**/*.h', 'ProtoGen/*.h'
+  s.preserve_paths = 'ProtoGen/*.{h,m}'
+
+  s.dependency 'IrohaCrypto'
+  s.dependency 'gRPC-ProtoRPC', '= 1.11.0'
+  s.dependency 'Protobuf', '~> 3.5.0'
+  s.dependency 'BoringSSL', '= 10.0.3'
+  s.dependency 'nanopb', '= 0.3.8'
+
+  s.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1' }
+
+  s.test_spec do |ts|
+      ts.source_files = 'Tests/**/*.{h,m}'
+  end
+
 end
