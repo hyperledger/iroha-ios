@@ -1,3 +1,8 @@
+/**
+ * Copyright Soramitsu Co., Ltd. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #import "IRRoleName.h"
 
 static NSString * const ROLE_NAME_FORMAT = @"[a-z_0-9]{1,32}";

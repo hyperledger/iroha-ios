@@ -1,3 +1,8 @@
+/**
+ * Copyright Soramitsu Co., Ltd. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #import "IRBlockQueryResponse+Proto.h"
 #import "QryResponses.pbobjc.h"
 #import "IRBlock+Proto.h"

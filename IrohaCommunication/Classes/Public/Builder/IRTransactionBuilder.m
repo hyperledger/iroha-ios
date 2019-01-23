@@ -1,3 +1,8 @@
+/**
+ * Copyright Soramitsu Co., Ltd. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #import "IRTransactionBuilder.h"
 #import "IRCommandAll.h"
 #import "IRTransactionImpl.h"

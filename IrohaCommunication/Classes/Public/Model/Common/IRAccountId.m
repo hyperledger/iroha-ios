@@ -1,3 +1,8 @@
+/**
+ * Copyright Soramitsu Co., Ltd. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #import "IRAccountId.h"
 
 static NSString * const ACCOUNT_NAME_FORMAT = @"[a-z_0-9]{1,32}";

@@ -1,3 +1,8 @@
+/**
+ * Copyright Soramitsu Co., Ltd. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #import "IRTransactionImpl+Proto.h"
 #import "Transaction.pbobjc.h"
 #import "IRPeerSignature+Proto.h"
