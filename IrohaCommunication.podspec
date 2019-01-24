@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IrohaCommunication'
-  s.version          = '0.1.0'
+  s.version          = '3.0.0'
   s.summary          = 'Helper classes to use for communication with Iroha blockchain.'
 
   s.homepage         = 'https://github.com/hyperledger/iroha-ios'
