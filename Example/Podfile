@@ -1,22 +1,17 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+use_frameworks!
 
-target 'Example' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+target 'IrohaExample' do
+    pod 'SwiftyIroha', :path => '../'
+end
 
-  # Pods for Example
-  pod 'KeychainAccess', '3.0.0'
-  pod 'SwiftyJSON', '3.0.0'
-  # pod 'IrohaSwift', :git => 'https://github.com/soramitsu/iroha-ios.git', :submodules => true, :branch => 'feature/singleton'
-  target 'ExampleTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+target 'IntegrationTestHost' do
+    pod 'SwiftyIroha', :path => '../'
 
-  target 'ExampleUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+    target 'UnitTests' do
+        inherit! :search_paths
+    end
 
+    target 'IntegrationTests' do
+        inherit! :search_paths
+    end
 end
