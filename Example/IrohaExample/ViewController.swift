@@ -4,7 +4,7 @@
  */
 
 import UIKit
-import SwiftyIroha;
+import IrohaCommunication;
 import IrohaCrypto;
 
 class ViewController: UIViewController {
