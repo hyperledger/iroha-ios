@@ -4,7 +4,7 @@
  */
 
 @import XCTest;
-@import SwiftyIroha;
+@import IrohaCommunication;
 
 @interface IRGrantablePermissionTests : XCTestCase
 

@@ -24,6 +24,12 @@ PODS:
   - gRPC/Main (1.11.0):
     - gRPC-Core (= 1.11.0)
     - gRPC-RxLibrary (= 1.11.0)
+  - IrohaCommunication (0.1.0):
+    - BoringSSL (= 10.0.3)
+    - gRPC-ProtoRPC (= 1.11.0)
+    - IrohaCrypto
+    - nanopb (= 0.3.8)
+    - Protobuf (~> 3.5.0)
   - IrohaCrypto (0.2.5)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -31,15 +37,9 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Protobuf (3.5.0)
-  - SwiftyIroha (0.1.0-rc2):
-    - BoringSSL (= 10.0.3)
-    - gRPC-ProtoRPC (= 1.11.0)
-    - IrohaCrypto
-    - nanopb (= 0.3.8)
-    - Protobuf (~> 3.5.0)
 
 DEPENDENCIES:
-  - SwiftyIroha (from `../`)
+  - IrohaCommunication (from `../`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -53,7 +53,7 @@ SPEC REPOS:
     - Protobuf
 
 EXTERNAL SOURCES:
-  SwiftyIroha:
+  IrohaCommunication:
     :path: "../"
 
 SPEC CHECKSUMS:
@@ -62,11 +62,11 @@ SPEC CHECKSUMS:
   gRPC-Core: 164639cd8ae18ca8b65477fafb2efbaecf4f181a
   gRPC-ProtoRPC: bb5fddf3424aa4fad74d76736578a79fe40e244e
   gRPC-RxLibrary: 26d53d1b1f306befd4ad4e15bd6de27839a82481
+  IrohaCommunication: e40a8540f7fd1c4e81765fbfa12dc7291a070dcb
   IrohaCrypto: d0e6e1189ce43a51b6f7916f4830605c7d466d57
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
-  SwiftyIroha: dabcf81e33d9cce5b87cd438e2026cd96c18b784
 
-PODFILE CHECKSUM: 9644665bf10c3fd12336940a2087d327330159c9
+PODFILE CHECKSUM: 29089a97c3781ec366ef8266addf4289525ff849
 
 COCOAPODS: 1.5.3
