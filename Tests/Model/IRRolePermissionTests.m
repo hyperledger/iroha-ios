@@ -4,7 +4,7 @@
  */
 
 @import XCTest;
-@import IrohaCommunication;
+@import SwiftyIroha;
 
 @interface IRRolePermissionTests : XCTestCase
 

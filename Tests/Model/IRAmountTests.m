@@ -4,7 +4,7 @@
  */
 
 @import XCTest;
-@import IrohaCommunication;
+@import SwiftyIroha;
 
 static const NSUInteger VALID_STRING_AMOUNT_COUNT = 4;
 static NSString * const VALID_STRING_AMOUNT[] = {

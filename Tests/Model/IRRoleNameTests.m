@@ -4,7 +4,7 @@
  */
 
 @import XCTest;
-@import IrohaCommunication;
+@import SwiftyIroha;
 
 static const NSUInteger VALID_ROLE_NAMES_COUNT = 6;
 static NSString* const VALID_ROLE_NAMES[] = {

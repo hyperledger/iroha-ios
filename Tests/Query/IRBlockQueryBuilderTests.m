@@ -4,7 +4,7 @@
  */
 
 @import XCTest;
-@import IrohaCommunication;
+@import SwiftyIroha;
 
 static NSString * const VALID_ACCOUNT_IDENTIFIER = @"bob@gmail.com";
 

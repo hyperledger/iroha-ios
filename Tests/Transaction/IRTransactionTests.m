@@ -4,10 +4,10 @@
  */
 
 @import XCTest;
-@import IrohaCommunication;
+@import SwiftyIroha;
 @import IrohaCrypto;
 
-#import "IrohaCommunication/IRTransactionImpl+Proto.h"
+#import "SwiftyIroha/IRTransactionImpl+Proto.h"
 
 static NSString * const VALID_ACCOUNT_NAME = @"bob";
 static NSString * const VALID_DOMAIN = @"gmail.com";

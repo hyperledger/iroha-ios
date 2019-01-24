@@ -4,7 +4,7 @@
  */
 
 @import XCTest;
-@import IrohaCommunication;
+@import SwiftyIroha;
 
 static const NSUInteger VALID_ASSET_NAMES_COUNT = 5;
 static NSString* const VALID_ASSET_NAMES[] = {

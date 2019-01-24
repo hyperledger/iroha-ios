@@ -4,7 +4,7 @@
  */
 
 @import XCTest;
-@import IrohaCommunication;
+@import SwiftyIroha;
 @import IrohaCrypto;
 
 @interface IRBaseIrohaContainerTests : XCTestCase
