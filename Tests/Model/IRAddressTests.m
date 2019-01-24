@@ -4,7 +4,7 @@
  */
 
 @import XCTest;
-@import SwiftyIroha;
+@import IrohaCommunication;
 
 static const NSUInteger VALID_ADDRESSES_COUNT = 4;
 static NSString* const VALID_IPV4[] = {
