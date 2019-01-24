@@ -1,11 +1,11 @@
 use_frameworks!
 
 target 'IrohaExample' do
-    pod 'SwiftyIroha', :path => '../'
+    pod 'IrohaCommunication', :path => '../'
 end
 
 target 'IntegrationTestHost' do
-    pod 'SwiftyIroha', :path => '../'
+    pod 'IrohaCommunication', :path => '../'
 
     target 'UnitTests' do
         inherit! :search_paths
