@@ -1,6 +1,6 @@
 # Hyperledger Iroha iOS library
 
-### Please pay attention! Current version of the library was tested and compatible with [`iroha-v1.0.0_rc2`](https://github.com/hyperledger/iroha/releases/tag/1.0.0_rc2).
+### Please pay attention! Current version of the library was tested and compatible with [![Iroha 1.0.0-rc2](https://img.shields.io/badge/Iroha-1.0.0--rc2-red.svg)](https://github.com/hyperledger/iroha/releases/tag/1.0.0_rc2).
 
 The library was created to provide convienent interface for iOS applications to communicate with [Iroha](https://github.com/hyperledger/iroha) blockchain including sending transactions/query, streaming transaction statuses and block commits.
 
@@ -10,7 +10,7 @@ For new iroha users we recommend to checkout iOS example project. It tries to es
 
 1. Follow instructions from [Iroha documentation](https://iroha.readthedocs.io/en/latest/getting_started/) to setup and run iroha peer in [Docker](https://www.docker.com) container.
 
-2. Clone current repositary.
+2. Clone current repository.
 
 3. cd Example directory and run ```pod install```.
 
@@ -21,6 +21,11 @@ For new iroha users we recommend to checkout iOS example project. It tries to es
 7. Consider logs to see if the scenario completed successfully.
 
 Feel free to experiment with example project and don't hesistate to ask any questions.
+
+## Need Help?
+
+* Join [Hyperledger RocketChat](https://chat.hyperledger.org) #iroha channel 
+* Use mailing list [hyperledger-iroha@lists.hyperledger.org](mailto:hyperledger-iroha@lists.hyperledger.org)
 
 ## Cocoapods Installation
 
@@ -33,7 +38,8 @@ pod 'IrohaCommunication'
 
 ## Author
 
-Ruslan Rezin, rezin@soramitsu.co.jp
+Ruslan Rezin, rezin@soramitsu.co.jp  
+Andrei Marin, marin@soramitsu.co.jp
 
 ## License
 
