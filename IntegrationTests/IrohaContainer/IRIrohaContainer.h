@@ -4,7 +4,7 @@
  */
 
 #import <Foundation/Foundation.h>
-@import SwiftyIroha;
+@import IrohaCommunication;
 
 @interface IRIrohaContainer : NSObject
 

@@ -4,7 +4,7 @@
  */
 
 @import XCTest;
-@import SwiftyIroha;
+@import IrohaCommunication;
 
 static const NSUInteger VALID_ACCOUNT_NAMES_COUNT = 5;
 static NSString* const VALID_ACCOUNT_NAMES[] = {
