@@ -26,6 +26,7 @@ typedef NS_ENUM(NSUInteger, IRTransactionBatchType) {
 @property(nonatomic, readonly)NSArray<id<IRPeerSignature>>* _Nullable signatures;
 @property(nonatomic, readonly)NSArray<NSData*>* _Nullable batchHashes;
 @property(nonatomic, readonly)IRTransactionBatchType batchType;
+@property(nonatomic, readonly)NSData* _Nullable transactionData;
 
 - (nullable NSData*)transactionHashWithError:(NSError **)error;
 

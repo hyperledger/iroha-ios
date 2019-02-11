@@ -60,6 +60,10 @@ static NSString * const VALID_ROLE = @"admin";
                       usingPublicKey:resultSignature.publicKey];
 
     XCTAssertTrue(verified);
+    
+    NSData *transactionData = transaction.transactionData;
+    
+    XCTAssertNotNil(transactionData);
 }
 
 - (void)testInitializationFromRawTransaction {
@@ -111,6 +115,10 @@ static NSString * const VALID_ROLE = @"admin";
 
     XCTAssertEqualObjects(originalSignature.signature.rawData, restoredSignature.signature.rawData);
     XCTAssertEqualObjects(originalSignature.publicKey.rawData, restoredSignature.publicKey.rawData);
+    
+    NSData *transactionData = transaction.transactionData;
+    
+    XCTAssertNotNil(transactionData);
 }
 
 - (void)testBatchInitialization {
@@ -147,6 +155,10 @@ static NSString * const VALID_ROLE = @"admin";
     XCTAssertNil(batchedTransaction.signatures);
 
     XCTAssertEqualObjects([batchedTransaction batchHashWithError:nil], batchHash);
+    
+    NSData *transactionData = transaction.transactionData;
+    
+    XCTAssertNotNil(transactionData);
 }
 
 #pragma mark - Private
