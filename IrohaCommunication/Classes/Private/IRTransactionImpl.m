@@ -68,6 +68,14 @@
     return transaction;
 }
 
+#pragma mark - Transaction data
+
+- (nullable NSData *)transactionData {
+    Transaction *transaction = [self transform:nil];
+    
+    return transaction.data;
+}
+
 #pragma mark - Signable
 
 - (nullable NSData*)transactionHashWithError:(NSError **)error {
