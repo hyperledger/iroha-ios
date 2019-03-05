@@ -23,7 +23,7 @@
 
 - (void)testInvalidGrantablePermissionWithError {
     for (int i = 5; i < 10; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRGrantablePermission> permission = [IRGrantablePermissionFactory permissionWithValue:i
                                                                                            error:&error];
         XCTAssertNil(permission);
