@@ -40,7 +40,7 @@ static NSString * const INVALID_STRING_AMOUNT[] = {
 
 - (void)testInvalidStringAmountWithError {
     for (NSUInteger i = 0; i < INVALID_STRING_AMOUNT_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRAmount> amount = [IRAmountFactory amountFromString:INVALID_STRING_AMOUNT[i]
                                                           error:&error];
 

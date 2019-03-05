@@ -41,7 +41,7 @@ static NSString * const INVALID_DOMAINS[] = {
 
 - (void)testInvalidDomainsWithError {
     for (NSUInteger i = 0; i < INVALID_DOMAINS_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRDomain> domain = [IRDomainFactory domainWithIdentitifer:INVALID_DOMAINS[i]
                                                                error:&error];
         XCTAssertNil(domain);

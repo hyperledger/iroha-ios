@@ -213,7 +213,7 @@
         return promise;
     }
 
-    NSError *error;
+    NSError *error = nil;
     Query *protobufQuery = [(id<IRProtobufTransformable>)queryRequest transform:&error];
 
     if (!protobufQuery) {

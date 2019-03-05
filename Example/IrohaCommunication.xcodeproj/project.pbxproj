@@ -677,7 +677,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-IntegrationTestHost/Pods-IntegrationTestHost-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-IntegrationTestHost/Pods-IntegrationTestHost-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/IrohaCommunication/IrohaCommunication.framework",
 				"${BUILT_PRODUCTS_DIR}/IrohaCrypto/IrohaCrypto.framework",
@@ -704,7 +704,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntegrationTestHost/Pods-IntegrationTestHost-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IntegrationTestHost/Pods-IntegrationTestHost-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F038CD8710A254DFB6ADBE4A /* [CP] Embed Pods Frameworks */ = {
@@ -715,7 +715,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-IrohaExample/Pods-IrohaExample-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-IrohaExample/Pods-IrohaExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/IrohaCommunication/IrohaCommunication.framework",
 				"${BUILT_PRODUCTS_DIR}/IrohaCrypto/IrohaCrypto.framework",
@@ -742,7 +742,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IrohaExample/Pods-IrohaExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IrohaExample/Pods-IrohaExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
