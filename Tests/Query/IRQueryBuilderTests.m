@@ -44,7 +44,7 @@ static UInt64 VALID_QUERY_COUNTER = 10;
 - (void)testMissingAccountId {
     IRQueryBuilder *queryBuilder = [[IRQueryBuilder alloc] init];
 
-    NSError *error;
+    NSError *error = nil;
     id<IRQueryRequest> query = [queryBuilder build:&error];
 
     XCTAssertNil(query);
@@ -57,7 +57,7 @@ static UInt64 VALID_QUERY_COUNTER = 10;
 
     IRQueryBuilder *queryBuilder = [IRQueryBuilder builderWithCreatorAccountId:accountId];
 
-    NSError *error;
+    NSError *error = nil;
     id<IRQueryRequest> query = [queryBuilder build:&error];
 
     XCTAssertNil(query);
@@ -91,10 +91,10 @@ static UInt64 VALID_QUERY_COUNTER = 10;
 
         [invocation invoke];
 
-        NSError *error;
+        NSError *error = nil;
         id<IRQueryRequest> queryRequest = [queryBuilder build:&error];
 
-        XCTAssertNil(error);
+        XCTAssertNil(error, "Query builder failed: %@", [error localizedDescription]);
         XCTAssertNotNil(queryRequest);
         XCTAssertEqualObjects([accountId identifier], [queryRequest.creator identifier]);
         XCTAssertEqualObjects(date, queryRequest.createdAt);
