@@ -54,7 +54,7 @@ static NSString * const VALID_DOMAIN = @"gmail.com";
 
 - (void)testInvalidAccountNamesWithError {
     for (NSUInteger i = 0; i < INVALID_ACCOUNT_NAMES_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRAccountId> accountId = [IRAccountIdFactory accountIdWithName:INVALID_ACCOUNT_NAMES[i]
                                                                    domain:[IRDomainFactory domainWithIdentitifer:VALID_DOMAIN error:nil]
                                                                     error:&error];
@@ -85,7 +85,7 @@ static NSString * const VALID_DOMAIN = @"gmail.com";
 
 - (void)testInvalidAccountIdentifierWithError {
     for (NSUInteger i = 0; i < INVALID_ACCOUNT_IDENTIFIERS_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:INVALID_ACCOUNT_IDENTIFIERS[i]
                                                                         error:&error];
         XCTAssertNil(accountId);
