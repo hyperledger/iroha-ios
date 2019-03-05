@@ -71,7 +71,7 @@ static NSString * const INVALID_ADDRESS_DOMAINS[] = {
 
 - (void)testInvalidAddressWithError {
     for (NSUInteger i = 0; i < INVALID_ADDRESSES_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRAddress> address = [IRAddressFactory addressWithIp:INVALID_IPV4[i]
                                                            port:VALID_PORT
                                                           error:&error];
@@ -92,7 +92,7 @@ static NSString * const INVALID_ADDRESS_DOMAINS[] = {
 
 - (void)testInvalidIpPortWithError {
     for (NSUInteger i = 0; i < INVALID_PORTS_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRAddress> address = [IRAddressFactory addressWithIp:VALID_IPV4[0]
                                                            port:INVALID_PORTS[i]
                                                           error:&error];
@@ -126,7 +126,7 @@ static NSString * const INVALID_ADDRESS_DOMAINS[] = {
 
 - (void)testInvalidDomainWithError {
     for (NSUInteger i = 0; i < INVALID_ADDRESS_DOMAINS_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRAddress> address = [IRAddressFactory addressWithDomain:INVALID_ADDRESS_DOMAINS[i]
                                                                port:VALID_PORT
                                                               error:&error];
@@ -149,7 +149,7 @@ static NSString * const INVALID_ADDRESS_DOMAINS[] = {
 
 - (void)testInvalidDomainPortWithError {
     for (NSUInteger i = 0; i < INVALID_PORTS_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRAddress> address = [IRAddressFactory addressWithDomain:VALID_ADDRESS_DOMAINS[0]
                                                                port:INVALID_PORTS[i]
                                                               error:&error];

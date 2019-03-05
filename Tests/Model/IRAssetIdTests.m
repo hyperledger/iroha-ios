@@ -53,7 +53,7 @@ static NSString * const VALID_DOMAIN = @"gmail.com";
 
 - (void)testInvalidAssetNamesWithError {
     for (NSUInteger i = 0; i < INVALID_ASSET_NAMES_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRAssetId> assetId = [IRAssetIdFactory assetIdWithName:INVALID_ASSET_NAMES[i]
                                                            domain:[IRDomainFactory domainWithIdentitifer:VALID_DOMAIN error:nil]
                                                             error:&error];
@@ -84,7 +84,7 @@ static NSString * const VALID_DOMAIN = @"gmail.com";
 
 - (void)testInvalidAssetIdentifierWithError {
     for (NSUInteger i = 0; i < INVALID_ASSET_IDENTIFIERS_COUNT; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRAssetId> assetId = [IRAssetIdFactory assetWithIdentifier:INVALID_ASSET_IDENTIFIERS[i]
                                                                 error:&error];
         XCTAssertNil(assetId);

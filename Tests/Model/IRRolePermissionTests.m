@@ -23,7 +23,7 @@
 
 - (void)testInvalidRolPermissionWithError {
     for (int i = 50; i < 60; i++) {
-        NSError *error;
+        NSError *error = nil;
         id<IRRolePermission> permission = [IRRolePermissionFactory permissionWithValue:i
                                                                                  error:&error];
         XCTAssertNil(permission);
