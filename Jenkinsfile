@@ -7,7 +7,7 @@ node('mac_for_ios') {
             'SCHEMA_PATH=Schema',
             'PROTO_GEN=ProtoGen',
             'LANG=en_US.UTF-8']) {
-      if (scmVars.GIT_LOCAL_BRANCH ==~ /(master)/) {
+      if (scmVars.GIT_LOCAL_BRANCH == 'develop' || scmVars.CHANGE_BRANCH_LOCAL == 'develop' ) {
         stage('prepare') {
           sh(script: "git clone -b master --depth=1 https://github.com/hyperledger/iroha")
           sh(script: "mkdir \$SCHEMA_PATH")
@@ -15,7 +15,7 @@ node('mac_for_ios') {
           sh(script: "rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN")
         }
         stage('build') {
-          sh(script: "protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto")
+          sh(script: "protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN-iroha --grpc_out=\$PROTO_GEN-iroha --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto")
         }
       }
       stage('test') {
