@@ -39,10 +39,14 @@ static NSString * const VALID_BALANCE = @"100";
     NSError *error = nil;
     id<IRQueryResponse> irQueryResponse = [IRSerializationFactory deserializeQueryResponseFromData:response.data error:&error];
 
+    // then
+
     if (!irQueryResponse || ![irQueryResponse conformsToProtocol:@protocol(IRAccountAssetsResponse)]) {
         XCTFail("Unexpected empty response");
         return;
     }
+
+    XCTAssertEqualObjects(irQueryResponse.queryHash, assetResponse.data);
 
     XCTAssertNil(error);
 }
