@@ -6,7 +6,6 @@
 @import XCTest;
 @import IrohaCommunication;
 
-
 @interface IRPromiseTests : XCTestCase
 
 @end
