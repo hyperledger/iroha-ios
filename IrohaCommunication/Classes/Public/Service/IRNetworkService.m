@@ -206,7 +206,7 @@
     if (![queryRequest conformsToProtocol:@protocol(IRProtobufTransformable)]) {
         NSString *message = @"Unsupported query implementation";
         NSError *error = [NSError errorWithDomain:NSStringFromClass([IRNetworkService class])
-                                             code:IRTransactionErrorSerialization
+                                             code:IRQueryRequestErrorSerialization
                                          userInfo:@{NSLocalizedDescriptionKey: message}];
 
         [promise fulfillWithResult:error];
