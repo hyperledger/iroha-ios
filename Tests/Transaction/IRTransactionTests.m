@@ -60,10 +60,12 @@ static NSString * const VALID_ROLE = @"admin";
                       usingPublicKey:resultSignature.publicKey];
 
     XCTAssertTrue(verified);
-    
-    NSData *transactionData = transaction.transactionData;
+
+    error = nil;
+    NSData *transactionData = [IRSerializationFactory serializeTransaction:transaction error:&error];
     
     XCTAssertNotNil(transactionData);
+    XCTAssertNil(error);
 }
 
 - (void)testInitializationFromRawTransaction {
@@ -82,14 +84,14 @@ static NSString * const VALID_ROLE = @"admin";
                                                                       error:&error];
 
     error = nil;
-    id rawTransaction = [(IRTransaction*)signedTransaction transform:&error];
+    NSData* transactionData = [IRSerializationFactory serializeTransaction:signedTransaction error:&error];
 
-    XCTAssertNotNil(rawTransaction);
+    XCTAssertNotNil(transactionData);
     XCTAssertNil(error);
 
     error = nil;
-    id<IRTransaction> restoredTransaction = [IRTransaction transactionFromPbTransaction:rawTransaction
-                                                                                  error:&error];
+    id<IRTransaction> restoredTransaction = [IRSerializationFactory deserializeTransactionFromData:transactionData
+                                                                                             error:&error];
 
     XCTAssertNotNil(restoredTransaction);
     XCTAssertNil(error);
@@ -115,10 +117,6 @@ static NSString * const VALID_ROLE = @"admin";
 
     XCTAssertEqualObjects(originalSignature.signature.rawData, restoredSignature.signature.rawData);
     XCTAssertEqualObjects(originalSignature.publicKey.rawData, restoredSignature.publicKey.rawData);
-    
-    NSData *transactionData = transaction.transactionData;
-    
-    XCTAssertNotNil(transactionData);
 }
 
 - (void)testBatchInitialization {
@@ -155,10 +153,13 @@ static NSString * const VALID_ROLE = @"admin";
     XCTAssertNil(batchedTransaction.signatures);
 
     XCTAssertEqualObjects([batchedTransaction batchHashWithError:nil], batchHash);
+
+    error = nil;
+    NSData *batchTransactionData = [IRSerializationFactory serializeTransaction:batchedTransaction
+                                                                          error:&error];
     
-    NSData *transactionData = transaction.transactionData;
-    
-    XCTAssertNotNil(transactionData);
+    XCTAssertNotNil(batchTransactionData);
+    XCTAssertNil(error);
 }
 
 #pragma mark - Private
