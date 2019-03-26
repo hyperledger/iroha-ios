@@ -113,6 +113,13 @@ static UInt64 VALID_QUERY_COUNTER = 10;
 
         XCTAssertNotNil(signedQueryRequest.peerSignature);
         XCTAssertNil(error);
+
+        error = nil;
+        NSData *rawQueryRequestData = [IRSerializationFactory serializeQueryRequest:signedQueryRequest
+                                                                              error:&error];
+
+        XCTAssertNotNil(rawQueryRequestData);
+        XCTAssertNil(error);
     }
     
 }

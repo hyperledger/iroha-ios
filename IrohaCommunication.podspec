@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IrohaCommunication'
-  s.version          = '3.0.2'
+  s.version          = '3.1.0'
   s.summary          = 'Helper classes to use for communication with Iroha blockchain.'
 
   s.homepage         = 'https://github.com/hyperledger/iroha-ios'
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1' }
 
   s.test_spec do |ts|
-      ts.source_files = 'Tests/**/*.{h,m}'
+      ts.source_files = 'Tests/**/*.{h,m}', 'ProtoGen/*.{h,m}'
   end
 
 end
