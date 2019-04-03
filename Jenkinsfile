@@ -1,6 +1,5 @@
 node('mac_for_ios') {
   scmVars = checkout scm
-  tree = "develop"
   try {
     grpc = "protoc-gen-objcgrpc"
     withEnv(['IROHA_PATH=iroha',
