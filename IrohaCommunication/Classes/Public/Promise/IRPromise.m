@@ -29,11 +29,11 @@
     return self;
 }
 
-+ (instancetype)promise {
++ (nonnull instancetype)promise {
     return [[IRPromise alloc] init];
 }
 
-+ (instancetype)promiseWithResult:(nullable id)result {
++ (nonnull instancetype)promiseWithResult:(nullable id)result {
     IRPromise *promise = [self promise];
     [promise fulfillWithResult:result];
 

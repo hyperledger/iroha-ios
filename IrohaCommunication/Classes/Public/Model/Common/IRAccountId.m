@@ -37,7 +37,7 @@ static NSString * const ACCOUNT_SEPARATOR = @"@";
 
 + (nullable id<IRAccountId>)accountIdWithName:(nonnull NSString*)name
                                    domain:(nonnull id<IRDomain>)domain
-                                        error:(NSError**)error {
+                                        error:(NSError*_Nullable*_Nullable)error {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ACCOUNT_NAME_FORMAT];
 
     if ([predicate evaluateWithObject:name]) {
@@ -54,7 +54,7 @@ static NSString * const ACCOUNT_SEPARATOR = @"@";
 }
 
 + (nullable id<IRAccountId>)accountWithIdentifier:(nonnull NSString*)accountId
-                                          error:(NSError**)error {
+                                          error:(NSError*_Nullable*_Nullable)error {
     NSArray<NSString*> *components = [accountId componentsSeparatedByString:ACCOUNT_SEPARATOR];
 
     if ([components count] != 2) {
