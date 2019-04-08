@@ -10,11 +10,11 @@
 
 @protocol IRSerializationFactoryProtocol <NSObject>
 
-+ (nullable NSData*)serializeTransaction:(nonnull id<IRTransaction>)transaction error:(NSError**)error;
-+ (nullable NSData*)serializeQueryRequest:(nonnull id<IRQueryRequest>)queryRequest error:(NSError**)error;
++ (nullable NSData*)serializeTransaction:(nonnull id<IRTransaction>)transaction error:(NSError*_Nullable*_Nullable)error;
++ (nullable NSData*)serializeQueryRequest:(nonnull id<IRQueryRequest>)queryRequest error:(NSError*_Nullable*_Nullable)error;
 
-+ (nullable id<IRTransaction>)deserializeTransactionFromData:(nonnull NSData*)data error:(NSError**)error;
-+ (nullable id<IRQueryResponse>)deserializeQueryResponseFromData:(nonnull NSData*)data error:(NSError**)error;
++ (nullable id<IRTransaction>)deserializeTransactionFromData:(nonnull NSData*)data error:(NSError*_Nullable*_Nullable)error;
++ (nullable id<IRQueryResponse>)deserializeQueryResponseFromData:(nonnull NSData*)data error:(NSError*_Nullable*_Nullable)error;
 
 @end
 

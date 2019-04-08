@@ -39,7 +39,7 @@
 
 @implementation IRGrantablePermissionFactory
 
-+ (nullable id<IRGrantablePermission>)permissionWithValue:(int32_t)value error:(NSError**)error {
++ (nullable id<IRGrantablePermission>)permissionWithValue:(int32_t)value error:(NSError*_Nullable*_Nullable)error {
     if (!GrantablePermission_IsValidValue(value)) {
         if (error) {
             NSString *message = @"Invalid grantable permission value passed.";

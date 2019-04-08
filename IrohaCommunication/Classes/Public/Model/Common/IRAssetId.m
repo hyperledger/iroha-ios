@@ -37,7 +37,7 @@ static NSString * const ASSET_ID_SEPARATOR = @"#";
 
 + (nullable id<IRAssetId>)assetIdWithName:(nonnull NSString*)name
                                      domain:(nonnull id<IRDomain>)domain
-                                    error:(NSError**)error {
+                                    error:(NSError*_Nullable*_Nullable)error {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ASSET_NAME_FORMAT];
 
     if ([predicate evaluateWithObject:name]) {
@@ -55,7 +55,7 @@ static NSString * const ASSET_ID_SEPARATOR = @"#";
 }
 
 + (nullable id<IRAssetId>)assetWithIdentifier:(nonnull NSString*)assetId
-                                            error:(NSError**)error {
+                                            error:(NSError*_Nullable*_Nullable)error {
     NSArray<NSString*> *components = [assetId componentsSeparatedByString:ASSET_ID_SEPARATOR];
 
     if ([components count] != 2) {
