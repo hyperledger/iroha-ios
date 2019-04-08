@@ -24,10 +24,10 @@ typedef NS_ENUM(NSUInteger, IRAccountIdFactoryError) {
 
 + (nullable id<IRAccountId>)accountIdWithName:(nonnull NSString*)name
                                        domain:(nonnull id<IRDomain>)domain
-                                        error:(NSError**)error;
+                                        error:(NSError*_Nullable*_Nullable)error;
 
 + (nullable id<IRAccountId>)accountWithIdentifier:(nonnull NSString*)accountId
-                                          error:(NSError**)error;
+                                          error:(NSError*_Nullable*_Nullable)error;
 
 @end
 

@@ -17,7 +17,8 @@ typedef NS_ENUM(NSUInteger, IRDomainFactoryError) {
 
 @protocol IRDomainFactoryProtocol <NSObject>
 
-+ (nullable id<IRDomain>)domainWithIdentitifer:(nonnull NSString*)identifier error:(NSError**)error;
++ (nullable id<IRDomain>)domainWithIdentitifer:(nonnull NSString*)identifier
+                                         error:(NSError*_Nullable*_Nullable)error;
 
 @end
 

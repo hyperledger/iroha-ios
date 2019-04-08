@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, IRGrantablePermissionError) {
 
 @protocol IRGrantablePermissionFactoryProtocol <NSObject>
 
-+ (nullable id<IRGrantablePermission>)permissionWithValue:(int32_t)value error:(NSError**)error;
++ (nullable id<IRGrantablePermission>)permissionWithValue:(int32_t)value error:(NSError*_Nullable*_Nullable)error;
 
 @end
 

@@ -20,7 +20,7 @@
 
 - (nullable instancetype)signedWithSignatory:(nonnull id<IRSignatureCreatorProtocol>)signatory
                           signatoryPublicKey:(nonnull id<IRPublicKeyProtocol>)signatoryPublicKey
-                                       error:(NSError**)error;
+                                       error:(NSError*_Nullable*_Nullable)error;
 
 @end
 

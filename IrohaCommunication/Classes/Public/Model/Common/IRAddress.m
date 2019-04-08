@@ -41,7 +41,7 @@ static NSString * const DOMAIN_FORMAT = @"([a-zA-Z]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0
 
 @implementation IRAddressFactory
 
-+ (nullable id<IRAddress>)addressWithIp:(nonnull NSString*)ipV4 port:(nonnull NSString*)port error:(NSError**)error {
++ (nullable id<IRAddress>)addressWithIp:(nonnull NSString*)ipV4 port:(nonnull NSString*)port error:(NSError*_Nullable*_Nullable)error {
     if (![self isValidIpV4:ipV4]) {
         if (error) {
             NSString *message = [NSString stringWithFormat:@"IP address %@ is invalid. Expected: %@", ipV4, IP_V4_FORMAT];
@@ -67,7 +67,7 @@ static NSString * const DOMAIN_FORMAT = @"([a-zA-Z]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0
     return [[IRAddress alloc] initWithString:value];
 }
 
-+ (nullable id<IRAddress>)addressWithDomain:(nonnull NSString*)domain port:(nonnull NSString*)port error:(NSError**)error {
++ (nullable id<IRAddress>)addressWithDomain:(nonnull NSString*)domain port:(nonnull NSString*)port error:(NSError*_Nullable*_Nullable)error {
     if (![self isValidDomain:domain]) {
         if (error) {
             NSString *message = [NSString stringWithFormat:@"Domain %@ is invalid. Expected: %@", domain, DOMAIN_FORMAT];
@@ -94,7 +94,7 @@ static NSString * const DOMAIN_FORMAT = @"([a-zA-Z]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0
     return [[IRAddress alloc] initWithString:value];
 }
 
-+ (nullable id<IRAddress>)addressWithValue:(nonnull NSString*)value error:(NSError**)error {
++ (nullable id<IRAddress>)addressWithValue:(nonnull NSString*)value error:(NSError*_Nullable*_Nullable)error {
     NSArray<NSString*> *components = [value componentsSeparatedByString:ADDRESS_PORT_SEPARATOR];
 
     if ([components count] != 2) {

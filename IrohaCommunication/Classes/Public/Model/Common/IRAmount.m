@@ -28,7 +28,7 @@ static NSString * const DECIMAL_SEPARATOR = @".";
 
 @implementation IRAmountFactory
 
-+ (nullable id<IRAmount>)amountFromString:(nonnull NSString*)amount error:(NSError**)error {
++ (nullable id<IRAmount>)amountFromString:(nonnull NSString*)amount error:(NSError*_Nullable*_Nullable)error {
     NSCharacterSet *invalidSymbols = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
 
     if ([amount rangeOfCharacterFromSet:invalidSymbols].location != NSNotFound) {
@@ -57,7 +57,7 @@ static NSString * const DECIMAL_SEPARATOR = @".";
     return [[IRAmount alloc] initWithString:[decimalNumber stringValue]];
 }
 
-+ (nullable id<IRAmount>)amountFromUnsignedInteger:(NSUInteger)amount error:(NSError**)error {
++ (nullable id<IRAmount>)amountFromUnsignedInteger:(NSUInteger)amount error:(NSError*_Nullable*_Nullable)error {
     return [self amountFromString:[@(amount) stringValue] error:error];
 }
 
