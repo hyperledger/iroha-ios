@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, IRRoleNameFactoryError) {
 
 @protocol IRRoleNameFactoryProtocol <NSObject>
 
-+ (nullable id<IRRoleName>)roleWithName:(nonnull NSString*)name error:(NSError**)error;
++ (nullable id<IRRoleName>)roleWithName:(nonnull NSString*)name error:(NSError*_Nullable*_Nullable)error;
 
 @end
 

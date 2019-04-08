@@ -24,10 +24,10 @@ typedef NS_ENUM(NSUInteger, IRAssetIdFactoryError) {
 
 + (nullable id<IRAssetId>)assetIdWithName:(nonnull NSString*)name
                                    domain:(nonnull id<IRDomain>)domain
-                                    error:(NSError**)error;
+                                    error:(NSError*_Nullable*_Nullable)error;
 
 + (nullable id<IRAssetId>)assetWithIdentifier:(nonnull NSString*)assetId
-                                        error:(NSError**)error;
+                                        error:(NSError*_Nullable*_Nullable)error;
 
 @end
 
