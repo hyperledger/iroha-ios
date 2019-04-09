@@ -27,17 +27,17 @@ typedef NS_ENUM(NSUInteger, IRTransactionBatchType) {
 @property(nonatomic, readonly)NSArray<NSData*>* _Nullable batchHashes;
 @property(nonatomic, readonly)IRTransactionBatchType batchType;
 
-- (nullable NSData*)transactionHashWithError:(NSError **)error;
+- (nullable NSData*)transactionHashWithError:(NSError*_Nullable*_Nullable)error;
 
-- (nullable NSData*)batchHashWithError:(NSError **)error;
+- (nullable NSData*)batchHashWithError:(NSError*_Nullable*_Nullable)error;
 
 - (nullable instancetype)signedWithSignatories:(nonnull NSArray<id<IRSignatureCreatorProtocol>>*)signatories
                            signatoryPublicKeys:(nonnull NSArray<id<IRPublicKeyProtocol>> *)signatoryPublicKeys
-                                         error:(NSError**)error;
+                                         error:(NSError*_Nullable*_Nullable)error;
 
 - (nullable instancetype)batched:(nullable NSArray<NSData*>*)transactionBatchHashes
                        batchType:(IRTransactionBatchType)batchType
-                           error:(NSError**)error;
+                           error:(NSError*_Nullable*_Nullable)error;
 
 @end
 

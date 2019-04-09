@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, IRPaginationFactoryError) {
 
 + (nullable id<IRPagination>)pagination:(UInt32)pageSize
                           firstItemHash:(nullable NSData*)firstItemHash
-                                  error:(NSError **)error;
+                                  error:(NSError*_Nullable*_Nullable)error;
 
 @end
 
