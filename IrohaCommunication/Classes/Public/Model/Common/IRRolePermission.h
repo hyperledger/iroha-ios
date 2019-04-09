@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, IRRolePermissionError) {
 
 @protocol IRRolePermissionFactoryProtocol <NSObject>
 
-+ (nullable id<IRRolePermission>)permissionWithValue:(int32_t)value error:(NSError**)error;
++ (nullable id<IRRolePermission>)permissionWithValue:(int32_t)value error:(NSError*_Nullable*_Nullable)error;
 
 @end
 
@@ -25,56 +25,56 @@ typedef NS_ENUM(NSUInteger, IRRolePermissionError) {
 
 #pragma mark - Command Permissions
 
-+ (id<IRRolePermission>)canAppendRole;
-+ (id<IRRolePermission>)canCreateRole;
-+ (id<IRRolePermission>)canDetachRole;
-+ (id<IRRolePermission>)canAddAssetQuantity;
-+ (id<IRRolePermission>)canSubtractAssetQuantity;
-+ (id<IRRolePermission>)canAddPeer;
-+ (id<IRRolePermission>)canAddSignatory;
-+ (id<IRRolePermission>)canRemoveSignatory;
-+ (id<IRRolePermission>)canSetQuorum;
-+ (id<IRRolePermission>)canCreateAccount;
-+ (id<IRRolePermission>)canSetDetail;
-+ (id<IRRolePermission>)canCreateAsset;
-+ (id<IRRolePermission>)canTransfer;
-+ (id<IRRolePermission>)canReceive;
-+ (id<IRRolePermission>)canCreateDomain;
-+ (id<IRRolePermission>)canAddDomainAssetQuantity;
-+ (id<IRRolePermission>)canSubtractDomainAssetQuantity;
++ (nonnull id<IRRolePermission>)canAppendRole;
++ (nonnull id<IRRolePermission>)canCreateRole;
++ (nonnull id<IRRolePermission>)canDetachRole;
++ (nonnull id<IRRolePermission>)canAddAssetQuantity;
++ (nonnull id<IRRolePermission>)canSubtractAssetQuantity;
++ (nonnull id<IRRolePermission>)canAddPeer;
++ (nonnull id<IRRolePermission>)canAddSignatory;
++ (nonnull id<IRRolePermission>)canRemoveSignatory;
++ (nonnull id<IRRolePermission>)canSetQuorum;
++ (nonnull id<IRRolePermission>)canCreateAccount;
++ (nonnull id<IRRolePermission>)canSetDetail;
++ (nonnull id<IRRolePermission>)canCreateAsset;
++ (nonnull id<IRRolePermission>)canTransfer;
++ (nonnull id<IRRolePermission>)canReceive;
++ (nonnull id<IRRolePermission>)canCreateDomain;
++ (nonnull id<IRRolePermission>)canAddDomainAssetQuantity;
++ (nonnull id<IRRolePermission>)canSubtractDomainAssetQuantity;
 
 #pragma mark - Query permissions
 
-+ (id<IRRolePermission>)canReadAssets;
-+ (id<IRRolePermission>)canGetRoles;
-+ (id<IRRolePermission>)canGetMyAccount;
-+ (id<IRRolePermission>)canGetAllAccounts;
-+ (id<IRRolePermission>)canGetDomainAccounts;
-+ (id<IRRolePermission>)canGetMySignatories;
-+ (id<IRRolePermission>)canGetAllSignatories;
-+ (id<IRRolePermission>)canGetDomainSignatories;
-+ (id<IRRolePermission>)canGetMyAccountAssets;
-+ (id<IRRolePermission>)canGetAllAccountAssets;
-+ (id<IRRolePermission>)canGetDomainAccountAssets;
-+ (id<IRRolePermission>)canGetMyAccountDetail;
-+ (id<IRRolePermission>)canGetAllAccountDetail;
-+ (id<IRRolePermission>)canGetDomainAccountDetail;
-+ (id<IRRolePermission>)canGetMyAccountTransactions;
-+ (id<IRRolePermission>)canGetAllAccountTransactions;
-+ (id<IRRolePermission>)canGetDomainAccountTransactions;
-+ (id<IRRolePermission>)canGetMyAccountAssetTransactions;
-+ (id<IRRolePermission>)canGetAllAccountAssetTransactions;
-+ (id<IRRolePermission>)canGetDomainAccountAsssetTransactions;
-+ (id<IRRolePermission>)canGetMyTransactions;
-+ (id<IRRolePermission>)canGetAllTransactions;
-+ (id<IRRolePermission>)canGetBlocks;
++ (nonnull id<IRRolePermission>)canReadAssets;
++ (nonnull id<IRRolePermission>)canGetRoles;
++ (nonnull id<IRRolePermission>)canGetMyAccount;
++ (nonnull id<IRRolePermission>)canGetAllAccounts;
++ (nonnull id<IRRolePermission>)canGetDomainAccounts;
++ (nonnull id<IRRolePermission>)canGetMySignatories;
++ (nonnull id<IRRolePermission>)canGetAllSignatories;
++ (nonnull id<IRRolePermission>)canGetDomainSignatories;
++ (nonnull id<IRRolePermission>)canGetMyAccountAssets;
++ (nonnull id<IRRolePermission>)canGetAllAccountAssets;
++ (nonnull id<IRRolePermission>)canGetDomainAccountAssets;
++ (nonnull id<IRRolePermission>)canGetMyAccountDetail;
++ (nonnull id<IRRolePermission>)canGetAllAccountDetail;
++ (nonnull id<IRRolePermission>)canGetDomainAccountDetail;
++ (nonnull id<IRRolePermission>)canGetMyAccountTransactions;
++ (nonnull id<IRRolePermission>)canGetAllAccountTransactions;
++ (nonnull id<IRRolePermission>)canGetDomainAccountTransactions;
++ (nonnull id<IRRolePermission>)canGetMyAccountAssetTransactions;
++ (nonnull id<IRRolePermission>)canGetAllAccountAssetTransactions;
++ (nonnull id<IRRolePermission>)canGetDomainAccountAsssetTransactions;
++ (nonnull id<IRRolePermission>)canGetMyTransactions;
++ (nonnull id<IRRolePermission>)canGetAllTransactions;
++ (nonnull id<IRRolePermission>)canGetBlocks;
 
 #pragma mark - Grant permissions
 
-+ (id<IRRolePermission>)canGrantCanSetMyQuorum;
-+ (id<IRRolePermission>)canGrantCanAddMySignatory;
-+ (id<IRRolePermission>)canGrantCanRemoveMySignatory;
-+ (id<IRRolePermission>)canGrantCanTransferMyAssets;
-+ (id<IRRolePermission>)canGrantCanSetMyAccountDetail;
++ (nonnull id<IRRolePermission>)canGrantCanSetMyQuorum;
++ (nonnull id<IRRolePermission>)canGrantCanAddMySignatory;
++ (nonnull id<IRRolePermission>)canGrantCanRemoveMySignatory;
++ (nonnull id<IRRolePermission>)canGrantCanTransferMyAssets;
++ (nonnull id<IRRolePermission>)canGrantCanSetMyAccountDetail;
 
 @end

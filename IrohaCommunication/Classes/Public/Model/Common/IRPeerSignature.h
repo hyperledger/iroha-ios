@@ -18,7 +18,7 @@
 
 + (nullable id<IRPeerSignature>)peerSignature:(nonnull id<IRSignatureProtocol>)signature
                                     publicKey:(nonnull id<IRPublicKeyProtocol>)publicKey
-                                        error:(NSError**)error;
+                                        error:(NSError*_Nullable*_Nullable)error;
 
 @end
 
