@@ -123,61 +123,6 @@
     return promise;
 }
 
-- (nonnull IRPromise *)onTransactionStatus:(IRTransactionStatus)transactionStatus
-                                  withHash:(nonnull NSData*)transactionHash {
-    TxStatusRequest *statusRequest = [[TxStatusRequest alloc] init];
-    statusRequest.txHash = [transactionHash toHexString];
-
-    __block __weak GRPCProtoCall *weakCall = nil;
-
-    IRPromise *promise = [IRPromise promise];
-
-    __block NSMutableArray<NSNumber*> *receivedStatuses = [NSMutableArray array];
-
-    id eventHandler = ^(BOOL done, ToriiResponse *response, NSError *error) {
-        if (!weakCall) {
-            return;
-        }
-
-        if (response) {
-            NSError *parsingError;
-
-            id<IRTransactionStatusResponse> statusResponse = [IRTransactionStatusResponse statusResponseWithToriiResponse:response
-                                                                                                                    error:&parsingError];
-
-            [receivedStatuses addObject:@(statusResponse.status)];
-
-            if (statusResponse && statusResponse.status == transactionStatus) {
-                [promise fulfillWithResult:@(transactionStatus)];
-
-                [weakCall cancel];
-                weakCall = nil;
-            }
-        } else if (done && !promise.isFulfilled) {
-            if (error) {
-                [promise fulfillWithResult:error];
-            } else {
-                NSString *message = [NSString stringWithFormat:@"Received statuses [%@], but waited for %@. Streaming closed",
-                                     [receivedStatuses componentsJoinedByString:@","], @(transactionStatus)];
-                NSError *networkError = [NSError errorWithDomain:NSStringFromClass([IRNetworkService class])
-                                                            code:IRNetworkServiceErrorTransactionStatusNotReceived
-                                                        userInfo:@{NSLocalizedDescriptionKey: message}];
-                [promise fulfillWithResult:networkError];
-            }
-        }
-    };
-
-    GRPCProtoCall *call = [_commandService RPCToStatusStreamWithRequest:statusRequest
-                                                           eventHandler:eventHandler];
-    weakCall = call;
-
-    [call setResponseDispatchQueue:_responseSerialQueue];
-
-    [call start];
-
-    return promise;
-}
-
 - (id<IRCancellable>)streamTransactionStatus:(nonnull NSData*)transactionHash
                                    withBlock:(nonnull IRTransactionStatusBlock)block {
     TxStatusRequest *statusRequest = [[TxStatusRequest alloc] init];
@@ -292,7 +237,7 @@
                                      done:(BOOL)done
                                   handler:(nonnull IRTransactionStatusBlock)handler {
     if (toriiResponse) {
-        NSError *parsingError;
+        NSError *parsingError = nil;
         id<IRTransactionStatusResponse> statusResponse = [IRTransactionStatusResponse statusResponseWithToriiResponse:toriiResponse
                                                                                                                 error:&parsingError];
 

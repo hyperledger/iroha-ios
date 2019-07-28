@@ -40,7 +40,9 @@
             return nil;
         }
 
-        return [self.iroha onTransactionStatus:IRTransactionStatusCommitted withHash:result];
+        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
+                                                    withHash:result
+                                                        from:self.iroha];
     }).onThen(^IRPromise * _Nullable(id result) {
         [expectation fulfill];
         return nil;
@@ -61,7 +63,7 @@
         return nil;
     });
 
-    [self waitForExpectations:@[expectation] timeout:60.0];
+    [self waitForExpectations:@[expectation] timeout:120.0];
 }
 
 @end
