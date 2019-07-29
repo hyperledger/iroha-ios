@@ -71,7 +71,7 @@
 
     error = nil;
     NSData *transactionHash = [transaction transactionHashWithError:&error];
-    if (!transaction) {
+    if (!transactionHash) {
         [promise fulfillWithResult:error];
         return promise;
     }
@@ -87,6 +87,63 @@
 
     [call setResponseDispatchQueue:_responseSerialQueue];
 
+    [call start];
+
+    return promise;
+}
+
+- (nonnull IRPromise *)executeBatchTransactions:(nonnull NSArray<id<IRTransaction>>*)transactions {
+    IRPromise *promise = [IRPromise promise];
+
+    NSMutableArray<Transaction*> *pbTransactions = [NSMutableArray array];
+
+    NSMutableArray<NSData*> *transactionHashes = [NSMutableArray array];
+
+    for (NSUInteger i = 0; i < transactions.count; i++) {
+        if (![transactions[i] conformsToProtocol:@protocol(IRProtobufTransformable)]) {
+            NSString *message = @"Unsupported transaction implementation";
+            NSError *error = [NSError errorWithDomain:NSStringFromClass([IRNetworkService class])
+                                                 code:IRTransactionErrorSerialization
+                                             userInfo:@{NSLocalizedDescriptionKey: message}];
+
+            [promise fulfillWithResult:error];
+            return promise;
+        }
+
+        NSError *error = nil;
+        Transaction *pbTransaction = [(id<IRProtobufTransformable>)transactions[i] transform:&error];
+
+        if (!pbTransaction) {
+            [promise fulfillWithResult:error];
+            return promise;
+        }
+
+        [pbTransactions addObject:pbTransaction];
+
+        error = nil;
+        NSData *transactionHash = [transactions[i] transactionHashWithError:&error];
+        if (!transactionHash) {
+            [promise fulfillWithResult:error];
+            return promise;
+        }
+
+        [transactionHashes addObject:transactionHash];
+    }
+
+    TxList *txList = [[TxList alloc] init];
+    txList.transactionsArray = pbTransactions;
+
+    GRPCProtoCall *call = [_commandService RPCToListToriiWithRequest:txList
+                                                             handler:^(GPBEmpty * _Nullable response, NSError * _Nullable error) {
+                                                                 if (error) {
+                                                                     [promise fulfillWithResult: error];
+                                                                 } else {
+                                                                     [promise fulfillWithResult:transactionHashes];
+                                                                 }
+                                                             }];
+
+    [call setResponseDispatchQueue:_responseSerialQueue];
+    
     [call start];
 
     return promise;
