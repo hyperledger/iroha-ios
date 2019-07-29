@@ -8,7 +8,8 @@ The library was created to provide convienent interface for iOS applications to 
 
 For new iroha users we recommend to checkout iOS example project. It tries to establish connection with Iroha peer which should be also run locally on your computer to create new account and send some asset quantity to it. To run the project, please, go through steps below:
 
-1. Follow instructions from [Iroha documentation](https://iroha.readthedocs.io/en/latest/getting_started/) to setup and run iroha peer in [Docker](https://www.docker.com) container.
+1. Follow instructions from [Iroha documentation](https://iroha.readthedocs.io/en/latest/getting_started/) to setup and run iroha peer in [Docker](https://www.docker.com) container. However make sure you run iroha using following command (consider additional --overwrite_ledger flag):
+```docker run --name iroha -d -p 50051:50051 -v $(pwd)/iroha/example:/opt/iroha_data -v blockstore:/tmp/block_store --network=iroha-network -e KEY='node0 --overwrite_ledger' hyperledger/iroha:latest```
 
 2. Clone current repository.
 

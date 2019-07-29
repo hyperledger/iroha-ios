@@ -79,43 +79,6 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
         return resultError;
     }
 
-    __block NSString *taskId;
-    NSURLRequest *taskCreationRequest = [self createIrohaDaemonTaskPreparationRequest];
-    NSURLSessionDataTask *daemonTaskCreationTask = [_session dataTaskWithRequest:taskCreationRequest
-                                                               completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                   taskId = [self handleTaskPreparationResponse:response
-                                                                                                       data:data
-                                                                                                  receivedError:error
-                                                                                                    resultError:&resultError];
-                                                                   dispatch_semaphore_signal(semaphore);
-                                                               }];
-
-    [daemonTaskCreationTask resume];
-
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
-    if (resultError) {
-        return resultError;
-    }
-
-    NSURLRequest *taskExecutionRequest = [self createIrohaDaemonTaskStartRequest:taskId];
-    NSURLSessionDataTask *daemonTaskExecutionTask = [_session dataTaskWithRequest:taskExecutionRequest
-                                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                    resultError = [self handleTaskExecutionResponse:response
-                                                                                                               data:data
-                                                                                                      receivedError:error];
-
-                                                                    dispatch_semaphore_signal(semaphore);
-                                                                }];
-
-    [daemonTaskExecutionTask resume];
-
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
-    if (resultError) {
-        return resultError;
-    }
-
     BOOL connected = NO;
 
     for(NSUInteger tryIndex = 0; tryIndex < CONNECTION_TRIES; tryIndex++) {
