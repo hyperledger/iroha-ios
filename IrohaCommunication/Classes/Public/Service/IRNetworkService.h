@@ -11,15 +11,15 @@
 #import "IRBlockQueryRequest.h"
 #import "IRBlockQueryResponse.h"
 #import "IRCancellable.h"
+#import "IRTransactionStatusStreamable.h"
 
-typedef void (^IRTransactionStatusBlock)(id<IRTransactionStatusResponse> _Nullable response, BOOL done, NSError * _Nullable error);
 typedef void (^IRCommitStreamBlock)(id<IRBlockQueryResponse> _Nullable response, BOOL done, NSError * _Nullable error);
 
 typedef NS_ENUM(NSUInteger, IRNetworkServiceError) {
     IRNetworkServiceErrorTransactionStatusNotReceived
 };
 
-@interface IRNetworkService : NSObject
+@interface IRNetworkService : NSObject<IRTransactionStatusStreamable>
 
 @property(strong, nonatomic)dispatch_queue_t _Nonnull responseSerialQueue;
 
@@ -29,13 +29,9 @@ typedef NS_ENUM(NSUInteger, IRNetworkServiceError) {
 
 - (nonnull IRPromise *)executeTransaction:(nonnull id<IRTransaction>)transaction;
 
-- (nonnull IRPromise *)onTransactionStatus:(IRTransactionStatus)transactionStatus
-                                  withHash:(nonnull NSData*)transactionHash;
+- (nonnull IRPromise *)executeBatchTransactions:(nonnull NSArray<id<IRTransaction>>*)transactions;
 
 - (nonnull IRPromise *)fetchTransactionStatus:(nonnull NSData*)transactionHash;
-
-- (nullable id<IRCancellable>)streamTransactionStatus:(nonnull NSData*)transactionHash
-                                            withBlock:(nonnull IRTransactionStatusBlock)block;
 
 - (nonnull IRPromise*)executeQueryRequest:(nonnull id<IRQueryRequest>)queryRequest;
 

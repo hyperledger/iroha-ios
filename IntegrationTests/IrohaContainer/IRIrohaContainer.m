@@ -6,7 +6,7 @@
 #import "IRIrohaContainer.h"
 
 static NSString* const DOCKER_HOST = @"http://localhost:49721";
-static NSString* const CONTAINER = @"649f761b58de";
+static NSString* const CONTAINER = @"iroha";
 
 static NSString * IROHA_IP = @"127.0.0.1";
 static NSString * IROHA_PORT = @"50051";
@@ -72,43 +72,6 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
                                                     }];
 
     [restartTask resume];
-
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
-    if (resultError) {
-        return resultError;
-    }
-
-    __block NSString *taskId;
-    NSURLRequest *taskCreationRequest = [self createIrohaDaemonTaskPreparationRequest];
-    NSURLSessionDataTask *daemonTaskCreationTask = [_session dataTaskWithRequest:taskCreationRequest
-                                                               completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                   taskId = [self handleTaskPreparationResponse:response
-                                                                                                       data:data
-                                                                                                  receivedError:error
-                                                                                                    resultError:&resultError];
-                                                                   dispatch_semaphore_signal(semaphore);
-                                                               }];
-
-    [daemonTaskCreationTask resume];
-
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
-    if (resultError) {
-        return resultError;
-    }
-
-    NSURLRequest *taskExecutionRequest = [self createIrohaDaemonTaskStartRequest:taskId];
-    NSURLSessionDataTask *daemonTaskExecutionTask = [_session dataTaskWithRequest:taskExecutionRequest
-                                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                    resultError = [self handleTaskExecutionResponse:response
-                                                                                                               data:data
-                                                                                                      receivedError:error];
-
-                                                                    dispatch_semaphore_signal(semaphore);
-                                                                }];
-
-    [daemonTaskExecutionTask resume];
 
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 

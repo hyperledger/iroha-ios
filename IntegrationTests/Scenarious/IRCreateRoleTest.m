@@ -12,7 +12,7 @@
 
 @implementation IRCreateRoleTest
 
-- (void)testCreateRole {
+- (void)testCreateRoleRejected {
     NSError *error = nil;
     id<IRRoleName> role = [IRRoleNameFactory roleWithName:@"superadmintest" error:&error];
 
@@ -39,7 +39,9 @@
     XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
 
     [self.iroha executeTransaction:transaction].onThen(^IRPromise* _Nullable (id result) {
-        return [self.iroha onTransactionStatus:IRTransactionStatusCommitted withHash:result];
+        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusRejected
+                                                    withHash:result
+                                                        from:self.iroha];
     }).onThen(^IRPromise* _Nullable (id result) {
         [expectation fulfill];
 
@@ -48,21 +50,6 @@
         id<IRQueryRequest> request = [[builder build:nil] signedWithSignatory:self.adminSigner
                                                            signatoryPublicKey:self.adminPublicKey
                                                                         error:nil];
-
-        return [self.iroha executeQueryRequest:request];
-    }).onThen(^IRPromise* _Nullable (id result) {
-        IRQueryBuilder *builder = [IRQueryBuilder builderWithCreatorAccountId:self.adminAccountId];
-        builder = [builder getRolePermissions:role];
-
-        NSError *error = nil;
-        id<IRQueryRequest> request = [[builder build:&error] signedWithSignatory:self.adminSigner
-                                                           signatoryPublicKey:self.adminPublicKey
-                                                                        error:&error];
-
-        if (error) {
-            XCTFail();
-            return [IRPromise promiseWithResult:error];
-        }
 
         return [self.iroha executeQueryRequest:request];
     }).onThen(^IRPromise* _Nullable (id result) {
@@ -76,10 +63,12 @@
         XCTFail();
         NSLog(@"%@",error);
 
+        [expectation fulfill];
+
         return nil;
     });
 
-    [self waitForExpectations:@[expectation] timeout:60.0];
+    [self waitForExpectations:@[expectation] timeout:120.0];
 }
 
 @end

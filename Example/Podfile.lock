@@ -24,7 +24,7 @@ PODS:
   - gRPC/Main (1.11.0):
     - gRPC-Core (= 1.11.0)
     - gRPC-RxLibrary (= 1.11.0)
-  - IrohaCommunication (3.1.0):
+  - IrohaCommunication (3.2.0):
     - BoringSSL (= 10.0.3)
     - gRPC-ProtoRPC (= 1.11.0)
     - IrohaCrypto
@@ -62,11 +62,11 @@ SPEC CHECKSUMS:
   gRPC-Core: 164639cd8ae18ca8b65477fafb2efbaecf4f181a
   gRPC-ProtoRPC: bb5fddf3424aa4fad74d76736578a79fe40e244e
   gRPC-RxLibrary: 26d53d1b1f306befd4ad4e15bd6de27839a82481
-  IrohaCommunication: a58daac94b2438f2bd8459b5707e83c3934b9420
+  IrohaCommunication: 80d8be2565e5bbd3446bdc5d2bdfb0e0849606e8
   IrohaCrypto: 4eb85b5edbf7667b5ffcef1b5104357f18ca8e81
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
 
 PODFILE CHECKSUM: 29089a97c3781ec366ef8266addf4289525ff849
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.5
