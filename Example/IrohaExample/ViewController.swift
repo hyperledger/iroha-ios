@@ -104,7 +104,9 @@ class ViewController: UIViewController {
                 }).onThen({ (result) -> IRPromise? in
                     if let sentTransactionHash = result as? Data {
                         print("Transaction has been sent \((sentTransactionHash as NSData).toHexString())")
-                        return self.networkService.onTransactionStatus(.committed, withHash: sentTransactionHash)
+                        return IRRepeatableStatusStream.onTransactionStatus(.committed,
+                                                                            withHash: sentTransactionHash,
+                                                                            from: self.networkService);
                     } else {
                         return IRPromise(result: result)
                     }
@@ -158,7 +160,9 @@ class ViewController: UIViewController {
                 }).onThen({ (result) -> IRPromise? in
                     if let sentTransactionHash = result as? Data {
                         print("Transaction has been sent \((sentTransactionHash as NSData).toHexString())")
-                        return self.networkService.onTransactionStatus(.committed, withHash: sentTransactionHash)
+                        return IRRepeatableStatusStream.onTransactionStatus(.committed,
+                                                                            withHash: sentTransactionHash,
+                                                                            from: self.networkService);
                     } else {
                         return IRPromise(result: result)
                     }
@@ -216,7 +220,9 @@ class ViewController: UIViewController {
                 .onThen({ (result) -> IRPromise? in
                     if let sentTransactionHash = result as? Data {
                         print("Transaction has been sent \((sentTransactionHash as NSData).toHexString())")
-                        return self.networkService.onTransactionStatus(.committed, withHash: sentTransactionHash)
+                        return IRRepeatableStatusStream.onTransactionStatus(.committed,
+                                                                            withHash: sentTransactionHash,
+                                                                            from: self.networkService);
                     } else {
                         return IRPromise(result: result)
                     }

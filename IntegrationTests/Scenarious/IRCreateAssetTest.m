@@ -42,7 +42,9 @@
     XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
 
     [self.iroha executeTransaction:assetTransaction].onThen(^IRPromise * _Nullable (id result) {
-        return [self.iroha onTransactionStatus:IRTransactionStatusCommitted withHash:(NSData*)result];
+        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
+                                                    withHash:result
+                                                        from:self.iroha];
     }).onThen(^IRPromise * _Nullable (id result) {
         IRTransactionBuilder *transactionBuilder = [IRTransactionBuilder builderWithCreatorAccountId:self.adminAccountId];
         transactionBuilder = [transactionBuilder addAssetQuantity:assetId
@@ -59,7 +61,9 @@
 
         return [self.iroha executeTransaction:transaction];
     }).onThen(^IRPromise * _Nullable (id result) {
-        return [self.iroha onTransactionStatus:IRTransactionStatusCommitted withHash:(NSData*)result];
+        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
+                                                    withHash:result
+                                                        from:self.iroha];
     }).onThen(^IRPromise * _Nullable (id result) {
         IRQueryBuilder *queryBuilder = [IRQueryBuilder builderWithCreatorAccountId:self.adminAccountId];
         queryBuilder = [queryBuilder getAccountAssets:self.adminAccountId];
@@ -148,7 +152,7 @@
         return nil;
     });
 
-    [self waitForExpectations:@[expectation] timeout:60.0];
+    [self waitForExpectations:@[expectation] timeout:120.0];
 }
 
 @end
