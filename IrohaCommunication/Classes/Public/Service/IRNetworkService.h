@@ -29,6 +29,8 @@ typedef NS_ENUM(NSUInteger, IRNetworkServiceError) {
 
 - (nonnull IRPromise *)executeTransaction:(nonnull id<IRTransaction>)transaction;
 
+- (nonnull IRPromise *)executeBatchTransactions:(nonnull NSArray<id<IRTransaction>>*)transactions;
+
 - (nonnull IRPromise *)fetchTransactionStatus:(nonnull NSData*)transactionHash;
 
 - (nonnull IRPromise*)executeQueryRequest:(nonnull id<IRQueryRequest>)queryRequest;
