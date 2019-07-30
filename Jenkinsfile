@@ -21,7 +21,7 @@ node('mac_for_ios') {
         }
       }
       stage('test') {
-        sh(script: "pod lib lint --verbose")
+        sh(script: "pod lib lint --verbose --allow-warnings")
       }
       stage('release') {
         checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)
