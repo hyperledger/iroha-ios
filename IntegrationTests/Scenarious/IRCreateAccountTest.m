@@ -39,7 +39,9 @@
     UInt32 quorum = 2;
 
     [self.iroha executeTransaction:transaction].onThen(^IRPromise * _Nullable(id result) {
-        return [self.iroha onTransactionStatus:IRTransactionStatusCommitted withHash:result];
+        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
+                                                    withHash:result
+                                                        from:self.iroha];
     }).onThen(^IRPromise * _Nullable(id result) {
         IRTransactionBuilder *transactionBuilder = [IRTransactionBuilder builderWithCreatorAccountId:newAccountId];
         transactionBuilder = [transactionBuilder addSignatory:newAccountId publicKey:self.adminPublicKey];
@@ -52,7 +54,9 @@
 
         return [self.iroha executeTransaction:transaction];
     }).onThen(^IRPromise * _Nullable(id result) {
-        return [self.iroha onTransactionStatus:IRTransactionStatusCommitted withHash:result];
+        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
+                                                    withHash:result
+                                                        from:self.iroha];
     }).onThen(^IRPromise * _Nullable(id result) {
         IRQueryBuilder *queryBuilder = [IRQueryBuilder builderWithCreatorAccountId:self.adminAccountId];
         queryBuilder = [queryBuilder getAccount:newAccountId];
@@ -83,7 +87,7 @@
         return nil;
     });
 
-    [self waitForExpectations:@[expectation] timeout:60.0];
+    [self waitForExpectations:@[expectation] timeout:120.0];
 }
 
 @end
