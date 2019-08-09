@@ -315,7 +315,20 @@
         [accountAssets addObject:accountAsset];
     }
 
+    id<IRAssetId> nextAssetId = nil;
+
+    if (pbResponse.nextAssetId && pbResponse.nextAssetId.length > 0) {
+        NSError* error = nil;
+        nextAssetId = [IRAssetIdFactory assetWithIdentifier: pbResponse.nextAssetId error:&error];
+
+        if (error) {
+            return nil;
+        }
+    }
+
     return [[IRAccountAssetsResponse alloc] initWithAccountAssets:accountAssets
+                                                       totalCount:pbResponse.totalNumber
+                                                      nextAssetId:nextAssetId
                                                         queryHash:queryHash];
 }
 
@@ -361,7 +374,7 @@
 
     NSData *nextTransactionHash = nil;
 
-    if (pbResponse.nextTxHash) {
+    if (pbResponse.nextTxHash && pbResponse.nextTxHash.length > 0) {
         nextTransactionHash = [[NSData alloc] initWithHexString:pbResponse.nextTxHash];
 
         if (!nextTransactionHash) {

@@ -141,6 +141,49 @@ typedef struct AddPeer__storage_ {
 
 @end
 
+#pragma mark - RemovePeer
+
+@implementation RemovePeer
+
+@dynamic publicKey;
+
+typedef struct RemovePeer__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *publicKey;
+} RemovePeer__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "publicKey",
+        .dataTypeSpecific.className = NULL,
+        .number = RemovePeer_FieldNumber_PublicKey,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(RemovePeer__storage_, publicKey),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[RemovePeer class]
+                                     rootClass:[CommandsRoot class]
+                                          file:CommandsRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(RemovePeer__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - AddSignatory
 
 @implementation AddSignatory
@@ -987,6 +1030,94 @@ typedef struct SubtractAssetQuantity__storage_ {
 
 @end
 
+#pragma mark - CompareAndSetAccountDetail
+
+@implementation CompareAndSetAccountDetail
+
+@dynamic optOldValueOneOfCase;
+@dynamic accountId;
+@dynamic key;
+@dynamic value;
+@dynamic oldValue;
+
+typedef struct CompareAndSetAccountDetail__storage_ {
+  uint32_t _has_storage_[2];
+  NSString *accountId;
+  NSString *key;
+  NSString *value;
+  NSString *oldValue;
+} CompareAndSetAccountDetail__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "accountId",
+        .dataTypeSpecific.className = NULL,
+        .number = CompareAndSetAccountDetail_FieldNumber_AccountId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CompareAndSetAccountDetail__storage_, accountId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "key",
+        .dataTypeSpecific.className = NULL,
+        .number = CompareAndSetAccountDetail_FieldNumber_Key,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(CompareAndSetAccountDetail__storage_, key),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "value",
+        .dataTypeSpecific.className = NULL,
+        .number = CompareAndSetAccountDetail_FieldNumber_Value,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(CompareAndSetAccountDetail__storage_, value),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "oldValue",
+        .dataTypeSpecific.className = NULL,
+        .number = CompareAndSetAccountDetail_FieldNumber_OldValue,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(CompareAndSetAccountDetail__storage_, oldValue),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CompareAndSetAccountDetail class]
+                                     rootClass:[CommandsRoot class]
+                                          file:CommandsRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CompareAndSetAccountDetail__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    static const char *oneofs[] = {
+      "optOldValue",
+    };
+    [localDescriptor setupOneofs:oneofs
+                           count:(uint32_t)(sizeof(oneofs) / sizeof(char*))
+                   firstHasIndex:-1];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+void CompareAndSetAccountDetail_ClearOptOldValueOneOfCase(CompareAndSetAccountDetail *message) {
+  GPBDescriptor *descriptor = [message descriptor];
+  GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
+  GPBMaybeClearOneof(message, oneof, -1, 0);
+}
 #pragma mark - Command
 
 @implementation Command
@@ -1008,6 +1139,8 @@ typedef struct SubtractAssetQuantity__storage_ {
 @dynamic setAccountQuorum;
 @dynamic subtractAssetQuantity;
 @dynamic transferAsset;
+@dynamic removePeer;
+@dynamic compareAndSetAccountDetail;
 
 typedef struct Command__storage_ {
   uint32_t _has_storage_[2];
@@ -1027,6 +1160,8 @@ typedef struct Command__storage_ {
   SetAccountQuorum *setAccountQuorum;
   SubtractAssetQuantity *subtractAssetQuantity;
   TransferAsset *transferAsset;
+  RemovePeer *removePeer;
+  CompareAndSetAccountDetail *compareAndSetAccountDetail;
 } Command__storage_;
 
 // This method is threadsafe because it is initially called
@@ -1176,6 +1311,24 @@ typedef struct Command__storage_ {
         .number = Command_FieldNumber_TransferAsset,
         .hasIndex = -1,
         .offset = (uint32_t)offsetof(Command__storage_, transferAsset),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "removePeer",
+        .dataTypeSpecific.className = GPBStringifySymbol(RemovePeer),
+        .number = Command_FieldNumber_RemovePeer,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(Command__storage_, removePeer),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "compareAndSetAccountDetail",
+        .dataTypeSpecific.className = GPBStringifySymbol(CompareAndSetAccountDetail),
+        .number = Command_FieldNumber_CompareAndSetAccountDetail,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(Command__storage_, compareAndSetAccountDetail),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },

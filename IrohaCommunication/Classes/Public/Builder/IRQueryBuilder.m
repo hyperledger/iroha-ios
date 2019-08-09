@@ -73,7 +73,13 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
 }
 
 - (nonnull instancetype)getAccountAssets:(nonnull id<IRAccountId>)accountId {
-    id<IRGetAccountAssets> query = [[IRGetAccountAssets alloc] initWithAccountId:accountId];
+    return [self getAccountAssets:accountId pagination:nil];
+}
+
+- (nonnull instancetype)getAccountAssets:(nonnull id<IRAccountId>)accountId
+                              pagination:(nullable id<IRAssetPagination>)pagination {
+    id<IRGetAccountAssets> query = [[IRGetAccountAssets alloc] initWithAccountId:accountId
+                                                                      pagination:pagination];
 
     return [self withQuery:query];
 }

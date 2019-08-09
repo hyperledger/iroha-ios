@@ -39,7 +39,10 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
 
 - (nonnull instancetype)getTransactions:(nonnull NSArray<NSData*>*)hashes;
 
-- (nonnull instancetype)getAccountAssets:(nonnull id<IRAccountId>)accountId;
+- (nonnull instancetype)getAccountAssets:(nonnull id<IRAccountId>)accountId DEPRECATED_MSG_ATTRIBUTE("use getAccountAsset:pagination:");
+
+- (nonnull instancetype)getAccountAssets:(nonnull id<IRAccountId>)accountId
+                              pagination:(nullable id<IRAssetPagination>)pagination;
 
 - (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
                                   writer:(nullable id<IRAccountId>)writer
