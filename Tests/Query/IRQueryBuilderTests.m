@@ -135,6 +135,9 @@ static UInt64 VALID_QUERY_COUNTER = 10;
                                                     firstItemHash:nil
                                                             error:nil];
 
+    id<IRAssetPagination> assetPagination = [IRAssetPaginationFactory assetPagination:10
+                                                                      startingAssetId:assetId];
+
     NSData *itemHash = [@"Test Data" dataUsingEncoding:NSUTF8StringEncoding];
 
     IRQueryTestCase *getAccountTestCase = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccount:)
@@ -160,6 +163,10 @@ static UInt64 VALID_QUERY_COUNTER = 10;
     IRQueryTestCase *getAccountAssets = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountAssets:)
                                                                        arguments:@[accountId]
                                                                         protocol:@protocol(IRGetAccountAssets)];
+
+    IRQueryTestCase *getAccountAssetsPaginated = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountAssets:pagination:)
+                                                                              arguments:@[accountId, assetPagination]
+                                                                               protocol:@protocol(IRGetAccountAssets)];
 
     IRQueryTestCase *getAccountDetail = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:writer:key:)
                                                                         arguments:@[accountId, accountId]
@@ -187,6 +194,7 @@ static UInt64 VALID_QUERY_COUNTER = 10;
              getAccountAssetTransactions,
              getTransactions,
              getAccountAssets,
+             getAccountAssetsPaginated,
              getAccountDetail,
              getRoles,
              getRolePermission,

@@ -31,6 +31,7 @@ CF_EXTERN_C_BEGIN
 @class AddPeer;
 @class AddSignatory;
 @class AppendRole;
+@class CompareAndSetAccountDetail;
 @class CreateAccount;
 @class CreateAsset;
 @class CreateDomain;
@@ -38,6 +39,7 @@ CF_EXTERN_C_BEGIN
 @class DetachRole;
 @class GrantPermission;
 @class Peer;
+@class RemovePeer;
 @class RemoveSignatory;
 @class RevokePermission;
 @class SetAccountDetail;
@@ -89,6 +91,19 @@ typedef GPB_ENUM(AddPeer_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) Peer *peer;
 /** Test to see if @c peer has been set. */
 @property(nonatomic, readwrite) BOOL hasPeer;
+
+@end
+
+#pragma mark - RemovePeer
+
+typedef GPB_ENUM(RemovePeer_FieldNumber) {
+  RemovePeer_FieldNumber_PublicKey = 1,
+};
+
+@interface RemovePeer : GPBMessage
+
+/** hex string */
+@property(nonatomic, readwrite, copy, null_resettable) NSString *publicKey;
 
 @end
 
@@ -350,6 +365,39 @@ typedef GPB_ENUM(SubtractAssetQuantity_FieldNumber) {
 
 @end
 
+#pragma mark - CompareAndSetAccountDetail
+
+typedef GPB_ENUM(CompareAndSetAccountDetail_FieldNumber) {
+  CompareAndSetAccountDetail_FieldNumber_AccountId = 1,
+  CompareAndSetAccountDetail_FieldNumber_Key = 2,
+  CompareAndSetAccountDetail_FieldNumber_Value = 3,
+  CompareAndSetAccountDetail_FieldNumber_OldValue = 4,
+};
+
+typedef GPB_ENUM(CompareAndSetAccountDetail_OptOldValue_OneOfCase) {
+  CompareAndSetAccountDetail_OptOldValue_OneOfCase_GPBUnsetOneOfCase = 0,
+  CompareAndSetAccountDetail_OptOldValue_OneOfCase_OldValue = 4,
+};
+
+@interface CompareAndSetAccountDetail : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *accountId;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *key;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *value;
+
+@property(nonatomic, readonly) CompareAndSetAccountDetail_OptOldValue_OneOfCase optOldValueOneOfCase;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *oldValue;
+
+@end
+
+/**
+ * Clears whatever value was set for the oneof 'optOldValue'.
+ **/
+void CompareAndSetAccountDetail_ClearOptOldValueOneOfCase(CompareAndSetAccountDetail *message);
+
 #pragma mark - Command
 
 typedef GPB_ENUM(Command_FieldNumber) {
@@ -369,6 +417,8 @@ typedef GPB_ENUM(Command_FieldNumber) {
   Command_FieldNumber_SetAccountQuorum = 14,
   Command_FieldNumber_SubtractAssetQuantity = 15,
   Command_FieldNumber_TransferAsset = 16,
+  Command_FieldNumber_RemovePeer = 17,
+  Command_FieldNumber_CompareAndSetAccountDetail = 18,
 };
 
 typedef GPB_ENUM(Command_Command_OneOfCase) {
@@ -389,6 +439,8 @@ typedef GPB_ENUM(Command_Command_OneOfCase) {
   Command_Command_OneOfCase_SetAccountQuorum = 14,
   Command_Command_OneOfCase_SubtractAssetQuantity = 15,
   Command_Command_OneOfCase_TransferAsset = 16,
+  Command_Command_OneOfCase_RemovePeer = 17,
+  Command_Command_OneOfCase_CompareAndSetAccountDetail = 18,
 };
 
 @interface Command : GPBMessage
@@ -426,6 +478,10 @@ typedef GPB_ENUM(Command_Command_OneOfCase) {
 @property(nonatomic, readwrite, strong, null_resettable) SubtractAssetQuantity *subtractAssetQuantity;
 
 @property(nonatomic, readwrite, strong, null_resettable) TransferAsset *transferAsset;
+
+@property(nonatomic, readwrite, strong, null_resettable) RemovePeer *removePeer;
+
+@property(nonatomic, readwrite, strong, null_resettable) CompareAndSetAccountDetail *compareAndSetAccountDetail;
 
 @end
 
