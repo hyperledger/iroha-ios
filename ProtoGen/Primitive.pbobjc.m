@@ -50,25 +50,25 @@ GPBEnumDescriptor *RolePermission_EnumDescriptor(void) {
     static const char *valueNames =
         "CanAppendRole\000CanCreateRole\000CanDetachRol"
         "e\000CanAddAssetQty\000CanSubtractAssetQty\000Can"
-        "AddPeer\000CanAddSignatory\000CanRemoveSignato"
-        "ry\000CanSetQuorum\000CanCreateAccount\000CanSetD"
-        "etail\000CanCreateAsset\000CanTransfer\000CanRece"
-        "ive\000CanCreateDomain\000CanAddDomainAssetQty"
-        "\000CanSubtractDomainAssetQty\000CanReadAssets"
-        "\000CanGetRoles\000CanGetMyAccount\000CanGetAllAc"
-        "counts\000CanGetDomainAccounts\000CanGetMySign"
-        "atories\000CanGetAllSignatories\000CanGetDomai"
-        "nSignatories\000CanGetMyAccAst\000CanGetAllAcc"
-        "Ast\000CanGetDomainAccAst\000CanGetMyAccDetail"
-        "\000CanGetAllAccDetail\000CanGetDomainAccDetai"
-        "l\000CanGetMyAccTxs\000CanGetAllAccTxs\000CanGetD"
-        "omainAccTxs\000CanGetMyAccAstTxs\000CanGetAllA"
-        "ccAstTxs\000CanGetDomainAccAstTxs\000CanGetMyT"
-        "xs\000CanGetAllTxs\000CanGetBlocks\000CanGrantCan"
-        "SetMyQuorum\000CanGrantCanAddMySignatory\000Ca"
-        "nGrantCanRemoveMySignatory\000CanGrantCanTr"
-        "ansferMyAssets\000CanGrantCanSetMyAccountDe"
-        "tail\000";
+        "AddPeer\000CanRemovePeer\000CanAddSignatory\000Ca"
+        "nRemoveSignatory\000CanSetQuorum\000CanCreateA"
+        "ccount\000CanSetDetail\000CanCreateAsset\000CanTr"
+        "ansfer\000CanReceive\000CanCreateDomain\000CanAdd"
+        "DomainAssetQty\000CanSubtractDomainAssetQty"
+        "\000CanReadAssets\000CanGetRoles\000CanGetMyAccou"
+        "nt\000CanGetAllAccounts\000CanGetDomainAccount"
+        "s\000CanGetMySignatories\000CanGetAllSignatori"
+        "es\000CanGetDomainSignatories\000CanGetMyAccAs"
+        "t\000CanGetAllAccAst\000CanGetDomainAccAst\000Can"
+        "GetMyAccDetail\000CanGetAllAccDetail\000CanGet"
+        "DomainAccDetail\000CanGetMyAccTxs\000CanGetAll"
+        "AccTxs\000CanGetDomainAccTxs\000CanGetMyAccAst"
+        "Txs\000CanGetAllAccAstTxs\000CanGetDomainAccAs"
+        "tTxs\000CanGetMyTxs\000CanGetAllTxs\000CanGetBloc"
+        "ks\000CanGetPeers\000CanGrantCanSetMyQuorum\000Ca"
+        "nGrantCanAddMySignatory\000CanGrantCanRemov"
+        "eMySignatory\000CanGrantCanTransferMyAssets"
+        "\000CanGrantCanSetMyAccountDetail\000";
     static const int32_t values[] = {
         RolePermission_CanAppendRole,
         RolePermission_CanCreateRole,
@@ -76,6 +76,7 @@ GPBEnumDescriptor *RolePermission_EnumDescriptor(void) {
         RolePermission_CanAddAssetQty,
         RolePermission_CanSubtractAssetQty,
         RolePermission_CanAddPeer,
+        RolePermission_CanRemovePeer,
         RolePermission_CanAddSignatory,
         RolePermission_CanRemoveSignatory,
         RolePermission_CanSetQuorum,
@@ -110,13 +111,14 @@ GPBEnumDescriptor *RolePermission_EnumDescriptor(void) {
         RolePermission_CanGetMyTxs,
         RolePermission_CanGetAllTxs,
         RolePermission_CanGetBlocks,
+        RolePermission_CanGetPeers,
         RolePermission_CanGrantCanSetMyQuorum,
         RolePermission_CanGrantCanAddMySignatory,
         RolePermission_CanGrantCanRemoveMySignatory,
         RolePermission_CanGrantCanTransferMyAssets,
         RolePermission_CanGrantCanSetMyAccountDetail,
     };
-    static const char *extraTextFormatInfo = "-\000#\246\244\000\001#\246\244\000\002#\246\244\000\003#\243\245\243\000\004#\250\245\243\000\005#\243\244\000\006#\243\251\000\007#\246\251\000\010#\243\246\000\t#\246\247\000\n#\243\246\000\013#\246\245\000\014#\250\000\r#\247\000\016#\246\246\000\017#\243\246\245\243\000\020#\250\246\245\243\000\021#\244\246\000\022#\243\245\000\023#\243\242\247\000\024#\243\243\250\000\025#\243\246\250\000\026#\243\242\253\000\027#\243\243\253\000\030#\243\246\253\000\031#\243\242\243\243\000\032#\243\243\243\243\000\033#\243\246\243\243\000\034#\243\242\243\246\000\035#\243\243\243\246\000\036#\243\246\243\246\000\037#\243\242\243\243\000 #\243\243\243\243\000!#\243\246\243\243\000\"#\243\242\243\243\243\000##\243\243\243\243\243\000$#\243\246\243\243\243\000%#\243\242\243\000&#\243\243\243\000\'#\243\246\000(#\245\243\243\242\246\000)#\245\243\243\242\251\000*#\245\243\246\242\251\000+#\245\243\250\242\246\000,#\245\243\243\242\247\246\000";
+    static const char *extraTextFormatInfo = "/\000#\246\244\000\001#\246\244\000\002#\246\244\000\003#\243\245\243\000\004#\250\245\243\000\005#\243\244\000\006#\246\244\000\007#\243\251\000\010#\246\251\000\t#\243\246\000\n#\246\247\000\013#\243\246\000\014#\246\245\000\r#\250\000\016#\247\000\017#\246\246\000\020#\243\246\245\243\000\021#\250\246\245\243\000\022#\244\246\000\023#\243\245\000\024#\243\242\247\000\025#\243\243\250\000\026#\243\246\250\000\027#\243\242\253\000\030#\243\243\253\000\031#\243\246\253\000\032#\243\242\243\243\000\033#\243\243\243\243\000\034#\243\246\243\243\000\035#\243\242\243\246\000\036#\243\243\243\246\000\037#\243\246\243\246\000 #\243\242\243\243\000!#\243\243\243\243\000\"#\243\246\243\243\000##\243\242\243\243\243\000$#\243\243\243\243\243\000%#\243\246\243\243\243\000&#\243\242\243\000\'#\243\243\243\000(#\243\246\000)#\243\245\000*#\245\243\243\242\246\000+#\245\243\243\242\251\000,#\245\243\246\242\251\000-#\245\243\250\242\246\000.#\245\243\243\242\247\246\000";
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(RolePermission)
                                        valueNames:valueNames
@@ -139,6 +141,7 @@ BOOL RolePermission_IsValidValue(int32_t value__) {
     case RolePermission_CanAddAssetQty:
     case RolePermission_CanSubtractAssetQty:
     case RolePermission_CanAddPeer:
+    case RolePermission_CanRemovePeer:
     case RolePermission_CanAddSignatory:
     case RolePermission_CanRemoveSignatory:
     case RolePermission_CanSetQuorum:
@@ -173,6 +176,7 @@ BOOL RolePermission_IsValidValue(int32_t value__) {
     case RolePermission_CanGetMyTxs:
     case RolePermission_CanGetAllTxs:
     case RolePermission_CanGetBlocks:
+    case RolePermission_CanGetPeers:
     case RolePermission_CanGrantCanSetMyQuorum:
     case RolePermission_CanGrantCanAddMySignatory:
     case RolePermission_CanGrantCanRemoveMySignatory:
@@ -327,6 +331,60 @@ typedef struct Peer__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(Peer__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - AccountDetailRecordId
+
+@implementation AccountDetailRecordId
+
+@dynamic writer;
+@dynamic key;
+
+typedef struct AccountDetailRecordId__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *writer;
+  NSString *key;
+} AccountDetailRecordId__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "writer",
+        .dataTypeSpecific.className = NULL,
+        .number = AccountDetailRecordId_FieldNumber_Writer,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(AccountDetailRecordId__storage_, writer),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "key",
+        .dataTypeSpecific.className = NULL,
+        .number = AccountDetailRecordId_FieldNumber_Key,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(AccountDetailRecordId__storage_, key),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[AccountDetailRecordId class]
+                                     rootClass:[PrimitiveRoot class]
+                                          file:PrimitiveRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(AccountDetailRecordId__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;

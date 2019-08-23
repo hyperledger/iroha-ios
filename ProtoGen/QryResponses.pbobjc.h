@@ -30,6 +30,7 @@ CF_EXTERN_C_BEGIN
 @class Account;
 @class AccountAsset;
 @class AccountAssetResponse;
+@class AccountDetailRecordId;
 @class AccountDetailResponse;
 @class AccountResponse;
 @class Asset;
@@ -38,6 +39,10 @@ CF_EXTERN_C_BEGIN
 @class BlockErrorResponse;
 @class BlockResponse;
 @class ErrorResponse;
+@class Peer;
+@class PeersResponse;
+@class PendingTransactionsPageResponse;
+@class PendingTransactionsPageResponse_BatchInfo;
 @class RolePermissionsResponse;
 @class RolesResponse;
 @class SignatoriesResponse;
@@ -183,6 +188,13 @@ typedef GPB_ENUM(AccountAsset_FieldNumber) {
 
 typedef GPB_ENUM(AccountAssetResponse_FieldNumber) {
   AccountAssetResponse_FieldNumber_AccountAssetsArray = 1,
+  AccountAssetResponse_FieldNumber_TotalNumber = 2,
+  AccountAssetResponse_FieldNumber_NextAssetId = 3,
+};
+
+typedef GPB_ENUM(AccountAssetResponse_OptNextAssetId_OneOfCase) {
+  AccountAssetResponse_OptNextAssetId_OneOfCase_GPBUnsetOneOfCase = 0,
+  AccountAssetResponse_OptNextAssetId_OneOfCase_NextAssetId = 3,
 };
 
 /**
@@ -194,17 +206,36 @@ typedef GPB_ENUM(AccountAssetResponse_FieldNumber) {
 /** The number of items in @c accountAssetsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger accountAssetsArray_Count;
 
+@property(nonatomic, readwrite) uint32_t totalNumber;
+
+@property(nonatomic, readonly) AccountAssetResponse_OptNextAssetId_OneOfCase optNextAssetIdOneOfCase;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *nextAssetId;
+
 @end
+
+/**
+ * Clears whatever value was set for the oneof 'optNextAssetId'.
+ **/
+void AccountAssetResponse_ClearOptNextAssetIdOneOfCase(AccountAssetResponse *message);
 
 #pragma mark - AccountDetailResponse
 
 typedef GPB_ENUM(AccountDetailResponse_FieldNumber) {
   AccountDetailResponse_FieldNumber_Detail = 1,
+  AccountDetailResponse_FieldNumber_TotalNumber = 2,
+  AccountDetailResponse_FieldNumber_NextRecordId = 3,
 };
 
 @interface AccountDetailResponse : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *detail;
+
+@property(nonatomic, readwrite) uint64_t totalNumber;
+
+@property(nonatomic, readwrite, strong, null_resettable) AccountDetailRecordId *nextRecordId;
+/** Test to see if @c nextRecordId has been set. */
+@property(nonatomic, readwrite) BOOL hasNextRecordId;
 
 @end
 
@@ -360,6 +391,57 @@ typedef GPB_ENUM(TransactionsPageResponse_NextPageTag_OneOfCase) {
  **/
 void TransactionsPageResponse_ClearNextPageTagOneOfCase(TransactionsPageResponse *message);
 
+#pragma mark - PendingTransactionsPageResponse
+
+typedef GPB_ENUM(PendingTransactionsPageResponse_FieldNumber) {
+  PendingTransactionsPageResponse_FieldNumber_TransactionsArray = 1,
+  PendingTransactionsPageResponse_FieldNumber_AllTransactionsSize = 2,
+  PendingTransactionsPageResponse_FieldNumber_NextBatchInfo = 3,
+};
+
+@interface PendingTransactionsPageResponse : GPBMessage
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<Transaction*> *transactionsArray;
+/** The number of items in @c transactionsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger transactionsArray_Count;
+
+@property(nonatomic, readwrite) uint32_t allTransactionsSize;
+
+@property(nonatomic, readwrite, strong, null_resettable) PendingTransactionsPageResponse_BatchInfo *nextBatchInfo;
+/** Test to see if @c nextBatchInfo has been set. */
+@property(nonatomic, readwrite) BOOL hasNextBatchInfo;
+
+@end
+
+#pragma mark - PendingTransactionsPageResponse_BatchInfo
+
+typedef GPB_ENUM(PendingTransactionsPageResponse_BatchInfo_FieldNumber) {
+  PendingTransactionsPageResponse_BatchInfo_FieldNumber_FirstTxHash = 1,
+  PendingTransactionsPageResponse_BatchInfo_FieldNumber_BatchSize = 2,
+};
+
+@interface PendingTransactionsPageResponse_BatchInfo : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *firstTxHash;
+
+@property(nonatomic, readwrite) uint32_t batchSize;
+
+@end
+
+#pragma mark - PeersResponse
+
+typedef GPB_ENUM(PeersResponse_FieldNumber) {
+  PeersResponse_FieldNumber_PeersArray = 1,
+};
+
+@interface PeersResponse : GPBMessage
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<Peer*> *peersArray;
+/** The number of items in @c peersArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger peersArray_Count;
+
+@end
+
 #pragma mark - QueryResponse
 
 typedef GPB_ENUM(QueryResponse_FieldNumber) {
@@ -374,6 +456,9 @@ typedef GPB_ENUM(QueryResponse_FieldNumber) {
   QueryResponse_FieldNumber_RolePermissionsResponse = 9,
   QueryResponse_FieldNumber_QueryHash = 10,
   QueryResponse_FieldNumber_TransactionsPageResponse = 11,
+  QueryResponse_FieldNumber_BlockResponse = 12,
+  QueryResponse_FieldNumber_PendingTransactionsPageResponse = 13,
+  QueryResponse_FieldNumber_PeersResponse = 14,
 };
 
 typedef GPB_ENUM(QueryResponse_Response_OneOfCase) {
@@ -388,6 +473,9 @@ typedef GPB_ENUM(QueryResponse_Response_OneOfCase) {
   QueryResponse_Response_OneOfCase_RolesResponse = 8,
   QueryResponse_Response_OneOfCase_RolePermissionsResponse = 9,
   QueryResponse_Response_OneOfCase_TransactionsPageResponse = 11,
+  QueryResponse_Response_OneOfCase_PendingTransactionsPageResponse = 13,
+  QueryResponse_Response_OneOfCase_BlockResponse = 12,
+  QueryResponse_Response_OneOfCase_PeersResponse = 14,
 };
 
 @interface QueryResponse : GPBMessage
@@ -413,6 +501,12 @@ typedef GPB_ENUM(QueryResponse_Response_OneOfCase) {
 @property(nonatomic, readwrite, strong, null_resettable) RolePermissionsResponse *rolePermissionsResponse;
 
 @property(nonatomic, readwrite, strong, null_resettable) TransactionsPageResponse *transactionsPageResponse;
+
+@property(nonatomic, readwrite, strong, null_resettable) PendingTransactionsPageResponse *pendingTransactionsPageResponse;
+
+@property(nonatomic, readwrite, strong, null_resettable) BlockResponse *blockResponse;
+
+@property(nonatomic, readwrite, strong, null_resettable) PeersResponse *peersResponse;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *queryHash;
 

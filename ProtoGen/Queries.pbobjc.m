@@ -110,6 +110,72 @@ void TxPaginationMeta_ClearOptFirstTxHashOneOfCase(TxPaginationMeta *message) {
   GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
   GPBMaybeClearOneof(message, oneof, -1, 0);
 }
+#pragma mark - AssetPaginationMeta
+
+@implementation AssetPaginationMeta
+
+@dynamic optFirstAssetIdOneOfCase;
+@dynamic pageSize;
+@dynamic firstAssetId;
+
+typedef struct AssetPaginationMeta__storage_ {
+  uint32_t _has_storage_[2];
+  uint32_t pageSize;
+  NSString *firstAssetId;
+} AssetPaginationMeta__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "pageSize",
+        .dataTypeSpecific.className = NULL,
+        .number = AssetPaginationMeta_FieldNumber_PageSize,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(AssetPaginationMeta__storage_, pageSize),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "firstAssetId",
+        .dataTypeSpecific.className = NULL,
+        .number = AssetPaginationMeta_FieldNumber_FirstAssetId,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(AssetPaginationMeta__storage_, firstAssetId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[AssetPaginationMeta class]
+                                     rootClass:[QueriesRoot class]
+                                          file:QueriesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(AssetPaginationMeta__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    static const char *oneofs[] = {
+      "optFirstAssetId",
+    };
+    [localDescriptor setupOneofs:oneofs
+                           count:(uint32_t)(sizeof(oneofs) / sizeof(char*))
+                   firstHasIndex:-1];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+void AssetPaginationMeta_ClearOptFirstAssetIdOneOfCase(AssetPaginationMeta *message) {
+  GPBDescriptor *descriptor = [message descriptor];
+  GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
+  GPBMaybeClearOneof(message, oneof, -1, 0);
+}
 #pragma mark - GetAccount
 
 @implementation GetAccount
@@ -144,6 +210,49 @@ typedef struct GetAccount__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GetAccount__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - GetBlock
+
+@implementation GetBlock
+
+@dynamic height;
+
+typedef struct GetBlock__storage_ {
+  uint32_t _has_storage_[1];
+  uint64_t height;
+} GetBlock__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "height",
+        .dataTypeSpecific.className = NULL,
+        .number = GetBlock_FieldNumber_Height,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(GetBlock__storage_, height),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt64,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[GetBlock class]
+                                     rootClass:[QueriesRoot class]
+                                          file:QueriesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(GetBlock__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
@@ -363,10 +472,12 @@ typedef struct GetTransactions__storage_ {
 @implementation GetAccountAssets
 
 @dynamic accountId;
+@dynamic hasPaginationMeta, paginationMeta;
 
 typedef struct GetAccountAssets__storage_ {
   uint32_t _has_storage_[1];
   NSString *accountId;
+  AssetPaginationMeta *paginationMeta;
 } GetAccountAssets__storage_;
 
 // This method is threadsafe because it is initially called
@@ -384,6 +495,15 @@ typedef struct GetAccountAssets__storage_ {
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
+      {
+        .name = "paginationMeta",
+        .dataTypeSpecific.className = GPBStringifySymbol(AssetPaginationMeta),
+        .number = GetAccountAssets_FieldNumber_PaginationMeta,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(GetAccountAssets__storage_, paginationMeta),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[GetAccountAssets class]
@@ -392,6 +512,60 @@ typedef struct GetAccountAssets__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(GetAccountAssets__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - AccountDetailPaginationMeta
+
+@implementation AccountDetailPaginationMeta
+
+@dynamic pageSize;
+@dynamic hasFirstRecordId, firstRecordId;
+
+typedef struct AccountDetailPaginationMeta__storage_ {
+  uint32_t _has_storage_[1];
+  uint32_t pageSize;
+  AccountDetailRecordId *firstRecordId;
+} AccountDetailPaginationMeta__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "pageSize",
+        .dataTypeSpecific.className = NULL,
+        .number = AccountDetailPaginationMeta_FieldNumber_PageSize,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(AccountDetailPaginationMeta__storage_, pageSize),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "firstRecordId",
+        .dataTypeSpecific.className = GPBStringifySymbol(AccountDetailRecordId),
+        .number = AccountDetailPaginationMeta_FieldNumber_FirstRecordId,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(AccountDetailPaginationMeta__storage_, firstRecordId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[AccountDetailPaginationMeta class]
+                                     rootClass:[QueriesRoot class]
+                                          file:QueriesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(AccountDetailPaginationMeta__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
@@ -411,12 +585,14 @@ typedef struct GetAccountAssets__storage_ {
 @dynamic accountId;
 @dynamic key;
 @dynamic writer;
+@dynamic hasPaginationMeta, paginationMeta;
 
 typedef struct GetAccountDetail__storage_ {
   uint32_t _has_storage_[4];
   NSString *accountId;
   NSString *key;
   NSString *writer;
+  AccountDetailPaginationMeta *paginationMeta;
 } GetAccountDetail__storage_;
 
 // This method is threadsafe because it is initially called
@@ -451,6 +627,15 @@ typedef struct GetAccountDetail__storage_ {
         .offset = (uint32_t)offsetof(GetAccountDetail__storage_, writer),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "paginationMeta",
+        .dataTypeSpecific.className = GPBStringifySymbol(AccountDetailPaginationMeta),
+        .number = GetAccountDetail_FieldNumber_PaginationMeta,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(GetAccountDetail__storage_, paginationMeta),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -612,9 +797,11 @@ typedef struct GetRolePermissions__storage_ {
 
 @implementation GetPendingTransactions
 
+@dynamic hasPaginationMeta, paginationMeta;
 
 typedef struct GetPendingTransactions__storage_ {
   uint32_t _has_storage_[1];
+  TxPaginationMeta *paginationMeta;
 } GetPendingTransactions__storage_;
 
 // This method is threadsafe because it is initially called
@@ -622,13 +809,54 @@ typedef struct GetPendingTransactions__storage_ {
 + (GPBDescriptor *)descriptor {
   static GPBDescriptor *descriptor = nil;
   if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "paginationMeta",
+        .dataTypeSpecific.className = GPBStringifySymbol(TxPaginationMeta),
+        .number = GetPendingTransactions_FieldNumber_PaginationMeta,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(GetPendingTransactions__storage_, paginationMeta),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+    };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[GetPendingTransactions class]
                                      rootClass:[QueriesRoot class]
                                           file:QueriesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(GetPendingTransactions__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - GetPeers
+
+@implementation GetPeers
+
+
+typedef struct GetPeers__storage_ {
+  uint32_t _has_storage_[1];
+} GetPeers__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[GetPeers class]
+                                     rootClass:[QueriesRoot class]
+                                          file:QueriesRoot_FileDescriptor()
                                         fields:NULL
                                     fieldCount:0
-                                   storageSize:sizeof(GetPendingTransactions__storage_)
+                                   storageSize:sizeof(GetPeers__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
@@ -774,6 +1002,8 @@ typedef struct Query__storage_ {
 @dynamic getRolePermissions;
 @dynamic getAssetInfo;
 @dynamic getPendingTransactions;
+@dynamic getBlock;
+@dynamic getPeers;
 
 typedef struct Query_Payload__storage_ {
   uint32_t _has_storage_[2];
@@ -789,6 +1019,8 @@ typedef struct Query_Payload__storage_ {
   GetRolePermissions *getRolePermissions;
   GetAssetInfo *getAssetInfo;
   GetPendingTransactions *getPendingTransactions;
+  GetBlock *getBlock;
+  GetPeers *getPeers;
 } Query_Payload__storage_;
 
 // This method is threadsafe because it is initially called
@@ -902,6 +1134,24 @@ typedef struct Query_Payload__storage_ {
         .number = Query_Payload_FieldNumber_GetPendingTransactions,
         .hasIndex = -1,
         .offset = (uint32_t)offsetof(Query_Payload__storage_, getPendingTransactions),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "getBlock",
+        .dataTypeSpecific.className = GPBStringifySymbol(GetBlock),
+        .number = Query_Payload_FieldNumber_GetBlock,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(Query_Payload__storage_, getBlock),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "getPeers",
+        .dataTypeSpecific.className = GPBStringifySymbol(GetPeers),
+        .number = Query_Payload_FieldNumber_GetPeers,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(Query_Payload__storage_, getPeers),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
