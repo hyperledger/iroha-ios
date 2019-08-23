@@ -22,6 +22,8 @@
 @protocol IRAccountAssetsResponse <IRQueryResponse>
 
 @property(nonatomic, readonly)NSArray<id<IRAccountAsset>>* _Nonnull accountAssets;
+@property(nonatomic, readonly)UInt32 totalCount;
+@property(nonatomic, readonly)id<IRAssetId> _Nullable nextAssetId;
 
 @end
 

@@ -27,12 +27,17 @@
 
 CF_EXTERN_C_BEGIN
 
+@class AccountDetailPaginationMeta;
+@class AccountDetailRecordId;
+@class AssetPaginationMeta;
 @class GetAccount;
 @class GetAccountAssetTransactions;
 @class GetAccountAssets;
 @class GetAccountDetail;
 @class GetAccountTransactions;
 @class GetAssetInfo;
+@class GetBlock;
+@class GetPeers;
 @class GetPendingTransactions;
 @class GetRolePermissions;
 @class GetRoles;
@@ -87,6 +92,33 @@ typedef GPB_ENUM(TxPaginationMeta_OptFirstTxHash_OneOfCase) {
  **/
 void TxPaginationMeta_ClearOptFirstTxHashOneOfCase(TxPaginationMeta *message);
 
+#pragma mark - AssetPaginationMeta
+
+typedef GPB_ENUM(AssetPaginationMeta_FieldNumber) {
+  AssetPaginationMeta_FieldNumber_PageSize = 1,
+  AssetPaginationMeta_FieldNumber_FirstAssetId = 2,
+};
+
+typedef GPB_ENUM(AssetPaginationMeta_OptFirstAssetId_OneOfCase) {
+  AssetPaginationMeta_OptFirstAssetId_OneOfCase_GPBUnsetOneOfCase = 0,
+  AssetPaginationMeta_OptFirstAssetId_OneOfCase_FirstAssetId = 2,
+};
+
+@interface AssetPaginationMeta : GPBMessage
+
+@property(nonatomic, readwrite) uint32_t pageSize;
+
+@property(nonatomic, readonly) AssetPaginationMeta_OptFirstAssetId_OneOfCase optFirstAssetIdOneOfCase;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *firstAssetId;
+
+@end
+
+/**
+ * Clears whatever value was set for the oneof 'optFirstAssetId'.
+ **/
+void AssetPaginationMeta_ClearOptFirstAssetIdOneOfCase(AssetPaginationMeta *message);
+
 #pragma mark - GetAccount
 
 typedef GPB_ENUM(GetAccount_FieldNumber) {
@@ -96,6 +128,18 @@ typedef GPB_ENUM(GetAccount_FieldNumber) {
 @interface GetAccount : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *accountId;
+
+@end
+
+#pragma mark - GetBlock
+
+typedef GPB_ENUM(GetBlock_FieldNumber) {
+  GetBlock_FieldNumber_Height = 1,
+};
+
+@interface GetBlock : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t height;
 
 @end
 
@@ -166,11 +210,33 @@ typedef GPB_ENUM(GetTransactions_FieldNumber) {
 
 typedef GPB_ENUM(GetAccountAssets_FieldNumber) {
   GetAccountAssets_FieldNumber_AccountId = 1,
+  GetAccountAssets_FieldNumber_PaginationMeta = 2,
 };
 
 @interface GetAccountAssets : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *accountId;
+
+@property(nonatomic, readwrite, strong, null_resettable) AssetPaginationMeta *paginationMeta;
+/** Test to see if @c paginationMeta has been set. */
+@property(nonatomic, readwrite) BOOL hasPaginationMeta;
+
+@end
+
+#pragma mark - AccountDetailPaginationMeta
+
+typedef GPB_ENUM(AccountDetailPaginationMeta_FieldNumber) {
+  AccountDetailPaginationMeta_FieldNumber_PageSize = 1,
+  AccountDetailPaginationMeta_FieldNumber_FirstRecordId = 2,
+};
+
+@interface AccountDetailPaginationMeta : GPBMessage
+
+@property(nonatomic, readwrite) uint32_t pageSize;
+
+@property(nonatomic, readwrite, strong, null_resettable) AccountDetailRecordId *firstRecordId;
+/** Test to see if @c firstRecordId has been set. */
+@property(nonatomic, readwrite) BOOL hasFirstRecordId;
 
 @end
 
@@ -180,6 +246,7 @@ typedef GPB_ENUM(GetAccountDetail_FieldNumber) {
   GetAccountDetail_FieldNumber_AccountId = 1,
   GetAccountDetail_FieldNumber_Key = 2,
   GetAccountDetail_FieldNumber_Writer = 3,
+  GetAccountDetail_FieldNumber_PaginationMeta = 4,
 };
 
 typedef GPB_ENUM(GetAccountDetail_OptAccountId_OneOfCase) {
@@ -210,6 +277,10 @@ typedef GPB_ENUM(GetAccountDetail_OptWriter_OneOfCase) {
 @property(nonatomic, readonly) GetAccountDetail_OptWriter_OneOfCase optWriterOneOfCase;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *writer;
+
+@property(nonatomic, readwrite, strong, null_resettable) AccountDetailPaginationMeta *paginationMeta;
+/** Test to see if @c paginationMeta has been set. */
+@property(nonatomic, readwrite) BOOL hasPaginationMeta;
 
 @end
 
@@ -258,7 +329,21 @@ typedef GPB_ENUM(GetRolePermissions_FieldNumber) {
 
 #pragma mark - GetPendingTransactions
 
+typedef GPB_ENUM(GetPendingTransactions_FieldNumber) {
+  GetPendingTransactions_FieldNumber_PaginationMeta = 1,
+};
+
 @interface GetPendingTransactions : GPBMessage
+
+@property(nonatomic, readwrite, strong, null_resettable) TxPaginationMeta *paginationMeta;
+/** Test to see if @c paginationMeta has been set. */
+@property(nonatomic, readwrite) BOOL hasPaginationMeta;
+
+@end
+
+#pragma mark - GetPeers
+
+@interface GetPeers : GPBMessage
 
 @end
 
@@ -315,6 +400,8 @@ typedef GPB_ENUM(Query_Payload_FieldNumber) {
   Query_Payload_FieldNumber_GetRolePermissions = 11,
   Query_Payload_FieldNumber_GetAssetInfo = 12,
   Query_Payload_FieldNumber_GetPendingTransactions = 13,
+  Query_Payload_FieldNumber_GetBlock = 14,
+  Query_Payload_FieldNumber_GetPeers = 15,
 };
 
 typedef GPB_ENUM(Query_Payload_Query_OneOfCase) {
@@ -330,6 +417,8 @@ typedef GPB_ENUM(Query_Payload_Query_OneOfCase) {
   Query_Payload_Query_OneOfCase_GetRolePermissions = 11,
   Query_Payload_Query_OneOfCase_GetAssetInfo = 12,
   Query_Payload_Query_OneOfCase_GetPendingTransactions = 13,
+  Query_Payload_Query_OneOfCase_GetBlock = 14,
+  Query_Payload_Query_OneOfCase_GetPeers = 15,
 };
 
 @interface Query_Payload : GPBMessage
@@ -361,6 +450,10 @@ typedef GPB_ENUM(Query_Payload_Query_OneOfCase) {
 @property(nonatomic, readwrite, strong, null_resettable) GetAssetInfo *getAssetInfo;
 
 @property(nonatomic, readwrite, strong, null_resettable) GetPendingTransactions *getPendingTransactions;
+
+@property(nonatomic, readwrite, strong, null_resettable) GetBlock *getBlock;
+
+@property(nonatomic, readwrite, strong, null_resettable) GetPeers *getPeers;
 
 @end
 

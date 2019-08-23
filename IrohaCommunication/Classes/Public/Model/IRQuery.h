@@ -9,6 +9,7 @@
 #import "IRAccountId.h"
 #import "IRAssetId.h"
 #import "IRPagination.h"
+#import "IRAssetPagination.h"
 #import "IRRoleName.h"
 
 @protocol IRQuery <NSObject>
@@ -51,6 +52,7 @@
 @protocol IRGetAccountAssets <IRQuery>
 
 @property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
+@property(nonatomic, readonly)id<IRAssetPagination> _Nullable pagination;
 
 @end
 

@@ -9,6 +9,7 @@
 
 @interface IRGetAccountAssets : NSObject<IRGetAccountAssets, IRProtobufTransformable>
 
-- (nonnull instancetype)initWithAccountId:(nonnull id<IRAccountId>)accountId;
+- (nonnull instancetype)initWithAccountId:(nonnull id<IRAccountId>)accountId
+                               pagination:(nullable id<IRAssetPagination>)pagination;
 
 @end

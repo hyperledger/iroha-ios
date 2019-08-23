@@ -104,7 +104,7 @@ typedef GPB_ENUM(Transaction_Payload_OptionalBatchMeta_OneOfCase) {
 
 @interface Transaction_Payload : GPBMessage
 
-/** transcation fields */
+/** transaction fields */
 @property(nonatomic, readwrite, strong, null_resettable) Transaction_Payload_ReducedPayload *reducedPayload;
 /** Test to see if @c reducedPayload has been set. */
 @property(nonatomic, readwrite) BOOL hasReducedPayload;
