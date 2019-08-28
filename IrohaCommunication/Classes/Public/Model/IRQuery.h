@@ -11,10 +11,12 @@
 #import "IRPagination.h"
 #import "IRAssetPagination.h"
 #import "IRRoleName.h"
+#import "IRAccountDetailPagination.h"
+
 
 @protocol IRQuery <NSObject>
-
 @end
+
 
 @protocol IRGetAccount <IRQuery>
 
@@ -22,11 +24,13 @@
 
 @end
 
+
 @protocol IRGetSignatories <IRQuery>
 
 @property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
 
 @end
+
 
 @protocol IRGetAccountTransactions <IRQuery>
 
@@ -34,6 +38,7 @@
 @property(nonatomic, readonly)id<IRPagination> _Nullable pagination;
 
 @end
+
 
 @protocol IRGetAccountAssetTransactions <IRQuery>
 
@@ -43,11 +48,13 @@
 
 @end
 
+
 @protocol IRGetTransactions <IRQuery>
 
 @property(nonatomic, readonly)NSArray<NSData*> * _Nonnull transactionHashes;
 
 @end
+
 
 @protocol IRGetAccountAssets <IRQuery>
 
@@ -56,17 +63,20 @@
 
 @end
 
+
 @protocol IRGetAccountDetail <IRQuery>
 
 @property(nonatomic, readonly)id<IRAccountId> _Nullable accountId;
 @property(nonatomic, readonly)id<IRAccountId> _Nullable writer;
 @property(nonatomic, readonly)NSString * _Nullable key;
+@property(nonatomic, readonly)id<IRAccountDetailPagination> _Nullable pagination;
 
 @end
+
 
 @protocol IRGetRoles <IRQuery>
-
 @end
+
 
 @protocol IRGetRolePermissions <IRQuery>
 
@@ -74,14 +84,19 @@
 
 @end
 
+
 @protocol IRGetAssetInfo <IRQuery>
 
 @property(nonatomic, readonly)id<IRAssetId> _Nonnull assetId;
 
 @end
 
-@protocol IRGetPendingTransactions <IRQuery>
 
+@protocol IRGetPendingTransactions <IRQuery>
+@end
+
+
+@protocol IRGetPeers <IRQuery>
 @end
 
 #endif

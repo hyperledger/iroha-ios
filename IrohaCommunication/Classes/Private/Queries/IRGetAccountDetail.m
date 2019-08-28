@@ -5,19 +5,24 @@
 
 #import "IRGetAccountDetail.h"
 #import "Queries.pbobjc.h"
+#import "Primitive.pbobjc.h"
 
 @implementation IRGetAccountDetail
+
 @synthesize accountId = _accountId;
 @synthesize writer = _writer;
 @synthesize key = _key;
+@synthesize pagination = _pagination;
 
 - (nonnull instancetype)initWithAccountId:(nullable id<IRAccountId>)accountId
                                    writer:(nullable id<IRAccountId>)writer
-                                      key:(nullable NSString*)key {
+                                      key:(nullable NSString*)key
+                               pagination:(nullable id<IRAccountDetailPagination>)pagination {
     if (self = [super init]) {
         _accountId = accountId;
         _writer = writer;
         _key = key;
+        _pagination = pagination;
     }
 
     return self;
@@ -30,10 +35,22 @@
     query.accountId = [_accountId identifier];
     query.writer = [_writer identifier];
     query.key = _key;
-
+    
+    if (_pagination) {
+        AccountDetailRecordId *recordId = [AccountDetailRecordId new];
+        recordId.writer = _pagination.nextRecordId.writer;
+        recordId.key = _pagination.nextRecordId.key;
+        
+        AccountDetailPaginationMeta *meta = [AccountDetailPaginationMeta new];
+        meta.pageSize = _pagination.pageSize;
+        meta.firstRecordId = recordId;
+        
+        query.paginationMeta = meta;
+    }
+    
     Query_Payload *payload = [[Query_Payload alloc] init];
     payload.getAccountDetail = query;
-
+    
     return payload;
 }
 

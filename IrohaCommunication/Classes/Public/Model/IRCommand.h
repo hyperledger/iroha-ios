@@ -20,12 +20,14 @@
 
 @end
 
+
 @protocol IRAddAssetQuantity <IRCommand>
 
 @property(nonatomic, readonly)id<IRAssetId> _Nonnull assetId;
 @property(nonatomic, readonly)id<IRAmount> _Nonnull amount;
 
 @end
+
 
 @protocol IRAddPeer <IRCommand>
 
@@ -34,12 +36,14 @@
 
 @end
 
+
 @protocol IRAddSignatory <IRCommand>
 
 @property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
 @property(nonatomic, readonly)id<IRPublicKeyProtocol> _Nonnull publicKey;
 
 @end
+
 
 @protocol IRAppendRole <IRCommand>
 
@@ -48,12 +52,14 @@
 
 @end
 
+
 @protocol IRCreateAccount <IRCommand>
 
 @property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
 @property(nonatomic, readonly)id<IRPublicKeyProtocol> _Nonnull publicKey;
 
 @end
+
 
 @protocol IRCreateAsset <IRCommand>
 
@@ -62,12 +68,14 @@
 
 @end
 
+
 @protocol IRCreateDomain <IRCommand>
 
 @property(nonatomic, readonly)id<IRDomain> _Nonnull domainId;
 @property(nonatomic, readonly)id<IRRoleName> _Nullable defaultRole;
 
 @end
+
 
 @protocol IRCreateRole <IRCommand>
 
@@ -76,12 +84,14 @@
 
 @end
 
+
 @protocol IRDetachRole <IRCommand>
 
 @property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
 @property(nonatomic, readonly)id<IRRoleName> _Nonnull roleName;
 
 @end
+
 
 @protocol IRGrantPermission <IRCommand>
 
@@ -90,6 +100,7 @@
 
 @end
 
+
 @protocol IRRemoveSignatory <IRCommand>
 
 @property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
@@ -97,12 +108,14 @@
 
 @end
 
+
 @protocol IRRevokePermission <IRCommand>
 
 @property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
 @property(nonatomic, readonly)id<IRGrantablePermission> _Nonnull permission;
 
 @end
+
 
 @protocol IRSetAccountDetail <IRCommand>
 
@@ -112,6 +125,7 @@
 
 @end
 
+
 @protocol IRSetAccountQuorum <IRCommand>
 
 @property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
@@ -119,12 +133,14 @@
 
 @end
 
+
 @protocol IRSubtractAssetQuantity <IRCommand>
 
 @property(nonatomic, readonly)id<IRAssetId> _Nonnull assetId;
 @property(nonatomic, readonly)id<IRAmount> _Nonnull amount;
 
 @end
+
 
 @protocol IRTransferAsset <IRCommand>
 
@@ -135,5 +151,23 @@
 @property(nonatomic, readonly)id<IRAmount> _Nonnull amount;
 
 @end
+
+
+@protocol IRRemovePeer <IRCommand>
+
+@property(nonatomic, readonly)id<IRPublicKeyProtocol> _Nonnull peerKey;
+
+@end
+
+
+@protocol IRCompareAndSetAccountDetail <IRCommand>
+
+@property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
+@property(nonatomic, readonly)NSString* _Nonnull key;
+@property(nonatomic, readonly)NSString* _Nonnull value;
+@property(nonatomic, readonly)NSString* _Nullable oldValue;
+
+@end
+
 
 #endif

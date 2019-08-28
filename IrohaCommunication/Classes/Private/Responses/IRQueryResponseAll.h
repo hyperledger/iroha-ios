@@ -11,5 +11,6 @@
 #import "IRErrorResponse.h"
 #import "IRAssetResponse.h"
 #import "IRTransactionsPageResponse.h"
+#import "IRPeersResponse.h"
 
 #endif /* IRQueryResponseAll_h */
