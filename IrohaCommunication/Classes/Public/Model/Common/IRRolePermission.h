@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, IRRolePermissionError) {
 + (nonnull id<IRRolePermission>)canAddAssetQuantity;
 + (nonnull id<IRRolePermission>)canSubtractAssetQuantity;
 + (nonnull id<IRRolePermission>)canAddPeer;
++ (nonnull id<IRRolePermission>)canRemovePeer;
 + (nonnull id<IRRolePermission>)canAddSignatory;
 + (nonnull id<IRRolePermission>)canRemoveSignatory;
 + (nonnull id<IRRolePermission>)canSetQuorum;
@@ -68,6 +69,7 @@ typedef NS_ENUM(NSUInteger, IRRolePermissionError) {
 + (nonnull id<IRRolePermission>)canGetMyTransactions;
 + (nonnull id<IRRolePermission>)canGetAllTransactions;
 + (nonnull id<IRRolePermission>)canGetBlocks;
++ (nonnull id<IRRolePermission>)canGetPeers;
 
 #pragma mark - Grant permissions
 

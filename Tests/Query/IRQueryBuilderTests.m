@@ -137,6 +137,11 @@ static UInt64 VALID_QUERY_COUNTER = 10;
 
     id<IRAssetPagination> assetPagination = [IRAssetPaginationFactory assetPagination:10
                                                                       startingAssetId:assetId];
+    
+    id<IRAccountDetailRecordId> accountDetailRecordId = [IRAccountDetailRecordIdFactory accountDetailRecordIdWithWriter:@"writer"
+                                                                                                                    key:@"key"];
+    id<IRAccountDetailPagination> accountDetailPagination = [IRAccountDetailPaginationFactory accountDetailPagination:10
+                                                                                                         nextRecordId:accountDetailRecordId];
 
     NSData *itemHash = [@"Test Data" dataUsingEncoding:NSUTF8StringEncoding];
 
@@ -171,6 +176,10 @@ static UInt64 VALID_QUERY_COUNTER = 10;
     IRQueryTestCase *getAccountDetail = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:writer:key:)
                                                                         arguments:@[accountId, accountId]
                                                                          protocol:@protocol(IRGetAccountDetail)];
+    
+    IRQueryTestCase *getAccountDetailPaginated = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:writer:key:pagination:)
+                                                                                 arguments:@[accountId, accountId, @"key", accountDetailPagination]
+                                                                                  protocol:@protocol(IRGetAccountDetail)];
 
     IRQueryTestCase *getRoles = [[IRQueryTestCase alloc] initWithSelector:@selector(getRoles)
                                                                 arguments:nil
@@ -187,6 +196,10 @@ static UInt64 VALID_QUERY_COUNTER = 10;
     IRQueryTestCase *getPendingTransaction = [[IRQueryTestCase alloc] initWithSelector:@selector(getPendingTransactions)
                                                                              arguments:nil
                                                                               protocol:@protocol(IRGetPendingTransactions)];
+    
+    IRQueryTestCase *getPeers = [[IRQueryTestCase alloc] initWithSelector:@selector(getPeers)
+                                                                arguments:nil
+                                                                 protocol:@protocol(IRGetPeers)];
 
     return @[getAccountTestCase,
              getSignatories,
@@ -196,10 +209,12 @@ static UInt64 VALID_QUERY_COUNTER = 10;
              getAccountAssets,
              getAccountAssetsPaginated,
              getAccountDetail,
+             getAccountDetailPaginated,
              getRoles,
              getRolePermission,
              getAssetInfo,
-             getPendingTransaction];
+             getPendingTransaction,
+             getPeers];
 }
 
 @end

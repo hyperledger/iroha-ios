@@ -87,12 +87,21 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
 - (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
                                   writer:(nullable id<IRAccountId>)writer
                                      key:(nullable NSString*)key {
+    return [self getAccountDetail:accountId writer:writer key:key pagination:nil];
+}
+
+- (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
+                                  writer:(nullable id<IRAccountId>)writer
+                                     key:(nullable NSString*)key
+                              pagination:(nullable id<IRAccountDetailPagination>)pagination {
     id<IRGetAccountDetail> query = [[IRGetAccountDetail alloc] initWithAccountId:accountId
                                                                           writer:writer
-                                                                             key:key];
-
+                                                                             key:key
+                                                                      pagination:pagination];
+    
     return [self withQuery:query];
 }
+
 
 - (nonnull instancetype)getRoles {
     id<IRGetRoles> query = [[IRGetRoles alloc] init];
@@ -115,6 +124,12 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
 - (nonnull instancetype)getPendingTransactions {
     id<IRGetPendingTransactions> query = [[IRGetPendingTransactions alloc] init];
 
+    return [self withQuery:query];
+}
+
+-(nonnull instancetype)getPeers {
+    id<IRGetPeers> query = [IRGetPeers new];
+    
     return [self withQuery:query];
 }
 

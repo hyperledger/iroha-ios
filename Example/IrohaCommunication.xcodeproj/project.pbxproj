@@ -54,6 +54,7 @@
 		844761F1224A5133009ADC0E /* IRQueryResponseDeserializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761F0224A5133009ADC0E /* IRQueryResponseDeserializationTests.m */; };
 		8481A59122FD48800056D3D4 /* IRAssetPaginationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481A59022FD48800056D3D4 /* IRAssetPaginationTests.m */; };
 		84D693FB22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D693FA22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m */; };
+		8BB6C2BF23164E04009B7AEA /* IRAccountDetailPaginationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6C2BE23164E04009B7AEA /* IRAccountDetailPaginationTests.m */; };
 		8CA1A478927FFA33BA30A5B4 /* Pods_IntegrationTestHost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175938D8DE70C85E0CEA25AF /* Pods_IntegrationTestHost.framework */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +160,7 @@
 		84EA860F14455E442B5C9B29 /* IrohaCommunication.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IrohaCommunication.podspec; path = ../IrohaCommunication.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		86F19532265991B547599707 /* Pods-IrohaExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrohaExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-IrohaExample/Pods-IrohaExample.release.xcconfig"; sourceTree = "<group>"; };
 		872B4DCAED8E7A58AFC8B200 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BB6C2BE23164E04009B7AEA /* IRAccountDetailPaginationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRAccountDetailPaginationTests.m; sourceTree = "<group>"; };
 		9CA67C26A81EB59902096272 /* Pods_IntegrationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntegrationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B877F0064619F03D2B560C12 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		BE1A149366A65576BDC46228 /* Pods-IntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				0200347621C853E2001A6A53 /* IRRolePermissionTests.m */,
 				021C24AE21DCDDE3005D5304 /* IRPaginationTests.m */,
 				8481A59022FD48800056D3D4 /* IRAssetPaginationTests.m */,
+				8BB6C2BE23164E04009B7AEA /* IRAccountDetailPaginationTests.m */,
 				021C24EF21DDF706005D5304 /* IRAccountAssetTests.m */,
 			);
 			name = Model;
@@ -838,6 +841,7 @@
 				021C24E821DD3C90005D5304 /* IRQueryBuilderTests.m in Sources */,
 				0200347721C853E2001A6A53 /* IRRolePermissionTests.m in Sources */,
 				021C24F021DDF706005D5304 /* IRAccountAssetTests.m in Sources */,
+				8BB6C2BF23164E04009B7AEA /* IRAccountDetailPaginationTests.m in Sources */,
 				0200345E21C62D3F001A6A53 /* IRDomainTests.m in Sources */,
 				021C843D21EA6E950037F633 /* IRBlockQueryBuilderTests.m in Sources */,
 				0200345F21C62D3F001A6A53 /* IRAccountIdTests.m in Sources */,

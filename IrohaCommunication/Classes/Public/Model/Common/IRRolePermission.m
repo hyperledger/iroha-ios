@@ -79,6 +79,10 @@
     return [self permissionWithValue:RolePermission_CanAddPeer error:nil];
 }
 
++ (id<IRRolePermission>)canRemovePeer {
+    return [self permissionWithValue:RolePermission_CanRemovePeer error:nil];
+}
+
 + (nonnull id<IRRolePermission>)canAddSignatory {
     return [self permissionWithValue:RolePermission_CanAddSignatory error:nil];
 }
@@ -215,6 +219,10 @@
 
 + (nonnull id<IRRolePermission>)canGetBlocks {
     return [self permissionWithValue:RolePermission_CanGetBlocks error:nil];
+}
+
++ (id<IRRolePermission>)canGetPeers {
+    return [self permissionWithValue:RolePermission_CanGetPeers error:nil];
 }
 
 #pragma mark - Grant permissions

@@ -12,12 +12,16 @@
 #import "IRRolePermission.h"
 #import "IRTransaction.h"
 #import "IrohaCrypto/IRPublicKey.h"
+#import "IRAccountDetailRecordId.h"
+#import "IRPeer.h"
+
 
 @protocol IRQueryResponse <NSObject>
 
 @property(nonatomic, readonly)NSData* _Nonnull queryHash;
 
 @end
+
 
 @protocol IRAccountAssetsResponse <IRQueryResponse>
 
@@ -27,11 +31,15 @@
 
 @end
 
+
 @protocol IRAccountDetailResponse <IRQueryResponse>
 
 @property(nonatomic, readonly)NSString* _Nonnull detail;
+@property(nonatomic, readonly)UInt64 totalCount;
+@property(nonatomic, readonly)id<IRAccountDetailRecordId> _Nullable nextRecordId;
 
 @end
+
 
 @protocol IRSignatoriesResponse <IRQueryResponse>
 
@@ -39,11 +47,13 @@
 
 @end
 
+
 @protocol IRTransactionsResponse <IRQueryResponse>
 
 @property(nonatomic, readonly)NSArray<id<IRTransaction>>* _Nonnull transactions;
 
 @end
+
 
 @protocol IRRolesResponse <IRQueryResponse>
 
@@ -51,11 +61,13 @@
 
 @end
 
+
 @protocol IRRolePermissionsResponse <IRQueryResponse>
 
 @property(nonatomic, readonly)NSArray<id<IRRolePermission>>* _Nonnull permissions;
 
 @end
+
 
 @protocol IRAccountResponse <IRQueryResponse>
 
@@ -65,6 +77,7 @@
 @property(nonatomic, readonly)NSArray<id<IRRoleName>> * _Nonnull roles;
 
 @end
+
 
 typedef NS_ENUM(NSUInteger, IRErrorResponseReason) {
     IRErrorResponseReasonStatelessInvalid,
@@ -78,6 +91,7 @@ typedef NS_ENUM(NSUInteger, IRErrorResponseReason) {
     IRErrorResponseReasonNoRoles
 };
 
+
 @protocol IRErrorResponse <IRQueryResponse>
 
 @property(nonatomic, readonly)IRErrorResponseReason reason;
@@ -86,6 +100,7 @@ typedef NS_ENUM(NSUInteger, IRErrorResponseReason) {
 
 @end
 
+
 @protocol IRAssetResponse <IRQueryResponse>
 
 @property(nonatomic, readonly)id<IRAssetId> _Nonnull assetId;
@@ -93,11 +108,19 @@ typedef NS_ENUM(NSUInteger, IRErrorResponseReason) {
 
 @end
 
+
 @protocol IRTransactionsPageResponse <IRQueryResponse>
 
 @property(nonatomic, readonly)NSArray<id<IRTransaction>>* _Nonnull transactions;
 @property(nonatomic, readonly)UInt32 totalCount;
 @property(nonatomic, readonly)NSData * _Nullable nextTransactionHash;
+
+@end
+
+
+@protocol IRPeersResponse <IRQueryResponse>
+
+@property(nonatomic, readonly)NSArray<id<IRPeer>>* _Nonnull peers;
 
 @end
 
