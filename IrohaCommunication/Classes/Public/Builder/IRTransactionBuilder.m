@@ -223,6 +223,26 @@ static const NSUInteger DEFAULT_QUORUM = 1;
     return self;
 }
 
+- (instancetype)removePeer:(id<IRPublicKeyProtocol>)peerKey {
+    [self addCommand:[[IRRemovePeer alloc] initWithPeerKey:peerKey]];
+    
+    return self;
+}
+
+- (nonnull instancetype)compareAndSet:(nonnull id<IRAccountId>)accountId
+                                  key:(nonnull NSString *)key
+                                value:(nonnull NSString *)value
+                             oldValue:(nullable NSString *)oldValue {
+    IRCompareAndSetAccountDetail *command = [[IRCompareAndSetAccountDetail alloc] initWithAccountId:accountId
+                                                                                                key:key
+                                                                                              value:value
+                                                                                           oldValue:oldValue];
+    [self addCommand:command];
+    
+    return self;
+}
+
+
 #pragma mark - Protocol
 
 - (nonnull instancetype)withCreatorAccountId:(nonnull id<IRAccountId>)creatorAccountId {

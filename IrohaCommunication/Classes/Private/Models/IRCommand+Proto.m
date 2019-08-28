@@ -77,6 +77,12 @@
             return [self subtractAssetQuantityCommandFromPbCommand:command.subtractAssetQuantity
                                                              error:error];
             break;
+        case Command_Command_OneOfCase_RemovePeer:
+            return [self removePeerCommandFromPbCommand:command.removePeer error:error];
+            break;
+        case Command_Command_OneOfCase_CompareAndSetAccountDetail:
+            return [self compareAndSetAccountDetailCommandFromPbCommand:command.compareAndSetAccountDetail error:error];
+            break;
         default:
             if (error) {
                 NSString *message = [NSString stringWithFormat:@"Invalid transaction command %@", @(command.commandOneOfCase)];
@@ -478,6 +484,48 @@
 
     return [[IRSubtractAssetQuantity alloc] initWithAssetId:assetId
                                                      amount:amount];
+}
+
++ (nullable id<IRRemovePeer>)removePeerCommandFromPbCommand:(nonnull RemovePeer *)pbCommand
+                                                      error:(NSError **)error {
+    NSData *rawPeerKey = [[NSData alloc] initWithHexString:pbCommand.publicKey];
+    
+    if (!rawPeerKey) {
+        if (error) {
+            NSString *message = [NSString stringWithFormat:@"Invalid public key hex %@", pbCommand.publicKey];
+            *error = [NSError errorWithDomain:NSStringFromClass([IRCommandProtoFactory class])
+                                         code:IRCommandProtoFactoryErrorInvalidArgument
+                                     userInfo:@{NSLocalizedDescriptionKey: message}];
+        }
+        return nil;
+    }
+    
+    id<IRPublicKeyProtocol> peerKey = [self createPublicKeyFromRawData:rawPeerKey error:error];
+    
+    if (!peerKey) {
+        return nil;
+    }
+    
+    return [[IRRemovePeer alloc] initWithPeerKey:peerKey];
+}
+
++ (nullable id<IRCompareAndSetAccountDetail>)compareAndSetAccountDetailCommandFromPbCommand:(nonnull CompareAndSetAccountDetail *)pbCommand
+                                                                                      error:(NSError **)error {
+    id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.accountId
+                                                                    error:error];
+    
+    if (!accountId) {
+        return nil;
+    }
+    
+    if (!pbCommand.key || !pbCommand.value) {
+        return nil;
+    }
+    
+    return [[IRCompareAndSetAccountDetail alloc] initWithAccountId:accountId
+                                                               key:pbCommand.key
+                                                             value:pbCommand.value
+                                                          oldValue:pbCommand.oldValue];
 }
 
 + (nullable id<IRPublicKeyProtocol>)createPublicKeyFromRawData:(nonnull NSData*)rawData error:(NSError**)error {

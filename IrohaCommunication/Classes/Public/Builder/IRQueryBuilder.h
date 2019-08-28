@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 
 #import "IRQueryRequest.h"
+#import "IRAccountDetailPagination.h"
 
 @protocol IRQueryBuilderProtocol <NSObject>
 
@@ -46,7 +47,12 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
 
 - (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
                                   writer:(nullable id<IRAccountId>)writer
-                                     key:(nullable NSString*)key;
+                                     key:(nullable NSString*)key DEPRECATED_MSG_ATTRIBUTE("use getAccountDetail:writer:key:pagination:");
+
+- (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
+                                  writer:(nullable id<IRAccountId>)writer
+                                     key:(nullable NSString*)key
+                              pagination:(nullable id<IRAccountDetailPagination>)pagination;
 
 - (nonnull instancetype)getRoles;
 
@@ -55,5 +61,7 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
 - (nonnull instancetype)getAssetInfo:(nonnull id<IRAssetId>)assetId;
 
 - (nonnull instancetype)getPendingTransactions;
+
+- (nonnull instancetype)getPeers;
 
 @end
