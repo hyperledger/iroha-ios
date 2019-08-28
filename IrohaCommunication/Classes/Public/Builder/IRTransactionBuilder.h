@@ -79,4 +79,11 @@ typedef NS_ENUM(NSUInteger, IRTransactionBuilderError) {
                           description:(nonnull NSString*)transferDescription
                                amount:(nonnull id<IRAmount>)amount;
 
+- (nonnull instancetype)removePeer:(nonnull id<IRPublicKeyProtocol>)peerKey;
+
+- (nonnull instancetype)compareAndSet:(nonnull id<IRAccountId>)accountId
+                                  key:(nonnull NSString *)key
+                                value:(nonnull NSString *)value
+                             oldValue:(nullable NSString *)oldValue;
+
 @end

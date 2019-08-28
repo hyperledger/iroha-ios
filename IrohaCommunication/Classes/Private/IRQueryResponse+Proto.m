@@ -8,6 +8,7 @@
 #import "IRQueryResponseAll.h"
 #import "IrohaCrypto/NSData+Hex.h"
 #import "IRTransactionImpl+Proto.h"
+#import "Primitive.pbobjc.h"
 
 @implementation IRQueryResponseProtoFactory
 
@@ -88,6 +89,9 @@
             return [self transactionPageResponseFromPbResponse:pbResponse.transactionsPageResponse
                                                      queryHash:queryHash
                                                          error:error];
+            break;
+        case QueryResponse_Response_OneOfCase_PeersResponse:
+            return [self peersResponseFromPbResponse:pbResponse.peersResponse queryHash:queryHash error:error];
             break;
         default:
             if (error) {
@@ -337,8 +341,17 @@
                                                                       error:(NSError**)error {
 
     NSString *detail = pbResponse.detail ? pbResponse.detail : @"";
+    
+    id<IRAccountDetailRecordId> nextRecordId = nil;
+    
+    if (pbResponse.hasNextRecordId && pbResponse.nextRecordId) {
+        nextRecordId = [IRAccountDetailRecordIdFactory accountDetailRecordIdWithWriter:pbResponse.nextRecordId.writer
+                                                                                   key:pbResponse.nextRecordId.key];
+    }
 
     return [[IRAccountDetailResponse alloc] initWithDetail:detail
+                                                totalCount:pbResponse.totalNumber
+                                              nextRecordId:nextRecordId
                                                  queryHash:queryHash];
 }
 
@@ -412,6 +425,50 @@
     }
 
     return transactions;
+}
+
++ (nullable id<IRPeersResponse>)peersResponseFromPbResponse:(nonnull PeersResponse*)pbResponse
+                                                  queryHash:(nonnull NSData*)queryHash
+                                                      error:(NSError**)error {
+    NSMutableArray<id<IRPeer>> *peers = [NSMutableArray array];
+    
+    for (Peer *pbPeer in pbResponse.peersArray) {
+        id<IRAddress> address = [IRAddressFactory addressWithValue:pbPeer.address error:error];
+        
+        if (!address) {
+            return nil;
+        }
+        
+        NSData *rawPublicKey = [[NSData alloc] initWithHexString:pbPeer.peerKey];
+        
+        if (!rawPublicKey) {
+            if (error) {
+                NSString *message = [NSString stringWithFormat:@"Invalid public key hex string %@", pbPeer.peerKey];
+                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
+                                             code:IRQueryResponseFactoryErrorInvalidAgrument
+                                         userInfo:@{NSLocalizedDescriptionKey: message}];
+            }
+            return nil;
+        }
+        
+        id<IRPublicKeyProtocol> publicKey = [[IREd25519PublicKey alloc] initWithRawData:rawPublicKey];
+        
+        if (!publicKey) {
+            if (error) {
+                NSString *message = [NSString stringWithFormat:@"Invalid public key %@", [queryHash toHexString]];
+                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
+                                             code:IRQueryResponseFactoryErrorInvalidAgrument
+                                         userInfo:@{NSLocalizedDescriptionKey: message}];
+            }
+            return nil;
+        }
+        
+        id<IRPeer> peer = [IRPeerFactory peerWithAddress:address key:publicKey error:error];
+        
+        [peers addObject:peer];
+    }
+    
+    return [[IRPeersResponse alloc] initWithPeers:peers queryHash:queryHash];
 }
 
 @end
