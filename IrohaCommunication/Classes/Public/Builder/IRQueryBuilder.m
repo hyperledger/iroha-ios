@@ -87,17 +87,15 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
 - (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
                                   writer:(nullable id<IRAccountId>)writer
                                      key:(nullable NSString*)key {
-    return [self getAccountDetail:accountId writer:writer key:key pagination:nil];
+    id<IRAccountDetailRecordId> record = [IRAccountDetailRecordIdFactory accountDetailRecordIdWithWriter:writer
+                                                                                                      key:key];
+    id<IRAccountDetailPagination> pagination = [IRAccountDetailPaginationFactory accountDetailPagination:1
+                                                                                            nextRecordId:record];
+    return [self getAccountDetailWithPagination:pagination];
 }
 
-- (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
-                                  writer:(nullable id<IRAccountId>)writer
-                                     key:(nullable NSString*)key
-                              pagination:(nullable id<IRAccountDetailPagination>)pagination {
-    id<IRGetAccountDetail> query = [[IRGetAccountDetail alloc] initWithAccountId:accountId
-                                                                          writer:writer
-                                                                             key:key
-                                                                      pagination:pagination];
+- (nonnull instancetype)getAccountDetailWithPagination:(id<IRAccountDetailPagination>)pagination {
+    id<IRGetAccountDetail> query = [[IRGetAccountDetail alloc] initWithPagination:pagination];
     
     return [self withQuery:query];
 }

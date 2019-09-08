@@ -47,12 +47,9 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
 
 - (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
                                   writer:(nullable id<IRAccountId>)writer
-                                     key:(nullable NSString*)key DEPRECATED_MSG_ATTRIBUTE("use getAccountDetail:writer:key:pagination:");
+                                     key:(nullable NSString*)key;
 
-- (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
-                                  writer:(nullable id<IRAccountId>)writer
-                                     key:(nullable NSString*)key
-                              pagination:(nullable id<IRAccountDetailPagination>)pagination;
+- (nonnull instancetype)getAccountDetailWithPagination:(nonnull id<IRAccountDetailPagination>)pagination;
 
 - (nonnull instancetype)getRoles;
 

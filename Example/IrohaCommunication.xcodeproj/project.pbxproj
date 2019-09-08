@@ -54,7 +54,9 @@
 		844761F1224A5133009ADC0E /* IRQueryResponseDeserializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761F0224A5133009ADC0E /* IRQueryResponseDeserializationTests.m */; };
 		8481A59122FD48800056D3D4 /* IRAssetPaginationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481A59022FD48800056D3D4 /* IRAssetPaginationTests.m */; };
 		84D693FB22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D693FA22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m */; };
+		8BA6158423255099002C33D8 /* IRGetAccountDetailTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA6158323255099002C33D8 /* IRGetAccountDetailTest.m */; };
 		8BB6C2BF23164E04009B7AEA /* IRAccountDetailPaginationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6C2BE23164E04009B7AEA /* IRAccountDetailPaginationTests.m */; };
+		8BF9E1DE2321976F00A1257A /* IRGetAssetsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF9E1DD2321976F00A1257A /* IRGetAssetsTest.m */; };
 		8CA1A478927FFA33BA30A5B4 /* Pods_IntegrationTestHost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175938D8DE70C85E0CEA25AF /* Pods_IntegrationTestHost.framework */; };
 /* End PBXBuildFile section */
 
@@ -160,7 +162,9 @@
 		84EA860F14455E442B5C9B29 /* IrohaCommunication.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IrohaCommunication.podspec; path = ../IrohaCommunication.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		86F19532265991B547599707 /* Pods-IrohaExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrohaExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-IrohaExample/Pods-IrohaExample.release.xcconfig"; sourceTree = "<group>"; };
 		872B4DCAED8E7A58AFC8B200 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BA6158323255099002C33D8 /* IRGetAccountDetailTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRGetAccountDetailTest.m; sourceTree = "<group>"; };
 		8BB6C2BE23164E04009B7AEA /* IRAccountDetailPaginationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRAccountDetailPaginationTests.m; sourceTree = "<group>"; };
+		8BF9E1DD2321976F00A1257A /* IRGetAssetsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRGetAssetsTest.m; sourceTree = "<group>"; };
 		9CA67C26A81EB59902096272 /* Pods_IntegrationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntegrationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B877F0064619F03D2B560C12 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		BE1A149366A65576BDC46228 /* Pods-IntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 				02D656A121F12DC300AAA66A /* IRCreateDomainTest.m */,
 				02D656BD21F19F6B00AAA66A /* IRCreateRoleTest.m */,
 				84D693FA22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m */,
+				8BF9E1DD2321976F00A1257A /* IRGetAssetsTest.m */,
+				8BA6158323255099002C33D8 /* IRGetAccountDetailTest.m */,
 			);
 			path = Scenarious;
 			sourceTree = "<group>";
@@ -272,10 +278,10 @@
 		02D656A921F12DC300AAA66A /* IrohaContainer */ = {
 			isa = PBXGroup;
 			children = (
-				02D656AA21F12DC300AAA66A /* IRBaseIrohaContainerTests.m */,
-				02D656AB21F12DC300AAA66A /* IRIrohaContainer.m */,
 				02D656AC21F12DC300AAA66A /* IRBaseIrohaContainerTests.h */,
+				02D656AA21F12DC300AAA66A /* IRBaseIrohaContainerTests.m */,
 				02D656AD21F12DC300AAA66A /* IRIrohaContainer.h */,
+				02D656AB21F12DC300AAA66A /* IRIrohaContainer.m */,
 			);
 			path = IrohaContainer;
 			sourceTree = "<group>";
@@ -555,6 +561,7 @@
 				TargetAttributes = {
 					021C844621ED12B40037F633 = {
 						DevelopmentTeam = YLWWUD25VZ;
+						LastSwiftMigration = 1020;
 						TestTargetID = 02ED8DC121EE8DD80068AF05;
 					};
 					02E31A2321DC050E00B33B66 = {
@@ -797,8 +804,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				02D656B821F12DC300AAA66A /* IRIrohaContainer.m in Sources */,
+				8BF9E1DE2321976F00A1257A /* IRGetAssetsTest.m in Sources */,
 				02D656B021F12DC300AAA66A /* IRCreateDomainTest.m in Sources */,
 				02D656BF21F19F7500AAA66A /* IRCreateRoleTest.m in Sources */,
+				8BA6158423255099002C33D8 /* IRGetAccountDetailTest.m in Sources */,
 				02D656B721F12DC300AAA66A /* IRBaseIrohaContainerTests.m in Sources */,
 				84D693FB22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m in Sources */,
 				02D656AF21F12DC300AAA66A /* IRCreateAccountTest.m in Sources */,
@@ -910,6 +919,7 @@
 			baseConfigurationReference = BE1A149366A65576BDC46228 /* Pods-IntegrationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -923,8 +933,11 @@
 				);
 				INFOPLIST_FILE = "IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IntegrationTestHost.app/IntegrationTestHost";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -935,6 +948,7 @@
 			baseConfigurationReference = 55D980CEB7E9C5BA9DA95FC2 /* Pods-IntegrationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -944,8 +958,10 @@
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IntegrationTestHost.app/IntegrationTestHost";
 				WRAPPER_EXTENSION = xctest;
 			};
