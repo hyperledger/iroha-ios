@@ -6,12 +6,12 @@
 #import <Foundation/Foundation.h>
 @import IrohaCommunication;
 
-@interface IRIrohaContainer : NSObject
 
-+ (nonnull instancetype)shared;
+@interface IRIrohaContainer : NSObject
 
 @property(nonatomic, readonly)IRNetworkService * _Nonnull iroha;
 
++ (nonnull instancetype)shared;
 - (nullable NSError*)start;
 - (nullable NSError*)stop;
 

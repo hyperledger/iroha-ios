@@ -6,6 +6,7 @@
 #import "IRAccountAssetsResponse.h"
 
 @implementation IRAccountAssetsResponse
+
 @synthesize accountAssets = _accountAssets;
 @synthesize totalCount = _totalCount;
 @synthesize nextAssetId = _nextAssetId;
@@ -23,6 +24,10 @@
     }
 
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Account assets: %@\nTotal count:%u\nNext asset id: %@\n", _accountAssets, (unsigned int)_totalCount, _nextAssetId];
 }
 
 @end

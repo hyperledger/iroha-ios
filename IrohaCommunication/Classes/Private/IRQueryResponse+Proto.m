@@ -344,7 +344,7 @@
     
     id<IRAccountDetailRecordId> nextRecordId = nil;
     
-    if (pbResponse.hasNextRecordId && pbResponse.nextRecordId) {
+    if (pbResponse.hasNextRecordId) {
         nextRecordId = [IRAccountDetailRecordIdFactory accountDetailRecordIdWithWriter:pbResponse.nextRecordId.writer
                                                                                    key:pbResponse.nextRecordId.key];
     }

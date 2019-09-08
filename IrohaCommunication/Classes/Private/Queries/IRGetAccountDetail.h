@@ -11,7 +11,8 @@
 
 - (nonnull instancetype)initWithAccountId:(nullable id<IRAccountId>)accountId
                                    writer:(nullable id<IRAccountId>)writer
-                                      key:(nullable NSString*)key
-                               pagination:(nullable id<IRAccountDetailPagination>)pagination;
+                                      key:(nullable NSString*)key;
+
+- (nonnull instancetype)initWithPagination:(nonnull id<IRAccountDetailPagination>)pagination;
 
 @end

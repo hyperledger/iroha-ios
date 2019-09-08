@@ -5,18 +5,22 @@
 
 #import "IRAmount.h"
 
+
 static NSString * const DECIMAL_SEPARATOR = @".";
+
 
 @interface IRAmount : NSObject<IRAmount>
 
-- (instancetype)initWithString:(nonnull NSString*)amountString;
+- (instancetype)initWithString:(nonnull NSString *)amountString;
 
 @end
 
+
 @implementation IRAmount
+
 @synthesize value = _value;
 
-- (instancetype)initWithString:(nonnull NSString*)amountString {
+- (instancetype)initWithString:(nonnull NSString *)amountString {
     if (self = [super init]) {
         _value = amountString;
     }
@@ -24,11 +28,16 @@ static NSString * const DECIMAL_SEPARATOR = @".";
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@", _value];
+}
+
 @end
+
 
 @implementation IRAmountFactory
 
-+ (nullable id<IRAmount>)amountFromString:(nonnull NSString*)amount error:(NSError*_Nullable*_Nullable)error {
++ (nullable id<IRAmount>)amountFromString:(nonnull NSString *)amount error:(NSError *_Nullable*_Nullable)error {
     NSCharacterSet *invalidSymbols = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
 
     if ([amount rangeOfCharacterFromSet:invalidSymbols].location != NSNotFound) {
@@ -57,7 +66,7 @@ static NSString * const DECIMAL_SEPARATOR = @".";
     return [[IRAmount alloc] initWithString:[decimalNumber stringValue]];
 }
 
-+ (nullable id<IRAmount>)amountFromUnsignedInteger:(NSUInteger)amount error:(NSError*_Nullable*_Nullable)error {
++ (nullable id<IRAmount>)amountFromUnsignedInteger:(NSUInteger)amount error:(NSError *_Nullable*_Nullable)error {
     return [self amountFromString:[@(amount) stringValue] error:error];
 }
 

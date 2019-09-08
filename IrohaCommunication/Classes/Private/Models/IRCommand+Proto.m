@@ -518,10 +518,6 @@
         return nil;
     }
     
-    if (!pbCommand.key || !pbCommand.value) {
-        return nil;
-    }
-    
     return [[IRCompareAndSetAccountDetail alloc] initWithAccountId:accountId
                                                                key:pbCommand.key
                                                              value:pbCommand.value

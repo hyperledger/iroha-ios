@@ -18,7 +18,7 @@
 
 @protocol IRQueryResponse <NSObject>
 
-@property(nonatomic, readonly)NSData* _Nonnull queryHash;
+@property (nonatomic, readonly) NSData* _Nonnull queryHash;
 
 @end
 
