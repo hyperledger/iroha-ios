@@ -14,7 +14,7 @@
 
 @implementation IRAccountDetailPaginationTests
 
-- (void)testNonnilStartingAssetId {
+- (void)testNonnilStartingRecordId {
     UInt32 pageSize = 10;
     
     NSString *writer = @"writer";
@@ -32,7 +32,7 @@
     XCTAssertEqualObjects(pagination.nextRecordId.key, key);
 }
 
-- (void)testNilStartingAssetId {
+- (void)testNilStartingRecordId {
     UInt32 pageSize = 10;
     
     id<IRAccountDetailPagination> pagination = [IRAccountDetailPaginationFactory accountDetailPagination:pageSize

@@ -5,14 +5,15 @@
 
 #import "IRIrohaContainer.h"
 
-static NSString* const DOCKER_HOST = @"http://localhost:49721";
-static NSString* const CONTAINER = @"iroha";
+static NSString * const DOCKER_HOST = @"http://localhost:49721";
+static NSString * const CONTAINER = @"iroha";
 
-static NSString * IROHA_IP = @"127.0.0.1";
-static NSString * IROHA_PORT = @"50051";
+static NSString *IROHA_IP = @"127.0.0.1";
+static NSString *IROHA_PORT = @"50051";
 
 static NSUInteger CONNECTION_TRIES = 10;
 static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
+
 
 @interface IRIrohaContainer()
 
@@ -20,6 +21,7 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
 @property(strong, nonatomic)IRNetworkService *irohaService;
 
 @end
+
 
 @implementation IRIrohaContainer
 
@@ -55,9 +57,10 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
     return sharedContainer;
 }
 
+
 #pragma mark - Interface
 
-- (nullable NSError*)start {
+- (nullable NSError *)start {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
     __block NSError *resultError;

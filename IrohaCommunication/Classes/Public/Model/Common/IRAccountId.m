@@ -5,20 +5,24 @@
 
 #import "IRAccountId.h"
 
+
 static NSString * const ACCOUNT_NAME_FORMAT = @"[a-z_0-9]{1,32}";
 static NSString * const ACCOUNT_SEPARATOR = @"@";
 
+
 @interface IRAccountId : NSObject <IRAccountId>
 
-- (instancetype)initWithName:(nonnull NSString*)name inDomain:(nonnull id<IRDomain>)domain;
+- (instancetype)initWithName:(nonnull NSString *)name inDomain:(nonnull id<IRDomain>)domain;
 
 @end
 
+
 @implementation IRAccountId
+
 @synthesize name = _name;
 @synthesize domain = _domain;
 
-- (instancetype)initWithName:(nonnull NSString*)name inDomain:(nonnull id<IRDomain>)domain {
+- (instancetype)initWithName:(nonnull NSString *)name inDomain:(nonnull id<IRDomain>)domain {
     if (self = [super init]) {
         _name = name;
         _domain = domain;
@@ -27,17 +31,22 @@ static NSString * const ACCOUNT_SEPARATOR = @"@";
     return self;
 }
 
-- (nonnull NSString*)identifier {
+- (nonnull NSString *)identifier {
     return [NSString stringWithFormat:@"%@%@%@", _name, ACCOUNT_SEPARATOR, _domain.identifier];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@", [self identifier]];
 }
 
 @end
 
+
 @implementation IRAccountIdFactory
 
-+ (nullable id<IRAccountId>)accountIdWithName:(nonnull NSString*)name
++ (nullable id<IRAccountId>)accountIdWithName:(nonnull NSString *)name
                                    domain:(nonnull id<IRDomain>)domain
-                                        error:(NSError*_Nullable*_Nullable)error {
+                                        error:(NSError *_Nullable*_Nullable)error {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ACCOUNT_NAME_FORMAT];
 
     if ([predicate evaluateWithObject:name]) {
@@ -53,8 +62,8 @@ static NSString * const ACCOUNT_SEPARATOR = @"@";
     }
 }
 
-+ (nullable id<IRAccountId>)accountWithIdentifier:(nonnull NSString*)accountId
-                                          error:(NSError*_Nullable*_Nullable)error {
++ (nullable id<IRAccountId>)accountWithIdentifier:(nonnull NSString *)accountId
+                                          error:(NSError *_Nullable*_Nullable)error {
     NSArray<NSString*> *components = [accountId componentsSeparatedByString:ACCOUNT_SEPARATOR];
 
     if ([components count] != 2) {

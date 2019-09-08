@@ -24,6 +24,10 @@
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Writer: %@\nKey:%@", _writer, _key];
+}
+
 @end
 
 

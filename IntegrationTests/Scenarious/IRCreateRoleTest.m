@@ -14,16 +14,18 @@
 
 - (void)testCreateRoleRejected {
     NSError *error = nil;
-    id<IRRoleName> role = [IRRoleNameFactory roleWithName:@"superadmintest" error:&error];
+    id<IRRoleName> role = [IRRoleNameFactory roleWithName:@"superadmcdddintest" error:&error];
 
     if (error) {
         XCTFail();
         return;
     }
 
-    NSArray<id<IRRolePermission>>* permissions = @[[IRRolePermissionFactory canAddSignatory],
+    NSArray<id<IRRolePermission>>* permissions = @[
+                                                   [IRRolePermissionFactory canAddSignatory],
                                                    [IRRolePermissionFactory canRemoveSignatory],
-                                                   [IRRolePermissionFactory canSetQuorum]];
+//                                                   [IRRolePermissionFactory canSetQuorum]
+                                                   ];
 
     IRTransactionBuilder *transactionBuilder = [IRTransactionBuilder builderWithCreatorAccountId:self.adminAccountId];
     transactionBuilder = [transactionBuilder createRole:role permissions:permissions];
@@ -35,6 +37,8 @@
         XCTFail();
         return;
     }
+    
+    NSLog(@"%@", [[transaction transactionHashWithError:nil] toHexString]);
 
     XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
 
