@@ -7,13 +7,16 @@
 @import IrohaCommunication;
 @import IrohaCrypto;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface IRBaseIrohaContainerTests : XCTestCase
 
-@property(strong, nonatomic)IRNetworkService * _Nonnull iroha;
-
-@property(strong, nonatomic)id<IRAccountId> _Nonnull adminAccountId;
-@property(strong, nonatomic)id<IRPublicKeyProtocol> _Nonnull adminPublicKey;
-@property(strong, nonatomic)id<IRSignatureCreatorProtocol> _Nonnull adminSigner;
-@property(strong, nonatomic)id<IRDomain> _Nonnull domain;
+@property (strong, nonatomic) IRNetworkService *iroha;
+@property (strong, nonatomic) id<IRAccountId> adminAccountId;
+@property (strong, nonatomic) id<IRPublicKeyProtocol> adminPublicKey;
+@property (strong, nonatomic) id<IRSignatureCreatorProtocol> adminSigner;
+@property (strong, nonatomic) id<IRDomain> domain;
 
 @end
+
+NS_ASSUME_NONNULL_END

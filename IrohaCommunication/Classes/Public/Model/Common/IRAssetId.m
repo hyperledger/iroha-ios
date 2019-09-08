@@ -5,8 +5,10 @@
 
 #import "IRAssetId.h"
 
+
 static NSString * const ASSET_NAME_FORMAT = @"[a-z_0-9]{1,32}";
 static NSString * const ASSET_ID_SEPARATOR = @"#";
+
 
 @interface IRAssetId : NSObject <IRAssetId>
 
@@ -14,7 +16,9 @@ static NSString * const ASSET_ID_SEPARATOR = @"#";
 
 @end
 
+
 @implementation IRAssetId
+
 @synthesize name = _name;
 @synthesize domain = _domain;
 
@@ -31,7 +35,12 @@ static NSString * const ASSET_ID_SEPARATOR = @"#";
     return [NSString stringWithFormat:@"%@%@%@", _name, ASSET_ID_SEPARATOR, _domain.identifier];
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@", [self identifier]];
+}
+
 @end
+
 
 @implementation IRAssetIdFactory
 

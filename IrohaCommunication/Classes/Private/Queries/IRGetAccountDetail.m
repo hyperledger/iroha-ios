@@ -16,25 +16,30 @@
 
 - (nonnull instancetype)initWithAccountId:(nullable id<IRAccountId>)accountId
                                    writer:(nullable id<IRAccountId>)writer
-                                      key:(nullable NSString*)key
-                               pagination:(nullable id<IRAccountDetailPagination>)pagination {
+                                      key:(nullable NSString*)key {
     if (self = [super init]) {
         _accountId = accountId;
         _writer = writer;
         _key = key;
-        _pagination = pagination;
     }
 
     return self;
 }
 
+- (nonnull instancetype)initWithPagination:(nonnull id<IRAccountDetailPagination>)pagination {
+    
+    if (self = [super init]) {
+        _pagination = pagination;
+    }
+    
+    return self;
+}
+
+
 #pragma mark - Protobuf Transformable
 
-- (nullable id)transform:(NSError**)error {
-    GetAccountDetail *query = [[GetAccountDetail alloc] init];
-    query.accountId = [_accountId identifier];
-    query.writer = [_writer identifier];
-    query.key = _key;
+- (nullable id)transform:(NSError **)error {
+    GetAccountDetail *query = [GetAccountDetail new];
     
     if (_pagination) {
         AccountDetailRecordId *recordId = [AccountDetailRecordId new];
@@ -46,9 +51,13 @@
         meta.firstRecordId = recordId;
         
         query.paginationMeta = meta;
+    } else {
+        query.accountId = [_accountId identifier];
+        query.writer = [_writer identifier];
+        query.key = _key;
     }
     
-    Query_Payload *payload = [[Query_Payload alloc] init];
+    Query_Payload *payload = [Query_Payload new];
     payload.getAccountDetail = query;
     
     return payload;
