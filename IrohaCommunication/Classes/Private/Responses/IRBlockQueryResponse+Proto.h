@@ -14,6 +14,6 @@ typedef NS_ENUM(NSUInteger, IRBlockQueryResponseProtoError) {
 @interface IRBlockQueryResponse (Proto)
 
 + (nullable IRBlockQueryResponse*)responseFromPbResponse:(nonnull BlockQueryResponse*)queryResponse
-                                                   error:(NSError*_Nullable*_Nullable)error;
+                                                   error:(NSError *_Nullable*_Nullable)error;
 
 @end

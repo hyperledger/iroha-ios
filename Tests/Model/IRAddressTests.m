@@ -7,7 +7,7 @@
 @import IrohaCommunication;
 
 static const NSUInteger VALID_ADDRESSES_COUNT = 4;
-static NSString* const VALID_IPV4[] = {
+static NSString * const VALID_IPV4[] = {
     @"255.255.255.255",
     @"192.168.0.1",
     @"3.222.2.250",
@@ -15,7 +15,7 @@ static NSString* const VALID_IPV4[] = {
 };
 
 static const NSUInteger INVALID_ADDRESSES_COUNT = 5;
-static NSString* const INVALID_IPV4[] = {
+static NSString * const INVALID_IPV4[] = {
     @"",
     @"255.255.255",
     @"00.168.0.1",
@@ -23,10 +23,10 @@ static NSString* const INVALID_IPV4[] = {
     @"1.1111.1.1"
 };
 
-static NSString* const VALID_PORT = @"8080";
+static NSString * const VALID_PORT = @"8080";
 
 static const NSUInteger INVALID_PORTS_COUNT = 4;
-static NSString* const INVALID_PORTS[] = {
+static NSString * const INVALID_PORTS[] = {
     @"",
     @"65356666",
     @"68678",

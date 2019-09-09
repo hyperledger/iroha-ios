@@ -12,7 +12,7 @@ static NSString * const ASSET_ID_SEPARATOR = @"#";
 
 @interface IRAssetId : NSObject <IRAssetId>
 
-- (instancetype)initWithName:(nonnull NSString*)name inDomain:(nonnull id<IRDomain>)domain;
+- (instancetype)initWithName:(nonnull NSString *)name inDomain:(nonnull id<IRDomain>)domain;
 
 @end
 
@@ -22,7 +22,7 @@ static NSString * const ASSET_ID_SEPARATOR = @"#";
 @synthesize name = _name;
 @synthesize domain = _domain;
 
-- (instancetype)initWithName:(nonnull NSString*)name inDomain:(nonnull id<IRDomain>)domain {
+- (instancetype)initWithName:(nonnull NSString *)name inDomain:(nonnull id<IRDomain>)domain {
     if (self = [super init]) {
         _name = name;
         _domain = domain;
@@ -31,7 +31,7 @@ static NSString * const ASSET_ID_SEPARATOR = @"#";
     return self;
 }
 
-- (nonnull NSString*)identifier {
+- (nonnull NSString *)identifier {
     return [NSString stringWithFormat:@"%@%@%@", _name, ASSET_ID_SEPARATOR, _domain.identifier];
 }
 
@@ -44,9 +44,9 @@ static NSString * const ASSET_ID_SEPARATOR = @"#";
 
 @implementation IRAssetIdFactory
 
-+ (nullable id<IRAssetId>)assetIdWithName:(nonnull NSString*)name
++ (nullable id<IRAssetId>)assetIdWithName:(nonnull NSString *)name
                                      domain:(nonnull id<IRDomain>)domain
-                                    error:(NSError*_Nullable*_Nullable)error {
+                                    error:(NSError *_Nullable*_Nullable)error {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ASSET_NAME_FORMAT];
 
     if ([predicate evaluateWithObject:name]) {
@@ -63,9 +63,9 @@ static NSString * const ASSET_ID_SEPARATOR = @"#";
     }
 }
 
-+ (nullable id<IRAssetId>)assetWithIdentifier:(nonnull NSString*)assetId
-                                            error:(NSError*_Nullable*_Nullable)error {
-    NSArray<NSString*> *components = [assetId componentsSeparatedByString:ASSET_ID_SEPARATOR];
++ (nullable id<IRAssetId>)assetWithIdentifier:(nonnull NSString *)assetId
+                                            error:(NSError *_Nullable*_Nullable)error {
+    NSArray<NSString *> *components = [assetId componentsSeparatedByString:ASSET_ID_SEPARATOR];
 
     if ([components count] != 2) {
         if (error) {

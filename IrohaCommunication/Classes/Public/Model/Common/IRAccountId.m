@@ -64,7 +64,7 @@ static NSString * const ACCOUNT_SEPARATOR = @"@";
 
 + (nullable id<IRAccountId>)accountWithIdentifier:(nonnull NSString *)accountId
                                           error:(NSError *_Nullable*_Nullable)error {
-    NSArray<NSString*> *components = [accountId componentsSeparatedByString:ACCOUNT_SEPARATOR];
+    NSArray<NSString *> *components = [accountId componentsSeparatedByString:ACCOUNT_SEPARATOR];
 
     if ([components count] != 2) {
         if (error) {

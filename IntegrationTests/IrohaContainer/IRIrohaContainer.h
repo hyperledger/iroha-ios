@@ -9,10 +9,10 @@
 
 @interface IRIrohaContainer : NSObject
 
-@property(nonatomic, readonly)IRNetworkService * _Nonnull iroha;
+@property (nonatomic, readonly) IRNetworkService * _Nonnull iroha;
 
 + (nonnull instancetype)shared;
-- (nullable NSError*)start;
-- (nullable NSError*)stop;
+- (nullable NSError *)start;
+- (nullable NSError *)stop;
 
 @end

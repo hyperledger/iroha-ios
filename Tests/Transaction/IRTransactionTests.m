@@ -164,7 +164,7 @@ static NSString * const VALID_ROLE = @"admin";
 
 #pragma mark - Private
 
-- (nullable id<IRTransaction>)createTransactionWithAllCommands:(NSError**)error {
+- (nullable id<IRTransaction>)createTransactionWithAllCommands:(NSError **)error {
     id<IRDomain> domain = [IRDomainFactory domainWithIdentitifer:VALID_DOMAIN error:nil];
 
     id<IRAccountId> accountId = [IRAccountIdFactory accountIdWithName:VALID_ACCOUNT_NAME
@@ -216,7 +216,7 @@ static NSString * const VALID_ROLE = @"admin";
 
 - (nullable id<IRTransaction>)createSignedFromTransaction:(id<IRTransaction>)transaction
                                                   keypair:(id<IRCryptoKeypairProtocol>)keypair
-                                                    error:(NSError**)error {
+                                                    error:(NSError **)error {
 
     id<IRSignatureCreatorProtocol> signatory = [[IREd25519Sha512Signer alloc] initWithPrivateKey:[keypair privateKey]];
     return [transaction signedWithSignatories:@[signatory]

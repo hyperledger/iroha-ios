@@ -8,8 +8,8 @@
 
 @protocol IRAccountDetailRecordId <NSObject>
 
-@property(nonatomic, readonly)NSString * _Nonnull writer;
-@property(nonatomic, readonly)NSString * _Nonnull key;
+@property (nonatomic, readonly) NSString * _Nonnull writer;
+@property (nonatomic, readonly) NSString * _Nonnull key;
 
 @end
 

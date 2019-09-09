@@ -7,7 +7,7 @@
 @import IrohaCommunication;
 
 static const NSUInteger VALID_ACCOUNT_NAMES_COUNT = 5;
-static NSString* const VALID_ACCOUNT_NAMES[] = {
+static NSString * const VALID_ACCOUNT_NAMES[] = {
     @"bob",
     @"123",
     @"bob123bob123bob123bob123bob__123",
@@ -16,7 +16,7 @@ static NSString* const VALID_ACCOUNT_NAMES[] = {
 };
 
 static const NSUInteger INVALID_ACCOUNT_NAMES_COUNT = 5;
-static NSString* const INVALID_ACCOUNT_NAMES[] = {
+static NSString * const INVALID_ACCOUNT_NAMES[] = {
     @"",
     @"-",
     @"bOb",
@@ -25,7 +25,7 @@ static NSString* const INVALID_ACCOUNT_NAMES[] = {
 };
 
 static const NSUInteger INVALID_ACCOUNT_IDENTIFIERS_COUNT = 4;
-static NSString* const INVALID_ACCOUNT_IDENTIFIERS[] = {
+static NSString * const INVALID_ACCOUNT_IDENTIFIERS[] = {
     @"",
     @"-",
     @"bOb@gmail.com",

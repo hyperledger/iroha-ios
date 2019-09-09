@@ -26,7 +26,7 @@
 
 #pragma mark - Protobuf Transformable
 
-- (nullable id)transform:(NSError**)error {
+- (nullable id)transform:(NSError **)error {
     GetAccountAssetTransactions *query = [[GetAccountAssetTransactions alloc] init];
     query.accountId = [_accountId identifier];
     query.assetId = [_assetId identifier];

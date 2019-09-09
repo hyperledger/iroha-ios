@@ -12,10 +12,10 @@
 @synthesize totalCount = _totalCount;
 @synthesize nextRecordId = _nextRecordId;
 
-- (nonnull instancetype)initWithDetail:(nonnull NSString*)detail
+- (nonnull instancetype)initWithDetail:(nonnull NSString *)detail
                             totalCount:(UInt64)totalCount
                           nextRecordId:(nullable id<IRAccountDetailRecordId>)nextRecordId
-                             queryHash:(nonnull NSData*)queryHash {
+                             queryHash:(nonnull NSData *)queryHash {
     if (self = [super init]) {
         _detail = detail;
         _totalCount = totalCount;

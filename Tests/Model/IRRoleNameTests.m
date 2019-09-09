@@ -7,7 +7,7 @@
 @import IrohaCommunication;
 
 static const NSUInteger VALID_ROLE_NAMES_COUNT = 6;
-static NSString* const VALID_ROLE_NAMES[] = {
+static NSString * const VALID_ROLE_NAMES[] = {
     @"test",
     @"admin",
     @"admin_test",
@@ -17,7 +17,7 @@ static NSString* const VALID_ROLE_NAMES[] = {
 };
 
 static const NSUInteger INVALID_ROLE_NAMES_COUNT = 6;
-static NSString* const INVALID_ROLE_NAMES[] = {
+static NSString * const INVALID_ROLE_NAMES[] = {
     @"",
     @"a@dmin",
     @"admin-test",

@@ -17,7 +17,7 @@
     return self;
 }
 
-- (nonnull instancetype)initWithError:(nonnull NSError*)error {
+- (nonnull instancetype)initWithError:(nonnull NSError *)error {
     if (self = [super init]) {
         _error = error;
     }

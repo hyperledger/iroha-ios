@@ -9,6 +9,6 @@
 
 @interface IRGetTransactions : NSObject<IRGetTransactions, IRProtobufTransformable>
 
-- (nonnull instancetype)initWithTransactionHashes:(nonnull NSArray<NSData*> *)hashes;
+- (nonnull instancetype)initWithTransactionHashes:(nonnull NSArray<NSData *> *)hashes;
 
 @end

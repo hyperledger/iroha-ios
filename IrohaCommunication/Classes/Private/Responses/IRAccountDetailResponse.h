@@ -9,9 +9,9 @@
 
 @interface IRAccountDetailResponse : NSObject<IRAccountDetailResponse>
 
-- (nonnull instancetype)initWithDetail:(nonnull NSString*)detail
+- (nonnull instancetype)initWithDetail:(nonnull NSString *)detail
                             totalCount:(UInt64)totalCount
                           nextRecordId:(nullable id<IRAccountDetailRecordId>)nextRecordId
-                             queryHash:(nonnull NSData*)queryHash;
+                             queryHash:(nonnull NSData *)queryHash;
 
 @end

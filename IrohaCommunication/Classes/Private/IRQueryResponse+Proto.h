@@ -18,6 +18,6 @@ typedef NS_ENUM(NSUInteger, IRQueryResponseFactoryError) {
 @interface IRQueryResponseProtoFactory : NSObject
 
 + (nullable id<IRQueryResponse>)responseFromProtobuf:(nonnull QueryResponse*)pbResponse
-                                               error:(NSError*_Nullable*_Nullable)error;
+                                               error:(NSError *_Nullable*_Nullable)error;
 
 @end

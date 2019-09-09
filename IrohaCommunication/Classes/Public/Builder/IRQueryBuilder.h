@@ -11,10 +11,10 @@
 @protocol IRQueryBuilderProtocol <NSObject>
 
 - (nonnull instancetype)withCreatorAccountId:(nonnull id<IRAccountId>)creatorAccountId;
-- (nonnull instancetype)withCreatedDate:(nonnull NSDate*)date;
+- (nonnull instancetype)withCreatedDate:(nonnull NSDate *)date;
 - (nonnull instancetype)withQueryCounter:(UInt64)queryCounter;
 - (nonnull instancetype)withQuery:(nonnull id<IRQuery>)query;
-- (nullable id<IRQueryRequest>)build:(NSError*_Nullable*_Nullable)error;
+- (nullable id<IRQueryRequest>)build:(NSError *_Nullable*_Nullable)error;
 
 @end
 
@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
                                             assetId:(nonnull id<IRAssetId>)assetId
                                          pagination:(nullable id<IRPagination>)pagination;
 
-- (nonnull instancetype)getTransactions:(nonnull NSArray<NSData*>*)hashes;
+- (nonnull instancetype)getTransactions:(nonnull NSArray<NSData *>*)hashes;
 
 - (nonnull instancetype)getAccountAssets:(nonnull id<IRAccountId>)accountId DEPRECATED_MSG_ATTRIBUTE("use getAccountAsset:pagination:");
 
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
 
 - (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
                                   writer:(nullable id<IRAccountId>)writer
-                                     key:(nullable NSString*)key;
+                                     key:(nullable NSString *)key;
 
 - (nonnull instancetype)getAccountDetailWithPagination:(nonnull id<IRAccountDetailPagination>)pagination;
 

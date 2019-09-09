@@ -19,7 +19,7 @@
 
 #pragma mark - Protobuf Transformable
 
-- (nullable id)transform:(NSError**)error {
+- (nullable id)transform:(NSError **)error {
     GetRolePermissions *query = [[GetRolePermissions alloc] init];
     query.roleId = [_roleName value];
 

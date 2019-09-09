@@ -93,7 +93,7 @@
         });
     }
 
-    currentPromise.onError(^IRPromise*(NSError* error) {
+    currentPromise.onError(^IRPromise*(NSError * error) {
         [expectation fulfill];
 
         return nil;
