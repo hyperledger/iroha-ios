@@ -125,7 +125,13 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
     return [self withQuery:query];
 }
 
--(nonnull instancetype)getPeers {
+- (nonnull instancetype)getPendingTransactions:(nonnull id<IRPagination>)pagination {
+    id<IRGetPendingTransactions> query = [[IRGetPendingTransactions alloc] initWithPagination:pagination];
+    
+    return [self withQuery:query];
+}
+
+- (nonnull instancetype)getPeers {
     id<IRGetPeers> query = [IRGetPeers new];
     
     return [self withQuery:query];
