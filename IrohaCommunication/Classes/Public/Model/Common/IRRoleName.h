@@ -7,7 +7,7 @@
 
 @protocol IRRoleName <NSObject>
 
-@property(nonatomic, readonly)NSString * _Nonnull value;
+@property (nonatomic, readonly) NSString * _Nonnull value;
 
 @end
 
@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, IRRoleNameFactoryError) {
 
 @protocol IRRoleNameFactoryProtocol <NSObject>
 
-+ (nullable id<IRRoleName>)roleWithName:(nonnull NSString*)name error:(NSError*_Nullable*_Nullable)error;
++ (nullable id<IRRoleName>)roleWithName:(nonnull NSString *)name error:(NSError *_Nullable*_Nullable)error;
 
 @end
 

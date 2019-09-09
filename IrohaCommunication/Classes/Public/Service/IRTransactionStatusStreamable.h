@@ -13,7 +13,7 @@ typedef void (^IRTransactionStatusBlock)(id<IRTransactionStatusResponse> _Nullab
 
 @protocol IRTransactionStatusStreamable <NSObject>
 
-- (nullable id<IRCancellable>)streamTransactionStatus:(nonnull NSData*)transactionHash
+- (nullable id<IRCancellable>)streamTransactionStatus:(nonnull NSData *)transactionHash
                                             withBlock:(nonnull IRTransactionStatusBlock)block;
 
 @end

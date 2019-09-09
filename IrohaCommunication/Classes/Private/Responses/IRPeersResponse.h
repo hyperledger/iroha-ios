@@ -10,6 +10,6 @@
 
 @interface IRPeersResponse : NSObject<IRPeersResponse>
 
-- (nonnull instancetype)initWithPeers:(nonnull NSArray<id<IRPeer>>*)peers queryHash:(nonnull NSData*)queryHash;
+- (nonnull instancetype)initWithPeers:(nonnull NSArray<id<IRPeer>>*)peers queryHash:(nonnull NSData *)queryHash;
 
 @end

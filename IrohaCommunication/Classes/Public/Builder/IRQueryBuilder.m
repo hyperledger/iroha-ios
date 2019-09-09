@@ -11,10 +11,10 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
 
 @interface IRQueryBuilder()
 
-@property(strong, nonatomic)id<IRAccountId> _Nullable creator;
-@property(strong, nonatomic)NSDate* _Nullable createdAt;
-@property(strong, nonatomic)id<IRQuery> _Nullable query;
-@property(nonatomic, readwrite)UInt64 queryCounter;
+@property (nonatomic, strong) id<IRAccountId> _Nullable creator;
+@property (nonatomic, strong) NSDate * _Nullable createdAt;
+@property (nonatomic, strong) id<IRQuery> _Nullable query;
+@property (nonatomic, readwrite) UInt64 queryCounter;
 
 @end
 
@@ -66,7 +66,7 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
     return [self withQuery:query];
 }
 
-- (nonnull instancetype)getTransactions:(nonnull NSArray<NSData*>*)hashes {
+- (nonnull instancetype)getTransactions:(nonnull NSArray<NSData *>*)hashes {
     id<IRGetTransactions> query = [[IRGetTransactions alloc] initWithTransactionHashes:hashes];
 
     return [self withQuery:query];
@@ -86,7 +86,7 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
 
 - (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
                                   writer:(nullable id<IRAccountId>)writer
-                                     key:(nullable NSString*)key {
+                                     key:(nullable NSString *)key {
     id<IRAccountDetailRecordId> record = [IRAccountDetailRecordIdFactory accountDetailRecordIdWithWriter:writer
                                                                                                       key:key];
     id<IRAccountDetailPagination> pagination = [IRAccountDetailPaginationFactory accountDetailPagination:1
@@ -139,7 +139,7 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
     return self;
 }
 
-- (nonnull instancetype)withCreatedDate:(nonnull NSDate*)date {
+- (nonnull instancetype)withCreatedDate:(nonnull NSDate *)date {
     _createdAt = date;
 
     return self;
@@ -157,7 +157,7 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
     return self;
 }
 
-- (nullable id<IRQueryRequest>)build:(NSError*_Nullable*_Nullable)error {
+- (nullable id<IRQueryRequest>)build:(NSError *_Nullable*_Nullable)error {
     if (!_creator) {
         if (error) {
             NSString *message = @"Creator's account id is required!";

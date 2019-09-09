@@ -10,7 +10,7 @@
 @synthesize queryHash = _queryHash;
 
 - (nonnull instancetype)initWithPublicKeys:(nonnull NSArray<id<IRPublicKeyProtocol>>*)publicKeys
-                                 queryHash:(nonnull NSData*)queryHash {
+                                 queryHash:(nonnull NSData *)queryHash {
     if (self = [super init]) {
         _publicKeys = publicKeys;
         _queryHash = queryHash;

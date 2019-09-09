@@ -15,6 +15,6 @@ typedef NS_ENUM(NSUInteger, IRCommandProtoFactoryError){
 @interface IRCommandProtoFactory : NSObject
 
 + (nullable id<IRCommand>)commandFromPbCommand:(nonnull Command*)command
-                                         error:(NSError*_Nullable*_Nullable)error;
+                                         error:(NSError *_Nullable*_Nullable)error;
 
 @end

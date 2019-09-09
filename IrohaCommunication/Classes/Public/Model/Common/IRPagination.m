@@ -14,7 +14,7 @@
 @synthesize firstItemHash = _firstItemHash;
 
 - (nonnull instancetype)initWithPageSize:(UInt32)pageSize
-                           firstItemHash:(nullable NSData*)firstItemHash {
+                           firstItemHash:(nullable NSData *)firstItemHash {
     if (self = [super init]) {
         _pageSize = pageSize;
         _firstItemHash = firstItemHash;
@@ -28,7 +28,7 @@
 @implementation IRPaginationFactory
 
 + (nullable id<IRPagination>)pagination:(UInt32)pageSize
-                          firstItemHash:(nullable NSData*)firstItemHash
+                          firstItemHash:(nullable NSData *)firstItemHash
                                   error:(NSError **)error {
     if (firstItemHash && firstItemHash.length != 32) {
         if (error) {

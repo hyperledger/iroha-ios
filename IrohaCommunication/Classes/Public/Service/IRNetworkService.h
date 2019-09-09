@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, IRNetworkServiceError) {
 
 @interface IRNetworkService : NSObject<IRTransactionStatusStreamable>
 
-@property(strong, nonatomic)dispatch_queue_t _Nonnull responseSerialQueue;
+@property (nonatomic, strong) dispatch_queue_t _Nonnull responseSerialQueue;
 
 - (nonnull instancetype)initWithAddress:(nonnull id<IRAddress>)address;
 
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, IRNetworkServiceError) {
 
 - (nonnull IRPromise *)executeBatchTransactions:(nonnull NSArray<id<IRTransaction>>*)transactions;
 
-- (nonnull IRPromise *)fetchTransactionStatus:(nonnull NSData*)transactionHash;
+- (nonnull IRPromise *)fetchTransactionStatus:(nonnull NSData *)transactionHash;
 
 - (nonnull IRPromise*)executeQueryRequest:(nonnull id<IRQueryRequest>)queryRequest;
 

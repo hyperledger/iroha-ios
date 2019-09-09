@@ -22,11 +22,11 @@
 @synthesize batchType = _batchType;
 
 - (nonnull instancetype)initWithCreatorAccountId:(nonnull id<IRAccountId>)creatorAccountId
-                                       createdAt:(nonnull NSDate*)createdAt
+                                       createdAt:(nonnull NSDate *)createdAt
                                         commands:(nonnull NSArray<id<IRCommand>>*)commands
                                           quorum:(NSUInteger)quorum
                                       signatures:(nullable NSArray<id<IRPeerSignature>>*)signatures
-                                     batchHashes:(nullable NSArray<NSData*>*)batchHashes
+                                     batchHashes:(nullable NSArray<NSData *>*)batchHashes
                                        batchType:(IRTransactionBatchType)batchType {
 
     if (self = [super init]) {
@@ -44,7 +44,7 @@
 
 #pragma mark - Protobuf Transformable
 
-- (nullable id)transform:(NSError*_Nullable*_Nullable)error {
+- (nullable id)transform:(NSError *_Nullable*_Nullable)error {
     Transaction_Payload *payload = [self createPayload:error];
 
     if (!payload) {
@@ -70,7 +70,7 @@
 
 #pragma mark - Signable
 
-- (nullable NSData*)transactionHashWithError:(NSError **)error {
+- (nullable NSData *)transactionHashWithError:(NSError **)error {
     Transaction_Payload *payload = [self createPayload:error];
 
     if (!payload) {
@@ -104,7 +104,7 @@
 
 - (nullable id<IRPeerSignature>)signWithSignatory:(nonnull id<IRSignatureCreatorProtocol>)signatory
                                signatoryPublicKey:(nonnull id<IRPublicKeyProtocol>)signatoryPublicKey
-                                            error:(NSError**)error {
+                                            error:(NSError **)error {
 
     Transaction_Payload *payload = [self createPayload:error];
 
@@ -125,7 +125,7 @@
 
 - (nullable instancetype)signedWithSignatories:(nonnull NSArray<id<IRSignatureCreatorProtocol>>*)signatories
                            signatoryPublicKeys:(nonnull NSArray<id<IRPublicKeyProtocol>> *)signatoryPublicKeys
-                                         error:(NSError**)error {
+                                         error:(NSError **)error {
 
     if ([signatories count] == 0) {
         if (error) {
@@ -189,9 +189,9 @@
 
 #pragma mark - Batch
 
-- (nullable instancetype)batched:(nullable NSArray<NSData*>*)transactionBatchHashes
+- (nullable instancetype)batched:(nullable NSArray<NSData *>*)transactionBatchHashes
                        batchType:(IRTransactionBatchType)batchType
-                           error:(NSError**)error {
+                           error:(NSError **)error {
 
     if (batchType == IRTransactionBatchTypeNone) {
         return [[IRTransaction alloc] initWithCreatorAccountId:_creator
@@ -221,7 +221,7 @@
                                                  batchType:batchType];
 }
 
-- (nullable NSData*)batchHashWithError:(NSError **)error {
+- (nullable NSData *)batchHashWithError:(NSError **)error {
     Transaction_Payload_ReducedPayload *reducedPayload = [self createReducedPayload:error];
 
     if (!reducedPayload) {
@@ -255,7 +255,7 @@
 
 #pragma mark - Private
 
-- (nullable Transaction_Payload_ReducedPayload*)createReducedPayload:(NSError**)error {
+- (nullable Transaction_Payload_ReducedPayload*)createReducedPayload:(NSError **)error {
     NSMutableArray<Command*> *protobufCommands = [NSMutableArray array];
 
     for (id<IRCommand> command in _commands) {
@@ -297,7 +297,7 @@
     return reducedPayload;
 }
 
-- (nullable Transaction_Payload*)createPayload:(NSError**)error {
+- (nullable Transaction_Payload*)createPayload:(NSError **)error {
     Transaction_Payload_ReducedPayload *reducedPayload = [self createReducedPayload:error];
 
     if (!reducedPayload) {
@@ -324,7 +324,7 @@
         Transaction_Payload_BatchMeta *pbBatchMeta = [[Transaction_Payload_BatchMeta alloc] init];
         pbBatchMeta.type = pbBatchType;
 
-        NSMutableArray<NSString*> *pbReducedHashes = [NSMutableArray array];
+        NSMutableArray<NSString *> *pbReducedHashes = [NSMutableArray array];
 
         for (NSData *batchHash in _batchHashes) {
             [pbReducedHashes addObject:[batchHash toHexString]];
@@ -340,7 +340,7 @@
 
 - (nullable id<IRSignatureProtocol>)signPayload:(nonnull Transaction_Payload*)payload
                                       signatory:(nonnull id<IRSignatureCreatorProtocol>)signatory
-                                          error:(NSError**)error {
+                                          error:(NSError **)error {
     NSData *payloadData = [payload data];
 
     if (!payloadData) {
@@ -379,7 +379,7 @@
 
 #pragma mark - Helpers
 
-+ (nonnull NSError*)errorWithType:(IRTransactionError)errorType message:(nonnull NSString*)message {
++ (nonnull NSError *)errorWithType:(IRTransactionError)errorType message:(nonnull NSString *)message {
     return [NSError errorWithDomain:NSStringFromClass([IRTransaction class])
                                code:errorType
                            userInfo:@{NSLocalizedDescriptionKey: message}];

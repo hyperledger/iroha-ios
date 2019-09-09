@@ -9,8 +9,8 @@
 
 @protocol IRAccountDetailPagination <NSObject>
 
-@property(nonatomic, readonly)UInt32 pageSize;
-@property(nonatomic, readonly)id<IRAccountDetailRecordId> nextRecordId;
+@property (nonatomic, readonly) UInt32 pageSize;
+@property (nonatomic, readonly, nullable) id<IRAccountDetailRecordId> nextRecordId;
 
 @end
 

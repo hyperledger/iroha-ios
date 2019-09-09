@@ -252,7 +252,7 @@ typedef GPB_ENUM(AccountResponse_FieldNumber) {
 /** Test to see if @c account has been set. */
 @property(nonatomic, readwrite) BOOL hasAccount;
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString*> *accountRolesArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString *> *accountRolesArray;
 /** The number of items in @c accountRolesArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger accountRolesArray_Count;
 
@@ -280,7 +280,7 @@ typedef GPB_ENUM(RolesResponse_FieldNumber) {
 
 @interface RolesResponse : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString*> *rolesArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString *> *rolesArray;
 /** The number of items in @c rolesArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger rolesArray_Count;
 
@@ -339,7 +339,7 @@ typedef GPB_ENUM(SignatoriesResponse_FieldNumber) {
 
 @interface SignatoriesResponse : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString*> *keysArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString *> *keysArray;
 /** The number of items in @c keysArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger keysArray_Count;
 

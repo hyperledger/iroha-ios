@@ -18,8 +18,8 @@
 
 @interface IRNetworkService()
 
-@property(strong, nonatomic)CommandService_v1 *commandService;
-@property(strong, nonatomic)QueryService_v1 *queryService;
+@property (nonatomic, strong) CommandService_v1 *commandService;
+@property (nonatomic, strong) QueryService_v1 *queryService;
 
 @end
 
@@ -97,7 +97,7 @@
 
     NSMutableArray<Transaction*> *pbTransactions = [NSMutableArray array];
 
-    NSMutableArray<NSData*> *transactionHashes = [NSMutableArray array];
+    NSMutableArray<NSData *> *transactionHashes = [NSMutableArray array];
 
     for (NSUInteger i = 0; i < transactions.count; i++) {
         if (![transactions[i] conformsToProtocol:@protocol(IRProtobufTransformable)]) {
@@ -149,7 +149,7 @@
     return promise;
 }
 
-- (nonnull IRPromise *)fetchTransactionStatus:(nonnull NSData*)transactionHash {
+- (nonnull IRPromise *)fetchTransactionStatus:(nonnull NSData *)transactionHash {
     TxStatusRequest *statusRequest = [[TxStatusRequest alloc] init];
     statusRequest.txHash = [transactionHash toHexString];
 
@@ -180,7 +180,7 @@
     return promise;
 }
 
-- (id<IRCancellable>)streamTransactionStatus:(nonnull NSData*)transactionHash
+- (id<IRCancellable>)streamTransactionStatus:(nonnull NSData *)transactionHash
                                    withBlock:(nonnull IRTransactionStatusBlock)block {
     TxStatusRequest *statusRequest = [[TxStatusRequest alloc] init];
     statusRequest.txHash = [transactionHash toHexString];
@@ -224,7 +224,7 @@
     }
 
     GRPCProtoCall *call = [_queryService RPCToFindWithRequest:protobufQuery
-                                                      handler:^(QueryResponse* _Nullable response, NSError* _Nullable error) {
+                                                      handler:^(QueryResponse* _Nullable response, NSError * _Nullable error) {
                                                           if (response) {
                                                               NSError *parsingError = nil;
                                                               id<IRQueryResponse> queryResponse = [IRQueryResponseProtoFactory responseFromProtobuf:response

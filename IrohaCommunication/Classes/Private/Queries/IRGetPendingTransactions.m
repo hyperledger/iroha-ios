@@ -10,7 +10,7 @@
 
 #pragma mark - Protobuf Transformable
 
-- (nullable id)transform:(NSError**)error {
+- (nullable id)transform:(NSError **)error {
     GetPendingTransactions *query = [[GetPendingTransactions alloc] init];
 
     Query_Payload *payload = [[Query_Payload alloc] init];

@@ -13,8 +13,8 @@
 
 - (nonnull instancetype)initWithTransactions:(nonnull NSArray<id<IRTransaction>>*)transactions
                                   totalCount:(UInt32)totalCount
-                         nextTransactionHash:(nullable NSData*)nextTransactionHash
-                                   queryHash:(nonnull NSData*)queryHash {
+                         nextTransactionHash:(nullable NSData *)nextTransactionHash
+                                   queryHash:(nonnull NSData *)queryHash {
 
     if (self = [super init]) {
         _transactions = transactions;

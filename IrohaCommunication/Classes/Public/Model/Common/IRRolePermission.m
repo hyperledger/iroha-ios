@@ -39,7 +39,7 @@
 
 @implementation IRRolePermissionFactory
 
-+ (nullable id<IRRolePermission>)permissionWithValue:(int32_t)value error:(NSError*_Nullable*_Nullable)error {
++ (nullable id<IRRolePermission>)permissionWithValue:(int32_t)value error:(NSError *_Nullable*_Nullable)error {
     if (!RolePermission_IsValidValue(value)) {
         if (error) {
             NSString *message = @"Invalid role permission value passed.";

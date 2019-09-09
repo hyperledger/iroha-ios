@@ -14,7 +14,7 @@
 
 @implementation IRSerializationFactory
 
-+ (nullable NSData*)serializeTransaction:(nonnull id<IRTransaction>)transaction error:(NSError**)error {
++ (nullable NSData *)serializeTransaction:(nonnull id<IRTransaction>)transaction error:(NSError **)error {
     if (![transaction conformsToProtocol:@protocol(IRProtobufTransformable)]) {
 
         if (error) {
@@ -36,7 +36,7 @@
     return [pbTransaction data];
 }
 
-+ (nullable NSData*)serializeQueryRequest:(nonnull id<IRQueryRequest>)queryRequest error:(NSError**)error {
++ (nullable NSData *)serializeQueryRequest:(nonnull id<IRQueryRequest>)queryRequest error:(NSError **)error {
     if (![queryRequest conformsToProtocol:@protocol(IRProtobufTransformable)]) {
 
         if (error) {
@@ -58,7 +58,7 @@
     return [protobufQuery data];
 }
 
-+ (nullable id<IRTransaction>)deserializeTransactionFromData:(nonnull NSData*)data error:(NSError**)error {
++ (nullable id<IRTransaction>)deserializeTransactionFromData:(nonnull NSData *)data error:(NSError **)error {
     Transaction *transaction = [[Transaction alloc] initWithData:data error:error];
 
     if (!transaction) {
@@ -68,7 +68,7 @@
     return [IRTransaction transactionFromPbTransaction:transaction error:error];
 }
 
-+ (nullable id<IRQueryResponse>)deserializeQueryResponseFromData:(nonnull NSData*)data error:(NSError**)error {
++ (nullable id<IRQueryResponse>)deserializeQueryResponseFromData:(nonnull NSData *)data error:(NSError **)error {
     QueryResponse *response = [[QueryResponse alloc] initWithData:data error:error];
 
     if (!response) {
