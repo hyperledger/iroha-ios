@@ -9,14 +9,16 @@
 
 static const NSUInteger DEFAULT_QUORUM = 1;
 
-@interface IRTransactionBuilder()
 
-@property(strong, nonatomic)id<IRAccountId> accountId;
-@property(strong, readwrite)NSDate *date;
-@property(nonatomic, readwrite)NSUInteger quorum;
-@property(strong, nonatomic)NSMutableArray<id<IRCommand>> *commands;
+@interface IRTransactionBuilder ()
+
+@property (nonatomic, strong) id<IRAccountId> accountId;
+@property (strong, readwrite) NSDate *date;
+@property (nonatomic, readwrite) NSUInteger quorum;
+@property (nonatomic, strong) NSMutableArray<id<IRCommand>> *commands;
 
 @end
+
 
 @implementation IRTransactionBuilder
 
@@ -183,8 +185,8 @@ static const NSUInteger DEFAULT_QUORUM = 1;
 }
 
 - (nonnull instancetype)setAccountDetail:(nonnull id<IRAccountId>)accountId
-                                     key:(nonnull NSString*)key
-                                   value:(nonnull NSString*)value {
+                                     key:(nonnull NSString *)key
+                                   value:(nonnull NSString *)value {
 
     IRSetAccountDetail *command = [[IRSetAccountDetail alloc] initWithAccountId:accountId
                                                                             key:key
@@ -209,7 +211,7 @@ static const NSUInteger DEFAULT_QUORUM = 1;
 - (nonnull instancetype)transferAsset:(nonnull id<IRAccountId>)sourceAccountId
                    destinationAccount:(nonnull id<IRAccountId>)destinationAccountId
                               assetId:(nonnull id<IRAssetId>)assetId
-                          description:(nonnull NSString*)transferDescription
+                          description:(nonnull NSString *)transferDescription
                                amount:(nonnull id<IRAmount>)amount {
 
     IRTransferAsset *command = [[IRTransferAsset alloc] initWithSourceAccountId:sourceAccountId
@@ -251,7 +253,7 @@ static const NSUInteger DEFAULT_QUORUM = 1;
     return self;
 }
 
-- (nonnull instancetype)withCreatedDate:(nonnull NSDate*)date {
+- (nonnull instancetype)withCreatedDate:(nonnull NSDate *)date {
     _date = date;
 
     return self;
@@ -269,7 +271,7 @@ static const NSUInteger DEFAULT_QUORUM = 1;
     return self;
 }
 
-- (nullable id<IRTransaction>)build:(NSError*_Nullable*_Nullable)error {
+- (nullable id<IRTransaction>)build:(NSError *_Nullable*_Nullable)error {
     if (!_accountId) {
         if (error) {
             NSString *message = @"Creator's account id is required!";

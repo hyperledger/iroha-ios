@@ -11,7 +11,7 @@
 @implementation IRCommandProtoFactory
 
 + (nullable id<IRCommand>)commandFromPbCommand:(nonnull Command*)command
-                                         error:(NSError*_Nullable*_Nullable)error {
+                                         error:(NSError *_Nullable*_Nullable)error {
     switch (command.commandOneOfCase) {
         case Command_Command_OneOfCase_AddPeer:
             return [self addPeerCommandFromPbCommand:command.addPeer
@@ -96,7 +96,7 @@
 }
 
 + (nullable id<IRAddPeer>)addPeerCommandFromPbCommand:(nonnull AddPeer*)pbCommand
-                                                error:(NSError*_Nullable*_Nullable)error {
+                                                error:(NSError *_Nullable*_Nullable)error {
 
     id<IRAddress> address = [IRAddressFactory addressWithValue:pbCommand.peer.address
                                                          error:error];
@@ -129,7 +129,7 @@
 }
 
 + (nullable id<IRAppendRole>)appendRoleCommandFromPbCommand:(nonnull AppendRole*)pbCommand
-                                                      error:(NSError**)error {
+                                                      error:(NSError **)error {
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.accountId
                                                                     error:error];
     if (!accountId) {
@@ -147,7 +147,7 @@
                                           roleName:roleName];
 }
 
-+ (nullable id<IRCreateRole>)createRoleCommandFromPbCommand:(nonnull CreateRole*)pbCommand error:(NSError**)error {
++ (nullable id<IRCreateRole>)createRoleCommandFromPbCommand:(nonnull CreateRole*)pbCommand error:(NSError **)error {
     id<IRRoleName> roleName = [IRRoleNameFactory roleWithName:pbCommand.roleName
                                                         error:error];
 
@@ -172,7 +172,7 @@
                                       permissions:permissions];
 }
 
-+ (nullable id<IRDetachRole>)detachRoleCommandFromPbCommand:(nonnull DetachRole*)pbCommand error:(NSError**)error {
++ (nullable id<IRDetachRole>)detachRoleCommandFromPbCommand:(nonnull DetachRole*)pbCommand error:(NSError **)error {
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.accountId
                                                                     error:error];
 
@@ -192,7 +192,7 @@
 }
 
 + (nullable id<IRCreateAsset>)createAssetCommandFromPbCommand:(nonnull CreateAsset*)pbCommand
-                                                        error:(NSError**)error {
+                                                        error:(NSError **)error {
 
     id<IRDomain> domain = [IRDomainFactory domainWithIdentitifer:pbCommand.domainId
                                                            error:error];
@@ -214,7 +214,7 @@
 }
 
 + (nullable id<IRAddSignatory>)addSignatoryCommandFromPbCommand:(nonnull AddSignatory*)pbCommand
-                                                          error:(NSError**)error {
+                                                          error:(NSError **)error {
 
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.accountId
                                                                     error:error];
@@ -246,7 +246,7 @@
                                            publicKey:publicKey];
 }
 
-+ (nullable id<IRCreateDomain>)createDomainCommandFromPbCommand:(nonnull CreateDomain*)pbCommand error:(NSError**)error {
++ (nullable id<IRCreateDomain>)createDomainCommandFromPbCommand:(nonnull CreateDomain*)pbCommand error:(NSError **)error {
     id<IRDomain> domain = [IRDomainFactory domainWithIdentitifer:pbCommand.domainId
                                                            error:error];
 
@@ -269,7 +269,7 @@
 }
 
 + (nullable id<IRCreateAccount>)createAccountCommandFromPbCommand:(nonnull CreateAccount*)pbCommand
-                                                            error:(NSError**)error {
+                                                            error:(NSError **)error {
 
     id<IRDomain> domain = [IRDomainFactory domainWithIdentitifer:pbCommand.domainId
                                                            error:error];
@@ -306,7 +306,7 @@
 }
 
 + (nullable id<IRTransferAsset>)transferAssetCommandWithPbCommand:(nonnull TransferAsset*)pbCommand
-                                                            error:(NSError**)error {
+                                                            error:(NSError **)error {
     id<IRAccountId> sourceAccountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.srcAccountId
                                                                           error:error];
 
@@ -345,7 +345,7 @@
 }
 
 + (nullable id<IRGrantPermission>)grantPermissionCommandFromPbCommand:(nonnull GrantPermission*)pbCommand
-                                                                error:(NSError**)error {
+                                                                error:(NSError **)error {
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.accountId
                                                                     error:error];
 
@@ -365,7 +365,7 @@
 }
 
 + (nullable id<IRRemoveSignatory>)removeSignatoryCommandFromPbCommand:(nonnull RemoveSignatory*)pbCommand
-                                                                error:(NSError**)error {
+                                                                error:(NSError **)error {
 
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.accountId
                                                                     error:error];
@@ -398,7 +398,7 @@
 }
 
 + (nullable id<IRAddAssetQuantity>)addAssetQuantityCommandFromPbCommand:(nonnull AddAssetQuantity*)pbCommand
-                                                                  error:(NSError**)error {
+                                                                  error:(NSError **)error {
 
     id<IRAssetId> assetId = [IRAssetIdFactory assetWithIdentifier:pbCommand.assetId
                                                             error:error];
@@ -418,7 +418,7 @@
                                                 amount:amount];
 }
 
-+ (nullable id<IRRevokePermission>)revokePermissionCommandFromPbCommand:(nonnull RevokePermission*)pbCommand error:(NSError**)error {
++ (nullable id<IRRevokePermission>)revokePermissionCommandFromPbCommand:(nonnull RevokePermission*)pbCommand error:(NSError **)error {
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.accountId
                                                                     error:error];
 
@@ -438,7 +438,7 @@
 }
 
 + (nullable id<IRSetAccountDetail>)setAccountDetailCommandFromPbCommand:(nonnull SetAccountDetail*)pbCommand
-                                                                  error:(NSError**)error {
+                                                                  error:(NSError **)error {
 
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.accountId
                                                                     error:error];
@@ -453,7 +453,7 @@
 }
 
 + (nullable id<IRSetAccountQuorum>)setAccountQuorumCommandPbCommand:(nonnull SetAccountQuorum*)pbCommand
-                                                              error:(NSError**)error {
+                                                              error:(NSError **)error {
 
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbCommand.accountId
                                                                     error:error];
@@ -466,7 +466,7 @@
                                                   quorum:pbCommand.quorum];
 }
 
-+ (nullable id<IRSubtractAssetQuantity>)subtractAssetQuantityCommandFromPbCommand:(nonnull SubtractAssetQuantity*)pbCommand error:(NSError**)error {
++ (nullable id<IRSubtractAssetQuantity>)subtractAssetQuantityCommandFromPbCommand:(nonnull SubtractAssetQuantity*)pbCommand error:(NSError **)error {
 
     id<IRAssetId> assetId = [IRAssetIdFactory assetWithIdentifier:pbCommand.assetId
                                                             error:error];
@@ -524,7 +524,7 @@
                                                           oldValue:pbCommand.oldValue];
 }
 
-+ (nullable id<IRPublicKeyProtocol>)createPublicKeyFromRawData:(nonnull NSData*)rawData error:(NSError**)error {
++ (nullable id<IRPublicKeyProtocol>)createPublicKeyFromRawData:(nonnull NSData *)rawData error:(NSError **)error {
     id<IRPublicKeyProtocol> publicKey = [[IREd25519PublicKey alloc] initWithRawData:rawData];
 
     if (!publicKey) {

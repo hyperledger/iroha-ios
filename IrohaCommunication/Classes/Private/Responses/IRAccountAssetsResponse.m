@@ -15,7 +15,7 @@
 - (nonnull instancetype)initWithAccountAssets:(nonnull NSArray<id<IRAccountAsset>>*)accountAssets
                                    totalCount:(UInt32)totalCount
                                   nextAssetId:(nullable id<IRAssetId>)assetId
-                                    queryHash:(nonnull NSData*)queryHash {
+                                    queryHash:(nonnull NSData *)queryHash {
     if (self = [super init]) {
         _accountAssets = accountAssets;
         _totalCount = totalCount;

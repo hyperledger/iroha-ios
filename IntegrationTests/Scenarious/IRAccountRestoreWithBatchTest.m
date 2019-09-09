@@ -8,15 +8,15 @@
 
 @interface IRAccountRestoreWithBatchTest : IRBaseIrohaContainerTests
 
-@property(strong, nonatomic)id<IRRoleName> userRole;
-@property(strong, nonatomic)id<IRDomain> bankDomain;
-@property(strong, nonatomic)id<IRDomain> recoveryDomain;
-@property(strong, nonatomic)id<IRAccountId> recoveryAccount;
-@property(strong, nonatomic)id<IRCryptoKeypairProtocol> recoveryKeypair;
-@property(strong, nonatomic)id<IRSignatureCreatorProtocol> recoverySigner;
-@property(strong, nonatomic)id<IRAccountId> clientAccount;
-@property(strong, nonatomic)id<IRCryptoKeypairProtocol> clientKeypair;
-@property(strong, nonatomic)id<IRSignatureCreatorProtocol> clientSigner;
+@property (strong, nonatomic) id<IRRoleName> userRole;
+@property (strong, nonatomic) id<IRDomain> bankDomain;
+@property (strong, nonatomic) id<IRDomain> recoveryDomain;
+@property (strong, nonatomic) id<IRAccountId> recoveryAccount;
+@property (strong, nonatomic) id<IRCryptoKeypairProtocol> recoveryKeypair;
+@property (strong, nonatomic) id<IRSignatureCreatorProtocol> recoverySigner;
+@property (strong, nonatomic) id<IRAccountId> clientAccount;
+@property (strong, nonatomic) id<IRCryptoKeypairProtocol> clientKeypair;
+@property (strong, nonatomic) id<IRSignatureCreatorProtocol> clientSigner;
 
 @end
 
@@ -71,7 +71,7 @@
         [expectation fulfill];
 
         return nil;
-    }).onError(^IRPromise* _Nullable (NSError* error) {
+    }).onError(^IRPromise* _Nullable (NSError * error) {
         XCTFail(@"%@", error);
 
         [expectation fulfill];
@@ -105,7 +105,7 @@
         [expectation fulfill];
 
         return nil;
-    }).onError(^IRPromise* _Nullable (NSError* error) {
+    }).onError(^IRPromise* _Nullable (NSError * error) {
         XCTFail(@"%@", error);
 
         [expectation fulfill];

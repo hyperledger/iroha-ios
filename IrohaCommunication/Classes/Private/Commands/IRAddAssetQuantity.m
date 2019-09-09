@@ -22,7 +22,7 @@
 
 #pragma mark - Protobuf Transformable
 
-- (nullable id)transform:(NSError**)error {
+- (nullable id)transform:(NSError **)error {
     AddAssetQuantity *assetQuantity = [[AddAssetQuantity alloc] init];
     assetQuantity.assetId = [_assetId identifier];
     assetQuantity.amount = [_amount value];

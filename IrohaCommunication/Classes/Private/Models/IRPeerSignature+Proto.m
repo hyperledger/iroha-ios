@@ -10,7 +10,7 @@
 @implementation IRPeerSignatureFactory (Proto)
 
 + (nullable id<IRPeerSignature>)peerSignatureFromPbSignature:(nonnull Signature *)pbSignature
-                                                       error:(NSError*_Nullable*_Nullable)error {
+                                                       error:(NSError *_Nullable*_Nullable)error {
     NSData *rawSignature = [[NSData alloc] initWithHexString:pbSignature.signature];
 
     if (!rawSignature) {

@@ -7,7 +7,7 @@
 
 @protocol IRAmount <NSObject>
 
-@property(nonatomic, readonly)NSString* _Nonnull value;
+@property (nonatomic, readonly) NSString * _Nonnull value;
 
 @end
 
@@ -17,8 +17,8 @@ typedef NS_ENUM(NSUInteger, IRAmountError) {
 
 @protocol IRAmountFactoryProtocol <NSObject>
 
-+ (nullable id<IRAmount>)amountFromString:(nonnull NSString*)amount error:(NSError*_Nullable*_Nullable)error;
-+ (nullable id<IRAmount>)amountFromUnsignedInteger:(NSUInteger)amount error:(NSError*_Nullable*_Nullable)error;
++ (nullable id<IRAmount>)amountFromString:(nonnull NSString *)amount error:(NSError *_Nullable*_Nullable)error;
++ (nullable id<IRAmount>)amountFromUnsignedInteger:(NSUInteger)amount error:(NSError *_Nullable*_Nullable)error;
 
 @end
 

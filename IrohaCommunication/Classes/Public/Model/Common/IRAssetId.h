@@ -8,10 +8,10 @@
 
 @protocol IRAssetId <NSObject>
 
-@property(nonatomic, readonly)NSString * _Nonnull name;
-@property(nonatomic, readonly)id<IRDomain> _Nonnull domain;
+@property (nonatomic, readonly) NSString * _Nonnull name;
+@property (nonatomic, readonly) id<IRDomain> _Nonnull domain;
 
-- (nonnull NSString*)identifier;
+- (nonnull NSString *)identifier;
 
 @end
 
@@ -22,12 +22,12 @@ typedef NS_ENUM(NSUInteger, IRAssetIdFactoryError) {
 
 @protocol IRAssetIdFactoryProtocol <NSObject>
 
-+ (nullable id<IRAssetId>)assetIdWithName:(nonnull NSString*)name
++ (nullable id<IRAssetId>)assetIdWithName:(nonnull NSString *)name
                                    domain:(nonnull id<IRDomain>)domain
-                                    error:(NSError*_Nullable*_Nullable)error;
+                                    error:(NSError *_Nullable*_Nullable)error;
 
-+ (nullable id<IRAssetId>)assetWithIdentifier:(nonnull NSString*)assetId
-                                        error:(NSError*_Nullable*_Nullable)error;
++ (nullable id<IRAssetId>)assetWithIdentifier:(nonnull NSString *)assetId
+                                        error:(NSError *_Nullable*_Nullable)error;
 
 @end
 

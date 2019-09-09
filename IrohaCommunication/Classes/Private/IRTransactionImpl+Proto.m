@@ -13,7 +13,7 @@
 @implementation IRTransaction(Proto)
 
 + (nullable IRTransaction*)transactionFromPbTransaction:(nonnull Transaction*)pbTransaction
-                                                  error:(NSError*_Nullable*_Nullable)error {
+                                                  error:(NSError *_Nullable*_Nullable)error {
 
     NSMutableArray<id<IRPeerSignature>> *signatures = [NSMutableArray array];
     for (Signature *pbSignature in pbTransaction.signaturesArray) {
@@ -67,7 +67,7 @@
         [commands addObject:command];
     }
 
-    NSMutableArray<NSData*> *batchHashes = [NSMutableArray array];
+    NSMutableArray<NSData *> *batchHashes = [NSMutableArray array];
     IRTransactionBatchType batchType = IRTransactionBatchTypeNone;
 
     if (pbTransaction.payload.optionalBatchMetaOneOfCase == Transaction_Payload_OptionalBatchMeta_OneOfCase_Batch) {

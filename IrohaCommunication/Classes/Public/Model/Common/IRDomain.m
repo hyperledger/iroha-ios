@@ -9,14 +9,14 @@ static NSString * const DOMAIN_FORMAT = @"([a-zA-Z]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0
 
 @interface IRDomain : NSObject<IRDomain>
 
-- (instancetype)initWithIdentifier:(nonnull NSString*)identifier;
+- (instancetype)initWithIdentifier:(nonnull NSString *)identifier;
 
 @end
 
 @implementation IRDomain
 @synthesize identifier = _identifier;
 
-- (instancetype)initWithIdentifier:(nonnull NSString*)identifier {
+- (instancetype)initWithIdentifier:(nonnull NSString *)identifier {
     if (self = [super init]) {
         _identifier = identifier;
     }
@@ -28,8 +28,8 @@ static NSString * const DOMAIN_FORMAT = @"([a-zA-Z]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0
 
 @implementation IRDomainFactory
 
-+ (nullable id<IRDomain>)domainWithIdentitifer:(nonnull NSString*)identifier
-                                         error:(NSError*_Nullable*_Nullable)error {
++ (nullable id<IRDomain>)domainWithIdentitifer:(nonnull NSString *)identifier
+                                         error:(NSError *_Nullable*_Nullable)error {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", DOMAIN_FORMAT];
 
     if ([predicate evaluateWithObject:identifier]) {

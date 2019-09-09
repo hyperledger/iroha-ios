@@ -9,6 +9,6 @@
 @interface IRRolesResponse : NSObject<IRRolesResponse>
 
 - (nonnull instancetype)initWithRoles:(nonnull NSArray<id<IRRoleName>>*)roles
-                            queryHash:(nonnull NSData*)queryHash;
+                            queryHash:(nonnull NSData *)queryHash;
 
 @end

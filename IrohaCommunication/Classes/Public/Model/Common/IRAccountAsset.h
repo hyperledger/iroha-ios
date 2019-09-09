@@ -10,9 +10,9 @@
 
 @protocol IRAccountAsset <NSObject>
 
-@property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
-@property(nonatomic, readonly)id<IRAssetId> _Nonnull assetId;
-@property(nonatomic, readonly)id<IRAmount> _Nonnull balance;
+@property (nonatomic, readonly) id<IRAccountId> _Nonnull accountId;
+@property (nonatomic, readonly) id<IRAssetId> _Nonnull assetId;
+@property (nonatomic, readonly) id<IRAmount> _Nonnull balance;
 
 @end
 

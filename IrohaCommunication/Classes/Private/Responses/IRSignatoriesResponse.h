@@ -9,6 +9,6 @@
 @interface IRSignatoriesResponse : NSObject<IRSignatoriesResponse>
 
 - (nonnull instancetype)initWithPublicKeys:(nonnull NSArray<id<IRPublicKeyProtocol>>*)publicKeys
-                                 queryHash:(nonnull NSData*)queryHash;
+                                 queryHash:(nonnull NSData *)queryHash;
 
 @end

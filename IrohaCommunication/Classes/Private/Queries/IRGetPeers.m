@@ -11,7 +11,7 @@
 
 #pragma mark - Protobuf Transformable
 
-- (nullable id)transform:(NSError**)error {
+- (nullable id)transform:(NSError **)error {
     GetPeers *query = [GetPeers new];
     
     Query_Payload *payload = [[Query_Payload alloc] init];
