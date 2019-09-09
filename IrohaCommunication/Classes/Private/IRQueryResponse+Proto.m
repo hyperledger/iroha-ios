@@ -9,6 +9,7 @@
 #import "IrohaCrypto/NSData+Hex.h"
 #import "IRTransactionImpl+Proto.h"
 #import "Primitive.pbobjc.h"
+#import "IRBatchInfo.h"
 
 @implementation IRQueryResponseProtoFactory
 
@@ -89,6 +90,11 @@
             return [self transactionPageResponseFromPbResponse:pbResponse.transactionsPageResponse
                                                      queryHash:queryHash
                                                          error:error];
+            break;
+        case QueryResponse_Response_OneOfCase_PendingTransactionsPageResponse:
+            return [self pendingTransactionPageResponseFromPbResponse:pbResponse.pendingTransactionsPageResponse
+                                                            queryHash:queryHash
+                                                                error:error];
             break;
         case QueryResponse_Response_OneOfCase_PeersResponse:
             return [self peersResponseFromPbResponse:pbResponse.peersResponse queryHash:queryHash error:error];
@@ -408,7 +414,48 @@
                                                           queryHash:queryHash];
 }
 
-+ (nullable NSArray<id<IRTransaction>>*)transactionsFromPbTransactions:(nonnull NSArray<Transaction*>*)pbTransactions
++ (nullable id<IRPendingTransactionsPageResponse>)pendingTransactionPageResponseFromPbResponse:(nonnull PendingTransactionsPageResponse *)pbResponse
+                                                                                     queryHash:(nonnull NSData *)queryHash
+                                                                                         error:(NSError **)error {
+    
+    NSArray<id<IRTransaction>> *transactions = [self transactionsFromPbTransactions:pbResponse.transactionsArray
+                                                                              error:error];
+    
+    if (!transactions) {
+        if (error) {
+            NSString *message = [NSString stringWithFormat:@"Invalid transactions %@", pbResponse.transactionsArray];
+            *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
+                                         code:IRQueryResponseFactoryErrorInvalidAgrument
+                                     userInfo:@{NSLocalizedDescriptionKey: message}];
+        }
+        return nil;
+    }
+    
+    IRBatchInfo *nextBatch = nil;
+    
+    if (pbResponse.nextBatchInfo && pbResponse.nextBatchInfo.batchSize > 0) {
+        nextBatch = [[IRBatchInfo alloc] initWithNextHash:pbResponse.nextBatchInfo.firstTxHash
+                                                batchSize:pbResponse.nextBatchInfo.batchSize];
+        
+        if (!nextBatch) {
+            if (error) {
+                NSString *message = [NSString stringWithFormat:@"Invalid transaction batch info %@", pbResponse.nextBatchInfo];
+                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
+                                             code:IRQueryResponseFactoryErrorInvalidAgrument
+                                         userInfo:@{NSLocalizedDescriptionKey: message}];
+            }
+            
+            return nil;
+        }
+    }
+    
+    return [[IRPendingTransactionsPageResponse alloc] initWithTransactions:transactions
+                                                                totalCount:pbResponse.allTransactionsSize
+                                                                 nextBatch:nextBatch
+                                                                 queryHash:queryHash];
+}
+
++ (nullable NSArray<id<IRTransaction>> *)transactionsFromPbTransactions:(nonnull NSArray<Transaction*> *)pbTransactions
                                                                  error:(NSError **)error {
 
     NSMutableArray<id<IRTransaction>> *transactions = [NSMutableArray array];

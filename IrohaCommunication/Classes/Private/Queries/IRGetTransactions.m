@@ -7,7 +7,9 @@
 #import "Queries.pbobjc.h"
 #import <IrohaCrypto/NSData+Hex.h>
 
+
 @implementation IRGetTransactions
+
 @synthesize transactionHashes = _transactionHashes;
 
 - (nonnull instancetype)initWithTransactionHashes:(nonnull NSArray<NSData *> *)hashes {
