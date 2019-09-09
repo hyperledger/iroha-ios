@@ -14,6 +14,7 @@
 #import "IrohaCrypto/IRPublicKey.h"
 #import "IRAccountDetailRecordId.h"
 #import "IRPeer.h"
+#import "IRBatchInfo.h"
 
 
 @protocol IRQueryResponse <NSObject>
@@ -114,6 +115,15 @@ typedef NS_ENUM(NSUInteger, IRErrorResponseReason) {
 @property (nonatomic, readonly) NSArray<id<IRTransaction>> * _Nonnull transactions;
 @property (nonatomic, readonly) UInt32 totalCount;
 @property (nonatomic, readonly) NSData * _Nullable nextTransactionHash;
+
+@end
+
+
+@protocol IRPendingTransactionsPageResponse <IRQueryResponse>
+
+@property (nonatomic, readonly, nonnull) NSArray<id<IRTransaction>> *transactions;
+@property (nonatomic, readonly) UInt32 totalCount;
+@property (nonatomic, readonly, nullable) IRBatchInfo *nextBatch;
 
 @end
 

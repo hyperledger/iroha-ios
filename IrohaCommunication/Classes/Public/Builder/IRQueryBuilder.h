@@ -57,7 +57,8 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
 
 - (nonnull instancetype)getAssetInfo:(nonnull id<IRAssetId>)assetId;
 
-- (nonnull instancetype)getPendingTransactions;
+- (nonnull instancetype)getPendingTransactions DEPRECATED_MSG_ATTRIBUTE("use getPendingTransactions:");
+- (nonnull instancetype)getPendingTransactions:(nonnull id<IRPagination>)pagination;
 
 - (nonnull instancetype)getPeers;
 
