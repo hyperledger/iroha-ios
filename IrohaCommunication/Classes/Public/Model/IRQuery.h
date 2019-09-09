@@ -93,6 +93,9 @@
 
 
 @protocol IRGetPendingTransactions <IRQuery>
+
+@property (nonatomic, readonly, nullable) id<IRPagination> pagination;
+
 @end
 
 

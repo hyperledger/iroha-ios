@@ -7,6 +7,9 @@
 #import "IRQuery.h"
 #import "IRProtobufTransformable.h"
 
+
 @interface IRGetPendingTransactions : NSObject<IRGetPendingTransactions, IRProtobufTransformable>
+
+- (instancetype)initWithPagination:(nonnull id<IRPagination>)pagination;
 
 @end
