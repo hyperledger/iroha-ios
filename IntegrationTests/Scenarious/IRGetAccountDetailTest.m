@@ -105,7 +105,7 @@
         [expectation fulfill];
         
         return nil;
-    }).onError(^IRPromise * _Nullable(NSError* error) {
+    }).onError(^IRPromise * _Nullable(NSError * error) {
         XCTFail();
         NSLog(@"%@",error);
         

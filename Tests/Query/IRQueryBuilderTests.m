@@ -18,9 +18,9 @@ static UInt64 DETAIL_PAGE_SIZE = 10;
 
 @interface IRQueryTestCase : NSObject
 
-@property(nonatomic, readonly)SEL selector;
-@property(nonatomic, readonly)NSArray *arguments;
-@property(nonatomic, readonly)Protocol* protocol;
+@property (nonatomic, readonly) SEL selector;
+@property (nonatomic, readonly) NSArray *arguments;
+@property (nonatomic, readonly) Protocol *protocol;
 
 @end
 

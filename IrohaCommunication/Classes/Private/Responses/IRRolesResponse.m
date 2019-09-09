@@ -10,7 +10,7 @@
 @synthesize queryHash = _queryHash;
 
 - (nonnull instancetype)initWithRoles:(nonnull NSArray<id<IRRoleName>>*)roles
-                            queryHash:(nonnull NSData*)queryHash {
+                            queryHash:(nonnull NSData *)queryHash {
     if (self = [super init]) {
         _roles = roles;
         _queryHash = queryHash;

@@ -8,9 +8,9 @@
 
 @protocol IRAssetPagination <NSObject>
 
-@property(nonatomic, readonly)UInt32 pageSize;
+@property (nonatomic, readonly) UInt32 pageSize;
 
-@property(nonatomic, readonly)id<IRAssetId> _Nullable startingAssetId;
+@property (nonatomic, readonly) id<IRAssetId> _Nullable startingAssetId;
 
 @end
 

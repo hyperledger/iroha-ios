@@ -10,7 +10,7 @@
 @synthesize queryHash = _queryHash;
 
 - (nonnull instancetype)initWithTransactions:(nonnull NSArray<id<IRTransaction>>*)transactions
-                                   queryHash:(nonnull NSData*)queryHash {
+                                   queryHash:(nonnull NSData *)queryHash {
 
     if (self = [super init]) {
         _transactions = transactions;

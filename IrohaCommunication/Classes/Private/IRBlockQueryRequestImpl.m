@@ -17,7 +17,7 @@
 @synthesize peerSignature = _peerSignature;
 
 - (nonnull instancetype)initWithCreator:(nonnull id<IRAccountId>)creator
-                              createdAt:(nonnull NSDate*)createdAt
+                              createdAt:(nonnull NSDate *)createdAt
                            queryCounter:(UInt64)queryCounter
                           peerSignature:(nullable id<IRPeerSignature>)peerSignature {
 
@@ -35,7 +35,7 @@
 
 - (nullable instancetype)signedWithSignatory:(nonnull id<IRSignatureCreatorProtocol>)signatory
                           signatoryPublicKey:(nonnull id<IRPublicKeyProtocol>)signatoryPublicKey
-                                       error:(NSError**)error {
+                                       error:(NSError **)error {
 
     id<IRPeerSignature> peerSignature = [self signWithSignatory:signatory
                                              signatoryPublicKey:signatoryPublicKey
@@ -78,7 +78,7 @@
 
 #pragma mark - Protobuf Transformables
 
-- (nullable id)transform:(NSError*_Nullable*_Nullable)error {
+- (nullable id)transform:(NSError *_Nullable*_Nullable)error {
     QueryPayloadMeta *payload = [self createPayload:error];
 
     if (!payload) {
@@ -101,7 +101,7 @@
 
 #pragma mark - Private
 
-- (nullable QueryPayloadMeta*)createPayload:(NSError**)error {
+- (nullable QueryPayloadMeta*)createPayload:(NSError **)error {
     QueryPayloadMeta *meta = [[QueryPayloadMeta alloc] init];
     meta.creatorAccountId = [_creator identifier];
     meta.createdTime = [_createdAt milliseconds];
@@ -112,7 +112,7 @@
 
 - (nullable id<IRSignatureProtocol>)signPayload:(nonnull QueryPayloadMeta*)payload
                                       signatory:(nonnull id<IRSignatureCreatorProtocol>)signatory
-                                          error:(NSError**)error {
+                                          error:(NSError **)error {
     NSData *payloadData = [payload data];
 
     if (!payloadData) {
@@ -151,7 +151,7 @@
 
 #pragma mark - Helpers
 
-+ (nonnull NSError*)errorWithType:(IRQueryRequestError)errorType message:(nonnull NSString*)message {
++ (nonnull NSError *)errorWithType:(IRQueryRequestError)errorType message:(nonnull NSString *)message {
     return [NSError errorWithDomain:NSStringFromClass([IRBlockQueryRequest class])
                                code:errorType
                            userInfo:@{NSLocalizedDescriptionKey: message}];

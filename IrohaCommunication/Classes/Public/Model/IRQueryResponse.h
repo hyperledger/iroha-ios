@@ -18,63 +18,63 @@
 
 @protocol IRQueryResponse <NSObject>
 
-@property (nonatomic, readonly) NSData* _Nonnull queryHash;
+@property (nonatomic, readonly) NSData * _Nonnull queryHash;
 
 @end
 
 
 @protocol IRAccountAssetsResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)NSArray<id<IRAccountAsset>>* _Nonnull accountAssets;
-@property(nonatomic, readonly)UInt32 totalCount;
-@property(nonatomic, readonly)id<IRAssetId> _Nullable nextAssetId;
+@property (nonatomic, readonly) NSArray<id<IRAccountAsset>> * _Nonnull accountAssets;
+@property (nonatomic, readonly) UInt32 totalCount;
+@property (nonatomic, readonly) id<IRAssetId> _Nullable nextAssetId;
 
 @end
 
 
 @protocol IRAccountDetailResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)NSString* _Nonnull detail;
-@property(nonatomic, readonly)UInt64 totalCount;
-@property(nonatomic, readonly)id<IRAccountDetailRecordId> _Nullable nextRecordId;
+@property (nonatomic, readonly) NSString * _Nonnull detail;
+@property (nonatomic, readonly) UInt64 totalCount;
+@property (nonatomic, readonly) id<IRAccountDetailRecordId> _Nullable nextRecordId;
 
 @end
 
 
 @protocol IRSignatoriesResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)NSArray<id<IRPublicKeyProtocol>>* _Nonnull publicKeys;
+@property (nonatomic, readonly) NSArray<id<IRPublicKeyProtocol>> * _Nonnull publicKeys;
 
 @end
 
 
 @protocol IRTransactionsResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)NSArray<id<IRTransaction>>* _Nonnull transactions;
+@property (nonatomic, readonly) NSArray<id<IRTransaction>> * _Nonnull transactions;
 
 @end
 
 
 @protocol IRRolesResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)NSArray<id<IRRoleName>>* _Nonnull roles;
+@property (nonatomic, readonly) NSArray<id<IRRoleName>> * _Nonnull roles;
 
 @end
 
 
 @protocol IRRolePermissionsResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)NSArray<id<IRRolePermission>>* _Nonnull permissions;
+@property (nonatomic, readonly) NSArray<id<IRRolePermission>> * _Nonnull permissions;
 
 @end
 
 
 @protocol IRAccountResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)id<IRAccountId> _Nonnull accountId;
-@property(nonatomic, readonly)UInt32 quorum;
-@property(nonatomic, readonly)NSString * _Nullable details;
-@property(nonatomic, readonly)NSArray<id<IRRoleName>> * _Nonnull roles;
+@property (nonatomic, readonly) id<IRAccountId> _Nonnull accountId;
+@property (nonatomic, readonly) UInt32 quorum;
+@property (nonatomic, readonly) NSString * _Nullable details;
+@property (nonatomic, readonly) NSArray<id<IRRoleName>> * _Nonnull roles;
 
 @end
 
@@ -94,33 +94,33 @@ typedef NS_ENUM(NSUInteger, IRErrorResponseReason) {
 
 @protocol IRErrorResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)IRErrorResponseReason reason;
-@property(nonatomic, readonly)NSString * _Nonnull message;
-@property(nonatomic, readonly)UInt32 code;
+@property (nonatomic, readonly) IRErrorResponseReason reason;
+@property (nonatomic, readonly) NSString * _Nonnull message;
+@property (nonatomic, readonly) UInt32 code;
 
 @end
 
 
 @protocol IRAssetResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)id<IRAssetId> _Nonnull assetId;
-@property(nonatomic, readonly)UInt32 precision;
+@property (nonatomic, readonly) id<IRAssetId> _Nonnull assetId;
+@property (nonatomic, readonly) UInt32 precision;
 
 @end
 
 
 @protocol IRTransactionsPageResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)NSArray<id<IRTransaction>>* _Nonnull transactions;
-@property(nonatomic, readonly)UInt32 totalCount;
-@property(nonatomic, readonly)NSData * _Nullable nextTransactionHash;
+@property (nonatomic, readonly) NSArray<id<IRTransaction>> * _Nonnull transactions;
+@property (nonatomic, readonly) UInt32 totalCount;
+@property (nonatomic, readonly) NSData * _Nullable nextTransactionHash;
 
 @end
 
 
 @protocol IRPeersResponse <IRQueryResponse>
 
-@property(nonatomic, readonly)NSArray<id<IRPeer>>* _Nonnull peers;
+@property (nonatomic, readonly) NSArray<id<IRPeer>> * _Nonnull peers;
 
 @end
 

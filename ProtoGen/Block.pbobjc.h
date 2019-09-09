@@ -104,7 +104,7 @@ typedef GPB_ENUM(Block_v1_Payload_FieldNumber) {
  * / Needed here to be able to guarantee the client that this transaction
  * / was not and will never be executed.
  **/
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString*> *rejectedTransactionsHashesArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString *> *rejectedTransactionsHashesArray;
 /** The number of items in @c rejectedTransactionsHashesArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger rejectedTransactionsHashesArray_Count;
 

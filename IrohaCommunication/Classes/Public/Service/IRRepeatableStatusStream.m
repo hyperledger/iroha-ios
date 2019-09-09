@@ -10,27 +10,20 @@
 
 @interface IRRepeatableStatusStream()
 
-@property(strong, nonatomic)NSData * _Nonnull transactionHash;
-
-@property(weak, nonatomic)id<IRTransactionStatusStreamable> _Nullable streamable;
-
-@property(strong, nonatomic)IRPromise * _Nullable promise;
-
-@property(strong, nonatomic)id<IRCancellable> _Nullable operation;
-
-@property(nonatomic, readonly)IRTransactionStatus expectedTransactionStatus;
-
-@property(nonatomic, readonly)NSUInteger maxTrialsCount;
-
-@property(nonatomic, readwrite)NSUInteger currentTrial;
-
-@property(nonatomic, strong)NSMutableArray<NSNumber*> *receivedStatuses;
+@property (nonatomic, strong) NSData * _Nonnull transactionHash;
+@property (nonatomic, weak) id<IRTransactionStatusStreamable> _Nullable streamable;
+@property (nonatomic, strong) IRPromise * _Nullable promise;
+@property (nonatomic, strong) id<IRCancellable> _Nullable operation;
+@property (nonatomic, readonly) IRTransactionStatus expectedTransactionStatus;
+@property (nonatomic, readonly) NSUInteger maxTrialsCount;
+@property (nonatomic, readwrite) NSUInteger currentTrial;
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *receivedStatuses;
 
 @end
 
 @implementation IRRepeatableStatusStream
 
-- (instancetype)initWithTransactionHash:(nonnull NSData*)transactionHash
+- (instancetype)initWithTransactionHash:(nonnull NSData *)transactionHash
                           streamingFrom:(nonnull id<IRTransactionStatusStreamable>)streamable
                               expecting:(IRTransactionStatus)transactionStatus
                               maxTrials:(NSUInteger)trialsCount {
@@ -67,7 +60,7 @@
     _operation = [_streamable streamTransactionStatus:_transactionHash withBlock:eventHandler];
 }
 
-- (void)handle:(nullable id<IRTransactionStatusResponse>)response done:(BOOL)done error:(nullable NSError*)error {
+- (void)handle:(nullable id<IRTransactionStatusResponse>)response done:(BOOL)done error:(nullable NSError *)error {
     if (response) {
 
         if ([_receivedStatuses containsObject:@(response.status)]) {
@@ -113,7 +106,7 @@
     }
 }
 
-- (nonnull NSError*)prepareNotReceivedError {
+- (nonnull NSError *)prepareNotReceivedError {
     NSString *message = [NSString stringWithFormat:@"Received statuses [%@], but waited for %@. Streaming closed",
                          [_receivedStatuses componentsJoinedByString:@","], @(_expectedTransactionStatus)];
     return [NSError errorWithDomain:NSStringFromClass([IRRepeatableStatusStream class])
