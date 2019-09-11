@@ -34,9 +34,11 @@
 
 - (void)testNilStartingRecordId {
     UInt32 pageSize = 10;
-    
+
+    id<IRAccountDetailRecordId> recordId = nil;
+
     id<IRAccountDetailPagination> pagination = [IRAccountDetailPaginationFactory accountDetailPagination:pageSize
-                                                                                            nextRecordId:nil];
+                                                                                            nextRecordId:recordId];
     XCTAssertNil(pagination);
 }
 
