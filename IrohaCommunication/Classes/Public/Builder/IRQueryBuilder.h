@@ -46,10 +46,11 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
                               pagination:(nullable id<IRAssetPagination>)pagination;
 
 - (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
-                                  writer:(nullable id<IRAccountId>)writer
-                                     key:(nullable NSString *)key;
+                                  writer:(nonnull NSString *)writer
+                                     key:(nonnull NSString *)key;
 
-- (nonnull instancetype)getAccountDetailWithPagination:(nonnull id<IRAccountDetailPagination>)pagination;
+- (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
+                              pagination:(nonnull id<IRAccountDetailPagination>)pagination;
 
 - (nonnull instancetype)getRoles;
 
