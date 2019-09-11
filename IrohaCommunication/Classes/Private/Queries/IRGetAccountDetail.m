@@ -10,52 +10,33 @@
 @implementation IRGetAccountDetail
 
 @synthesize accountId = _accountId;
-@synthesize writer = _writer;
-@synthesize key = _key;
 @synthesize pagination = _pagination;
 
 - (nonnull instancetype)initWithAccountId:(nullable id<IRAccountId>)accountId
-                                   writer:(nullable id<IRAccountId>)writer
-                                      key:(nullable NSString *)key {
+                               pagination:(nonnull id<IRAccountDetailPagination>)pagination {
     if (self = [super init]) {
         _accountId = accountId;
-        _writer = writer;
-        _key = key;
-    }
-
-    return self;
-}
-
-- (nonnull instancetype)initWithPagination:(nonnull id<IRAccountDetailPagination>)pagination {
-    
-    if (self = [super init]) {
         _pagination = pagination;
     }
-    
+
     return self;
 }
-
 
 #pragma mark - Protobuf Transformable
 
 - (nullable id)transform:(NSError **)error {
     GetAccountDetail *query = [GetAccountDetail new];
     
-    if (_pagination) {
-        AccountDetailRecordId *recordId = [AccountDetailRecordId new];
-        recordId.writer = _pagination.nextRecordId.writer;
-        recordId.key = _pagination.nextRecordId.key;
-        
-        AccountDetailPaginationMeta *meta = [AccountDetailPaginationMeta new];
-        meta.pageSize = _pagination.pageSize;
-        meta.firstRecordId = recordId;
-        
-        query.paginationMeta = meta;
-    } else {
-        query.accountId = [_accountId identifier];
-        query.writer = [_writer identifier];
-        query.key = _key;
-    }
+    AccountDetailRecordId *recordId = [AccountDetailRecordId new];
+    recordId.writer = _pagination.nextRecordId.writer;
+    recordId.key = _pagination.nextRecordId.key;
+
+    AccountDetailPaginationMeta *meta = [AccountDetailPaginationMeta new];
+    meta.pageSize = _pagination.pageSize;
+    meta.firstRecordId = recordId;
+
+    query.accountId = [_accountId identifier];
+    query.paginationMeta = meta;
     
     Query_Payload *payload = [Query_Payload new];
     payload.getAccountDetail = query;
