@@ -67,9 +67,9 @@
 @protocol IRGetAccountDetail <IRQuery>
 
 @property (nonatomic, readonly) id<IRAccountId> _Nullable accountId;
-@property (nonatomic, readonly) id<IRAccountId> _Nullable writer;
-@property (nonatomic, readonly) NSString * _Nullable key;
-@property (nonatomic, readonly) id<IRAccountDetailPagination> _Nullable pagination;
+@property (nonatomic, readonly) id<IRAccountId> _Nullable writer DEPRECATED_ATTRIBUTE;
+@property (nonatomic, readonly) NSString * _Nullable key DEPRECATED_ATTRIBUTE;
+@property (nonatomic, readonly) id<IRAccountDetailPagination> _Nonnull pagination;
 
 @end
 

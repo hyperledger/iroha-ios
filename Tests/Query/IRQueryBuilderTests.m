@@ -13,7 +13,7 @@ static NSString * const VALID_ASSET_IDENTIFIER = @"testcoin#gmail.com";
 static NSString * const VALID_ROLE = @"admin";
 static NSString * const DETAIL_KEY = @"key";
 static UInt64 VALID_QUERY_COUNTER = 10;
-static UInt64 DETAIL_PAGE_SIZE = 10;
+static UInt32 DETAIL_PAGE_SIZE = 10;
 
 
 @interface IRQueryTestCase : NSObject
@@ -146,8 +146,6 @@ static UInt64 DETAIL_PAGE_SIZE = 10;
 
     id<IRAssetPagination> assetPagination = [IRAssetPaginationFactory assetPagination:DETAIL_PAGE_SIZE startingAssetId:assetId];
     
-    NSString
-    
     id<IRAccountDetailRecordId> accountDetailRecordId = [IRAccountDetailRecordIdFactory accountDetailRecordIdWithWriter:VALID_WRITER_IDENTIFIER
                                                                                                                     key:DETAIL_KEY];
     
@@ -184,12 +182,12 @@ static UInt64 DETAIL_PAGE_SIZE = 10;
                                                                               arguments:@[accountId, assetPagination]
                                                                                protocol:@protocol(IRGetAccountAssets)];
 
-    IRQueryTestCase *getAccountDetail = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:writer:key:)
-                                                                        arguments:@[accountId, accountId]
+    IRQueryTestCase *getAccountDetail = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:pagination:)
+                                                                        arguments:@[accountId, accountDetailPagination]
                                                                          protocol:@protocol(IRGetAccountDetail)];
     
-    IRQueryTestCase *getAccountDetailPaginated = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:writer:key:pagination:)
-                                                                                 arguments:@[accountId, accountId, DETAIL_KEY, accountDetailPagination]
+    IRQueryTestCase *getAccountDetailPaginated = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:writer:key:)
+                                                                                 arguments:@[accountId, [accountId identifier], DETAIL_KEY]
                                                                                   protocol:@protocol(IRGetAccountDetail)];
 
     IRQueryTestCase *getRoles = [[IRQueryTestCase alloc] initWithSelector:@selector(getRoles)
