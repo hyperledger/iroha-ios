@@ -422,12 +422,6 @@
                                                                               error:error];
     
     if (!transactions) {
-        if (error) {
-            NSString *message = [NSString stringWithFormat:@"Invalid transactions %@", pbResponse.transactionsArray];
-            *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
-                                         code:IRQueryResponseFactoryErrorInvalidAgrument
-                                     userInfo:@{NSLocalizedDescriptionKey: message}];
-        }
         return nil;
     }
     

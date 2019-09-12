@@ -11,9 +11,9 @@ static const UInt64 DEFAULT_QUERY_COUNTER = 1;
 
 @interface IRQueryBuilder()
 
-@property (nonatomic, strong) id<IRAccountId> _Nullable creator;
-@property (nonatomic, strong) NSDate * _Nullable createdAt;
-@property (nonatomic, strong) id<IRQuery> _Nullable query;
+@property (strong, nonatomic) id<IRAccountId> _Nullable creator;
+@property (strong, nonatomic) NSDate * _Nullable createdAt;
+@property (strong, nonatomic) id<IRQuery> _Nullable query;
 @property (nonatomic, readwrite) UInt64 queryCounter;
 
 @end

@@ -17,8 +17,8 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
 
 @interface IRIrohaContainer()
 
-@property (nonatomic, strong) NSURLSession *session;
-@property (nonatomic, strong) IRNetworkService *irohaService;
+@property (strong, nonatomic) NSURLSession *session;
+@property (strong, nonatomic) IRNetworkService *irohaService;
 
 @end
 
