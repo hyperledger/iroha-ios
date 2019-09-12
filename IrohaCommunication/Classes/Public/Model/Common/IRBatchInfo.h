@@ -8,9 +8,9 @@
 
 @interface IRBatchInfo : NSObject
 
-@property (nonatomic, readonly) NSString *nextHash;
+@property (nonatomic, readonly, nonnull) NSString *nextHash;
 @property (nonatomic, readonly) UInt32 batchSize;
 
-- (instancetype)initWithNextHash:(NSString *)nextHash batchSize:(UInt32)batchSize;
+- (nonnull instancetype)initWithNextHash:(nonnull NSString *)nextHash batchSize:(UInt32)batchSize;
 
 @end

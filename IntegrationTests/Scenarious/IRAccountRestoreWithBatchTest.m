@@ -43,31 +43,31 @@
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self createAccounts];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self grandClientToRecoveryPermissions];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self grandRecoveryToAdminPermissions];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self setupRecoveryAccount];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         [expectation fulfill];
 
         return nil;
@@ -85,27 +85,27 @@
 - (void)testAccountRestoreScenarioWithBatch {
     XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
 
-    [self createDomains].onThen(^IRPromise* _Nullable (id result) {
+    [self createDomains].onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self createAccounts];
     }).onThen(^IRPromise* _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self sendRecoverySetupBatch];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:[result objectAtIndex:0]
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         [expectation fulfill];
 
         return nil;
-    }).onError(^IRPromise* _Nullable (NSError * error) {
+    }).onError(^IRPromise * _Nullable (NSError *error) {
         XCTFail(@"%@", error);
 
         [expectation fulfill];
