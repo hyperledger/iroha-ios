@@ -10,7 +10,10 @@
 @interface IRGetAccountDetail : NSObject<IRGetAccountDetail, IRProtobufTransformable>
 
 - (nonnull instancetype)initWithAccountId:(nullable id<IRAccountId>)accountId
-                                   writer:(nullable id<IRAccountId>)writer
-                                      key:(nullable NSString*)key;
+                                   writer:(nonnull NSString*)writer
+                                      key:(nonnull NSString*)key;
+
+- (nonnull instancetype)initWithAccountId:(nullable id<IRAccountId>)accountId
+                               pagination:(nonnull id<IRAccountDetailPagination>)pagination;
 
 @end

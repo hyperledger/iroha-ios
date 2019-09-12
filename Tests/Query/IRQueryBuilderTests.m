@@ -6,18 +6,24 @@
 @import XCTest;
 @import IrohaCommunication;
 
+
 static NSString * const VALID_ACCOUNT_IDENTIFIER = @"bob@gmail.com";
+static NSString * const VALID_WRITER_IDENTIFIER = @"writer@test";
 static NSString * const VALID_ASSET_IDENTIFIER = @"testcoin#gmail.com";
 static NSString * const VALID_ROLE = @"admin";
+static NSString * const DETAIL_KEY = @"key";
 static UInt64 VALID_QUERY_COUNTER = 10;
+static UInt32 DETAIL_PAGE_SIZE = 10;
+
 
 @interface IRQueryTestCase : NSObject
 
-@property(nonatomic, readonly)SEL selector;
-@property(nonatomic, readonly)NSArray *arguments;
-@property(nonatomic, readonly)Protocol* protocol;
+@property (nonatomic, readonly) SEL selector;
+@property (nonatomic, readonly) NSArray *arguments;
+@property (nonatomic, readonly) Protocol *protocol;
 
 @end
+
 
 @implementation IRQueryTestCase
 
@@ -127,16 +133,24 @@ static UInt64 VALID_QUERY_COUNTER = 10;
 - (nonnull NSArray<IRQueryTestCase*>*)createTestCases {
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:VALID_ACCOUNT_IDENTIFIER
                                                                     error:nil];
+    
     id<IRAssetId> assetId = [IRAssetIdFactory assetWithIdentifier:VALID_ASSET_IDENTIFIER
                                                             error:nil];
+    
     id<IRRoleName> roleName = [IRRoleNameFactory roleWithName:VALID_ROLE
                                                         error:nil];
+    
     id<IRPagination> pagination = [IRPaginationFactory pagination:10
                                                     firstItemHash:nil
                                                             error:nil];
 
-    id<IRAssetPagination> assetPagination = [IRAssetPaginationFactory assetPagination:10
-                                                                      startingAssetId:assetId];
+    id<IRAssetPagination> assetPagination = [IRAssetPaginationFactory assetPagination:DETAIL_PAGE_SIZE startingAssetId:assetId];
+    
+    id<IRAccountDetailRecordId> accountDetailRecordId = [IRAccountDetailRecordIdFactory accountDetailRecordIdWithWriter:VALID_WRITER_IDENTIFIER
+                                                                                                                    key:DETAIL_KEY];
+    
+    id<IRAccountDetailPagination> accountDetailPagination = [IRAccountDetailPaginationFactory accountDetailPagination:DETAIL_PAGE_SIZE
+                                                                                                         nextRecordId:accountDetailRecordId];
 
     NSData *itemHash = [@"Test Data" dataUsingEncoding:NSUTF8StringEncoding];
 
@@ -168,9 +182,13 @@ static UInt64 VALID_QUERY_COUNTER = 10;
                                                                               arguments:@[accountId, assetPagination]
                                                                                protocol:@protocol(IRGetAccountAssets)];
 
-    IRQueryTestCase *getAccountDetail = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:writer:key:)
-                                                                        arguments:@[accountId, accountId]
+    IRQueryTestCase *getAccountDetail = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:pagination:)
+                                                                        arguments:@[accountId, accountDetailPagination]
                                                                          protocol:@protocol(IRGetAccountDetail)];
+    
+    IRQueryTestCase *getAccountDetailPaginated = [[IRQueryTestCase alloc] initWithSelector:@selector(getAccountDetail:writer:key:)
+                                                                                 arguments:@[accountId, [accountId identifier], DETAIL_KEY]
+                                                                                  protocol:@protocol(IRGetAccountDetail)];
 
     IRQueryTestCase *getRoles = [[IRQueryTestCase alloc] initWithSelector:@selector(getRoles)
                                                                 arguments:nil
@@ -187,6 +205,10 @@ static UInt64 VALID_QUERY_COUNTER = 10;
     IRQueryTestCase *getPendingTransaction = [[IRQueryTestCase alloc] initWithSelector:@selector(getPendingTransactions)
                                                                              arguments:nil
                                                                               protocol:@protocol(IRGetPendingTransactions)];
+    
+    IRQueryTestCase *getPeers = [[IRQueryTestCase alloc] initWithSelector:@selector(getPeers)
+                                                                arguments:nil
+                                                                 protocol:@protocol(IRGetPeers)];
 
     return @[getAccountTestCase,
              getSignatories,
@@ -196,10 +218,12 @@ static UInt64 VALID_QUERY_COUNTER = 10;
              getAccountAssets,
              getAccountAssetsPaginated,
              getAccountDetail,
+             getAccountDetailPaginated,
              getRoles,
              getRolePermission,
              getAssetInfo,
-             getPendingTransaction];
+             getPendingTransaction,
+             getPeers];
 }
 
 @end

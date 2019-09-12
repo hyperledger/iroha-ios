@@ -10,6 +10,6 @@
 
 - (nonnull instancetype)initWithAssetId:(nonnull id<IRAssetId>)assetId
                               precision:(UInt32)precision
-                              queryHash:(nonnull NSData*)queryHash;
+                              queryHash:(nonnull NSData *)queryHash;
 
 @end

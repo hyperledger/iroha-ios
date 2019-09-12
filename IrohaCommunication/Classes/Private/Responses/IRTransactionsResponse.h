@@ -9,6 +9,6 @@
 @interface IRTransactionsResponse : NSObject<IRTransactionsResponse>
 
 - (nonnull instancetype)initWithTransactions:(nonnull NSArray<id<IRTransaction>>*)transactions
-                                   queryHash:(nonnull NSData*)queryHash;
+                                   queryHash:(nonnull NSData *)queryHash;
 
 @end

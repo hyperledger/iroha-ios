@@ -7,7 +7,7 @@
 
 @protocol IRDomain <NSObject>
 
-@property(nonatomic, readonly)NSString * _Nonnull identifier;
+@property (nonatomic, readonly) NSString * _Nonnull identifier;
 
 @end
 
@@ -17,8 +17,8 @@ typedef NS_ENUM(NSUInteger, IRDomainFactoryError) {
 
 @protocol IRDomainFactoryProtocol <NSObject>
 
-+ (nullable id<IRDomain>)domainWithIdentitifer:(nonnull NSString*)identifier
-                                         error:(NSError*_Nullable*_Nullable)error;
++ (nullable id<IRDomain>)domainWithIdentitifer:(nonnull NSString *)identifier
+                                         error:(NSError *_Nullable*_Nullable)error;
 
 @end
 

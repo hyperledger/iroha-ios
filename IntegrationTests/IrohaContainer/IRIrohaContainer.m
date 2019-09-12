@@ -5,21 +5,23 @@
 
 #import "IRIrohaContainer.h"
 
-static NSString* const DOCKER_HOST = @"http://localhost:49721";
-static NSString* const CONTAINER = @"iroha";
+static NSString * const DOCKER_HOST = @"http://localhost:49721";
+static NSString * const CONTAINER = @"iroha";
 
-static NSString * IROHA_IP = @"127.0.0.1";
-static NSString * IROHA_PORT = @"50051";
+static NSString *IROHA_IP = @"127.0.0.1";
+static NSString *IROHA_PORT = @"50051";
 
 static NSUInteger CONNECTION_TRIES = 10;
 static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
 
+
 @interface IRIrohaContainer()
 
-@property(strong, nonatomic)NSURLSession *session;
-@property(strong, nonatomic)IRNetworkService *irohaService;
+@property (strong, nonatomic) NSURLSession *session;
+@property (strong, nonatomic) IRNetworkService *irohaService;
 
 @end
+
 
 @implementation IRIrohaContainer
 
@@ -55,9 +57,10 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
     return sharedContainer;
 }
 
+
 #pragma mark - Interface
 
-- (nullable NSError*)start {
+- (nullable NSError *)start {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
     __block NSError *resultError;
@@ -98,7 +101,7 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
     return resultError;
 }
 
-- (nullable NSError*)stop {
+- (nullable NSError *)stop {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
     __block NSError *resultError;
@@ -177,7 +180,7 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
 
 #pragma mark - Response
 
-- (nullable NSError*)handleRestartResponse:(nonnull NSURLResponse *)response
+- (nullable NSError *)handleRestartResponse:(nonnull NSURLResponse *)response
                                       data:(nullable NSData *)data
                              receivedError:(nullable NSError *)receivedError {
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -206,10 +209,10 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
     return [IRIrohaContainer errorForMessage:@"Unexpected response received during restart"];
 }
 
-- (nullable NSString*)handleTaskPreparationResponse:(nonnull NSURLResponse *)response
+- (nullable NSString *)handleTaskPreparationResponse:(nonnull NSURLResponse *)response
                                            data:(nullable NSData *)data
                                       receivedError:(nullable NSError *)receivedError
-                                        resultError:(NSError*_Nullable*_Nullable)resultError {
+                                        resultError:(NSError *_Nullable*_Nullable)resultError {
     if (data) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data
                                                                options:0
@@ -236,7 +239,7 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
     }
 }
 
-- (nullable NSError*)handleTaskExecutionResponse:(nonnull NSURLResponse *)response
+- (nullable NSError *)handleTaskExecutionResponse:(nonnull NSURLResponse *)response
                                             data:(nullable NSData *)data
                                    receivedError:(nullable NSError *)receivedError {
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -265,7 +268,7 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
     return [IRIrohaContainer errorForMessage:@"Unexpected response received on try to run iroha daemon"];
 }
 
-- (nullable NSError*)handleStopResponse:(nonnull NSURLResponse *)response
+- (nullable NSError *)handleStopResponse:(nonnull NSURLResponse *)response
                                    data:(nullable NSData *)data
                           receivedError:(nullable NSError *)receivedError {
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -309,7 +312,7 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
         dispatch_semaphore_signal(semaphore);
 
         return nil;
-    }).onError(^IRPromise * _Nullable(NSError* error) {
+    }).onError(^IRPromise * _Nullable(NSError * error) {
         dispatch_semaphore_signal(semaphore);
 
         return nil;
@@ -322,7 +325,7 @@ static NSTimeInterval CONNECTION_TRY_DELAY = 1.0;
 
 #pragma mark - Helper
 
-+ (nonnull NSError *)errorForMessage:(nonnull NSString*)message {
++ (nonnull NSError *)errorForMessage:(nonnull NSString *)message {
     NSString *domain = [NSString stringWithFormat:@"co.jp.soramitsu.iroha.%@", NSStringFromClass([IRIrohaContainer class])];
     return [NSError errorWithDomain:domain
                                code:0

@@ -14,6 +14,6 @@ typedef NS_ENUM(NSUInteger, IRPeerSignatureFactoryProtoError) {
 @interface IRPeerSignatureFactory (Proto)
 
 + (nullable id<IRPeerSignature>)peerSignatureFromPbSignature:(nonnull Signature *)pbSignature
-                                                       error:(NSError*_Nullable*_Nullable)error;
+                                                       error:(NSError *_Nullable*_Nullable)error;
 
 @end
