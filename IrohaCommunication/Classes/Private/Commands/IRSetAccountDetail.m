@@ -12,8 +12,8 @@
 @synthesize value = _value;
 
 - (nonnull instancetype)initWithAccountId:(nonnull id<IRAccountId>)accountId
-                                      key:(nonnull NSString*)key
-                                    value:(nonnull NSString*)value {
+                                      key:(nonnull NSString *)key
+                                    value:(nonnull NSString *)value {
 
     if (self = [super init]) {
         _accountId = accountId;

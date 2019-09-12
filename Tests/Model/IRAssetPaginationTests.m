@@ -6,7 +6,7 @@
 @import XCTest;
 @import IrohaCommunication;
 
-static NSString* const ASSET_ID = @"test#test";
+static NSString * const ASSET_ID = @"test#test";
 
 @interface IRAssetPaginationTests : XCTestCase
 

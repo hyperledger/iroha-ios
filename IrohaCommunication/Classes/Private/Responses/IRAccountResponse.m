@@ -14,9 +14,9 @@
 
 - (nonnull instancetype)initWithAccountId:(nonnull id<IRAccountId>)accountId
                                    quorum:(UInt32)quorum
-                                  details:(nullable NSString*)details
+                                  details:(nullable NSString *)details
                                     roles:(nonnull NSArray<id<IRRoleName>>*)roles
-                                queryHash:(nonnull NSData*)queryHash {
+                                queryHash:(nonnull NSData *)queryHash {
 
     if (self = [super init]) {
         _accountId = accountId;

@@ -7,7 +7,7 @@
 
 @protocol IRGrantablePermission <NSObject>
 
-@property(nonatomic, readonly)int32_t value;
+@property (nonatomic, readonly) int32_t value;
 
 @end
 
@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, IRGrantablePermissionError) {
 
 @protocol IRGrantablePermissionFactoryProtocol <NSObject>
 
-+ (nullable id<IRGrantablePermission>)permissionWithValue:(int32_t)value error:(NSError*_Nullable*_Nullable)error;
++ (nullable id<IRGrantablePermission>)permissionWithValue:(int32_t)value error:(NSError *_Nullable *_Nullable)error;
 
 @end
 

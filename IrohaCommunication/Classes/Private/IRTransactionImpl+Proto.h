@@ -14,6 +14,6 @@ typedef NS_ENUM(NSUInteger, IRTransactionProtoError) {
 @interface IRTransaction(Proto)
 
 + (nullable IRTransaction*)transactionFromPbTransaction:(nonnull Transaction*)pbTransaction
-                                                  error:(NSError*_Nullable*_Nullable)error;
+                                                  error:(NSError *_Nullable*_Nullable)error;
 
 @end

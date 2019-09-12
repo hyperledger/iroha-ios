@@ -6,14 +6,15 @@
 #import <Foundation/Foundation.h>
 
 #import "IRQueryRequest.h"
+#import "IRAccountDetailPagination.h"
 
 @protocol IRQueryBuilderProtocol <NSObject>
 
 - (nonnull instancetype)withCreatorAccountId:(nonnull id<IRAccountId>)creatorAccountId;
-- (nonnull instancetype)withCreatedDate:(nonnull NSDate*)date;
+- (nonnull instancetype)withCreatedDate:(nonnull NSDate *)date;
 - (nonnull instancetype)withQueryCounter:(UInt64)queryCounter;
 - (nonnull instancetype)withQuery:(nonnull id<IRQuery>)query;
-- (nullable id<IRQueryRequest>)build:(NSError*_Nullable*_Nullable)error;
+- (nullable id<IRQueryRequest>)build:(NSError *_Nullable*_Nullable)error;
 
 @end
 
@@ -37,7 +38,7 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
                                             assetId:(nonnull id<IRAssetId>)assetId
                                          pagination:(nullable id<IRPagination>)pagination;
 
-- (nonnull instancetype)getTransactions:(nonnull NSArray<NSData*>*)hashes;
+- (nonnull instancetype)getTransactions:(nonnull NSArray<NSData *>*)hashes;
 
 - (nonnull instancetype)getAccountAssets:(nonnull id<IRAccountId>)accountId DEPRECATED_MSG_ATTRIBUTE("use getAccountAsset:pagination:");
 
@@ -45,8 +46,11 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
                               pagination:(nullable id<IRAssetPagination>)pagination;
 
 - (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
-                                  writer:(nullable id<IRAccountId>)writer
-                                     key:(nullable NSString*)key;
+                                  writer:(nonnull NSString *)writer
+                                     key:(nonnull NSString *)key DEPRECATED_MSG_ATTRIBUTE("use getAccountDetail:pagination:");
+
+- (nonnull instancetype)getAccountDetail:(nullable id<IRAccountId>)accountId
+                              pagination:(nonnull id<IRAccountDetailPagination>)pagination;
 
 - (nonnull instancetype)getRoles;
 
@@ -54,6 +58,9 @@ typedef NS_ENUM(NSUInteger, IRQueryBuilderError) {
 
 - (nonnull instancetype)getAssetInfo:(nonnull id<IRAssetId>)assetId;
 
-- (nonnull instancetype)getPendingTransactions;
+- (nonnull instancetype)getPendingTransactions DEPRECATED_MSG_ATTRIBUTE("use getPendingTransactions:");
+- (nonnull instancetype)getPendingTransactions:(nonnull id<IRPagination>)pagination;
+
+- (nonnull instancetype)getPeers;
 
 @end

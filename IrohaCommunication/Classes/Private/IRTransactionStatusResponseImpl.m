@@ -11,8 +11,8 @@
 @synthesize statusDescription = _statusDescription;
 
 - (nonnull instancetype)initWithStatus:(IRTransactionStatus)status
-                       transactionHash:(nonnull NSData*)transactionHash
-                           description:(nullable NSString*)statusDescription {
+                       transactionHash:(nonnull NSData *)transactionHash
+                           description:(nullable NSString *)statusDescription {
 
     if (self = [super init]) {
         _status = status;

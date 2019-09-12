@@ -6,6 +6,7 @@
 #import "IRAccountAssetsResponse.h"
 
 @implementation IRAccountAssetsResponse
+
 @synthesize accountAssets = _accountAssets;
 @synthesize totalCount = _totalCount;
 @synthesize nextAssetId = _nextAssetId;
@@ -14,7 +15,7 @@
 - (nonnull instancetype)initWithAccountAssets:(nonnull NSArray<id<IRAccountAsset>>*)accountAssets
                                    totalCount:(UInt32)totalCount
                                   nextAssetId:(nullable id<IRAssetId>)assetId
-                                    queryHash:(nonnull NSData*)queryHash {
+                                    queryHash:(nonnull NSData *)queryHash {
     if (self = [super init]) {
         _accountAssets = accountAssets;
         _totalCount = totalCount;
@@ -23,6 +24,10 @@
     }
 
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Account assets: %@\nTotal count:%u\nNext asset id: %@\n", _accountAssets, (unsigned int)_totalCount, _nextAssetId];
 }
 
 @end
