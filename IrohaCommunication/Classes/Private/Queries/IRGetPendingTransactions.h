@@ -10,6 +10,6 @@
 
 @interface IRGetPendingTransactions : NSObject<IRGetPendingTransactions, IRProtobufTransformable>
 
-- (instancetype)initWithPagination:(nonnull id<IRPagination>)pagination;
+- (nonnull instancetype)initWithPagination:(nonnull id<IRPagination>)pagination;
 
 @end
