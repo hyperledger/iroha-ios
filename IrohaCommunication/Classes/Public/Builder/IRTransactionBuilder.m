@@ -12,10 +12,10 @@ static const NSUInteger DEFAULT_QUORUM = 1;
 
 @interface IRTransactionBuilder ()
 
-@property (nonatomic, strong) id<IRAccountId> accountId;
+@property (strong, nonatomic) id<IRAccountId> accountId;
 @property (strong, readwrite) NSDate *date;
 @property (nonatomic, readwrite) NSUInteger quorum;
-@property (nonatomic, strong) NSMutableArray<id<IRCommand>> *commands;
+@property (strong, nonatomic) NSMutableArray<id<IRCommand>> *commands;
 
 @end
 

@@ -8,7 +8,7 @@
 
 @interface IRBatchInfo ()
 
-@property (nonatomic, strong) NSString *nextHash;
+@property (strong, nonatomic, nonnull) NSString *nextHash;
 @property (nonatomic, assign) UInt32 batchSize;
 
 
@@ -17,7 +17,7 @@
 
 @implementation IRBatchInfo
 
-- (instancetype)initWithNextHash:(NSString *)nextHash batchSize:(UInt32)batchSize {
+- (nonnull instancetype)initWithNextHash:(nonnull NSString *)nextHash batchSize:(UInt32)batchSize {
     if (self = [super init]) {
         _nextHash = nextHash;
         _batchSize = batchSize;
