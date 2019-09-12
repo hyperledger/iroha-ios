@@ -14,28 +14,23 @@
 @implementation IRGetAccountDetailTest
 
 - (void)testGetAccountDetailInSeveralPages {
-    id<IRAccountId> newAccountId = [IRAccountIdFactory accountIdWithName:@"new"
-                                                                  domain:self.domain
-                                                                   error:nil];
-    
-    id<IRCryptoKeypairProtocol> keypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
-    
-    id<IRSignatureCreatorProtocol> newAccountSigner = [[IREd25519Sha512Signer alloc] initWithPrivateKey:keypair.privateKey];
-    
-    IRTransactionBuilder *builder = [IRTransactionBuilder builderWithCreatorAccountId:self.adminAccountId];
-    builder = [builder createAccount:newAccountId publicKey:keypair.publicKey];
-    
-    NSError *error = nil;
-    id<IRTransaction> transaction = [[builder build:&error] signedWithSignatories:@[self.adminSigner]
-                                                              signatoryPublicKeys:@[self.adminPublicKey]
-                                                                            error:&error];
-    
     NSString *firstDetailKey = @"key";
     NSString *firstDetailValue = @"value";
     
     NSString *secondDetailKey = @"otherkey";
     NSString *secondDetailValue = @"othervalue";
-    
+
+    IRTransactionBuilder *transactionBuilder = [IRTransactionBuilder builderWithCreatorAccountId:self.adminAccountId];
+    transactionBuilder = [transactionBuilder setAccountDetail:self.adminAccountId key:firstDetailKey
+                                                        value:firstDetailValue];
+    transactionBuilder = [transactionBuilder setAccountDetail:self.adminAccountId key:secondDetailKey
+                                                        value:secondDetailValue];
+
+    NSError *error = nil;
+    id<IRTransaction> transaction = [[transactionBuilder build:&error] signedWithSignatories:@[self.adminSigner]
+                                                                         signatoryPublicKeys:@[self.adminPublicKey]
+                                                                                       error:&error];
+
     if (!transaction) {
         XCTFail();
         return;
@@ -43,47 +38,15 @@
     
     XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
     
-    UInt32 quorum = 2;
-    
     [self.iroha executeTransaction:transaction].onThen(^IRPromise * _Nullable(id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
     }).onThen(^IRPromise * _Nullable(id result) {
-        IRTransactionBuilder *transactionBuilder = [IRTransactionBuilder builderWithCreatorAccountId:newAccountId];
-        transactionBuilder = [transactionBuilder addSignatory:newAccountId publicKey:self.adminPublicKey];
-        transactionBuilder = [transactionBuilder setAccountQuorum:newAccountId quorum:quorum];
-        
-        NSError *error = nil;
-        id<IRTransaction> transaction = [[transactionBuilder build:&error] signedWithSignatories:@[newAccountSigner]
-                                                                             signatoryPublicKeys:@[keypair.publicKey]
-                                                                                           error:&error];
-        
-        return [self.iroha executeTransaction:transaction];
-    }).onThen(^IRPromise * _Nullable(id result) {
-        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
-                                                    withHash:result
-                                                        from:self.iroha];
-    }).onThen(^IRPromise * _Nullable(id result) {
-        IRTransactionBuilder *transactionBuilder = [IRTransactionBuilder builderWithCreatorAccountId:newAccountId];
-        transactionBuilder = [transactionBuilder setAccountDetail:self.adminAccountId key:firstDetailKey
-                                                            value:firstDetailValue];
-        transactionBuilder = [transactionBuilder setAccountDetail:self.adminAccountId key:secondDetailKey
-                                                            value:secondDetailValue];
-        
-        NSError *error = nil;
-        id<IRTransaction> transaction = [[transactionBuilder build:&error] signedWithSignatories:@[newAccountSigner]
-                                                                             signatoryPublicKeys:@[keypair.publicKey]
-                                                                                           error:&error];
-        
-        return [self.iroha executeTransaction:transaction];
-    }).onThen(^IRPromise * _Nullable(id result) {
-        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
-                                                    withHash:result
-                                                        from:self.iroha];
-    }).onThen(^IRPromise * _Nullable(id result) {
         IRQueryBuilder *queryBuilder = [IRQueryBuilder builderWithCreatorAccountId:self.adminAccountId];
-        queryBuilder = [queryBuilder getAccountDetail:newAccountId writer:nil key:nil];
+        queryBuilder = [queryBuilder getAccountDetail:self.adminAccountId
+                                               writer:[self.adminAccountId identifier]
+                                                  key:firstDetailKey];
         
         NSError *queryError = nil;
         id<IRQueryRequest> queryRequest = [[queryBuilder build:&queryError] signedWithSignatory:self.adminSigner
