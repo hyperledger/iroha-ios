@@ -11,6 +11,20 @@
 
 @synthesize accountId = _accountId;
 @synthesize pagination = _pagination;
+@synthesize writer = _writer;
+@synthesize key = _key;
+
+- (nonnull instancetype)initWithAccountId:(nullable id<IRAccountId>)accountId
+                                   writer:(nonnull NSString*)writer
+                                      key:(nonnull NSString*)key {
+    if (self = [super init]) {
+        _accountId = accountId;
+        _writer = writer;
+        _key = key;
+    }
+
+    return self;
+}
 
 - (nonnull instancetype)initWithAccountId:(nullable id<IRAccountId>)accountId
                                pagination:(nonnull id<IRAccountDetailPagination>)pagination {
@@ -26,18 +40,23 @@
 
 - (nullable id)transform:(NSError **)error {
     GetAccountDetail *query = [GetAccountDetail new];
-    
-    AccountDetailRecordId *recordId = [AccountDetailRecordId new];
-    recordId.writer = _pagination.nextRecordId.writer;
-    recordId.key = _pagination.nextRecordId.key;
-
-    AccountDetailPaginationMeta *meta = [AccountDetailPaginationMeta new];
-    meta.pageSize = _pagination.pageSize;
-    meta.firstRecordId = recordId;
-
     query.accountId = [_accountId identifier];
-    query.paginationMeta = meta;
-    
+
+    if (_pagination != nil) {
+        AccountDetailRecordId *recordId = [AccountDetailRecordId new];
+        recordId.writer = _pagination.nextRecordId.writer;
+        recordId.key = _pagination.nextRecordId.key;
+
+        AccountDetailPaginationMeta *meta = [AccountDetailPaginationMeta new];
+        meta.pageSize = _pagination.pageSize;
+        meta.firstRecordId = recordId;
+
+        query.paginationMeta = meta;
+    } else {
+        query.writer = _writer;
+        query.key = _key;
+    }
+
     Query_Payload *payload = [Query_Payload new];
     payload.getAccountDetail = query;
     

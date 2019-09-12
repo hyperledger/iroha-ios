@@ -27,7 +27,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Detail: %@\nTotal count:%u\nNext record id:%@", _detail, _totalCount, _nextRecordId];
+    return [NSString stringWithFormat:@"Detail: %@\nTotal count:%@\nNext record id:%@", _detail, @(_totalCount), _nextRecordId];
 }
 
 @end

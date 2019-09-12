@@ -44,9 +44,12 @@
                                                         from:self.iroha];
     }).onThen(^IRPromise * _Nullable(id result) {
         IRQueryBuilder *queryBuilder = [IRQueryBuilder builderWithCreatorAccountId:self.adminAccountId];
+        id<IRAccountDetailRecordId> recordId = [IRAccountDetailRecordIdFactory accountDetailRecordIdWithWriter:[self.adminAccountId identifier]
+                                                                                                           key:firstDetailKey];
+        id<IRAccountDetailPagination> pagination = [IRAccountDetailPaginationFactory accountDetailPagination:1
+                                                                                                nextRecordId:recordId];
         queryBuilder = [queryBuilder getAccountDetail:self.adminAccountId
-                                               writer:[self.adminAccountId identifier]
-                                                  key:firstDetailKey];
+                                           pagination:pagination];
         
         NSError *queryError = nil;
         id<IRQueryRequest> queryRequest = [[queryBuilder build:&queryError] signedWithSignatory:self.adminSigner
@@ -77,6 +80,76 @@
         return nil;
     });
     
+    [self waitForExpectations:@[expectation] timeout:120.0];
+}
+
+- (void)testGetAccountDetailCompatability {
+    NSString *firstDetailKey = @"key";
+    NSString *firstDetailValue = @"value";
+
+    NSString *secondDetailKey = @"otherkey";
+    NSString *secondDetailValue = @"othervalue";
+
+    IRTransactionBuilder *transactionBuilder = [IRTransactionBuilder builderWithCreatorAccountId:self.adminAccountId];
+    transactionBuilder = [transactionBuilder setAccountDetail:self.adminAccountId key:firstDetailKey
+                                                        value:firstDetailValue];
+    transactionBuilder = [transactionBuilder setAccountDetail:self.adminAccountId key:secondDetailKey
+                                                        value:secondDetailValue];
+
+    NSError *error = nil;
+    id<IRTransaction> transaction = [[transactionBuilder build:&error] signedWithSignatories:@[self.adminSigner]
+                                                                         signatoryPublicKeys:@[self.adminPublicKey]
+                                                                                       error:&error];
+
+    if (!transaction) {
+        XCTFail();
+        return;
+    }
+
+    XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
+
+    [self.iroha executeTransaction:transaction].onThen(^IRPromise * _Nullable(id result) {
+        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
+                                                    withHash:result
+                                                        from:self.iroha];
+    }).onThen(^IRPromise * _Nullable(id result) {
+        IRQueryBuilder *queryBuilder = [IRQueryBuilder builderWithCreatorAccountId:self.adminAccountId];
+
+        queryBuilder = [queryBuilder getAccountDetail:self.adminAccountId
+                                               writer:[self.adminAccountId identifier]
+                                                  key:firstDetailKey];
+
+        NSError *queryError = nil;
+        id<IRQueryRequest> queryRequest = [[queryBuilder build:&queryError] signedWithSignatory:self.adminSigner
+                                                                             signatoryPublicKey:self.adminPublicKey
+                                                                                          error:&queryError];
+
+        return [self.iroha executeQueryRequest:queryRequest];
+    }).onThen(^IRPromise * _Nullable(id result) {
+        NSLog(@"%@", result);
+        if (![result conformsToProtocol:@protocol(IRAccountDetailResponse)]) {
+            XCTFail();
+        } else {
+            id<IRAccountDetailResponse> detailResponse = result;
+
+            NSString *expectedDetails = [NSString stringWithFormat:@"{ \"%@\" : { \"%@\" : \"%@\" } }",
+                                         [self.adminAccountId identifier], firstDetailKey, firstDetailValue];
+
+            XCTAssertEqualObjects(detailResponse.detail, expectedDetails);
+        }
+
+        [expectation fulfill];
+
+        return nil;
+    }).onError(^IRPromise * _Nullable(NSError * error) {
+        XCTFail();
+        NSLog(@"%@",error);
+
+        [expectation fulfill];
+
+        return nil;
+    });
+
     [self waitForExpectations:@[expectation] timeout:120.0];
 }
 
