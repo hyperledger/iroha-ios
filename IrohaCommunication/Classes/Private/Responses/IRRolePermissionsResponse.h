@@ -9,6 +9,6 @@
 @interface IRRolePermissionsResponse : NSObject<IRRolePermissionsResponse>
 
 - (nonnull instancetype)initWithPermissions:(nonnull NSArray<id<IRRolePermission>>*)permissions
-                                  queryHash:(nonnull NSData*)queryHash;
+                                  queryHash:(nonnull NSData *)queryHash;
 
 @end

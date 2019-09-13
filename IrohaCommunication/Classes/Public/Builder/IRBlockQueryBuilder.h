@@ -9,9 +9,9 @@
 @protocol IRBlockQueryBuilderProtocol <NSObject>
 
 - (nonnull instancetype)withCreatorAccountId:(nonnull id<IRAccountId>)creatorAccountId;
-- (nonnull instancetype)withCreatedDate:(nonnull NSDate*)date;
+- (nonnull instancetype)withCreatedDate:(nonnull NSDate *)date;
 - (nonnull instancetype)withQueryCounter:(UInt64)queryCounter;
-- (nullable id<IRBlockQueryRequest>)build:(NSError*_Nullable*_Nullable)error;
+- (nullable id<IRBlockQueryRequest>)build:(NSError *_Nullable*_Nullable)error;
 
 @end
 

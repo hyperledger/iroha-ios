@@ -10,7 +10,7 @@
 @implementation IRBlockQueryResponse (Proto)
 
 + (nullable IRBlockQueryResponse*)responseFromPbResponse:(nonnull BlockQueryResponse*)queryResponse
-                                                   error:(NSError*_Nullable*_Nullable)error {
+                                                   error:(NSError *_Nullable*_Nullable)error {
     if (queryResponse.responseOneOfCase == BlockQueryResponse_Response_OneOfCase_BlockResponse) {
         Block *pbBlock = queryResponse.blockResponse.block;
         if (!pbBlock) {
@@ -42,7 +42,7 @@
 
 #pragma mark - Helper
 
-+ (nonnull NSError*)errorWithMessage:(NSString*)message {
++ (nonnull NSError *)errorWithMessage:(NSString *)message {
     return [NSError errorWithDomain:NSStringFromClass([IRBlockQueryResponse class])
                                code:IRBlockQueryResponseProtoErrorInvalidField
                            userInfo:@{NSLocalizedDescriptionKey: message}];

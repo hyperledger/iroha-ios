@@ -12,5 +12,6 @@
 #import "IRGetRolePermissions.h"
 #import "IRGetAssetInfo.h"
 #import "IRGetPendingTransactions.h"
+#import "IRGetPeers.h"
 
 #endif /* IRQueryAll_h */

@@ -104,7 +104,7 @@ typedef GPB_ENUM(Transaction_Payload_OptionalBatchMeta_OneOfCase) {
 
 @interface Transaction_Payload : GPBMessage
 
-/** transcation fields */
+/** transaction fields */
 @property(nonatomic, readwrite, strong, null_resettable) Transaction_Payload_ReducedPayload *reducedPayload;
 /** Test to see if @c reducedPayload has been set. */
 @property(nonatomic, readwrite) BOOL hasReducedPayload;
@@ -133,7 +133,7 @@ typedef GPB_ENUM(Transaction_Payload_BatchMeta_FieldNumber) {
 @property(nonatomic, readwrite) Transaction_Payload_BatchMeta_BatchType type;
 
 /** array of reduced hashes of all txs from the batch */
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString*> *reducedHashesArray;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString *> *reducedHashesArray;
 /** The number of items in @c reducedHashesArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger reducedHashesArray_Count;
 

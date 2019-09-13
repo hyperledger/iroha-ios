@@ -9,10 +9,10 @@
 @interface IRBlock : NSObject<IRBlock>
 
 - (nonnull instancetype)initWithHeight:(UInt64)height
-                     previousBlockHash:(nullable NSData*)previousBlockHash
-                             createdAt:(nonnull NSDate*)createdAt
+                     previousBlockHash:(nullable NSData *)previousBlockHash
+                             createdAt:(nonnull NSDate *)createdAt
                           transactions:(nonnull NSArray*)transactions
-             rejectedTransactionHashes:(nonnull NSArray<NSData*>*)rejectedTransactionHashes
+             rejectedTransactionHashes:(nonnull NSArray<NSData *>*)rejectedTransactionHashes
                         peerSignatures:(nonnull NSArray<id<IRPeerSignature>>*)peerSignatures;
 
 @end

@@ -65,6 +65,7 @@
                                                     withHash:result
                                                         from:self.iroha];
     }).onThen(^IRPromise * _Nullable (id result) {
+        NSLog(@"%@", result);
         IRQueryBuilder *queryBuilder = [IRQueryBuilder builderWithCreatorAccountId:self.adminAccountId];
         queryBuilder = [queryBuilder getAccountAssets:self.adminAccountId];
 
@@ -79,6 +80,7 @@
 
         return [self.iroha executeQueryRequest:request];
     }).onThen(^IRPromise * _Nullable (id result) {
+        NSLog(@"%@", result);
         if ([result conformsToProtocol:@protocol(IRAccountAssetsResponse)]) {
             id<IRAccountAssetsResponse> accountAssetsResult = result;
 
@@ -112,6 +114,7 @@
             return [IRPromise promiseWithResult:error];
         }
     }).onThen(^IRPromise * _Nullable (id result) {
+        NSLog(@"%@", result);
         IRQueryBuilder *queryBuilder = [IRQueryBuilder builderWithCreatorAccountId:self.adminAccountId];
         queryBuilder = [queryBuilder getAssetInfo:assetId];
 
@@ -126,6 +129,7 @@
 
         return [self.iroha executeQueryRequest:request];
     }).onThen(^IRPromise * _Nullable (id result) {
+        NSLog(@"%@", result);
         if ([result conformsToProtocol:@protocol(IRAssetResponse)]) {
             id<IRAssetResponse> assetResponse = result;
 
@@ -142,6 +146,7 @@
             return [IRPromise promiseWithResult:error];
         }
     }).onThen(^IRPromise * _Nullable (id result) {
+        NSLog(@"%@", result);
         [expectation fulfill];
         return nil;
     }).onError(^IRPromise * _Nullable (NSError *error) {

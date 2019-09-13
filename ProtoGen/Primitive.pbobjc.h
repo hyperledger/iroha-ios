@@ -57,6 +57,7 @@ typedef GPB_ENUM(RolePermission) {
   RolePermission_CanAddAssetQty = 3,
   RolePermission_CanSubtractAssetQty = 4,
   RolePermission_CanAddPeer = 5,
+  RolePermission_CanRemovePeer = 46,
   RolePermission_CanAddSignatory = 6,
   RolePermission_CanRemoveSignatory = 7,
   RolePermission_CanSetQuorum = 8,
@@ -93,6 +94,7 @@ typedef GPB_ENUM(RolePermission) {
   RolePermission_CanGetMyTxs = 35,
   RolePermission_CanGetAllTxs = 36,
   RolePermission_CanGetBlocks = 42,
+  RolePermission_CanGetPeers = 45,
 
   /** Grant permissions */
   RolePermission_CanGrantCanSetMyQuorum = 37,
@@ -179,6 +181,21 @@ typedef GPB_ENUM(Peer_FieldNumber) {
 
 /** hex string */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *peerKey;
+
+@end
+
+#pragma mark - AccountDetailRecordId
+
+typedef GPB_ENUM(AccountDetailRecordId_FieldNumber) {
+  AccountDetailRecordId_FieldNumber_Writer = 1,
+  AccountDetailRecordId_FieldNumber_Key = 2,
+};
+
+@interface AccountDetailRecordId : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *writer;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *key;
 
 @end
 

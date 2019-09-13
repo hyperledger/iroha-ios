@@ -39,7 +39,7 @@
 
 @implementation IRRolePermissionFactory
 
-+ (nullable id<IRRolePermission>)permissionWithValue:(int32_t)value error:(NSError*_Nullable*_Nullable)error {
++ (nullable id<IRRolePermission>)permissionWithValue:(int32_t)value error:(NSError *_Nullable*_Nullable)error {
     if (!RolePermission_IsValidValue(value)) {
         if (error) {
             NSString *message = @"Invalid role permission value passed.";
@@ -77,6 +77,10 @@
 
 + (nonnull id<IRRolePermission>)canAddPeer {
     return [self permissionWithValue:RolePermission_CanAddPeer error:nil];
+}
+
++ (id<IRRolePermission>)canRemovePeer {
+    return [self permissionWithValue:RolePermission_CanRemovePeer error:nil];
 }
 
 + (nonnull id<IRRolePermission>)canAddSignatory {
@@ -215,6 +219,10 @@
 
 + (nonnull id<IRRolePermission>)canGetBlocks {
     return [self permissionWithValue:RolePermission_CanGetBlocks error:nil];
+}
+
++ (id<IRRolePermission>)canGetPeers {
+    return [self permissionWithValue:RolePermission_CanGetPeers error:nil];
 }
 
 #pragma mark - Grant permissions

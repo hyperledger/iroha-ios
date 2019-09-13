@@ -46,7 +46,7 @@
     }).onThen(^IRPromise * _Nullable(id result) {
         [expectation fulfill];
         return nil;
-    }).onError(^IRPromise * _Nullable(NSError* error) {
+    }).onError(^IRPromise * _Nullable(NSError * error) {
         NSLog(@"%@", error);
         XCTFail();
 

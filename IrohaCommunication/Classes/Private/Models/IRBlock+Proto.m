@@ -13,7 +13,7 @@
 
 @implementation IRBlock (Proto)
 
-+ (nullable id<IRBlock>)blockFromPbBlock:(nonnull Block*)block error:(NSError*_Nullable*_Nullable)error {
++ (nullable id<IRBlock>)blockFromPbBlock:(nonnull Block*)block error:(NSError *_Nullable*_Nullable)error {
     if (!block.blockV1) {
         if (error) {
             *error = [IRBlock errorWithMessage:@"Versioned block expected but nil found."];
@@ -58,7 +58,7 @@
 
     NSDate *createdAt = [NSDate dateWithTimestampInMilliseconds:block.blockV1.payload.createdTime];
 
-    NSMutableArray<NSData*> *rejectedHashes = [NSMutableArray array];
+    NSMutableArray<NSData *> *rejectedHashes = [NSMutableArray array];
 
     if (!block.blockV1.payload.rejectedTransactionsHashesArray) {
         if (error) {
@@ -101,7 +101,7 @@
 
 #pragma mark - Helper
 
-+ (nonnull NSError*)errorWithMessage:(NSString*)message {
++ (nonnull NSError *)errorWithMessage:(NSString *)message {
     return [NSError errorWithDomain:NSStringFromClass([IRBlock class])
                                code:IRBlockProtoErrorInvalidField
                            userInfo:@{NSLocalizedDescriptionKey: message}];
