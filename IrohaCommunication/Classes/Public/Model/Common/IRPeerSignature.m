@@ -33,7 +33,7 @@
 
 + (nullable id<IRPeerSignature>)peerSignature:(nonnull id<IRSignatureProtocol>)signature
                                     publicKey:(nonnull id<IRPublicKeyProtocol>)publicKey
-                                        error:(NSError*_Nullable*_Nullable)error {
+                                        error:(NSError *_Nullable*_Nullable)error {
     
     return [[IRPeerSignature alloc] initWithSignature:signature
                                             publicKey:publicKey];

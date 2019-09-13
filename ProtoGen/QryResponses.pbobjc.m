@@ -310,11 +310,16 @@ typedef struct AccountAsset__storage_ {
 
 @implementation AccountAssetResponse
 
+@dynamic optNextAssetIdOneOfCase;
 @dynamic accountAssetsArray, accountAssetsArray_Count;
+@dynamic totalNumber;
+@dynamic nextAssetId;
 
 typedef struct AccountAssetResponse__storage_ {
-  uint32_t _has_storage_[1];
+  uint32_t _has_storage_[2];
+  uint32_t totalNumber;
   NSMutableArray *accountAssetsArray;
+  NSString *nextAssetId;
 } AccountAssetResponse__storage_;
 
 // This method is threadsafe because it is initially called
@@ -332,6 +337,24 @@ typedef struct AccountAssetResponse__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
+      {
+        .name = "totalNumber",
+        .dataTypeSpecific.className = NULL,
+        .number = AccountAssetResponse_FieldNumber_TotalNumber,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(AccountAssetResponse__storage_, totalNumber),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "nextAssetId",
+        .dataTypeSpecific.className = NULL,
+        .number = AccountAssetResponse_FieldNumber_NextAssetId,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(AccountAssetResponse__storage_, nextAssetId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[AccountAssetResponse class]
@@ -341,6 +364,12 @@ typedef struct AccountAssetResponse__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(AccountAssetResponse__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
+    static const char *oneofs[] = {
+      "optNextAssetId",
+    };
+    [localDescriptor setupOneofs:oneofs
+                           count:(uint32_t)(sizeof(oneofs) / sizeof(char*))
+                   firstHasIndex:-1];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -349,15 +378,24 @@ typedef struct AccountAssetResponse__storage_ {
 
 @end
 
+void AccountAssetResponse_ClearOptNextAssetIdOneOfCase(AccountAssetResponse *message) {
+  GPBDescriptor *descriptor = [message descriptor];
+  GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
+  GPBMaybeClearOneof(message, oneof, -1, 0);
+}
 #pragma mark - AccountDetailResponse
 
 @implementation AccountDetailResponse
 
 @dynamic detail;
+@dynamic totalNumber;
+@dynamic hasNextRecordId, nextRecordId;
 
 typedef struct AccountDetailResponse__storage_ {
   uint32_t _has_storage_[1];
   NSString *detail;
+  AccountDetailRecordId *nextRecordId;
+  uint64_t totalNumber;
 } AccountDetailResponse__storage_;
 
 // This method is threadsafe because it is initially called
@@ -374,6 +412,24 @@ typedef struct AccountDetailResponse__storage_ {
         .offset = (uint32_t)offsetof(AccountDetailResponse__storage_, detail),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "totalNumber",
+        .dataTypeSpecific.className = NULL,
+        .number = AccountDetailResponse_FieldNumber_TotalNumber,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(AccountDetailResponse__storage_, totalNumber),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt64,
+      },
+      {
+        .name = "nextRecordId",
+        .dataTypeSpecific.className = GPBStringifySymbol(AccountDetailRecordId),
+        .number = AccountDetailResponse_FieldNumber_NextRecordId,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(AccountDetailResponse__storage_, nextRecordId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -865,6 +921,169 @@ void TransactionsPageResponse_ClearNextPageTagOneOfCase(TransactionsPageResponse
   GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
   GPBMaybeClearOneof(message, oneof, -1, 0);
 }
+#pragma mark - PendingTransactionsPageResponse
+
+@implementation PendingTransactionsPageResponse
+
+@dynamic transactionsArray, transactionsArray_Count;
+@dynamic allTransactionsSize;
+@dynamic hasNextBatchInfo, nextBatchInfo;
+
+typedef struct PendingTransactionsPageResponse__storage_ {
+  uint32_t _has_storage_[1];
+  uint32_t allTransactionsSize;
+  NSMutableArray *transactionsArray;
+  PendingTransactionsPageResponse_BatchInfo *nextBatchInfo;
+} PendingTransactionsPageResponse__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "transactionsArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(Transaction),
+        .number = PendingTransactionsPageResponse_FieldNumber_TransactionsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(PendingTransactionsPageResponse__storage_, transactionsArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "allTransactionsSize",
+        .dataTypeSpecific.className = NULL,
+        .number = PendingTransactionsPageResponse_FieldNumber_AllTransactionsSize,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(PendingTransactionsPageResponse__storage_, allTransactionsSize),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "nextBatchInfo",
+        .dataTypeSpecific.className = GPBStringifySymbol(PendingTransactionsPageResponse_BatchInfo),
+        .number = PendingTransactionsPageResponse_FieldNumber_NextBatchInfo,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(PendingTransactionsPageResponse__storage_, nextBatchInfo),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[PendingTransactionsPageResponse class]
+                                     rootClass:[QryResponsesRoot class]
+                                          file:QryResponsesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(PendingTransactionsPageResponse__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - PendingTransactionsPageResponse_BatchInfo
+
+@implementation PendingTransactionsPageResponse_BatchInfo
+
+@dynamic firstTxHash;
+@dynamic batchSize;
+
+typedef struct PendingTransactionsPageResponse_BatchInfo__storage_ {
+  uint32_t _has_storage_[1];
+  uint32_t batchSize;
+  NSString *firstTxHash;
+} PendingTransactionsPageResponse_BatchInfo__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "firstTxHash",
+        .dataTypeSpecific.className = NULL,
+        .number = PendingTransactionsPageResponse_BatchInfo_FieldNumber_FirstTxHash,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(PendingTransactionsPageResponse_BatchInfo__storage_, firstTxHash),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "batchSize",
+        .dataTypeSpecific.className = NULL,
+        .number = PendingTransactionsPageResponse_BatchInfo_FieldNumber_BatchSize,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(PendingTransactionsPageResponse_BatchInfo__storage_, batchSize),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[PendingTransactionsPageResponse_BatchInfo class]
+                                     rootClass:[QryResponsesRoot class]
+                                          file:QryResponsesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(PendingTransactionsPageResponse_BatchInfo__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    [localDescriptor setupContainingMessageClassName:GPBStringifySymbol(PendingTransactionsPageResponse)];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - PeersResponse
+
+@implementation PeersResponse
+
+@dynamic peersArray, peersArray_Count;
+
+typedef struct PeersResponse__storage_ {
+  uint32_t _has_storage_[1];
+  NSMutableArray *peersArray;
+} PeersResponse__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "peersArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(Peer),
+        .number = PeersResponse_FieldNumber_PeersArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(PeersResponse__storage_, peersArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[PeersResponse class]
+                                     rootClass:[QryResponsesRoot class]
+                                          file:QryResponsesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(PeersResponse__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - QueryResponse
 
 @implementation QueryResponse
@@ -880,6 +1099,9 @@ void TransactionsPageResponse_ClearNextPageTagOneOfCase(TransactionsPageResponse
 @dynamic rolesResponse;
 @dynamic rolePermissionsResponse;
 @dynamic transactionsPageResponse;
+@dynamic pendingTransactionsPageResponse;
+@dynamic blockResponse;
+@dynamic peersResponse;
 @dynamic queryHash;
 
 typedef struct QueryResponse__storage_ {
@@ -895,6 +1117,9 @@ typedef struct QueryResponse__storage_ {
   RolePermissionsResponse *rolePermissionsResponse;
   NSString *queryHash;
   TransactionsPageResponse *transactionsPageResponse;
+  BlockResponse *blockResponse;
+  PendingTransactionsPageResponse *pendingTransactionsPageResponse;
+  PeersResponse *peersResponse;
 } QueryResponse__storage_;
 
 // This method is threadsafe because it is initially called
@@ -999,6 +1224,33 @@ typedef struct QueryResponse__storage_ {
         .number = QueryResponse_FieldNumber_TransactionsPageResponse,
         .hasIndex = -1,
         .offset = (uint32_t)offsetof(QueryResponse__storage_, transactionsPageResponse),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "blockResponse",
+        .dataTypeSpecific.className = GPBStringifySymbol(BlockResponse),
+        .number = QueryResponse_FieldNumber_BlockResponse,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(QueryResponse__storage_, blockResponse),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "pendingTransactionsPageResponse",
+        .dataTypeSpecific.className = GPBStringifySymbol(PendingTransactionsPageResponse),
+        .number = QueryResponse_FieldNumber_PendingTransactionsPageResponse,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(QueryResponse__storage_, pendingTransactionsPageResponse),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "peersResponse",
+        .dataTypeSpecific.className = GPBStringifySymbol(PeersResponse),
+        .number = QueryResponse_FieldNumber_PeersResponse,
+        .hasIndex = -1,
+        .offset = (uint32_t)offsetof(QueryResponse__storage_, peersResponse),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },

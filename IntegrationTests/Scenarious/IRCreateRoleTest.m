@@ -21,9 +21,11 @@
         return;
     }
 
-    NSArray<id<IRRolePermission>>* permissions = @[[IRRolePermissionFactory canAddSignatory],
+    NSArray<id<IRRolePermission>>* permissions = @[
+                                                   [IRRolePermissionFactory canAddSignatory],
                                                    [IRRolePermissionFactory canRemoveSignatory],
-                                                   [IRRolePermissionFactory canSetQuorum]];
+                                                   [IRRolePermissionFactory canSetQuorum]
+                                                   ];
 
     IRTransactionBuilder *transactionBuilder = [IRTransactionBuilder builderWithCreatorAccountId:self.adminAccountId];
     transactionBuilder = [transactionBuilder createRole:role permissions:permissions];
@@ -35,6 +37,8 @@
         XCTFail();
         return;
     }
+    
+    NSLog(@"%@", [[transaction transactionHashWithError:nil] toHexString]);
 
     XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
 
@@ -59,7 +63,7 @@
         [expectation fulfill];
 
         return nil;
-    }).onError(^IRPromise* _Nullable (NSError* error) {
+    }).onError(^IRPromise* _Nullable (NSError * error) {
         XCTFail();
         NSLog(@"%@",error);
 

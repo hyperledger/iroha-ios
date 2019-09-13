@@ -17,5 +17,7 @@
 #import "IRSetAccountQuorum.h"
 #import "IRSubtractAssetQuantity.h"
 #import "IRTransferAsset.h"
+#import "IRRemovePeer.h"
+#import "IRCompareAndSetAccountDetail.h"
 
 #endif

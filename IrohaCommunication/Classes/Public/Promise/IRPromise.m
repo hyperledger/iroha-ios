@@ -7,13 +7,13 @@
 
 @interface IRPromise()
 
-@property(strong, nonatomic)IRPromise* _Nullable next;
+@property (nonatomic, strong) IRPromise* _Nullable next;
 
-@property(strong, nonatomic)IRPromiseResultHandler _Nullable resultHandler;
+@property (nonatomic, strong) IRPromiseResultHandler _Nullable resultHandler;
 
-@property(strong, nonatomic)IRPromiseErrorHandler _Nullable errorHandler;
+@property (nonatomic, strong) IRPromiseErrorHandler _Nullable errorHandler;
 
-@property(strong, nonatomic)dispatch_semaphore_t semaphore;
+@property (nonatomic, strong) dispatch_semaphore_t semaphore;
 
 @end
 

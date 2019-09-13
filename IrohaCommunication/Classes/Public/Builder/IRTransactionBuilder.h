@@ -12,10 +12,10 @@
 @protocol IRTransactionBuilderProtocol <NSObject>
 
 - (nonnull instancetype)withCreatorAccountId:(nonnull id<IRAccountId>)creatorAccountId;
-- (nonnull instancetype)withCreatedDate:(nonnull NSDate*)date;
+- (nonnull instancetype)withCreatedDate:(nonnull NSDate *)date;
 - (nonnull instancetype)withQuorum:(NSUInteger)quorum;
 - (nonnull instancetype)addCommand:(nonnull id<IRCommand>)command;
-- (nullable id<IRTransaction>)build:(NSError*_Nullable*_Nullable)error;
+- (nullable id<IRTransaction>)build:(NSError *_Nullable*_Nullable)error;
 
 @end
 
@@ -67,8 +67,8 @@ typedef NS_ENUM(NSUInteger, IRTransactionBuilderError) {
                               permission:(nonnull id<IRGrantablePermission>)grantablePermission;
 
 - (nonnull instancetype)setAccountDetail:(nonnull id<IRAccountId>)accountId
-                                      key:(nonnull NSString*)key
-                                    value:(nonnull NSString*)value;
+                                      key:(nonnull NSString *)key
+                                    value:(nonnull NSString *)value;
 
 - (nonnull instancetype)setAccountQuorum:(nonnull id<IRAccountId>)accountId
                                   quorum:(UInt32)quorum;
@@ -76,7 +76,14 @@ typedef NS_ENUM(NSUInteger, IRTransactionBuilderError) {
 - (nonnull instancetype)transferAsset:(nonnull id<IRAccountId>)sourceAccountId
                    destinationAccount:(nonnull id<IRAccountId>)destinationAccountId
                               assetId:(nonnull id<IRAssetId>)assetId
-                          description:(nonnull NSString*)transferDescription
+                          description:(nonnull NSString *)transferDescription
                                amount:(nonnull id<IRAmount>)amount;
+
+- (nonnull instancetype)removePeer:(nonnull id<IRPublicKeyProtocol>)peerKey;
+
+- (nonnull instancetype)compareAndSet:(nonnull id<IRAccountId>)accountId
+                                  key:(nonnull NSString *)key
+                                value:(nonnull NSString *)value
+                             oldValue:(nullable NSString *)oldValue;
 
 @end

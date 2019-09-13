@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, IRQueryRequestError) {
 @interface IRBlockQueryRequest : NSObject<IRBlockQueryRequest, IRProtobufTransformable>
 
 - (nonnull instancetype)initWithCreator:(nonnull id<IRAccountId>)creator
-                              createdAt:(nonnull NSDate*)createdAt
+                              createdAt:(nonnull NSDate *)createdAt
                            queryCounter:(UInt64)queryCounter
                           peerSignature:(nullable id<IRPeerSignature>)peerSignature;
 

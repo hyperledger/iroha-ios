@@ -51,17 +51,12 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		7C8964A2BAE86B246752F5D5 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872B4DCAED8E7A58AFC8B200 /* Pods_UnitTests.framework */; };
 		844761D3224A4946009ADC0E /* IRInvalidSerializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761D2224A4946009ADC0E /* IRInvalidSerializationTests.m */; };
-		844761E7224A4EFF009ADC0E /* Block.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761D6224A4EFF009ADC0E /* Block.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		844761E8224A4EFF009ADC0E /* Endpoint.pbrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761D8224A4EFF009ADC0E /* Endpoint.pbrpc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		844761E9224A4EFF009ADC0E /* QryResponses.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761DA224A4EFF009ADC0E /* QryResponses.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		844761EA224A4EFF009ADC0E /* Queries.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761DC224A4EFF009ADC0E /* Queries.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		844761EB224A4EFF009ADC0E /* Transaction.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761DD224A4EFF009ADC0E /* Transaction.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		844761EC224A4EFF009ADC0E /* Endpoint.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761DE224A4EFF009ADC0E /* Endpoint.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		844761ED224A4EFF009ADC0E /* Primitive.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761E0224A4EFF009ADC0E /* Primitive.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		844761EE224A4EFF009ADC0E /* Proposal.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761E2224A4EFF009ADC0E /* Proposal.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		844761EF224A4EFF009ADC0E /* Commands.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761E5224A4EFF009ADC0E /* Commands.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		844761F1224A5133009ADC0E /* IRQueryResponseDeserializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 844761F0224A5133009ADC0E /* IRQueryResponseDeserializationTests.m */; };
+		8481A59122FD48800056D3D4 /* IRAssetPaginationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8481A59022FD48800056D3D4 /* IRAssetPaginationTests.m */; };
 		84D693FB22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D693FA22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m */; };
+		8BA6158423255099002C33D8 /* IRGetAccountDetailTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA6158323255099002C33D8 /* IRGetAccountDetailTest.m */; };
+		8BB6C2BF23164E04009B7AEA /* IRAccountDetailPaginationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6C2BE23164E04009B7AEA /* IRAccountDetailPaginationTests.m */; };
+		8BF9E1DE2321976F00A1257A /* IRGetAssetsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BF9E1DD2321976F00A1257A /* IRGetAssetsTest.m */; };
 		8CA1A478927FFA33BA30A5B4 /* Pods_IntegrationTestHost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175938D8DE70C85E0CEA25AF /* Pods_IntegrationTestHost.framework */; };
 /* End PBXBuildFile section */
 
@@ -152,29 +147,24 @@
 		6BF3097DA0B1239D7D3C0799 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		74D33D817C5F7989BD3071B1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		844761D2224A4946009ADC0E /* IRInvalidSerializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRInvalidSerializationTests.m; sourceTree = "<group>"; };
-		844761D5224A4EFF009ADC0E /* Primitive.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitive.pbobjc.h; sourceTree = "<group>"; };
-		844761D6224A4EFF009ADC0E /* Block.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.pbobjc.m; sourceTree = "<group>"; };
-		844761D7224A4EFF009ADC0E /* Endpoint.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Endpoint.pbobjc.h; sourceTree = "<group>"; };
-		844761D8224A4EFF009ADC0E /* Endpoint.pbrpc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Endpoint.pbrpc.m; sourceTree = "<group>"; };
-		844761D9224A4EFF009ADC0E /* Proposal.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Proposal.pbobjc.h; sourceTree = "<group>"; };
-		844761DA224A4EFF009ADC0E /* QryResponses.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QryResponses.pbobjc.m; sourceTree = "<group>"; };
-		844761DB224A4EFF009ADC0E /* Commands.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commands.pbobjc.h; sourceTree = "<group>"; };
-		844761DC224A4EFF009ADC0E /* Queries.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queries.pbobjc.m; sourceTree = "<group>"; };
-		844761DD224A4EFF009ADC0E /* Transaction.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transaction.pbobjc.m; sourceTree = "<group>"; };
-		844761DE224A4EFF009ADC0E /* Endpoint.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Endpoint.pbobjc.m; sourceTree = "<group>"; };
-		844761DF224A4EFF009ADC0E /* Block.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.pbobjc.h; sourceTree = "<group>"; };
-		844761E0224A4EFF009ADC0E /* Primitive.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Primitive.pbobjc.m; sourceTree = "<group>"; };
-		844761E1224A4EFF009ADC0E /* QryResponses.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QryResponses.pbobjc.h; sourceTree = "<group>"; };
-		844761E2224A4EFF009ADC0E /* Proposal.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Proposal.pbobjc.m; sourceTree = "<group>"; };
-		844761E3224A4EFF009ADC0E /* Endpoint.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Endpoint.pbrpc.h; sourceTree = "<group>"; };
-		844761E4224A4EFF009ADC0E /* Queries.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queries.pbobjc.h; sourceTree = "<group>"; };
-		844761E5224A4EFF009ADC0E /* Commands.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Commands.pbobjc.m; sourceTree = "<group>"; };
-		844761E6224A4EFF009ADC0E /* Transaction.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.pbobjc.h; sourceTree = "<group>"; };
 		844761F0224A5133009ADC0E /* IRQueryResponseDeserializationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRQueryResponseDeserializationTests.m; sourceTree = "<group>"; };
+		8481A59022FD48800056D3D4 /* IRAssetPaginationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRAssetPaginationTests.m; sourceTree = "<group>"; };
+		8481A59322FD4D780056D3D4 /* Primitive.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitive.pbobjc.h; sourceTree = "<group>"; };
+		8481A59522FD4D790056D3D4 /* Endpoint.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Endpoint.pbobjc.h; sourceTree = "<group>"; };
+		8481A59722FD4D790056D3D4 /* Proposal.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Proposal.pbobjc.h; sourceTree = "<group>"; };
+		8481A59922FD4D790056D3D4 /* Commands.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commands.pbobjc.h; sourceTree = "<group>"; };
+		8481A59D22FD4D790056D3D4 /* Block.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.pbobjc.h; sourceTree = "<group>"; };
+		8481A59F22FD4D790056D3D4 /* QryResponses.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QryResponses.pbobjc.h; sourceTree = "<group>"; };
+		8481A5A122FD4D790056D3D4 /* Endpoint.pbrpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Endpoint.pbrpc.h; sourceTree = "<group>"; };
+		8481A5A222FD4D790056D3D4 /* Queries.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queries.pbobjc.h; sourceTree = "<group>"; };
+		8481A5A422FD4D790056D3D4 /* Transaction.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.pbobjc.h; sourceTree = "<group>"; };
 		84D693FA22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRAccountRestoreWithBatchTest.m; sourceTree = "<group>"; };
 		84EA860F14455E442B5C9B29 /* IrohaCommunication.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IrohaCommunication.podspec; path = ../IrohaCommunication.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		86F19532265991B547599707 /* Pods-IrohaExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrohaExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-IrohaExample/Pods-IrohaExample.release.xcconfig"; sourceTree = "<group>"; };
 		872B4DCAED8E7A58AFC8B200 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BA6158323255099002C33D8 /* IRGetAccountDetailTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRGetAccountDetailTest.m; sourceTree = "<group>"; };
+		8BB6C2BE23164E04009B7AEA /* IRAccountDetailPaginationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRAccountDetailPaginationTests.m; sourceTree = "<group>"; };
+		8BF9E1DD2321976F00A1257A /* IRGetAssetsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRGetAssetsTest.m; sourceTree = "<group>"; };
 		9CA67C26A81EB59902096272 /* Pods_IntegrationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntegrationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B877F0064619F03D2B560C12 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		BE1A149366A65576BDC46228 /* Pods-IntegrationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntegrationTests/Pods-IntegrationTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -241,6 +231,8 @@
 				0200347421C8516F001A6A53 /* IRGrantablePermissionTests.m */,
 				0200347621C853E2001A6A53 /* IRRolePermissionTests.m */,
 				021C24AE21DCDDE3005D5304 /* IRPaginationTests.m */,
+				8481A59022FD48800056D3D4 /* IRAssetPaginationTests.m */,
+				8BB6C2BE23164E04009B7AEA /* IRAccountDetailPaginationTests.m */,
 				021C24EF21DDF706005D5304 /* IRAccountAssetTests.m */,
 			);
 			name = Model;
@@ -277,6 +269,8 @@
 				02D656A121F12DC300AAA66A /* IRCreateDomainTest.m */,
 				02D656BD21F19F6B00AAA66A /* IRCreateRoleTest.m */,
 				84D693FA22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m */,
+				8BF9E1DD2321976F00A1257A /* IRGetAssetsTest.m */,
+				8BA6158323255099002C33D8 /* IRGetAccountDetailTest.m */,
 			);
 			path = Scenarious;
 			sourceTree = "<group>";
@@ -284,10 +278,10 @@
 		02D656A921F12DC300AAA66A /* IrohaContainer */ = {
 			isa = PBXGroup;
 			children = (
-				02D656AA21F12DC300AAA66A /* IRBaseIrohaContainerTests.m */,
-				02D656AB21F12DC300AAA66A /* IRIrohaContainer.m */,
 				02D656AC21F12DC300AAA66A /* IRBaseIrohaContainerTests.h */,
+				02D656AA21F12DC300AAA66A /* IRBaseIrohaContainerTests.m */,
 				02D656AD21F12DC300AAA66A /* IRIrohaContainer.h */,
+				02D656AB21F12DC300AAA66A /* IRIrohaContainer.m */,
 			);
 			path = IrohaContainer;
 			sourceTree = "<group>";
@@ -415,7 +409,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				844761D4224A4EFF009ADC0E /* ProtoGen */,
+				8481A59222FD4D780056D3D4 /* ProtoGen */,
 				844761D1224A4946009ADC0E /* Serialization */,
 				021C24E621DD3C90005D5304 /* Query */,
 				02E319DB21DBB18500B33B66 /* Promise */,
@@ -456,27 +450,18 @@
 			path = ../../Tests/Serialization;
 			sourceTree = "<group>";
 		};
-		844761D4224A4EFF009ADC0E /* ProtoGen */ = {
+		8481A59222FD4D780056D3D4 /* ProtoGen */ = {
 			isa = PBXGroup;
 			children = (
-				844761D5224A4EFF009ADC0E /* Primitive.pbobjc.h */,
-				844761D6224A4EFF009ADC0E /* Block.pbobjc.m */,
-				844761D7224A4EFF009ADC0E /* Endpoint.pbobjc.h */,
-				844761D8224A4EFF009ADC0E /* Endpoint.pbrpc.m */,
-				844761D9224A4EFF009ADC0E /* Proposal.pbobjc.h */,
-				844761DA224A4EFF009ADC0E /* QryResponses.pbobjc.m */,
-				844761DB224A4EFF009ADC0E /* Commands.pbobjc.h */,
-				844761DC224A4EFF009ADC0E /* Queries.pbobjc.m */,
-				844761DD224A4EFF009ADC0E /* Transaction.pbobjc.m */,
-				844761DE224A4EFF009ADC0E /* Endpoint.pbobjc.m */,
-				844761DF224A4EFF009ADC0E /* Block.pbobjc.h */,
-				844761E0224A4EFF009ADC0E /* Primitive.pbobjc.m */,
-				844761E1224A4EFF009ADC0E /* QryResponses.pbobjc.h */,
-				844761E2224A4EFF009ADC0E /* Proposal.pbobjc.m */,
-				844761E3224A4EFF009ADC0E /* Endpoint.pbrpc.h */,
-				844761E4224A4EFF009ADC0E /* Queries.pbobjc.h */,
-				844761E5224A4EFF009ADC0E /* Commands.pbobjc.m */,
-				844761E6224A4EFF009ADC0E /* Transaction.pbobjc.h */,
+				8481A59322FD4D780056D3D4 /* Primitive.pbobjc.h */,
+				8481A59522FD4D790056D3D4 /* Endpoint.pbobjc.h */,
+				8481A59722FD4D790056D3D4 /* Proposal.pbobjc.h */,
+				8481A59922FD4D790056D3D4 /* Commands.pbobjc.h */,
+				8481A59D22FD4D790056D3D4 /* Block.pbobjc.h */,
+				8481A59F22FD4D790056D3D4 /* QryResponses.pbobjc.h */,
+				8481A5A122FD4D790056D3D4 /* Endpoint.pbrpc.h */,
+				8481A5A222FD4D790056D3D4 /* Queries.pbobjc.h */,
+				8481A5A422FD4D790056D3D4 /* Transaction.pbobjc.h */,
 			);
 			name = ProtoGen;
 			path = ../../ProtoGen;
@@ -576,6 +561,7 @@
 				TargetAttributes = {
 					021C844621ED12B40037F633 = {
 						DevelopmentTeam = YLWWUD25VZ;
+						LastSwiftMigration = 1020;
 						TestTargetID = 02ED8DC121EE8DD80068AF05;
 					};
 					02E31A2321DC050E00B33B66 = {
@@ -818,8 +804,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				02D656B821F12DC300AAA66A /* IRIrohaContainer.m in Sources */,
+				8BF9E1DE2321976F00A1257A /* IRGetAssetsTest.m in Sources */,
 				02D656B021F12DC300AAA66A /* IRCreateDomainTest.m in Sources */,
 				02D656BF21F19F7500AAA66A /* IRCreateRoleTest.m in Sources */,
+				8BA6158423255099002C33D8 /* IRGetAccountDetailTest.m in Sources */,
 				02D656B721F12DC300AAA66A /* IRBaseIrohaContainerTests.m in Sources */,
 				84D693FB22EDCDB10059C1FB /* IRAccountRestoreWithBatchTest.m in Sources */,
 				02D656AF21F12DC300AAA66A /* IRCreateAccountTest.m in Sources */,
@@ -854,27 +842,20 @@
 			files = (
 				02E3198B21D0FEF000B33B66 /* IRTransactionTests.m in Sources */,
 				0200346F21C840D1001A6A53 /* IRAmountTests.m in Sources */,
-				844761E7224A4EFF009ADC0E /* Block.pbobjc.m in Sources */,
 				02E319DD21DBB18500B33B66 /* IRPromiseTests.m in Sources */,
-				844761ED224A4EFF009ADC0E /* Primitive.pbobjc.m in Sources */,
 				0200347521C8516F001A6A53 /* IRGrantablePermissionTests.m in Sources */,
-				844761EC224A4EFF009ADC0E /* Endpoint.pbobjc.m in Sources */,
 				0200347121C849FF001A6A53 /* IRAssetIdTests.m in Sources */,
 				844761D3224A4946009ADC0E /* IRInvalidSerializationTests.m in Sources */,
-				844761EA224A4EFF009ADC0E /* Queries.pbobjc.m in Sources */,
+				8481A59122FD48800056D3D4 /* IRAssetPaginationTests.m in Sources */,
 				021C24E821DD3C90005D5304 /* IRQueryBuilderTests.m in Sources */,
-				844761E8224A4EFF009ADC0E /* Endpoint.pbrpc.m in Sources */,
-				844761EF224A4EFF009ADC0E /* Commands.pbobjc.m in Sources */,
 				0200347721C853E2001A6A53 /* IRRolePermissionTests.m in Sources */,
 				021C24F021DDF706005D5304 /* IRAccountAssetTests.m in Sources */,
+				8BB6C2BF23164E04009B7AEA /* IRAccountDetailPaginationTests.m in Sources */,
 				0200345E21C62D3F001A6A53 /* IRDomainTests.m in Sources */,
-				844761E9224A4EFF009ADC0E /* QryResponses.pbobjc.m in Sources */,
 				021C843D21EA6E950037F633 /* IRBlockQueryBuilderTests.m in Sources */,
-				844761EB224A4EFF009ADC0E /* Transaction.pbobjc.m in Sources */,
 				0200345F21C62D3F001A6A53 /* IRAccountIdTests.m in Sources */,
 				844761F1224A5133009ADC0E /* IRQueryResponseDeserializationTests.m in Sources */,
 				0200346121C63F45001A6A53 /* IRAddressTests.m in Sources */,
-				844761EE224A4EFF009ADC0E /* Proposal.pbobjc.m in Sources */,
 				021C24AF21DCDDE3005D5304 /* IRPaginationTests.m in Sources */,
 				0200347321C84E5C001A6A53 /* IRRoleNameTests.m in Sources */,
 			);
@@ -938,6 +919,7 @@
 			baseConfigurationReference = BE1A149366A65576BDC46228 /* Pods-IntegrationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -951,8 +933,11 @@
 				);
 				INFOPLIST_FILE = "IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IntegrationTestHost.app/IntegrationTestHost";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -963,6 +948,7 @@
 			baseConfigurationReference = 55D980CEB7E9C5BA9DA95FC2 /* Pods-IntegrationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = YLWWUD25VZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -972,8 +958,10 @@
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "IntegrationTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IntegrationTestHost.app/IntegrationTestHost";
 				WRAPPER_EXTENSION = xctest;
 			};

@@ -8,11 +8,13 @@
 #import "IRQueryResponseAll.h"
 #import "IrohaCrypto/NSData+Hex.h"
 #import "IRTransactionImpl+Proto.h"
+#import "Primitive.pbobjc.h"
+#import "IRBatchInfo.h"
 
 @implementation IRQueryResponseProtoFactory
 
 + (nullable id<IRQueryResponse>)responseFromProtobuf:(nonnull QueryResponse*)pbResponse
-                                               error:(NSError*_Nullable*_Nullable)error {
+                                               error:(NSError *_Nullable*_Nullable)error {
 
     if (!pbResponse.queryHash) {
         if (error) {
@@ -89,6 +91,14 @@
                                                      queryHash:queryHash
                                                          error:error];
             break;
+        case QueryResponse_Response_OneOfCase_PendingTransactionsPageResponse:
+            return [self pendingTransactionPageResponseFromPbResponse:pbResponse.pendingTransactionsPageResponse
+                                                            queryHash:queryHash
+                                                                error:error];
+            break;
+        case QueryResponse_Response_OneOfCase_PeersResponse:
+            return [self peersResponseFromPbResponse:pbResponse.peersResponse queryHash:queryHash error:error];
+            break;
         default:
             if (error) {
                 NSString *message = [NSString stringWithFormat:@"Unexpected query response type %@", @(pbResponse.responseOneOfCase)];
@@ -104,7 +114,7 @@
 #pragma mark - Responses
 
 + (nullable id<IRAssetResponse>)assetResponseFromProtobuf:(nonnull AssetResponse*)pbResponse
-                                                queryHash:(nonnull NSData*)queryHash
+                                                queryHash:(nonnull NSData *)queryHash
                                                     error:(NSError **)error {
     id<IRAssetId> assetId = [IRAssetIdFactory assetWithIdentifier:pbResponse.asset.assetId
                                                             error:error];
@@ -119,8 +129,8 @@
 }
 
 + (nullable id<IRAccountResponse>)accountResponseFromProtobuf:(nonnull AccountResponse*)pbResponse
-                                                    queryHash:(nonnull NSData*)queryHash
-                                                        error:(NSError**)error {
+                                                    queryHash:(nonnull NSData *)queryHash
+                                                        error:(NSError **)error {
     id<IRAccountId> accountId = [IRAccountIdFactory accountWithIdentifier:pbResponse.account.accountId
                                                                     error:error];
 
@@ -149,8 +159,8 @@
 }
 
 + (nullable id<IRErrorResponse>)errorResponseFromProtobuf:(nonnull ErrorResponse*)pbResponse
-                                                queryHash:(nonnull NSData*)queryHash
-                                                    error:(NSError**)error {
+                                                queryHash:(nonnull NSData *)queryHash
+                                                    error:(NSError **)error {
 
     IRErrorResponseReason reason;
 
@@ -202,8 +212,8 @@
 }
 
 + (nullable id<IRRolesResponse>)rolesResponseFromPbResponse:(nonnull RolesResponse*)pbResponse
-                                                  queryHash:(nonnull NSData*)queryHash
-                                                      error:(NSError**)error {
+                                                  queryHash:(nonnull NSData *)queryHash
+                                                      error:(NSError **)error {
 
     NSMutableArray<id<IRRoleName>> *roles = [NSMutableArray array];
 
@@ -223,8 +233,8 @@
 }
 
 + (nullable id<IRSignatoriesResponse>)signatoriesResponseFromPbResponse:(nonnull SignatoriesResponse*)pbResponse
-                                                              queryHash:(nonnull NSData*)queryHash
-                                                                  error:(NSError**)error {
+                                                              queryHash:(nonnull NSData *)queryHash
+                                                                  error:(NSError **)error {
 
     NSMutableArray<id<IRPublicKeyProtocol>> *publicKeys = [NSMutableArray array];
 
@@ -261,8 +271,8 @@
 }
 
 + (nullable id<IRTransactionsResponse>)transactionsResponseFromPbResponse:(nonnull TransactionsResponse*)pbResponse
-                                                                queryHash:(nonnull NSData*)queryHash
-                                                                    error:(NSError**)error {
+                                                                queryHash:(nonnull NSData *)queryHash
+                                                                    error:(NSError **)error {
 
     NSArray<id<IRTransaction>> *transactions = [self transactionsFromPbTransactions:pbResponse.transactionsArray
                                                                               error:error];
@@ -276,8 +286,8 @@
 }
 
 + (nullable id<IRAccountAssetsResponse>)accountAssetsResponseFromPbResponse:(nonnull AccountAssetResponse*)pbResponse
-                                                                  queryHash:(nonnull NSData*)queryHash
-                                                                      error:(NSError**)error {
+                                                                  queryHash:(nonnull NSData *)queryHash
+                                                                      error:(NSError **)error {
 
     NSMutableArray<id<IRAccountAsset>> *accountAssets = [NSMutableArray array];
 
@@ -315,23 +325,45 @@
         [accountAssets addObject:accountAsset];
     }
 
+    id<IRAssetId> nextAssetId = nil;
+
+    if (pbResponse.nextAssetId && pbResponse.nextAssetId.length > 0) {
+        NSError * error = nil;
+        nextAssetId = [IRAssetIdFactory assetWithIdentifier: pbResponse.nextAssetId error:&error];
+
+        if (error) {
+            return nil;
+        }
+    }
+
     return [[IRAccountAssetsResponse alloc] initWithAccountAssets:accountAssets
+                                                       totalCount:pbResponse.totalNumber
+                                                      nextAssetId:nextAssetId
                                                         queryHash:queryHash];
 }
 
 + (nullable id<IRAccountDetailResponse>)accountDetailResponseFromPbResponse:(nonnull AccountDetailResponse*)pbResponse
-                                                                  queryHash:(nonnull NSData*)queryHash
-                                                                      error:(NSError**)error {
+                                                                  queryHash:(nonnull NSData *)queryHash
+                                                                      error:(NSError **)error {
 
     NSString *detail = pbResponse.detail ? pbResponse.detail : @"";
+    
+    id<IRAccountDetailRecordId> nextRecordId = nil;
+    
+    if (pbResponse.hasNextRecordId) {
+        nextRecordId = [IRAccountDetailRecordIdFactory accountDetailRecordIdWithWriter:pbResponse.nextRecordId.writer
+                                                                                   key:pbResponse.nextRecordId.key];
+    }
 
     return [[IRAccountDetailResponse alloc] initWithDetail:detail
+                                                totalCount:pbResponse.totalNumber
+                                              nextRecordId:nextRecordId
                                                  queryHash:queryHash];
 }
 
 + (nullable id<IRRolePermissionsResponse>)rolePermissionsResponseFromPbResponse:(nonnull RolePermissionsResponse*)pbResponse
-                                                                      queryHash:(nonnull NSData*)queryHash
-                                                                          error:(NSError**)error {
+                                                                      queryHash:(nonnull NSData *)queryHash
+                                                                          error:(NSError **)error {
     NSMutableArray<id<IRRolePermission>>* permissions = [NSMutableArray array];
     for (NSUInteger i = 0; i < pbResponse.permissionsArray.count; i++) {
         id<IRRolePermission> permission = [IRRolePermissionFactory permissionWithValue:[pbResponse.permissionsArray valueAtIndex:i]
@@ -349,8 +381,8 @@
 }
 
 + (nullable id<IRTransactionsPageResponse>)transactionPageResponseFromPbResponse:(nonnull TransactionsPageResponse*)pbResponse
-                                                                       queryHash:(nonnull NSData*)queryHash
-                                                                           error:(NSError**)error {
+                                                                       queryHash:(nonnull NSData *)queryHash
+                                                                           error:(NSError **)error {
 
     NSArray<id<IRTransaction>> *transactions = [self transactionsFromPbTransactions:pbResponse.transactionsArray
                                                                               error:error];
@@ -361,7 +393,7 @@
 
     NSData *nextTransactionHash = nil;
 
-    if (pbResponse.nextTxHash) {
+    if (pbResponse.nextTxHash && pbResponse.nextTxHash.length > 0) {
         nextTransactionHash = [[NSData alloc] initWithHexString:pbResponse.nextTxHash];
 
         if (!nextTransactionHash) {
@@ -382,8 +414,43 @@
                                                           queryHash:queryHash];
 }
 
-+ (nullable NSArray<id<IRTransaction>>*)transactionsFromPbTransactions:(nonnull NSArray<Transaction*>*)pbTransactions
-                                                                 error:(NSError**)error {
++ (nullable id<IRPendingTransactionsPageResponse>)pendingTransactionPageResponseFromPbResponse:(nonnull PendingTransactionsPageResponse *)pbResponse
+                                                                                     queryHash:(nonnull NSData *)queryHash
+                                                                                         error:(NSError **)error {
+    
+    NSArray<id<IRTransaction>> *transactions = [self transactionsFromPbTransactions:pbResponse.transactionsArray
+                                                                              error:error];
+    
+    if (!transactions) {
+        return nil;
+    }
+    
+    IRBatchInfo *nextBatch = nil;
+    
+    if (pbResponse.nextBatchInfo && pbResponse.nextBatchInfo.batchSize > 0) {
+        nextBatch = [[IRBatchInfo alloc] initWithNextHash:pbResponse.nextBatchInfo.firstTxHash
+                                                batchSize:pbResponse.nextBatchInfo.batchSize];
+        
+        if (!nextBatch) {
+            if (error) {
+                NSString *message = [NSString stringWithFormat:@"Invalid transaction batch info %@", pbResponse.nextBatchInfo];
+                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
+                                             code:IRQueryResponseFactoryErrorInvalidAgrument
+                                         userInfo:@{NSLocalizedDescriptionKey: message}];
+            }
+            
+            return nil;
+        }
+    }
+    
+    return [[IRPendingTransactionsPageResponse alloc] initWithTransactions:transactions
+                                                                totalCount:pbResponse.allTransactionsSize
+                                                                 nextBatch:nextBatch
+                                                                 queryHash:queryHash];
+}
+
++ (nullable NSArray<id<IRTransaction>> *)transactionsFromPbTransactions:(nonnull NSArray<Transaction*> *)pbTransactions
+                                                                 error:(NSError **)error {
 
     NSMutableArray<id<IRTransaction>> *transactions = [NSMutableArray array];
 
@@ -399,6 +466,50 @@
     }
 
     return transactions;
+}
+
++ (nullable id<IRPeersResponse>)peersResponseFromPbResponse:(nonnull PeersResponse*)pbResponse
+                                                  queryHash:(nonnull NSData *)queryHash
+                                                      error:(NSError **)error {
+    NSMutableArray<id<IRPeer>> *peers = [NSMutableArray array];
+    
+    for (Peer *pbPeer in pbResponse.peersArray) {
+        id<IRAddress> address = [IRAddressFactory addressWithValue:pbPeer.address error:error];
+        
+        if (!address) {
+            return nil;
+        }
+        
+        NSData *rawPublicKey = [[NSData alloc] initWithHexString:pbPeer.peerKey];
+        
+        if (!rawPublicKey) {
+            if (error) {
+                NSString *message = [NSString stringWithFormat:@"Invalid public key hex string %@", pbPeer.peerKey];
+                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
+                                             code:IRQueryResponseFactoryErrorInvalidAgrument
+                                         userInfo:@{NSLocalizedDescriptionKey: message}];
+            }
+            return nil;
+        }
+        
+        id<IRPublicKeyProtocol> publicKey = [[IREd25519PublicKey alloc] initWithRawData:rawPublicKey];
+        
+        if (!publicKey) {
+            if (error) {
+                NSString *message = [NSString stringWithFormat:@"Invalid public key %@", [queryHash toHexString]];
+                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
+                                             code:IRQueryResponseFactoryErrorInvalidAgrument
+                                         userInfo:@{NSLocalizedDescriptionKey: message}];
+            }
+            return nil;
+        }
+        
+        id<IRPeer> peer = [IRPeerFactory peerWithAddress:address key:publicKey error:error];
+        
+        [peers addObject:peer];
+    }
+    
+    return [[IRPeersResponse alloc] initWithPeers:peers queryHash:queryHash];
 }
 
 @end

@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, IRTransactionStatusStreamError) {
 @protocol IRRepeatableStatusStreamProtocol <NSObject>
 
 + (nonnull IRPromise*)onTransactionStatus:(IRTransactionStatus)transactionStatus
-                                 withHash:(nonnull NSData*)transactionHash
+                                 withHash:(nonnull NSData *)transactionHash
                                      from:(nonnull id<IRTransactionStatusStreamable>)streamable
                           maxReconnection:(NSUInteger)trialsCount;
 
@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, IRTransactionStatusStreamError) {
 @interface IRRepeatableStatusStream : NSObject<IRRepeatableStatusStreamProtocol>
 
 + (nonnull IRPromise*)onTransactionStatus:(IRTransactionStatus)transactionStatus
-                                 withHash:(nonnull NSData*)transactionHash
+                                 withHash:(nonnull NSData *)transactionHash
                                      from:(nonnull id<IRTransactionStatusStreamable>)streamable;
 
 @end

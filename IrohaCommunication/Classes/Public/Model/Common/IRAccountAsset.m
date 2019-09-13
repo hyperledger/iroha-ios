@@ -5,11 +5,13 @@
 
 #import "IRAccountAsset.h"
 
-@interface IRAccountAsset : NSObject<IRAccountAsset>
 
+@interface IRAccountAsset : NSObject<IRAccountAsset>
 @end
 
+
 @implementation IRAccountAsset
+
 @synthesize accountId = _accountId;
 @synthesize assetId = _assetId;
 @synthesize balance = _balance;
@@ -26,7 +28,12 @@
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Account id: %@\nAsset id:%@\nBalance: %@\n", _accountId, _assetId, _balance];
+}
+
 @end
+
 
 @implementation IRAccountAssetFactory
 

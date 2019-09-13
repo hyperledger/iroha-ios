@@ -9,8 +9,8 @@
 
 @protocol IRPeerSignature <NSObject>
 
-@property(nonatomic, readonly)id<IRSignatureProtocol> _Nonnull signature;
-@property(nonatomic, readonly)id<IRPublicKeyProtocol> _Nonnull publicKey;
+@property (nonatomic, readonly) id<IRSignatureProtocol> _Nonnull signature;
+@property (nonatomic, readonly) id<IRPublicKeyProtocol> _Nonnull publicKey;
 
 @end
 
@@ -18,7 +18,7 @@
 
 + (nullable id<IRPeerSignature>)peerSignature:(nonnull id<IRSignatureProtocol>)signature
                                     publicKey:(nonnull id<IRPublicKeyProtocol>)publicKey
-                                        error:(NSError*_Nullable*_Nullable)error;
+                                        error:(NSError *_Nullable*_Nullable)error;
 
 @end
 

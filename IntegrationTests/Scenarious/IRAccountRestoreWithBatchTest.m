@@ -8,15 +8,15 @@
 
 @interface IRAccountRestoreWithBatchTest : IRBaseIrohaContainerTests
 
-@property(strong, nonatomic)id<IRRoleName> userRole;
-@property(strong, nonatomic)id<IRDomain> bankDomain;
-@property(strong, nonatomic)id<IRDomain> recoveryDomain;
-@property(strong, nonatomic)id<IRAccountId> recoveryAccount;
-@property(strong, nonatomic)id<IRCryptoKeypairProtocol> recoveryKeypair;
-@property(strong, nonatomic)id<IRSignatureCreatorProtocol> recoverySigner;
-@property(strong, nonatomic)id<IRAccountId> clientAccount;
-@property(strong, nonatomic)id<IRCryptoKeypairProtocol> clientKeypair;
-@property(strong, nonatomic)id<IRSignatureCreatorProtocol> clientSigner;
+@property (strong, nonatomic) id<IRRoleName> userRole;
+@property (strong, nonatomic) id<IRDomain> bankDomain;
+@property (strong, nonatomic) id<IRDomain> recoveryDomain;
+@property (strong, nonatomic) id<IRAccountId> recoveryAccount;
+@property (strong, nonatomic) id<IRCryptoKeypairProtocol> recoveryKeypair;
+@property (strong, nonatomic) id<IRSignatureCreatorProtocol> recoverySigner;
+@property (strong, nonatomic) id<IRAccountId> clientAccount;
+@property (strong, nonatomic) id<IRCryptoKeypairProtocol> clientKeypair;
+@property (strong, nonatomic) id<IRSignatureCreatorProtocol> clientSigner;
 
 @end
 
@@ -43,35 +43,35 @@
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self createAccounts];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self grandClientToRecoveryPermissions];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self grandRecoveryToAdminPermissions];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self setupRecoveryAccount];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         [expectation fulfill];
 
         return nil;
-    }).onError(^IRPromise* _Nullable (NSError* error) {
+    }).onError(^IRPromise* _Nullable (NSError * error) {
         XCTFail(@"%@", error);
 
         [expectation fulfill];
@@ -85,27 +85,27 @@
 - (void)testAccountRestoreScenarioWithBatch {
     XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
 
-    [self createDomains].onThen(^IRPromise* _Nullable (id result) {
+    [self createDomains].onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self createAccounts];
     }).onThen(^IRPromise* _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:result
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [self sendRecoverySetupBatch];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
                                                     withHash:[result objectAtIndex:0]
                                                         from:self.iroha];
-    }).onThen(^IRPromise* _Nullable (id result) {
+    }).onThen(^IRPromise * _Nullable (id result) {
         [expectation fulfill];
 
         return nil;
-    }).onError(^IRPromise* _Nullable (NSError* error) {
+    }).onError(^IRPromise * _Nullable (NSError *error) {
         XCTFail(@"%@", error);
 
         [expectation fulfill];
