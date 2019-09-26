@@ -9,11 +9,11 @@
 #import "IRTransactionImpl.h"
 #import "Transaction.pbobjc.h"
 #import "IRTransactionStatusResponseImpl+Proto.h"
-#import "GRPCCall+Tests.h"
 #import "IRQueryResponse+Proto.h"
 #import "IRBlockQueryRequestImpl.h"
 #import "IRBlockQueryResponse+Proto.h"
 #import "GRPCProtoCall+Cancellable.h"
+#import <GRPCClient/GRPCCall+Tests.h>
 #import <IrohaCrypto/NSData+Hex.h>
 
 @interface IRNetworkService()
