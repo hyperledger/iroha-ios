@@ -1,6 +1,6 @@
 # Hyperledger Iroha iOS library
 
-### Please pay attention! Current version of the library was tested and compatible with [![Iroha 1.0.0](https://img.shields.io/badge/Iroha-1.0.1-green.svg)](https://github.com/hyperledger/iroha/releases/tag/1.0.1).
+### Please pay attention! Current version of the library was tested and compatible with [![Iroha 1.1.1](https://img.shields.io/badge/Iroha-1.1.1-green.svg)](https://github.com/hyperledger/iroha/releases/tag/1.1.1).
 
 The library was created to provide convienent interface for iOS applications to communicate with [Iroha](https://github.com/hyperledger/iroha) blockchain including sending transactions/query, streaming transaction statuses and block commits.
 
@@ -27,11 +27,17 @@ Feel free to experiment with example project and don't hesistate to ask any ques
 Integration tests is a good place to check existing scenarious or to introduce new ones. To run integration tests, please, go through steps below:
 
 1. Follow instructions from [Iroha documentation](https://iroha.readthedocs.io/en/latest/getting_started/) to setup and run iroha peer in [Docker](https://www.docker.com) container. However make sure you run iroha using following command (consider additional --overwrite_ledger flag):
-```docker run --name iroha -d -p 50051:50051 -v $(pwd)/iroha/example:/opt/iroha_data -v blockstore:/tmp/block_store --network=iroha-network -e KEY='node0 --overwrite_ledger' hyperledger/iroha:latest```.
+```
+docker run --name iroha -d -p 50051:50051 -v $(pwd)/iroha/example:/opt/iroha_data -v blockstore:/tmp/block_store --network=iroha-network -e KEY='node0 --overwrite_ledger' hyperledger/iroha:latest
+```
 
 2. Launch proxy for docker daemon to make it available through http. For example, one can use socat utility:
-```brew install socat```
- ```socat TCP-LISTEN:49721,fork UNIX-CONNECT:/var/run/docker.sock``` 
+```
+brew install socat
+```
+ ```
+ socat TCP-LISTEN:49721,fork UNIX-CONNECT:/var/run/docker.sock
+ ``` 
 
 3. Clone current repository.
 
