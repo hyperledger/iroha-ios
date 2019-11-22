@@ -34,7 +34,8 @@
 
 @implementation IRAmountFactory
 
-+ (nullable IRAmount*)concreteFromString:(nonnull NSString *)amount error:(NSError *_Nullable*_Nullable)error {
++ (nullable IRAmount *)concreteAmountFromString:(nonnull NSString *)amount
+                                          error:(NSError *_Nullable*_Nullable)error {
     NSCharacterSet *invalidSymbols = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
 
     if ([amount rangeOfCharacterFromSet:invalidSymbols].location != NSNotFound) {
@@ -63,7 +64,7 @@
 }
 
 + (nullable id<IRAmount>)amountFromString:(nonnull NSString *)amount error:(NSError *_Nullable*_Nullable)error {
-    return [self concreteFromString:amount error:error];
+    return [self concreteAmountFromString:amount error:error];
 }
 
 + (nullable id<IRAmount>)amountFromUnsignedInteger:(NSUInteger)amount error:(NSError *_Nullable*_Nullable)error {
@@ -72,7 +73,7 @@
 
 + (nullable id<IRTransferAmount>)transferAmountFromString:(nonnull NSString *)amount
                                                     error:(NSError *_Nullable*_Nullable)error {
-    IRAmount *irAmount = [self concreteFromString:amount error:error];
+    IRAmount *irAmount = [self concreteAmountFromString:amount error:error];
 
     NSComparisonResult result = [[NSDecimalNumber decimalNumberWithAmount:irAmount] compare:NSDecimalNumber.zero];
     if (result == NSOrderedDescending) {
