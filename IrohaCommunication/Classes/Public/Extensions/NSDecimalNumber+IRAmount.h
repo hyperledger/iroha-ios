@@ -8,7 +8,7 @@
 
 @interface NSDecimalNumber (IRAmount)
 
-+ (nullable NSDecimalNumber*)decimalNumberWithAmountValue:(nonnull NSString*)value;
-+ (nullable NSDecimalNumber*)decimalNumberWithAmount:(nonnull id<IRAmount>)amount;
++ (nullable NSDecimalNumber *)decimalNumberWithAmountValue:(nonnull NSString *)value;
++ (nullable NSDecimalNumber *)decimalNumberWithAmount:(nonnull id<IRAmount>)amount;
 
 @end

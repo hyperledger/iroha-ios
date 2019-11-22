@@ -9,12 +9,12 @@ static NSString * const DECIMAL_SEPARATOR = @".";
 
 @implementation NSDecimalNumber (IRAmount)
 
-+ (nullable NSDecimalNumber*)decimalNumberWithAmountValue:(nonnull NSString*)value {
++ (nullable NSDecimalNumber *)decimalNumberWithAmountValue:(nonnull NSString *)value {
     return [NSDecimalNumber decimalNumberWithString:value
                                              locale:@{NSLocaleDecimalSeparator: DECIMAL_SEPARATOR}];
 }
 
-+ (nullable NSDecimalNumber*)decimalNumberWithAmount:(id<IRAmount>)amount {
++ (nullable NSDecimalNumber *)decimalNumberWithAmount:(id<IRAmount>)amount {
     return [NSDecimalNumber decimalNumberWithAmountValue:amount.value];
 }
 
