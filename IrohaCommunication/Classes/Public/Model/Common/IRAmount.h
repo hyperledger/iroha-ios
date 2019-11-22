@@ -11,6 +11,10 @@
 
 @end
 
+@protocol IRTransferAmount <IRAmount>
+
+@end
+
 typedef NS_ENUM(NSUInteger, IRAmountError) {
     IRInvalidAmountValue
 };
@@ -19,6 +23,10 @@ typedef NS_ENUM(NSUInteger, IRAmountError) {
 
 + (nullable id<IRAmount>)amountFromString:(nonnull NSString *)amount error:(NSError *_Nullable*_Nullable)error;
 + (nullable id<IRAmount>)amountFromUnsignedInteger:(NSUInteger)amount error:(NSError *_Nullable*_Nullable)error;
++ (nullable id<IRTransferAmount>)transferAmountFromString:(nonnull NSString *)amount
+                                                    error:(NSError *_Nullable*_Nullable)error;
++ (nullable id<IRTransferAmount>)transferAmountFromUnsignedInteger:(NSUInteger)amount
+                                                     error:(NSError *_Nullable*_Nullable)error;
 
 @end
 

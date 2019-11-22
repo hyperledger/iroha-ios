@@ -42,7 +42,7 @@ static const NSUInteger DEFAULT_QUORUM = 1;
 }
 
 - (nonnull instancetype)addAssetQuantity:(nonnull id<IRAssetId>)assetId
-                                  amount:(nonnull id<IRAmount>)amount {
+                                  amount:(nonnull id<IRTransferAmount>)amount {
 
     IRAddAssetQuantity *command = [[IRAddAssetQuantity alloc] initWithAssetId:assetId
                                                                        amount:amount];
@@ -53,7 +53,7 @@ static const NSUInteger DEFAULT_QUORUM = 1;
 }
 
 - (nonnull instancetype)subtractAssetQuantity:(nonnull id<IRAssetId>)assetId
-                                       amount:(nonnull id<IRAmount>)amount {
+                                       amount:(nonnull id<IRTransferAmount>)amount {
 
     IRSubtractAssetQuantity *command = [[IRSubtractAssetQuantity alloc] initWithAssetId:assetId
                                                                                  amount:amount];
@@ -212,7 +212,7 @@ static const NSUInteger DEFAULT_QUORUM = 1;
                    destinationAccount:(nonnull id<IRAccountId>)destinationAccountId
                               assetId:(nonnull id<IRAssetId>)assetId
                           description:(nonnull NSString *)transferDescription
-                               amount:(nonnull id<IRAmount>)amount {
+                               amount:(nonnull id<IRTransferAmount>)amount {
 
     IRTransferAsset *command = [[IRTransferAsset alloc] initWithSourceAccountId:sourceAccountId
                                                            destinationAccountId:destinationAccountId

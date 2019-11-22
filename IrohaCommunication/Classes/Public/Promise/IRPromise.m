@@ -44,42 +44,53 @@
 
 - (IRPromise* _Nonnull (^)(IRPromiseResultHandler _Nonnull))onThen {
     return ^(IRPromiseResultHandler block) {
-        IRPromise* promise = [[IRPromise alloc] init];
+        IRPromise *promise = nil;
 
         dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
 
-        self.resultHandler = block;
-        self.errorHandler = nil;
-
-        self.next = promise;
-
         if (self.isFulfilled) {
-            [self triggerResultProcessing];
+            if (![self.result isKindOfClass:[NSError class]]) {
+                promise = block(self.result);
+            } else {
+                promise = [[IRPromise alloc] init];
+                [promise fulfillWithResult:self.result];
+            }
+        } else {
+            promise = [[IRPromise alloc] init];
+
+            self.resultHandler = block;
+            self.errorHandler = nil;
+
+            self.next = promise;
         }
 
         dispatch_semaphore_signal(self.semaphore);
 
-        return promise;
+        return promise != nil ? promise : [IRPromise promise];
     };
 }
 
 - (IRPromise* _Nonnull (^)(IRPromiseErrorHandler _Nonnull))onError {
     return ^(IRPromiseErrorHandler block) {
-        IRPromise* promise = [[IRPromise alloc] init];
+        IRPromise* promise = nil;
 
         dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
 
-        self.resultHandler = nil;
-        self.errorHandler = block;
-        self.next = promise;
-
         if (self.isFulfilled) {
-            [self triggerResultProcessing];
+            if ([self.result isKindOfClass:[NSError class]]) {
+                promise = block(self.result);
+            }
+        } else {
+            promise = [[IRPromise alloc] init];
+
+            self.resultHandler = nil;
+            self.errorHandler = block;
+            self.next = promise;
         }
 
         dispatch_semaphore_signal(self.semaphore);
 
-        return promise;
+        return promise != nil ? promise : [IRPromise promise];
     };
 }
 
@@ -134,7 +145,7 @@
             [resultPromise copyHandlersFromPromise:_next];
 
             if (resultPromise.isFulfilled) {
-                [self triggerResultProcessing];
+                [resultPromise triggerResultProcessing];
             }
 
         } else if(_next) {
