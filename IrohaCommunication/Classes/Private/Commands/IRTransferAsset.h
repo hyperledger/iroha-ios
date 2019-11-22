@@ -13,6 +13,6 @@
                            destinationAccountId:(nonnull id<IRAccountId>)destinationAccountId
                                         assetId:(nonnull id<IRAssetId>)assetId
                             transferDescription:(nonnull NSString *)transferDescription
-                                         amount:(nonnull id<IRAmount>)amount;
+                                         amount:(nonnull id<IRTransferAmount>)amount;
 
 @end

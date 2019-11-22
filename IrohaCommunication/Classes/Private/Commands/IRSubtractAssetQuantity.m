@@ -11,7 +11,7 @@
 @synthesize amount = _amount;
 
 - (nonnull instancetype)initWithAssetId:(nonnull id<IRAssetId>)assetId
-                                 amount:(nonnull id<IRAmount>)amount {
+                                 amount:(nonnull id<IRTransferAmount>)amount {
 
     if (self = [super init]) {
         _assetId = assetId;

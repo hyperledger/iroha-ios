@@ -104,7 +104,7 @@
     [self waitForExpectations:@[expectation] timeout:10];
 }
 
-- (void)testFirstFullWithError {
+- (void)testFirstFullfillWithError {
     XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
 
     NSError *error = [NSError errorWithDomain:@"Test domain"
@@ -123,6 +123,70 @@
         [expectation fulfill];
 
         return nil;
+    });
+
+    [self waitForExpectations:@[expectation] timeout:10.0];
+}
+
+- (void)testHandleImmediateResultReturnedFromError {
+    XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
+
+    NSError *error = [NSError errorWithDomain:@"Test domain"
+                                         code:0
+                                     userInfo:nil];
+
+    NSString *initialResult = @"Initial result";
+    NSString *expectedResult = @"Expected result";
+
+    [IRPromise promiseWithResult:initialResult].onThen(^IRPromise*(id result){
+        return [IRPromise promiseWithResult:error];
+    }).onThen(^IRPromise*(id result) {
+        XCTFail();
+
+        return nil;
+    }).onError(^IRPromise*(NSError *error) {
+        return [IRPromise promiseWithResult:expectedResult];
+    }).onThen(^IRPromise*(id result) {
+        XCTAssertEqualObjects(result, expectedResult);
+
+        [expectation fulfill];
+
+        return nil;
+    });
+
+    [self waitForExpectations:@[expectation] timeout:10.0];
+}
+
+- (void)testHandleAsyncResultReturnedFromErrorAndThenReturnError {
+    XCTestExpectation *expectation = [[XCTestExpectation alloc] init];
+
+    NSError *error = [NSError errorWithDomain:@"Test domain"
+                                         code:0
+                                     userInfo:nil];
+
+    NSString *initialResult = @"Initial result";
+    NSString *expectedResult = @"Expected result";
+
+    IRPromise *asyncPromise = [IRPromise promise];
+
+    asyncPromise.onThen(^IRPromise*(id result){
+        return [IRPromise promiseWithResult:error];
+    }).onThen(^IRPromise*(id result) {
+        XCTFail();
+
+        return nil;
+    }).onError(^IRPromise*(NSError *error) {
+        return [IRPromise promiseWithResult:expectedResult];
+    }).onThen(^IRPromise*(id result) {
+        XCTAssertEqualObjects(result, expectedResult);
+
+        [expectation fulfill];
+
+        return nil;
+    });
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [asyncPromise fulfillWithResult:initialResult];
     });
 
     [self waitForExpectations:@[expectation] timeout:10.0];

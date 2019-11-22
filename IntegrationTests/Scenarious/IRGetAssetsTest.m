@@ -34,7 +34,8 @@
                                           signatoryPublicKeys:@[self.adminPublicKey]
                                           error:&error];
     
-    id<IRAmount> addAmount = [IRAmountFactory amountFromUnsignedInteger:200 error:&error];
+    id<IRTransferAmount> addAmount = [IRAmountFactory transferAmountFromUnsignedInteger:200
+                                                                          error:&error];
     
     if (error) {
         XCTFail();
@@ -148,7 +149,8 @@
                                           signatoryPublicKeys:@[self.adminPublicKey]
                                           error:&error];
     
-    id<IRAmount> addAmount = [IRAmountFactory amountFromUnsignedInteger:200 error:&error];
+    id<IRTransferAmount> addAmount = [IRAmountFactory transferAmountFromUnsignedInteger:200
+                                                                                  error:&error];
     
     if (error) {
         XCTFail();
@@ -238,7 +240,7 @@
             id<IRAccountAssetsResponse> assetsResponse = result;
             
             id<IRAccountAsset> firstAsset = [assetsResponse.accountAssets firstObject];
-            
+
             XCTAssertEqual(assetsResponse.totalCount, 2);
             XCTAssertEqualObjects(assetsResponse.nextAssetId.identifier, secondAssetId.identifier);
             XCTAssertEqualObjects(firstAsset.assetId.identifier, firstAssetId.identifier);
@@ -267,6 +269,129 @@
     });
     
     [self waitForExpectations:@[expectation] timeout:120.0];
+}
+
+- (void)testCreateTransferThenFetchAssetWithZeroBalance {
+    NSError *error = nil;
+    id<IRAssetId> assetId = [IRAssetIdFactory assetIdWithName:@"dummycoin"
+                                                       domain:self.domain
+                                                        error:&error];
+
+    if (error) {
+        XCTFail();
+        return;
+    }
+
+    id<IRAccountId> newAccount = [IRAccountIdFactory accountIdWithName:@"new"
+                                                                domain:self.domain
+                                                                 error:&error];
+
+    id<IRCryptoKeypairProtocol> newKeypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
+
+    if (error) {
+        XCTFail();
+        return;
+    }
+
+    UInt32 assetPrecision = 2;
+    IRTransactionBuilder *assetTransactionBuilder = [IRTransactionBuilder
+                                                     builderWithCreatorAccountId:self.adminAccountId];
+    assetTransactionBuilder = [assetTransactionBuilder createAsset:assetId precision:assetPrecision];
+
+    id<IRTransaction> assetTransaction = [[assetTransactionBuilder build:&error]
+                                          signedWithSignatories:@[self.adminSigner]
+                                          signatoryPublicKeys:@[self.adminPublicKey]
+                                          error:&error];
+
+    id<IRTransferAmount> addAmount = [IRAmountFactory transferAmountFromUnsignedInteger:200
+                                                                                  error:&error];
+
+    if (error) {
+        XCTFail();
+        return;
+    }
+
+    XCTestExpectation *expectation = [XCTestExpectation new];
+
+    [self.iroha executeTransaction:assetTransaction].onThen(^IRPromise * _Nullable (id result) {
+        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
+                                                    withHash:result
+                                                        from:self.iroha];
+    }).onThen(^IRPromise * _Nullable (id result) {
+        IRTransactionBuilder *transactionBuilder = [IRTransactionBuilder builderWithCreatorAccountId:self.adminAccountId];
+        transactionBuilder = [transactionBuilder createAccount:newAccount
+                                                     publicKey:newKeypair.publicKey];
+        transactionBuilder = [transactionBuilder addAssetQuantity:assetId
+                                                           amount:addAmount];
+        transactionBuilder = [transactionBuilder transferAsset:self.adminAccountId
+                                            destinationAccount:newAccount
+                                                       assetId:assetId
+                                                   description:@""
+                                                        amount:addAmount];
+
+        NSError *error = nil;
+        id<IRTransaction> transaction = [[transactionBuilder build:&error]
+                                         signedWithSignatories:@[self.adminSigner]
+                                         signatoryPublicKeys:@[self.adminPublicKey] error:&error];
+
+        if (error) {
+            return [IRPromise promiseWithResult:error];
+        }
+
+        return [self.iroha executeTransaction:transaction];
+    }).onThen(^IRPromise * _Nullable (id result) {
+        return [IRRepeatableStatusStream onTransactionStatus:IRTransactionStatusCommitted
+                                                    withHash:result
+                                                        from:self.iroha];
+    }).onThen(^IRPromise * _Nullable (id result) {
+        IRQueryBuilder *queryBuilder = [IRQueryBuilder builderWithCreatorAccountId:self.adminAccountId];
+        id<IRAssetPagination> pagination = [IRAssetPaginationFactory assetPagination:1 startingAssetId:assetId];
+        queryBuilder = [queryBuilder getAccountAssets:self.adminAccountId pagination:pagination];
+
+        NSError *error = nil;
+        id<IRQueryRequest> request = [[queryBuilder build:&error] signedWithSignatory:self.adminSigner
+                                                                   signatoryPublicKey:self.adminPublicKey
+                                                                                error:&error];
+
+        if (error) {
+            return [IRPromise promiseWithResult:error];
+        }
+
+        return [self.iroha executeQueryRequest:request];
+    }).onThen(^IRPromise * _Nullable (id result) {
+        NSLog(@"%@", result);
+        if ([result conformsToProtocol:@protocol(IRAccountAssetsResponse)]) {
+            id<IRAccountAssetsResponse> assetsResponse = result;
+
+            id<IRAccountAsset> asset = [assetsResponse.accountAssets firstObject];
+
+            XCTAssertEqualObjects(asset.assetId.identifier, assetId.identifier);
+            XCTAssertEqual(asset.balance.value.intValue, 0);
+
+            return [IRPromise promiseWithResult:nil];
+        } else {
+            NSString *message = [NSString stringWithFormat:@"Invalid get assets response %@", NSStringFromClass([result class])];
+            NSError *error = [NSError errorWithDomain:@"co.jp.getassetstest"
+                                                 code:0
+                                             userInfo:@{NSLocalizedDescriptionKey: message}];
+
+            return [IRPromise promiseWithResult:error];
+        }
+    }).onThen(^IRPromise * _Nullable (id result) {
+        NSLog(@"%@", result);
+
+        [expectation fulfill];
+
+        return nil;
+    }).onError(^IRPromise * _Nullable (NSError *error) {
+        XCTFail();
+        NSLog(@"%@", error);
+
+        [expectation fulfill];
+        return nil;
+    });
+
+    [self waitForExpectations:@[expectation] timeout:120.0];;
 }
 
 @end
