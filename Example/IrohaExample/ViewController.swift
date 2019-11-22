@@ -179,7 +179,7 @@ class ViewController: UIViewController {
                 print("Creating new one and minting \(Constants.assetMintVolume)")
 
                 do {
-                    let mintAmount = try IRAmountFactory.amount(fromUnsignedInteger: Constants.assetMintVolume)
+                    let mintAmount = try IRAmountFactory.transferAmount(fromUnsignedInteger: Constants.assetMintVolume)
                     let transaction = try IRTransactionBuilder(creatorAccountId: self.adminAccountId)
                         .createAsset(self.assetId, precision: 1)
                         .addAssetQuantity(self.assetId, amount: mintAmount)
@@ -206,7 +206,7 @@ class ViewController: UIViewController {
 
     private func transfer(to newAccountId: IRAccountId, amount: UInt, description: String) -> IRPromise {
         do {
-            let amountObject = try IRAmountFactory.amount(fromUnsignedInteger: amount)
+            let amountObject = try IRAmountFactory.transferAmount(fromUnsignedInteger: amount)
             let transaction = try IRTransactionBuilder(creatorAccountId: adminAccountId)
                 .transferAsset(adminAccountId,
                                destinationAccount: newAccountId,

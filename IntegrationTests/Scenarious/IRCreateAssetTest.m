@@ -12,7 +12,7 @@
 
 @implementation IRCreateAssetTest
 
-- (void)testCreateAddSubtractQueryAsset {
+- (void)testCreateAddQueryAsset {
     NSError *error = nil;
     id<IRAssetId> assetId = [IRAssetIdFactory assetIdWithName:@"dummycoin"
                                                        domain:self.domain
@@ -32,7 +32,8 @@
                                              signatoryPublicKeys:@[self.adminPublicKey]
                                              error:&error];
 
-    id<IRAmount> addAmount = [IRAmountFactory amountFromUnsignedInteger:200 error:&error];
+    id<IRTransferAmount> addAmount = [IRAmountFactory transferAmountFromUnsignedInteger:200
+                                                                                  error:&error];
 
     if (error) {
         XCTFail();

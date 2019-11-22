@@ -28,10 +28,10 @@ typedef NS_ENUM(NSUInteger, IRTransactionBuilderError) {
 + (nonnull instancetype)builderWithCreatorAccountId:(nonnull id<IRAccountId>)creator;
 
 - (nonnull instancetype)addAssetQuantity:(nonnull id<IRAssetId>)assetId
-                          amount:(nonnull id<IRAmount>)amount;
+                          amount:(nonnull id<IRTransferAmount>)amount;
 
 - (nonnull instancetype)subtractAssetQuantity:(nonnull id<IRAssetId>)assetId
-                               amount:(nonnull id<IRAmount>)amount;
+                               amount:(nonnull id<IRTransferAmount>)amount;
 
 - (nonnull instancetype)addPeer:(nonnull id<IRAddress>)address
               publicKey:(nonnull id<IRPublicKeyProtocol>)publicKey;
@@ -77,7 +77,7 @@ typedef NS_ENUM(NSUInteger, IRTransactionBuilderError) {
                    destinationAccount:(nonnull id<IRAccountId>)destinationAccountId
                               assetId:(nonnull id<IRAssetId>)assetId
                           description:(nonnull NSString *)transferDescription
-                               amount:(nonnull id<IRAmount>)amount;
+                               amount:(nonnull id<IRTransferAmount>)amount;
 
 - (nonnull instancetype)removePeer:(nonnull id<IRPublicKeyProtocol>)peerKey;
 
