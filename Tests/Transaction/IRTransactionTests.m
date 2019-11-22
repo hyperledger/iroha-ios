@@ -179,7 +179,7 @@ static NSString * const VALID_ROLE = @"admin";
                                                        port:VALID_PORT
                                                       error:nil];
 
-    id<IRAmount> amount = [IRAmountFactory amountFromUnsignedInteger:100 error:nil];
+    id<IRTransferAmount> amount = [IRAmountFactory transferAmountFromUnsignedInteger:100 error:nil];
 
     id<IRRoleName> roleName = [IRRoleNameFactory roleWithName:VALID_ROLE error:nil];
 
