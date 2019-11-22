@@ -330,8 +330,8 @@
 
     NSString *transferDescription = pbCommand.description_p ? pbCommand.description_p : @"";
 
-    id<IRAmount> amount = [IRAmountFactory amountFromString:pbCommand.amount
-                                                      error:error];
+    id<IRTransferAmount> amount = [IRAmountFactory transferAmountFromString:pbCommand.amount
+                                                              error:error];
 
     if (!amount) {
         return nil;
@@ -407,8 +407,8 @@
         return nil;
     }
 
-    id<IRAmount> amount = [IRAmountFactory amountFromString:pbCommand.amount
-                                                      error:error];
+    id<IRTransferAmount> amount = [IRAmountFactory transferAmountFromString:pbCommand.amount
+                                                                      error:error];
 
     if (!amount) {
         return nil;
@@ -475,8 +475,8 @@
         return nil;
     }
 
-    id<IRAmount> amount = [IRAmountFactory amountFromString:pbCommand.amount
-                                                      error:error];
+    id<IRTransferAmount> amount = [IRAmountFactory transferAmountFromString:pbCommand.amount
+                                                                      error:error];
 
     if (!amount) {
         return nil;
