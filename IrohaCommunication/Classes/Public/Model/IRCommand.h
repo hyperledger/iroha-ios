@@ -24,7 +24,7 @@
 @protocol IRAddAssetQuantity <IRCommand>
 
 @property (nonatomic, readonly) id<IRAssetId> _Nonnull assetId;
-@property (nonatomic, readonly) id<IRAmount> _Nonnull amount;
+@property (nonatomic, readonly) id<IRTransferAmount> _Nonnull amount;
 
 @end
 
@@ -137,7 +137,7 @@
 @protocol IRSubtractAssetQuantity <IRCommand>
 
 @property (nonatomic, readonly) id<IRAssetId> _Nonnull assetId;
-@property (nonatomic, readonly) id<IRAmount> _Nonnull amount;
+@property (nonatomic, readonly) id<IRTransferAmount> _Nonnull amount;
 
 @end
 
@@ -148,7 +148,7 @@
 @property (nonatomic, readonly) id<IRAccountId> _Nonnull destinationAccountId;
 @property (nonatomic, readonly) id<IRAssetId> _Nonnull assetId;
 @property (nonatomic, readonly) NSString * _Nonnull transferDescription;
-@property (nonatomic, readonly) id<IRAmount> _Nonnull amount;
+@property (nonatomic, readonly) id<IRTransferAmount> _Nonnull amount;
 
 @end
 

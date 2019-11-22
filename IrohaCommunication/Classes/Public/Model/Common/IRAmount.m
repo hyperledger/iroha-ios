@@ -4,12 +4,9 @@
  */
 
 #import "IRAmount.h"
+#import "NSDecimalNumber+IRAmount.h"
 
-
-static NSString * const DECIMAL_SEPARATOR = @".";
-
-
-@interface IRAmount : NSObject<IRAmount>
+@interface IRAmount : NSObject<IRTransferAmount>
 
 - (instancetype)initWithString:(nonnull NSString *)amountString;
 
@@ -37,7 +34,7 @@ static NSString * const DECIMAL_SEPARATOR = @".";
 
 @implementation IRAmountFactory
 
-+ (nullable id<IRAmount>)amountFromString:(nonnull NSString *)amount error:(NSError *_Nullable*_Nullable)error {
++ (nullable IRAmount*)concreteFromString:(nonnull NSString *)amount error:(NSError *_Nullable*_Nullable)error {
     NSCharacterSet *invalidSymbols = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
 
     if ([amount rangeOfCharacterFromSet:invalidSymbols].location != NSNotFound) {
@@ -50,12 +47,11 @@ static NSString * const DECIMAL_SEPARATOR = @".";
         return nil;
     }
 
-    NSDecimalNumber *decimalNumber = [NSDecimalNumber decimalNumberWithString:amount
-                                                                       locale:@{NSLocaleDecimalSeparator: DECIMAL_SEPARATOR}];
+    NSDecimalNumber *decimalNumber = [NSDecimalNumber decimalNumberWithAmountValue:amount];
 
-    if (!decimalNumber || [decimalNumber isEqualToNumber:[NSDecimalNumber notANumber]] || [decimalNumber doubleValue] <= 0.0) {
+    if (!decimalNumber || [decimalNumber isEqualToNumber:[NSDecimalNumber notANumber]]) {
         if (error) {
-            NSString *message = @"Amount must be positive";
+            NSString *message = @"Invalid amount value";
             *error = [NSError errorWithDomain:NSStringFromClass([IRAmountFactory class])
                                          code:IRInvalidAmountValue
                                      userInfo:@{NSLocalizedDescriptionKey: message}];
@@ -66,8 +62,35 @@ static NSString * const DECIMAL_SEPARATOR = @".";
     return [[IRAmount alloc] initWithString:[decimalNumber stringValue]];
 }
 
++ (nullable id<IRAmount>)amountFromString:(nonnull NSString *)amount error:(NSError *_Nullable*_Nullable)error {
+    return [self concreteFromString:amount error:error];
+}
+
 + (nullable id<IRAmount>)amountFromUnsignedInteger:(NSUInteger)amount error:(NSError *_Nullable*_Nullable)error {
     return [self amountFromString:[@(amount) stringValue] error:error];
+}
+
++ (nullable id<IRTransferAmount>)transferAmountFromString:(nonnull NSString *)amount
+                                                    error:(NSError *_Nullable*_Nullable)error {
+    IRAmount *irAmount = [self concreteFromString:amount error:error];
+
+    NSComparisonResult result = [[NSDecimalNumber decimalNumberWithAmount:irAmount] compare:NSDecimalNumber.zero];
+    if (result == NSOrderedDescending) {
+        return irAmount;
+    } else {
+        if (error) {
+            NSString *message = @"Amount value must be positive";
+            *error = [NSError errorWithDomain:NSStringFromClass([IRAmountFactory class])
+                                         code:IRInvalidAmountValue
+                                     userInfo:@{NSLocalizedDescriptionKey: message}];
+        }
+        return nil;
+    }
+}
+
++ (nullable id<IRTransferAmount>)transferAmountFromUnsignedInteger:(NSUInteger)amount
+                                                             error:(NSError *_Nullable*_Nullable)error {
+    return [self transferAmountFromString:[@(amount) stringValue] error:error];
 }
 
 @end
