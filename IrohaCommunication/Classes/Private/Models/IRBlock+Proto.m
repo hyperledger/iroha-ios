@@ -68,26 +68,19 @@
     }
 
     for (NSString *pbRejectedHash in block.blockV1.payload.rejectedTransactionsHashesArray)  {
-        NSData *rejectedHash = [[NSData alloc] initWithHexString:pbRejectedHash];
+        NSData *rejectedHash = [[NSData alloc] initWithHexString:pbRejectedHash error:error];
 
         if (!rejectedHash) {
-            if (error) {
-                NSString *message = [NSString stringWithFormat:@"Can't parse rejected hash hex string: %@", pbRejectedHash];
-                *error = [IRBlock errorWithMessage:message];
-            }
             return nil;
         }
 
         [rejectedHashes addObject:rejectedHash];
     }
 
-    NSData *previousBlockHash = [[NSData alloc] initWithHexString:block.blockV1.payload.prevBlockHash];
+    NSData *previousBlockHash = [[NSData alloc] initWithHexString:block.blockV1.payload.prevBlockHash
+                                                            error:error];
 
     if (!previousBlockHash) {
-        if (error) {
-            NSString *message = [NSString stringWithFormat:@"Can't parse previous block hash hex string: %@", block.blockV1.payload.prevBlockHash];
-            *error = [IRBlock errorWithMessage:message];
-        }
         return nil;
     }
 

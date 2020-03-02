@@ -108,8 +108,13 @@ static UInt32 DETAIL_PAGE_SIZE = 10;
         XCTAssertTrue([queryRequest.query conformsToProtocol:testCase.protocol]);
         XCTAssertNil(queryRequest.peerSignature);
 
-        id<IRCryptoKeypairProtocol> keypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
-        id<IRSignatureCreatorProtocol> signatory = [[IREd25519Sha512Signer alloc] initWithPrivateKey:[keypair privateKey]];
+        error = nil;
+
+        id<IRCryptoKeypairProtocol> keypair = [[[IRIrohaKeyFactory alloc] init] createRandomKeypair:&error];
+
+        XCTAssertNil(error, "Iroha key factory error: %@", [error localizedDescription]);
+
+        id<IRSignatureCreatorProtocol> signatory = [[IRIrohaSigner alloc] initWithPrivateKey:[keypair privateKey]];
 
         error = nil;
 
@@ -118,14 +123,15 @@ static UInt32 DETAIL_PAGE_SIZE = 10;
                                                                             error:&error];
 
         XCTAssertNotNil(signedQueryRequest.peerSignature);
-        XCTAssertNil(error);
+        XCTAssertNil(error, "Signing failed: %@", [error localizedDescription]);
 
         error = nil;
+
         NSData *rawQueryRequestData = [IRSerializationFactory serializeQueryRequest:signedQueryRequest
                                                                               error:&error];
 
         XCTAssertNotNil(rawQueryRequestData);
-        XCTAssertNil(error);
+        XCTAssertNil(error, "Serialization failed: %@", [error localizedDescription]);
     }
     
 }
