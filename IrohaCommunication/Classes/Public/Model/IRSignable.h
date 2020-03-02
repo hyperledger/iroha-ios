@@ -6,7 +6,7 @@
 #ifndef IRSignable_h
 #define IRSignable_h
 
-#import <IrohaCrypto/IRSignatureCreator.h>
+#import <IrohaCrypto/IRSignature.h>
 #import "IRPeerSignature.h"
 
 @protocol IRSignable <NSObject>

@@ -4,8 +4,8 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "IrohaCrypto/IRSignature.h"
-#import "IrohaCrypto/IRPublicKey.h"
+#import <IrohaCrypto/IRSignature.h>
+#import <IrohaCrypto/IRCryptoKey.h>
 
 @protocol IRPeerSignature <NSObject>
 

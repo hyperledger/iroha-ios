@@ -14,7 +14,7 @@
 #import "IRGrantablePermission.h"
 #import "IRRoleName.h"
 #import "IRRolePermission.h"
-#import <IrohaCrypto/IRPublicKey.h>
+#import <IrohaCrypto/IRCryptoKey.h>
 
 @protocol IRCommand <NSObject>
 

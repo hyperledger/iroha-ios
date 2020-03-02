@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IrohaCommunication'
-  s.version          = '3.5.0'
+  s.version          = '4.0.0'
   s.summary          = 'Helper classes to use for communication with Iroha blockchain.'
 
   s.homepage         = 'https://github.com/hyperledger/iroha-ios'
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.private_header_files = 'IrohaCommunication/Classes/Private/**/*.h', 'ProtoGen/*.h'
   s.preserve_paths = 'ProtoGen/*.{h,m}'
 
-  s.dependency 'IrohaCrypto'
+  s.dependency 'IrohaCrypto/Iroha', '~> 0.3.0'
   s.dependency 'gRPC-ProtoRPC', '= 1.11.0'
   s.dependency 'Protobuf', '~> 3.5.0'
   s.dependency 'BoringSSL', '= 10.0.3'
