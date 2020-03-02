@@ -45,13 +45,14 @@
                                                      domain:_domain
                                                       error:nil];
 
-    NSData *rawPublicKey = [[NSData alloc] initWithHexString:@"313a07e6384776ed95447710d15e59148473ccfc052a681317a72a69f2a49910"];
-    NSData *rawPrivateKey = [[NSData alloc] initWithHexString:@"f101537e319568c765b2cc89698325604991dca57b9716b58016b253506cab70"];
+    NSData *rawPublicKey = [[NSData alloc] initWithHexString:@"313a07e6384776ed95447710d15e59148473ccfc052a681317a72a69f2a49910" error:nil];
+    NSData *rawPrivateKey = [[NSData alloc] initWithHexString:@"f101537e319568c765b2cc89698325604991dca57b9716b58016b253506cab70" error:nil];
 
-    _adminPublicKey = [[IREd25519PublicKey alloc] initWithRawData:rawPublicKey];
+    _adminPublicKey = [[IRIrohaPublicKey alloc] initWithRawData:rawPublicKey error:nil];
 
-    id<IRPrivateKeyProtocol> adminPrivateKey = [[IREd25519PrivateKey alloc] initWithRawData:rawPrivateKey];
-    _adminSigner = [[IREd25519Sha512Signer alloc] initWithPrivateKey:adminPrivateKey];
+    id<IRPrivateKeyProtocol> adminPrivateKey = [[IRIrohaPrivateKey alloc] initWithRawData:rawPrivateKey
+                                                                                    error:nil];
+    _adminSigner = [[IRIrohaSigner alloc] initWithPrivateKey:adminPrivateKey];
 }
 
 @end

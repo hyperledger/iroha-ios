@@ -88,14 +88,9 @@
         return nil;
     }
 
-    NSData *sha3Data = [payloadData sha3:IRSha3Variant256];
+    NSData *sha3Data = [payloadData sha3:IRSha3Variant256 error:error];
 
     if (!sha3Data) {
-        if (error) {
-            NSString *message = @"Hashing function failed";
-            *error = [IRTransaction errorWithType:IRTransactionErrorHashing
-                                          message:message];
-        }
         return nil;
     }
 
@@ -239,14 +234,9 @@
         return nil;
     }
 
-    NSData *sha3Data = [reducedPayloadData sha3:IRSha3Variant256];
+    NSData *sha3Data = [reducedPayloadData sha3:IRSha3Variant256 error:error];
 
     if (!sha3Data) {
-        if (error) {
-            NSString *message = @"Hashing function failed";
-            *error = [IRTransaction errorWithType:IRTransactionErrorHashing
-                                          message:message];
-        }
         return nil;
     }
 
@@ -352,25 +342,15 @@
         return nil;
     }
 
-    NSData *sha3Data = [payloadData sha3:IRSha3Variant256];
+    NSData *sha3Data = [payloadData sha3:IRSha3Variant256 error:error];
 
     if (!sha3Data) {
-        if (error) {
-            NSString *message = @"Hashing function failed";
-            *error = [IRTransaction errorWithType:IRTransactionErrorSigning
-                                          message:message];
-        }
         return nil;
     }
 
-    id<IRSignatureProtocol> signature = [signatory sign:sha3Data];
+    id<IRSignatureProtocol> signature = [signatory sign:sha3Data error:error];
 
     if (!signature) {
-        if (error) {
-            NSString *message = @"Signing function failed";
-            *error = [IRTransaction errorWithType:IRTransactionErrorSigning
-                                          message:message];
-        }
         return nil;
     }
 

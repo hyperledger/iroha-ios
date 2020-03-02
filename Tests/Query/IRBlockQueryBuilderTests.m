@@ -60,10 +60,16 @@ static NSString * const VALID_ACCOUNT_IDENTIFIER = @"bob@gmail.com";
     XCTAssertNil(query.peerSignature);
     XCTAssertEqualObjects(accountId.identifier, query.creator.identifier);
 
-    id<IRCryptoKeypairProtocol> keypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
-    id<IRSignatureCreatorProtocol> signer = [[IREd25519Sha512Signer alloc] initWithPrivateKey:keypair.privateKey];
+    error = nil;
+
+    id<IRCryptoKeypairProtocol> keypair = [[[IRIrohaKeyFactory alloc] init] createRandomKeypair:&error];
+
+    XCTAssertNil(error);
 
     error = nil;
+
+    id<IRSignatureCreatorProtocol> signer = [[IRIrohaSigner alloc] initWithPrivateKey:keypair.privateKey];
+
     id<IRBlockQueryRequest> signedQuery = [query signedWithSignatory:signer
                                                   signatoryPublicKey:keypair.publicKey
                                                                error:&error];

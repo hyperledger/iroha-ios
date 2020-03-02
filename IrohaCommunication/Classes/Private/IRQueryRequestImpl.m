@@ -6,8 +6,8 @@
 #import "IRQueryRequestImpl.h"
 #import "Queries.pbobjc.h"
 #import "Primitive.pbobjc.h"
-#import "IrohaCrypto/NSData+SHA3.h"
 #import "NSDate+IrohaCommunication.h"
+#import <IrohaCrypto/NSData+SHA3.h>
 #import <IrohaCrypto/NSData+Hex.h>
 
 @implementation IRQueryRequest
@@ -148,25 +148,15 @@
         return nil;
     }
 
-    NSData *sha3Data = [payloadData sha3:IRSha3Variant256];
+    NSData *sha3Data = [payloadData sha3:IRSha3Variant256 error:error];
 
     if (!sha3Data) {
-        if (error) {
-            NSString *message = @"Hashing function failed";
-            *error = [IRQueryRequest errorWithType:IRQueryRequestErrorSigning
-                                          message:message];
-        }
         return nil;
     }
 
-    id<IRSignatureProtocol> signature = [signatory sign:sha3Data];
+    id<IRSignatureProtocol> signature = [signatory sign:sha3Data error:error];
 
     if (!signature) {
-        if (error) {
-            NSString *message = @"Signing function failed";
-            *error = [IRQueryRequest errorWithType:IRQueryRequestErrorSigning
-                                          message:message];
-        }
         return nil;
     }
 
