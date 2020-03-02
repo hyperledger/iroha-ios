@@ -31,14 +31,14 @@ class ViewController: UIViewController {
     }()
 
     let adminPublicKey: IRPublicKeyProtocol = {
-        let adminPublicKeyData = NSData(hexString: Constants.adminPublicKey)! as Data
-        return IREd25519PublicKey(rawData: adminPublicKeyData)!
+        let adminPublicKeyData = try! NSData(hexString: Constants.adminPublicKey) as Data
+        return try! IRIrohaPublicKey(rawData: adminPublicKeyData)
     }()
 
     let adminSigner: IRSignatureCreatorProtocol = {
-        let adminPrivateKeyData = NSData(hexString: Constants.adminPrivateKey)! as Data
-        let adminPrivateKey = IREd25519PrivateKey(rawData: adminPrivateKeyData)!
-        return IREd25519Sha512Signer(privateKey: adminPrivateKey)!
+        let adminPrivateKeyData = try! NSData(hexString: Constants.adminPrivateKey) as Data
+        let adminPrivateKey = try! IRIrohaPrivateKey(rawData: adminPrivateKeyData)
+        return IRIrohaSigner(privateKey: adminPrivateKey)
     }()
 
     let assetId: IRAssetId = {
@@ -50,8 +50,8 @@ class ViewController: UIViewController {
     }()
 
     let userPublicKey: IRPublicKeyProtocol = {
-        let userPublicKeyData = NSData(hexString: Constants.newAccountPublicKey)! as Data
-        return IREd25519PublicKey(rawData: userPublicKeyData)!
+        let userPublicKeyData = try! NSData(hexString: Constants.newAccountPublicKey) as Data
+        return try! IRIrohaPublicKey(rawData: userPublicKeyData)
     }()
 
     let networkService: IRNetworkService = {

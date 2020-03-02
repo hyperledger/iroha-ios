@@ -90,18 +90,7 @@
         }
 
         for (NSString *pbReducedHash in pbTransaction.payload.batch.reducedHashesArray) {
-            NSData *batchHash = [[NSData alloc] initWithHexString:pbReducedHash];
-
-            if (!batchHash) {
-                if (error) {
-                    NSString *message = [NSString stringWithFormat:@"Invalid batch hash hex %@", pbReducedHash];
-                    *error = [NSError errorWithDomain:NSStringFromClass([IRTransaction class])
-                                                 code:IRTransactionProtoErrorInvalidArgument
-                                             userInfo:@{NSLocalizedDescriptionKey: message}];
-                }
-                return nil;
-            }
-
+            NSData *batchHash = [[NSData alloc] initWithHexString:pbReducedHash error:error];
             [batchHashes addObject:batchHash];
         }
     }

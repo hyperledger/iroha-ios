@@ -286,7 +286,12 @@
                                                                 domain:self.domain
                                                                  error:&error];
 
-    id<IRCryptoKeypairProtocol> newKeypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
+    if (error) {
+        XCTFail();
+        return;
+    }
+
+    id<IRCryptoKeypairProtocol> newKeypair = [[[IRIrohaKeyFactory alloc] init] createRandomKeypair:&error];
 
     if (error) {
         XCTFail();

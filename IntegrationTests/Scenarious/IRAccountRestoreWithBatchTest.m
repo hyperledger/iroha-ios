@@ -29,11 +29,11 @@
     _recoveryDomain = [IRDomainFactory domainWithIdentitifer:@"cmb.recovery" error:nil];
     _bankDomain = [IRDomainFactory domainWithIdentitifer:@"cmb" error:nil];
     _recoveryAccount = [IRAccountIdFactory accountIdWithName:@"recovery" domain:_recoveryDomain error:nil];
-    _recoveryKeypair = [[IREd25519KeyFactory new] createRandomKeypair];
-    _recoverySigner = [[IREd25519Sha512Signer alloc] initWithPrivateKey:_recoveryKeypair.privateKey];
+    _recoveryKeypair = [[IRIrohaKeyFactory new] createRandomKeypair:nil];
+    _recoverySigner = [[IRIrohaSigner alloc] initWithPrivateKey:_recoveryKeypair.privateKey];
     _clientAccount = [IRAccountIdFactory accountIdWithName:@"client" domain:_bankDomain error:nil];
-    _clientKeypair = [[IREd25519KeyFactory new] createRandomKeypair];
-    _clientSigner = [[IREd25519Sha512Signer alloc] initWithPrivateKey:_clientKeypair.privateKey];
+    _clientKeypair = [[IRIrohaKeyFactory new] createRandomKeypair: nil];
+    _clientSigner = [[IRIrohaSigner alloc] initWithPrivateKey:_clientKeypair.privateKey];
 }
 
 - (void)testAccountRestoreScenarioWithoutBatch {
