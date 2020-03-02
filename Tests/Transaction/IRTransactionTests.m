@@ -31,18 +31,23 @@ static NSString * const VALID_ROLE = @"admin";
 
     error = nil;
 
-    id<IRCryptoKeypairProtocol> keypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
+    id<IRCryptoKeypairProtocol> keypair = [[[IRIrohaKeyFactory alloc] init] createRandomKeypair:&error];
+
+    XCTAssertNil(error, "Key pair generation failed: %@", [error localizedDescription]);
+
+    error = nil;
 
     id<IRTransaction> signedTransaction = [self createSignedFromTransaction:transaction
                                                                     keypair:keypair
                                                                       error:&error];
 
     XCTAssertNotNil(signedTransaction);
-    XCTAssertNil(error);
+    XCTAssertNil(error, "Signing failed: %@", [error localizedDescription]);
 
     error = nil;
 
-    id<IRSignatureCreatorProtocol> signatory = [[IREd25519Sha512Signer alloc] initWithPrivateKey:[keypair privateKey]];
+    id<IRSignatureCreatorProtocol> signatory = [[IRIrohaSigner alloc] initWithPrivateKey:[keypair privateKey]];
+
     id<IRPeerSignature> peerSignature = [transaction signWithSignatory:signatory
                                                     signatoryPublicKey:[keypair publicKey]
                                                                  error:&error];
@@ -54,7 +59,7 @@ static NSString * const VALID_ROLE = @"admin";
     XCTAssertEqualObjects(peerSignature.signature.rawData, resultSignature.signature.rawData);
     XCTAssertEqualObjects(peerSignature.publicKey.rawData, resultSignature.publicKey.rawData);
 
-    IREd25519Sha512Verifier *verifier = [[IREd25519Sha512Verifier alloc] init];
+    IRIrohaSignatureVerifier *verifier = [[IRIrohaSignatureVerifier alloc] init];
     BOOL verified = [verifier verify:resultSignature.signature
                      forOriginalData:[transaction transactionHashWithError:nil]
                       usingPublicKey:resultSignature.publicKey];
@@ -77,7 +82,11 @@ static NSString * const VALID_ROLE = @"admin";
 
     error = nil;
 
-    id<IRCryptoKeypairProtocol> keypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
+    id<IRCryptoKeypairProtocol> keypair = [[[IRIrohaKeyFactory alloc] init] createRandomKeypair:&error];
+
+    XCTAssertNil(error, "Keypair creation failed: %@", [error localizedDescription]);
+
+    error = nil;
 
     id<IRTransaction> signedTransaction = [self createSignedFromTransaction:transaction
                                                                     keypair:keypair
@@ -128,7 +137,13 @@ static NSString * const VALID_ROLE = @"admin";
     XCTAssertNotNil(batchHash);
     XCTAssertNil(error);
 
-    id<IRCryptoKeypairProtocol> keypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
+    error = nil;
+
+    id<IRCryptoKeypairProtocol> keypair = [[[IRIrohaKeyFactory alloc] init] createRandomKeypair:&error];
+
+    XCTAssertNil(error, "Keypair creation failed: %@", [error localizedDescription]);
+
+    error = nil;
 
     id<IRTransaction> signedTransaction = [self createSignedFromTransaction:transaction
                                                                     keypair:keypair
@@ -183,7 +198,7 @@ static NSString * const VALID_ROLE = @"admin";
 
     id<IRRoleName> roleName = [IRRoleNameFactory roleWithName:VALID_ROLE error:nil];
 
-    id<IRCryptoKeypairProtocol> keypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
+    id<IRCryptoKeypairProtocol> keypair = [[[IRIrohaKeyFactory alloc] init] createRandomKeypair: nil];
 
     IRTransactionBuilder* builder = [IRTransactionBuilder builderWithCreatorAccountId:accountId];
     builder = [builder addAssetQuantity:assetId amount:amount];
@@ -218,7 +233,7 @@ static NSString * const VALID_ROLE = @"admin";
                                                   keypair:(id<IRCryptoKeypairProtocol>)keypair
                                                     error:(NSError **)error {
 
-    id<IRSignatureCreatorProtocol> signatory = [[IREd25519Sha512Signer alloc] initWithPrivateKey:[keypair privateKey]];
+    id<IRSignatureCreatorProtocol> signatory = [[IRIrohaSigner alloc] initWithPrivateKey:[keypair privateKey]];
     return [transaction signedWithSignatories:@[signatory]
                           signatoryPublicKeys:@[[keypair publicKey]]
                                         error:error];
