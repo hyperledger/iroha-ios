@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "IRAddress.h"
-#import "IrohaCrypto/IRPublicKey.h"
+#import <IrohaCrypto/IRCryptoKey.h>
 
 
 @protocol IRPeer <NSObject>

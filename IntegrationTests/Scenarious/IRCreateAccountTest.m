@@ -17,9 +17,9 @@
                                                                   domain:self.domain
                                                                    error:nil];
 
-    id<IRCryptoKeypairProtocol> keypair = [[[IREd25519KeyFactory alloc] init] createRandomKeypair];
+    id<IRCryptoKeypairProtocol> keypair = [[[IRIrohaKeyFactory alloc] init] createRandomKeypair:nil];
 
-    id<IRSignatureCreatorProtocol> newAccountSigner = [[IREd25519Sha512Signer alloc] initWithPrivateKey:keypair.privateKey];
+    id<IRSignatureCreatorProtocol> newAccountSigner = [[IRIrohaSigner alloc] initWithPrivateKey:keypair.privateKey];
 
     IRTransactionBuilder* builder = [IRTransactionBuilder builderWithCreatorAccountId:self.adminAccountId];
     builder = [builder createAccount:newAccountId publicKey:keypair.publicKey];

@@ -10,16 +10,9 @@
 @implementation IRTransactionStatusResponse (Proto)
 
 + (nullable instancetype)statusResponseWithToriiResponse:(nonnull ToriiResponse *)toriiResponse error:(NSError **)error {
-    NSData *transactionHash = [[NSData alloc] initWithHexString:toriiResponse.txHash];
+    NSData *transactionHash = [[NSData alloc] initWithHexString:toriiResponse.txHash error:error];
 
     if (!transactionHash) {
-        if (error) {
-            NSString *message = [NSString stringWithFormat:@"Unexpected hex transaction hash %@", toriiResponse.txHash];
-            *error = [NSError errorWithDomain:@"IRTransactionStatusResponseProtoError"
-                                         code:IRTransactionStatusResponseProtoErrorInvalidField
-                                     userInfo:@{NSLocalizedDescriptionKey: message}];
-        }
-
         return nil;
     }
 

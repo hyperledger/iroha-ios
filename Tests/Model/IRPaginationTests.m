@@ -13,10 +13,17 @@
 @implementation IRPaginationTests
 
 - (void)testValidPagination {
-    NSData *itemHash = [[@"Test Hash" dataUsingEncoding:NSUTF8StringEncoding] sha3:IRSha3Variant256];
+    NSError *error = nil;
+
+    NSData *itemHash = [[@"Test Hash" dataUsingEncoding:NSUTF8StringEncoding] sha3:IRSha3Variant256
+                                                                             error:&error];
+
+    XCTAssertNil(error);
+
+    error = nil;
+
     UInt32 pageSize = 10;
 
-    NSError *error = nil;
     id<IRPagination> pagination = [IRPaginationFactory pagination:pageSize
                                                     firstItemHash:itemHash
                                                             error:&error];

@@ -11,7 +11,7 @@
 #import "IRRoleName.h"
 #import "IRRolePermission.h"
 #import "IRTransaction.h"
-#import "IrohaCrypto/IRPublicKey.h"
+#import <IrohaCrypto/IRCryptoKey.h>
 #import "IRAccountDetailRecordId.h"
 #import "IRPeer.h"
 #import "IRBatchInfo.h"

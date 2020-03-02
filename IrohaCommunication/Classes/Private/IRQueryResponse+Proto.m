@@ -6,7 +6,8 @@
 #import "IRQueryResponse+Proto.h"
 #import "QryResponses.pbobjc.h"
 #import "IRQueryResponseAll.h"
-#import "IrohaCrypto/NSData+Hex.h"
+#import <IrohaCrypto/NSData+Hex.h>
+#import <IrohaCrypto/IRIrohaPublicKey.h>
 #import "IRTransactionImpl+Proto.h"
 #import "Primitive.pbobjc.h"
 #import "IRBatchInfo.h"
@@ -27,16 +28,10 @@
         return nil;
     }
 
-    NSData *queryHash = [[NSData alloc] initWithHexString:pbResponse.queryHash];
+    NSData *queryHash = [[NSData alloc] initWithHexString:pbResponse.queryHash
+                                                    error:error];
 
     if (!queryHash) {
-        if (error) {
-            NSString *message = @"Invalid query hash. Hex is expected.";
-            *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
-                                         code:IRQueryResponseFactoryErrorQueryHashInvalid
-                                     userInfo:@{NSLocalizedDescriptionKey: message}];
-        }
-
         return nil;
     }
 
@@ -239,27 +234,16 @@
     NSMutableArray<id<IRPublicKeyProtocol>> *publicKeys = [NSMutableArray array];
 
     for (NSString *pbPublicKey in pbResponse.keysArray) {
-        NSData *rawPublicKey = [[NSData alloc] initWithHexString:pbPublicKey];
+        NSData *rawPublicKey = [[NSData alloc] initWithHexString:pbPublicKey error:error];
 
         if (!rawPublicKey) {
-            if (error) {
-                NSString *message = [NSString stringWithFormat:@"Invalid public key hex string %@", pbPublicKey];
-                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
-                                             code:IRQueryResponseFactoryErrorInvalidAgrument
-                                         userInfo:@{NSLocalizedDescriptionKey: message}];
-            }
             return nil;
         }
 
-        id<IRPublicKeyProtocol> publicKey = [[IREd25519PublicKey alloc] initWithRawData:rawPublicKey];
+        id<IRPublicKeyProtocol> publicKey = [[IRIrohaPublicKey alloc] initWithRawData:rawPublicKey
+                                                                                error:error];
 
         if (!publicKey) {
-            if (error) {
-                NSString *message = [NSString stringWithFormat:@"Invalid public key %@", [queryHash toHexString]];
-                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
-                                             code:IRQueryResponseFactoryErrorInvalidAgrument
-                                         userInfo:@{NSLocalizedDescriptionKey: message}];
-            }
             return nil;
         }
 
@@ -394,16 +378,9 @@
     NSData *nextTransactionHash = nil;
 
     if (pbResponse.nextTxHash && pbResponse.nextTxHash.length > 0) {
-        nextTransactionHash = [[NSData alloc] initWithHexString:pbResponse.nextTxHash];
+        nextTransactionHash = [[NSData alloc] initWithHexString:pbResponse.nextTxHash error:error];
 
         if (!nextTransactionHash) {
-            if (error) {
-                NSString *message = [NSString stringWithFormat:@"Invalid transaction hash %@", pbResponse.nextTxHash];
-                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
-                                             code:IRQueryResponseFactoryErrorInvalidAgrument
-                                         userInfo:@{NSLocalizedDescriptionKey: message}];
-            }
-
             return nil;
         }
     }
@@ -480,27 +457,15 @@
             return nil;
         }
         
-        NSData *rawPublicKey = [[NSData alloc] initWithHexString:pbPeer.peerKey];
+        NSData *rawPublicKey = [[NSData alloc] initWithHexString:pbPeer.peerKey error:error];
         
         if (!rawPublicKey) {
-            if (error) {
-                NSString *message = [NSString stringWithFormat:@"Invalid public key hex string %@", pbPeer.peerKey];
-                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
-                                             code:IRQueryResponseFactoryErrorInvalidAgrument
-                                         userInfo:@{NSLocalizedDescriptionKey: message}];
-            }
             return nil;
         }
         
-        id<IRPublicKeyProtocol> publicKey = [[IREd25519PublicKey alloc] initWithRawData:rawPublicKey];
+        id<IRPublicKeyProtocol> publicKey = [[IRIrohaPublicKey alloc] initWithRawData:rawPublicKey error:error];
         
         if (!publicKey) {
-            if (error) {
-                NSString *message = [NSString stringWithFormat:@"Invalid public key %@", [queryHash toHexString]];
-                *error = [NSError errorWithDomain:NSStringFromClass([IRQueryResponseProtoFactory class])
-                                             code:IRQueryResponseFactoryErrorInvalidAgrument
-                                         userInfo:@{NSLocalizedDescriptionKey: message}];
-            }
             return nil;
         }
         
