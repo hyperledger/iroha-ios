@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.summary          = 'Helper classes to use for communication with Iroha blockchain.'
 
   s.homepage         = 'https://github.com/hyperledger/iroha-ios'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'Apache-2.0', :file => 'LICENSE' }
   s.author           = { 'Russel' => 'emkil.russel@gmail.com' }
   s.source           = { :git => 'https://github.com/hyperledger/iroha-ios.git', :tag => s.version.to_s }
 
