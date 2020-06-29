@@ -8,11 +8,11 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IrohaCommunication'
-  s.version          = '4.0.0'
+  s.version          = '4.0.1'
   s.summary          = 'Helper classes to use for communication with Iroha blockchain.'
 
   s.homepage         = 'https://github.com/hyperledger/iroha-ios'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'Apache-2.0', :file => 'LICENSE' }
   s.author           = { 'Russel' => 'emkil.russel@gmail.com' }
   s.source           = { :git => 'https://github.com/hyperledger/iroha-ios.git', :tag => s.version.to_s }
 
@@ -25,10 +25,10 @@ Pod::Spec.new do |s|
   s.preserve_paths = 'ProtoGen/*.{h,m}'
 
   s.dependency 'IrohaCrypto/Iroha', '~> 0.3.0'
-  s.dependency 'gRPC-ProtoRPC', '= 1.11.0'
+  s.dependency 'gRPC-ProtoRPC', '~> 1.11.0'
   s.dependency 'Protobuf', '~> 3.5.0'
-  s.dependency 'BoringSSL', '= 10.0.3'
-  s.dependency 'nanopb', '= 0.3.8'
+  s.dependency 'BoringSSL', '~> 10.0.3'
+  s.dependency 'nanopb', '~> 0.3.8'
 
   s.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1' }
 
