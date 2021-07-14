@@ -1,17 +1,12 @@
 use_frameworks!
 
-target 'IrohaExample' do
-    pod 'IrohaCommunication', :path => '../'
-end
+platform :ios, '9.0'
 
-target 'IntegrationTestHost' do
-    pod 'IrohaCommunication', :path => '../'
+target 'IrohaSwiftSDK_Example' do
+  pod 'IrohaSwiftSDK', :path => '../'
+  pod 'IrohaSwiftScale', :path => '../'
 
-    target 'UnitTests' do
-        inherit! :search_paths
-    end
-
-    target 'IntegrationTests' do
-        inherit! :search_paths
-    end
+  target 'IrohaSwiftSDK_Tests' do
+    inherit! :search_paths
+  end
 end

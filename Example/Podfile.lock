@@ -1,74 +1,22 @@
 PODS:
-  - BoringSSL (10.0.3):
-    - BoringSSL/Implementation (= 10.0.3)
-    - BoringSSL/Interface (= 10.0.3)
-  - BoringSSL/Implementation (10.0.3):
-    - BoringSSL/Interface (= 10.0.3)
-  - BoringSSL/Interface (10.0.3)
-  - gRPC (1.11.0):
-    - gRPC-RxLibrary (= 1.11.0)
-    - gRPC/Main (= 1.11.0)
-  - gRPC-Core (1.11.0):
-    - gRPC-Core/Implementation (= 1.11.0)
-    - gRPC-Core/Interface (= 1.11.0)
-  - gRPC-Core/Implementation (1.11.0):
-    - BoringSSL (~> 10.0)
-    - gRPC-Core/Interface (= 1.11.0)
-    - nanopb (~> 0.3)
-  - gRPC-Core/Interface (1.11.0)
-  - gRPC-ProtoRPC (1.11.0):
-    - gRPC (= 1.11.0)
-    - gRPC-RxLibrary (= 1.11.0)
-    - Protobuf (~> 3.0)
-  - gRPC-RxLibrary (1.11.0)
-  - gRPC/Main (1.11.0):
-    - gRPC-Core (= 1.11.0)
-    - gRPC-RxLibrary (= 1.11.0)
-  - IrohaCommunication (4.0.0):
-    - BoringSSL (= 10.0.3)
-    - gRPC-ProtoRPC (= 1.11.0)
-    - IrohaCrypto/Iroha (~> 0.3.0)
-    - nanopb (= 0.3.8)
-    - Protobuf (~> 3.5.0)
-  - IrohaCrypto/Common (0.3.0)
-  - IrohaCrypto/Iroha (0.3.0):
-    - IrohaCrypto/Common
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
-  - Protobuf (3.5.0)
+  - IrohaSwiftScale (1.0.0)
+  - IrohaSwiftSDK (1.0.0):
+    - IrohaSwiftScale
 
 DEPENDENCIES:
-  - IrohaCommunication (from `../`)
-
-SPEC REPOS:
-  trunk:
-    - BoringSSL
-    - gRPC
-    - gRPC-Core
-    - gRPC-ProtoRPC
-    - gRPC-RxLibrary
-    - IrohaCrypto
-    - nanopb
-    - Protobuf
+  - IrohaSwiftScale (from `../`)
+  - IrohaSwiftSDK (from `../`)
 
 EXTERNAL SOURCES:
-  IrohaCommunication:
+  IrohaSwiftScale:
+    :path: "../"
+  IrohaSwiftSDK:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BoringSSL: c46efb47593135382bc0934196f16d2f726f5f36
-  gRPC: 70703dc9ba31c72341fc7f37745cc1c379edee96
-  gRPC-Core: 164639cd8ae18ca8b65477fafb2efbaecf4f181a
-  gRPC-ProtoRPC: bb5fddf3424aa4fad74d76736578a79fe40e244e
-  gRPC-RxLibrary: 26d53d1b1f306befd4ad4e15bd6de27839a82481
-  IrohaCommunication: e53d340e9e787d920612248c34fbe4e4e5444fe8
-  IrohaCrypto: 5d518bd6fcde6d90be5e3f4d077d6cadb6e43fad
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
+  IrohaSwiftScale: 32c5cf055d81c3afa1d535e68d8c0ffdfbfdacc1
+  IrohaSwiftSDK: 53021d6e652d65793789d36a9e2a63be0beeab21
 
-PODFILE CHECKSUM: 29089a97c3781ec366ef8266addf4289525ff849
+PODFILE CHECKSUM: 50c643ab0e30b3862e4f5b9e3bdac81e2d956c5c
 
-COCOAPODS: 1.9.0
+COCOAPODS: 1.10.1
