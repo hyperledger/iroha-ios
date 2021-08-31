@@ -18,16 +18,20 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-public struct If: Codable {
-    
-    public var condition: Bool
-    public var then: IrohaDataModelIsi.Instruction
-    public var otherwise: IrohaDataModelIsi.Instruction?
-    
-    public init(condition: Bool, then: IrohaDataModelIsi.Instruction, otherwise: IrohaDataModelIsi.Instruction?) {
-    self.condition = condition
-        self.then = then
-        self.otherwise = otherwise
+    public struct If: Codable {
+        
+        public var condition: IrohaDataModelExpression.EvaluatesTo
+        public var then: IrohaDataModelIsi.Instruction
+        public var otherwise: IrohaDataModelIsi.Instruction?
+        
+        public init(
+            condition: IrohaDataModelExpression.EvaluatesTo, 
+            then: IrohaDataModelIsi.Instruction, 
+            otherwise: IrohaDataModelIsi.Instruction?
+        ) {
+            self.condition = condition
+            self.then = then
+            self.otherwise = otherwise
+        }
     }
-}
 }

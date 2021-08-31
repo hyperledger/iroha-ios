@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-public struct FailBox: Codable {
-    
-    public var message: String
-    
-    public init(message: String) {
-    self.message = message
+    public struct FailBox: Codable {
+        
+        public var message: String
+        
+        public init(message: String) {
+            self.message = message
+        }
     }
-}
 }

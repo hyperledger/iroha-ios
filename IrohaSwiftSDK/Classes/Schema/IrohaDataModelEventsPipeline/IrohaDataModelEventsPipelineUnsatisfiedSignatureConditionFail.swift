@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-public struct UnsatisfiedSignatureConditionFail: Codable {
-    
-    public var reason: String
-    
-    public init(reason: String) {
-    self.reason = reason
+    public struct UnsatisfiedSignatureConditionFail: Codable {
+        
+        public var reason: String
+        
+        public init(reason: String) {
+            self.reason = reason
+        }
     }
-}
 }

@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-public struct GrantBox: Codable {
-    
-    public var object: IrohaDataModel.Value
-    public var destinationId: IrohaDataModel.IdBox
-    
-    public init(object: IrohaDataModel.Value, destinationId: IrohaDataModel.IdBox) {
-    self.object = object
-        self.destinationId = destinationId
+    public struct GrantBox: Codable {
+        
+        public var object: IrohaDataModelExpression.EvaluatesTo
+        public var destinationId: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(
+            object: IrohaDataModelExpression.EvaluatesTo, 
+            destinationId: IrohaDataModelExpression.EvaluatesTo
+        ) {
+            self.object = object
+            self.destinationId = destinationId
+        }
     }
-}
 }

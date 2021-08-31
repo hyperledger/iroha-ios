@@ -18,74 +18,74 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModel {
-public indirect enum Parameter: Codable {
-    
-    case maximumFaultyPeersAmount(UInt32)
-    case blockTime(UInt128)
-    case commitTime(UInt128)
-    case transactionReceiptTime(UInt128)
-    
-    // MARK: - For Codable purpose
-    
-    static func index(of case: Self) -> Int {
-        switch `case` {
-            case .maximumFaultyPeersAmount:
-                return 0
-            case .blockTime:
-                return 1
-            case .commitTime:
-                return 2
-            case .transactionReceiptTime:
-                return 3
+    public indirect enum Parameter: Codable {
+        
+        case maximumFaultyPeersAmount(UInt32)
+        case blockTime(UInt128)
+        case commitTime(UInt128)
+        case transactionReceiptTime(UInt128)
+        
+        // MARK: - For Codable purpose
+        
+        static func discriminant(of case: Self) -> UInt8 {
+            switch `case` {
+                case .maximumFaultyPeersAmount:
+                    return 0
+                case .blockTime:
+                    return 1
+                case .commitTime:
+                    return 2
+                case .transactionReceiptTime:
+                    return 3
+            }
+        }
+        
+        // MARK: - Decodable
+        
+        public init(from decoder: Decoder) throws {
+            var container = try decoder.unkeyedContainer()
+            let discriminant = try container.decode(UInt8.self)
+            switch discriminant {
+            case 0:
+                let val0 = try container.decode(UInt32.self)
+                self = .maximumFaultyPeersAmount(val0)
+                break
+            case 1:
+                let val0 = try container.decode(UInt128.self)
+                self = .blockTime(val0)
+                break
+            case 2:
+                let val0 = try container.decode(UInt128.self)
+                self = .commitTime(val0)
+                break
+            case 3:
+                let val0 = try container.decode(UInt128.self)
+                self = .transactionReceiptTime(val0)
+                break
+            default:
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+            }
+        }
+        
+        // MARK: - Encodable
+        
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.unkeyedContainer()
+            try container.encode(Parameter.discriminant(of: self))
+            switch self {
+            case let .maximumFaultyPeersAmount(val0):
+                try container.encode(val0)
+                break
+            case let .blockTime(val0):
+                try container.encode(val0)
+                break
+            case let .commitTime(val0):
+                try container.encode(val0)
+                break
+            case let .transactionReceiptTime(val0):
+                try container.encode(val0)
+                break
+            }
         }
     }
-    
-    // MARK: - Decodable
-    
-    public init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        let index = try container.decode(Int.self)
-        switch index {
-        case 0:
-            let val0 = try container.decode(UInt32.self)
-            self = .maximumFaultyPeersAmount(val0)
-            break
-        case 1:
-            let val0 = try container.decode(UInt128.self)
-            self = .blockTime(val0)
-            break
-        case 2:
-            let val0 = try container.decode(UInt128.self)
-            self = .commitTime(val0)
-            break
-        case 3:
-            let val0 = try container.decode(UInt128.self)
-            self = .transactionReceiptTime(val0)
-            break
-        default:
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown index \(index)")
-        }
-    }
-    
-    // MARK: - Encodable
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        try container.encode(Parameter.index(of: self))
-        switch self {
-        case let .maximumFaultyPeersAmount(val0):
-            try container.encode(val0)
-            break
-        case let .blockTime(val0):
-            try container.encode(val0)
-            break
-        case let .commitTime(val0):
-            try container.encode(val0)
-            break
-        case let .transactionReceiptTime(val0):
-            try container.encode(val0)
-            break
-        }
-    }
-}
 }

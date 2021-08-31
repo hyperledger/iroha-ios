@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-public struct SequenceBox: Codable {
-    
-    public var instructions: [IrohaDataModelIsi.Instruction]
-    
-    public init(instructions: [IrohaDataModelIsi.Instruction]) {
-    self.instructions = instructions
+    public struct SequenceBox: Codable {
+        
+        public var instructions: [IrohaDataModelIsi.Instruction]
+        
+        public init(instructions: [IrohaDataModelIsi.Instruction]) {
+            self.instructions = instructions
+        }
     }
-}
 }

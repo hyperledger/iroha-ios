@@ -18,5 +18,5 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQuery {
-public typealias _VersionedSignedQueryRequestV1 = (IrohaDataModelQuery.SignedQueryRequest)
+    public typealias _VersionedSignedQueryRequestV1 = (IrohaDataModelQuery.SignedQueryRequest)
 }

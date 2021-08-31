@@ -18,16 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQuery {
-public struct SignedQueryRequest: Codable {
-    
-    public var timestampMs: Compact<UInt128>
-    public var signature: IrohaCrypto.Signature
-    public var query: IrohaDataModelQuery.QueryBox
-    
-    public init(timestampMs: Compact<UInt128>, signature: IrohaCrypto.Signature, query: IrohaDataModelQuery.QueryBox) {
-    self.timestampMs = timestampMs
-        self.signature = signature
-        self.query = query
+    public struct SignedQueryRequest: Codable {
+        
+        public var payload: IrohaDataModelQuery.Payload
+        public var signature: IrohaCrypto.Signature
+        
+        public init(
+            payload: IrohaDataModelQuery.Payload, 
+            signature: IrohaCrypto.Signature
+        ) {
+            self.payload = payload
+            self.signature = signature
+        }
     }
-}
 }

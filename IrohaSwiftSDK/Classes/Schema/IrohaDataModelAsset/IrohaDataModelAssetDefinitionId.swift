@@ -18,21 +18,24 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAsset {
-public struct DefinitionId: Codable, Hashable {
-    
-    public var name: String
-    public var domainName: String
-    
-    public init(name: String, domainName: String) {
-    self.name = name
-        self.domainName = domainName
-    }
+    public struct DefinitionId: Codable, Hashable {
         
-    // MARK: - Hashable
+        public var name: String
+        public var domainName: String
         
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
-        hasher.combine(domainName)
+        public init(
+            name: String, 
+            domainName: String
+        ) {
+            self.name = name
+            self.domainName = domainName
+        }
+            
+        // MARK: - Hashable
+            
+        public func hash(into hasher: inout Hasher) {
+            hasher.combine(name)
+            hasher.combine(domainName)
+        }
     }
-}
 }

@@ -17,24 +17,24 @@
 import Foundation
 import IrohaSwiftScale
 
-public struct IrohaDataModelQueryAsset: Codable {}
-public struct IrohaDataModelIsi: Codable {}
-public struct IrohaDataModelQueryAccount: Codable {}
-public struct IrohaDataModelEventsPipeline: Codable {}
-public struct IrohaDataModelExpression: Codable {}
-public struct IrohaDataModelTransaction: Codable {}
-public struct IrohaDataModelQueryDomain: Codable {}
-public struct IrohaDataModelQuery: Codable {}
-public struct IrohaDataModelAsset: Codable {}
-public struct IrohaDataModelMetadata: Codable {}
-public struct IrohaDataModelEventsData: Codable {}
-public struct IrohaDataModelAccount: Codable {}
-public struct IrohaDataModelEvents: Codable {}
-public struct IrohaCrypto: Codable {}
-public struct IrohaDataModel: Codable {}
-public struct IrohaDataModelPermissions: Codable {}
-public struct IrohaDataModelQueryPermissions: Codable {}
-public struct IrohaDataModelPeer: Codable {}
-public struct IrohaDataModelQueryTransaction: Codable {}
-public struct IrohaDataModelQueryPeer: Codable {}
-public struct IrohaDataModelDomain: Codable {}
+public struct IrohaDataModelEventsPipeline {}
+public struct IrohaDataModelIsi {}
+public struct IrohaDataModel {}
+public struct IrohaDataModelExpression {}
+public struct IrohaDataModelQueryAsset {}
+public struct IrohaDataModelQueryPermissions {}
+public struct IrohaDataModelQueryAccount {}
+public struct IrohaDataModelAsset {}
+public struct IrohaDataModelTransaction {}
+public struct IrohaDataModelAccount {}
+public struct IrohaDataModelQuery {}
+public struct IrohaCrypto {}
+public struct IrohaDataModelQueryDomain {}
+public struct IrohaDataModelEvents {}
+public struct IrohaDataModelQueryPeer {}
+public struct IrohaDataModelPeer {}
+public struct IrohaDataModelEventsData {}
+public struct IrohaDataModelMetadata {}
+public struct IrohaDataModelPermissions {}
+public struct IrohaDataModelDomain {}
+public struct IrohaDataModelQueryTransaction {}

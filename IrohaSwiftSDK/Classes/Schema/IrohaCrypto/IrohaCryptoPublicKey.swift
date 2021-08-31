@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaCrypto {
-public struct PublicKey: Codable {
-    
-    public var digestFunction: String
-    public var payload: [UInt8]
-    
-    public init(digestFunction: String, payload: [UInt8]) {
-    self.digestFunction = digestFunction
-        self.payload = payload
+    public struct PublicKey: Codable {
+        
+        public var digestFunction: String
+        public var payload: [UInt8]
+        
+        public init(
+            digestFunction: String, 
+            payload: [UInt8]
+        ) {
+            self.digestFunction = digestFunction
+            self.payload = payload
+        }
     }
-}
 }

@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelPeer {
-public struct Id: Codable {
-    
-    public var address: String
-    public var publicKey: IrohaCrypto.PublicKey
-    
-    public init(address: String, publicKey: IrohaCrypto.PublicKey) {
-    self.address = address
-        self.publicKey = publicKey
+    public struct Id: Codable {
+        
+        public var address: String
+        public var publicKey: IrohaCrypto.PublicKey
+        
+        public init(
+            address: String, 
+            publicKey: IrohaCrypto.PublicKey
+        ) {
+            self.address = address
+            self.publicKey = publicKey
+        }
     }
-}
 }

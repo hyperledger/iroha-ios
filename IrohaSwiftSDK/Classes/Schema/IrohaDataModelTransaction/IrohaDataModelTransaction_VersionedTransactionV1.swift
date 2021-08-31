@@ -18,5 +18,5 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-public typealias _VersionedTransactionV1 = (IrohaDataModelTransaction.Transaction)
+    public typealias _VersionedTransactionV1 = (IrohaDataModelTransaction.Transaction)
 }

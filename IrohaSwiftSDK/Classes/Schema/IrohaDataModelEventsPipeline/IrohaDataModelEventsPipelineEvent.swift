@@ -18,16 +18,20 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-public struct Event: Codable {
-    
-    public var entityType: IrohaDataModelEventsPipeline.EntityType
-    public var status: IrohaDataModelEventsPipeline.Status
-    public var hash: IrohaCrypto.Hash
-    
-    public init(entityType: IrohaDataModelEventsPipeline.EntityType, status: IrohaDataModelEventsPipeline.Status, hash: IrohaCrypto.Hash) {
-    self.entityType = entityType
-        self.status = status
-        self.hash = hash
+    public struct Event: Codable {
+        
+        public var entityType: IrohaDataModelEventsPipeline.EntityType
+        public var status: IrohaDataModelEventsPipeline.Status
+        public var hash: IrohaCrypto.Hash
+        
+        public init(
+            entityType: IrohaDataModelEventsPipeline.EntityType, 
+            status: IrohaDataModelEventsPipeline.Status, 
+            hash: IrohaCrypto.Hash
+        ) {
+            self.entityType = entityType
+            self.status = status
+            self.hash = hash
+        }
     }
-}
 }

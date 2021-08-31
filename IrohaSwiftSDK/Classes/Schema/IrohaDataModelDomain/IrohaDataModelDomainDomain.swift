@@ -18,16 +18,20 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelDomain {
-public struct Domain: Codable {
-    
-    public var name: String
-    public var accounts: [IrohaDataModelAccount.Id: IrohaDataModelAccount.Account]
-    public var assetDefinitions: [IrohaDataModelAsset.DefinitionId: IrohaDataModelAsset.AssetDefinitionEntry]
-    
-    public init(name: String, accounts: [IrohaDataModelAccount.Id: IrohaDataModelAccount.Account], assetDefinitions: [IrohaDataModelAsset.DefinitionId: IrohaDataModelAsset.AssetDefinitionEntry]) {
-    self.name = name
-        self.accounts = accounts
-        self.assetDefinitions = assetDefinitions
+    public struct Domain: Codable {
+        
+        public var name: String
+        public var accounts: [IrohaDataModelAccount.Id: IrohaDataModelAccount.Account]
+        public var assetDefinitions: [IrohaDataModelAsset.DefinitionId: IrohaDataModelAsset.AssetDefinitionEntry]
+        
+        public init(
+            name: String, 
+            accounts: [IrohaDataModelAccount.Id: IrohaDataModelAccount.Account], 
+            assetDefinitions: [IrohaDataModelAsset.DefinitionId: IrohaDataModelAsset.AssetDefinitionEntry]
+        ) {
+            self.name = name
+            self.accounts = accounts
+            self.assetDefinitions = assetDefinitions
+        }
     }
-}
 }

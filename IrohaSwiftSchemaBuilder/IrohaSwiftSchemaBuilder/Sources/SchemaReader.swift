@@ -35,7 +35,7 @@ enum TypeKind {
     case `struct`([(String, String)]) // pairs of name + ref name
     case tupleStruct([String]) // array of ref names
 
-    case `enum`([(String, [String]?)]) // pairs of case + array of ref names
+    case `enum`([(String, UInt8, [String]?)]) // pairs of case + array of ref names
 
     case optional(String) // ref name
 }
@@ -247,16 +247,20 @@ extension TypeResolver {
             return .failure(.other("Invalid enum schema: `variants` is not array or not found"))
         }
         
-        var enumCases: [(String, [String]?)] = []
+        var enumCases: [(String, UInt8, [String]?)] = []
         for field in variants {
             guard let name = field["name"] as? String else {
                 return .failure(.other("Invalid enum schema: `name` is not string or not found"))
             }
             
+            guard let discriminant = field["discriminant"] as? UInt8 else {
+                return .failure(.other("Invalid enum schema: `discriminant` is not UInt8 or not found"))
+            }
+            
             // Currently schema provide only one type, but keep it in array
             let types = (field["ty"] as? String).map { [$0] } ?? nil
             
-            enumCases.append((name, types))
+            enumCases.append((name, discriminant, types))
         }
         
         return .success(.enum(enumCases))

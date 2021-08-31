@@ -18,16 +18,20 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-public struct TransferBox: Codable {
-    
-    public var sourceId: IrohaDataModel.IdBox
-    public var object: IrohaDataModel.Value
-    public var destinationId: IrohaDataModel.IdBox
-    
-    public init(sourceId: IrohaDataModel.IdBox, object: IrohaDataModel.Value, destinationId: IrohaDataModel.IdBox) {
-    self.sourceId = sourceId
-        self.object = object
-        self.destinationId = destinationId
+    public struct TransferBox: Codable {
+        
+        public var sourceId: IrohaDataModelExpression.EvaluatesTo
+        public var object: IrohaDataModelExpression.EvaluatesTo
+        public var destinationId: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(
+            sourceId: IrohaDataModelExpression.EvaluatesTo, 
+            object: IrohaDataModelExpression.EvaluatesTo, 
+            destinationId: IrohaDataModelExpression.EvaluatesTo
+        ) {
+            self.sourceId = sourceId
+            self.object = object
+            self.destinationId = destinationId
+        }
     }
-}
 }

@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelExpression {
-public struct Not: Codable {
-    
-    public var expression: Bool
-    
-    public init(expression: Bool) {
-    self.expression = expression
+    public struct Not: Codable {
+        
+        public var expression: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(expression: IrohaDataModelExpression.EvaluatesTo) {
+            self.expression = expression
+        }
     }
-}
 }

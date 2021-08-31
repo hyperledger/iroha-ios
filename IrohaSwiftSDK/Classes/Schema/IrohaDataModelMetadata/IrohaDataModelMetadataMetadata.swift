@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelMetadata {
-public struct Metadata: Codable {
-    
-    public var map: [String: IrohaDataModel.Value]
-    
-    public init(map: [String: IrohaDataModel.Value]) {
-    self.map = map
+    public struct Metadata: Codable {
+        
+        public var map: [String: IrohaDataModel.Value]
+        
+        public init(map: [String: IrohaDataModel.Value]) {
+            self.map = map
+        }
     }
-}
 }

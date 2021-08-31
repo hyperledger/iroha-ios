@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelExpression {
-public struct ContainsAny: Codable {
-    
-    public var collection: [IrohaDataModel.Value]
-    public var elements: [IrohaDataModel.Value]
-    
-    public init(collection: [IrohaDataModel.Value], elements: [IrohaDataModel.Value]) {
-    self.collection = collection
-        self.elements = elements
+    public struct ContainsAny: Codable {
+        
+        public var collection: IrohaDataModelExpression.EvaluatesTo
+        public var elements: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(
+            collection: IrohaDataModelExpression.EvaluatesTo, 
+            elements: IrohaDataModelExpression.EvaluatesTo
+        ) {
+            self.collection = collection
+            self.elements = elements
+        }
     }
-}
 }

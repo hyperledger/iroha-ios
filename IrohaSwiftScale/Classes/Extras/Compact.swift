@@ -16,6 +16,61 @@
 
 import Foundation
 
+private extension Data {
+    var removingZeroesAtEnd: Data {
+        guard let offset = lastIndex(where: { $0 > 0 }) else {
+            return Data([0])
+        }
+    
+        return self[0...offset]
+    }
+    
+    func fillingZeroesAtEnd(byteWidth: Int) -> Data {
+        guard count != byteWidth else { return self }
+        
+        var data = self
+        for _ in 0..<(byteWidth - count) {
+            data.append(0)
+        }
+        
+        return data
+    }
+}
+
+private extension FixedWidthInteger {
+    static var byteWidth: Int { bitWidth / 8 }
+}
+
+private extension UInt128 {
+    init(clampedData: Data) throws {
+        switch clampedData.count {
+        case (0...UInt8.byteWidth): self = UInt128(UInt8(littleEndian: clampedData.fillingZeroesAtEnd(byteWidth: UInt8.byteWidth).withUnsafeBytes { $0.load(as: UInt8.self) }))
+        case (0...UInt16.byteWidth): self = UInt128(UInt16(littleEndian: clampedData.fillingZeroesAtEnd(byteWidth: UInt16.byteWidth).withUnsafeBytes { $0.load(as: UInt16.self) }))
+        case (0...UInt32.byteWidth): self = UInt128(UInt32(littleEndian: clampedData.fillingZeroesAtEnd(byteWidth: UInt32.byteWidth).withUnsafeBytes { $0.load(as: UInt32.self) }))
+        case (0...UInt64.byteWidth): self = UInt128(UInt64(littleEndian: clampedData.fillingZeroesAtEnd(byteWidth: UInt64.byteWidth).withUnsafeBytes { $0.load(as: UInt64.self) }))
+        default:
+            let dataReader = DataReader(data: clampedData.fillingZeroesAtEnd(byteWidth: UInt128.byteWidth))
+            let upperBits = try dataReader.read(UInt64.self)
+            let lowerBits = try dataReader.read(UInt64.self)
+            self = UInt128(upperBits: upperBits, lowerBits: lowerBits)
+        }
+    }
+    
+    var clampedData: Data {
+        var data: Data
+        
+        switch self {
+        case (0..<1 << UInt8.bitWidth): data = withUnsafeBytes(of: UInt8(self), { Data($0) })
+        case (0..<1 << UInt16.bitWidth): data = withUnsafeBytes(of: UInt16(self), { Data($0) })
+        case (0..<1 << UInt32.bitWidth): data = withUnsafeBytes(of: UInt32(self), { Data($0) })
+        case (0..<1 << UInt64.bitWidth): data = withUnsafeBytes(of: UInt64(self), { Data($0) })
+        default: data = withUnsafeBytes(of: value.upperBits) { Data($0) } + withUnsafeBytes(of: value.lowerBits) { Data($0) }
+        }
+        
+        return data.removingZeroesAtEnd
+    }
+}
+
 public struct Compact<I: FixedWidthInteger>: Codable, Equatable {
     
     public var value: UInt128
@@ -31,7 +86,7 @@ public struct Compact<I: FixedWidthInteger>: Codable, Equatable {
         case (0..<1 << (UInt16.bitWidth - 2)): try (UInt16(value) << 2 | 0b01).encode(to: encoder)
         case (0..<1 << (UInt32.bitWidth - 2)): try (UInt32(value) << 2 | 0b10).encode(to: encoder)
         default:
-            let data = withUnsafeBytes(of: value.value.upperBits) { Data($0) } + withUnsafeBytes(of: value.value.lowerBits) { Data($0) }
+            let data = value.clampedData
             let count = UInt8(data.count - 4) << 2 | 0b11
             try container.encode(count)
             try data.forEach { try container.encode($0) }
@@ -59,10 +114,7 @@ public struct Compact<I: FixedWidthInteger>: Codable, Equatable {
         default:
             let count = value >> 2 + 4
             let data = Data(try (0..<count).map { _ in try UInt8(from: decoder) })
-            let dataReader = DataReader(data: data)
-            let upperBits = try dataReader.read(UInt64.self)
-            let lowerBits = try dataReader.read(UInt64.self)
-            self.value = UInt128(upperBits: upperBits, lowerBits: lowerBits)
+            self.value = try UInt128(clampedData: data)
         }
     }
 }

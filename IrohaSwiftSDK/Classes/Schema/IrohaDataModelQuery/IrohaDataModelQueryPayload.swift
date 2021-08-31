@@ -17,15 +17,21 @@
 import Foundation
 import IrohaSwiftScale
 
-extension IrohaDataModelQueryAsset {
-public struct FindAssetsByAccountIdAndAssetDefinitionId: Codable {
-    
-    public var accountId: IrohaDataModelAccount.Id
-    public var assetDefinitionId: IrohaDataModelAsset.DefinitionId
-    
-    public init(accountId: IrohaDataModelAccount.Id, assetDefinitionId: IrohaDataModelAsset.DefinitionId) {
-    self.accountId = accountId
-        self.assetDefinitionId = assetDefinitionId
+extension IrohaDataModelQuery {
+    public struct Payload: Codable {
+        
+        public var timestampMs: Compact<UInt128>
+        public var query: IrohaDataModelQuery.QueryBox
+        public var accountId: IrohaDataModelAccount.Id
+        
+        public init(
+            timestampMs: Compact<UInt128>, 
+            query: IrohaDataModelQuery.QueryBox, 
+            accountId: IrohaDataModelAccount.Id
+        ) {
+            self.timestampMs = timestampMs
+            self.query = query
+            self.accountId = accountId
+        }
     }
-}
 }

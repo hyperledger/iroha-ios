@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-public struct RemoveKeyValueBox: Codable {
-    
-    public var objectId: IrohaDataModel.IdBox
-    public var key: String
-    
-    public init(objectId: IrohaDataModel.IdBox, key: String) {
-    self.objectId = objectId
-        self.key = key
+    public struct RemoveKeyValueBox: Codable {
+        
+        public var objectId: IrohaDataModelExpression.EvaluatesTo
+        public var key: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(
+            objectId: IrohaDataModelExpression.EvaluatesTo, 
+            key: IrohaDataModelExpression.EvaluatesTo
+        ) {
+            self.objectId = objectId
+            self.key = key
+        }
     }
-}
 }

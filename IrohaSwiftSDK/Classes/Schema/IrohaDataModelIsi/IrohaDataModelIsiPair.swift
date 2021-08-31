@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-public struct Pair: Codable {
-    
-    public var leftInstruction: IrohaDataModelIsi.Instruction
-    public var rightInstruction: IrohaDataModelIsi.Instruction
-    
-    public init(leftInstruction: IrohaDataModelIsi.Instruction, rightInstruction: IrohaDataModelIsi.Instruction) {
-    self.leftInstruction = leftInstruction
-        self.rightInstruction = rightInstruction
+    public struct Pair: Codable {
+        
+        public var leftInstruction: IrohaDataModelIsi.Instruction
+        public var rightInstruction: IrohaDataModelIsi.Instruction
+        
+        public init(
+            leftInstruction: IrohaDataModelIsi.Instruction, 
+            rightInstruction: IrohaDataModelIsi.Instruction
+        ) {
+            self.leftInstruction = leftInstruction
+            self.rightInstruction = rightInstruction
+        }
     }
-}
 }

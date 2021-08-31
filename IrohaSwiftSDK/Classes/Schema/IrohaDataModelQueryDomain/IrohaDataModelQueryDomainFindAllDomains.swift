@@ -18,5 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQueryDomain {
-public struct FindAllDomains: Codable {}
+    public struct FindAllDomains: Codable {
+        public init() {}
+    }
 }

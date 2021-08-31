@@ -1,5 +1,6 @@
-import XCTest
 import IrohaSwiftScale
+import IrohaSwiftSDK
+import XCTest
 
 class TestSCALE: XCTestCase {
     
@@ -18,6 +19,19 @@ class TestSCALE: XCTestCase {
             let data = try encoder.encode(value)
             let decoded = try decoder.decode(type(of: value), from: data)
             XCTAssertEqual(value, decoded)
+        }
+    }
+    
+    func testConcreteBool() throws {
+        let testCases: [(Bool?, Data)] = [
+            (nil, Data([0])),
+            (true, Data([1])),
+            (false, Data([2]))
+        ]
+
+        for testCase in testCases {
+            let actualData = try ScaleEncoder().encode(testCase.0)
+            XCTAssertEqual(actualData, testCase.1)
         }
     }
     
@@ -51,6 +65,30 @@ class TestSCALE: XCTestCase {
             let data = try encoder.encode(value)
             let decoded = try decoder.decode(type(of: value), from: data)
             XCTAssertEqual(value, decoded)
+        }
+    }
+    
+    func testConcreteCompact() throws {
+        let testCases: [(Compact<UInt128>, Data)] = [
+            (Compact(0), Data([0])),
+            (Compact(1), Data([4])),
+            (Compact(63), Data([252])),
+            (Compact(64), Data([1, 1])),
+            (Compact(255), Data([253, 3])),
+            (Compact(511), Data([253, 7])),
+            (Compact(16383), Data([253, 255])),
+            (Compact(16384), Data([2, 0, 1, 0])),
+            (Compact(65535), Data([254, 255, 3, 0])),
+            (Compact(1073741823), Data([254, 255, 255, 255])),
+            (Compact(1073741824), Data([3, 0, 0, 0, 64])),
+            (Compact(4592230960395125066), Data([19, 74, 1, 231, 80, 186, 225, 186, 63])),
+        ]
+
+        for testCase in testCases {
+            let actualData = try encoder.encode(testCase.0)
+            XCTAssertEqual(actualData, testCase.1)
+            let decoded = try decoder.decode(Compact<UInt128>.self, from: actualData)
+            XCTAssertEqual(decoded.value, testCase.0.value)
         }
     }
     
@@ -423,5 +461,12 @@ class TestSCALE: XCTestCase {
         XCTAssertEqual(value._1, decoded._1)
         XCTAssertEqual(value._2, decoded._2)
         XCTAssertEqual(value._3, decoded._3)
+    }
+    
+    func testSubmitQueryResponse() throws {
+        let responseBytes: [UInt8] = [3, 8, 5, 4, 28, 103, 101, 110, 101, 115, 105, 115, 4, 28, 103, 101, 110, 101, 115, 105, 115, 28, 103, 101, 110, 101, 115, 105, 115, 28, 103, 101, 110, 101, 115, 105, 115, 28, 103, 101, 110, 101, 115, 105, 115, 0, 4, 28, 101, 100, 50, 53, 53, 49, 57, 128, 114, 51, 191, 200, 157, 203, 214, 140, 25, 253, 230, 206, 97, 88, 34, 82, 152, 236, 17, 49, 182, 161, 48, 209, 174, 180, 84, 193, 171, 81, 131, 192, 0, 17, 19, 92, 116, 114, 97, 110, 115, 97, 99, 116, 105, 111, 110, 95, 115, 105, 103, 110, 97, 116, 111, 114, 105, 101, 115, 19, 76, 97, 99, 99, 111, 117, 110, 116, 95, 115, 105, 103, 110, 97, 116, 111, 114, 105, 101, 115, 0, 0, 5, 4, 40, 119, 111, 110, 100, 101, 114, 108, 97, 110, 100, 4, 20, 97, 108, 105, 99, 101, 40, 119, 111, 110, 100, 101, 114, 108, 97, 110, 100, 20, 97, 108, 105, 99, 101, 40, 119, 111, 110, 100, 101, 114, 108, 97, 110, 100, 4, 16, 114, 111, 115, 101, 40, 119, 111, 110, 100, 101, 114, 108, 97, 110, 100, 20, 97, 108, 105, 99, 101, 40, 119, 111, 110, 100, 101, 114, 108, 97, 110, 100, 16, 114, 111, 115, 101, 40, 119, 111, 110, 100, 101, 114, 108, 97, 110, 100, 20, 97, 108, 105, 99, 101, 40, 119, 111, 110, 100, 101, 114, 108, 97, 110, 100, 0, 13, 0, 0, 0, 4, 28, 101, 100, 50, 53, 53, 49, 57, 128, 229, 85, 209, 148, 232, 130, 45, 163, 90, 197, 65, 206, 158, 236, 139, 69, 5, 143, 77, 41, 77, 148, 38, 239, 151, 186, 146, 105, 135, 102, 247, 211, 0, 17, 19, 92, 116, 114, 97, 110, 115, 97, 99, 116, 105, 111, 110, 95, 115, 105, 103, 110, 97, 116, 111, 114, 105, 101, 115, 19, 76, 97, 99, 99, 111, 117, 110, 116, 95, 115, 105, 103, 110, 97, 116, 111, 114, 105, 101, 115, 0, 4, 16, 114, 111, 115, 101, 40, 119, 111, 110, 100, 101, 114, 108, 97, 110, 100, 0, 16, 114, 111, 115, 101, 40, 119, 111, 110, 100, 101, 114, 108, 97, 110, 100, 28, 103, 101, 110, 101, 115, 105, 115, 28, 103, 101, 110, 101, 115, 105, 115]
+        let responseData = Data(responseBytes)
+        
+        _ = try decoder.decode(IrohaDataModelQuery.QueryResult.self, from: responseData)
     }
 }

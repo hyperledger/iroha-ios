@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelExpression {
-public struct ContextValue: Codable {
-    
-    public var valueName: String
-    
-    public init(valueName: String) {
-    self.valueName = valueName
+    public struct ContextValue: Codable {
+        
+        public var valueName: String
+        
+        public init(valueName: String) {
+            self.valueName = valueName
+        }
     }
-}
 }

@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelExpression {
-public struct RaiseTo: Codable {
-    
-    public var left: UInt32
-    public var right: UInt32
-    
-    public init(left: UInt32, right: UInt32) {
-    self.left = left
-        self.right = right
+    public struct RaiseTo: Codable {
+        
+        public var left: IrohaDataModelExpression.EvaluatesTo
+        public var right: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(
+            left: IrohaDataModelExpression.EvaluatesTo, 
+            right: IrohaDataModelExpression.EvaluatesTo
+        ) {
+            self.left = left
+            self.right = right
+        }
     }
-}
 }

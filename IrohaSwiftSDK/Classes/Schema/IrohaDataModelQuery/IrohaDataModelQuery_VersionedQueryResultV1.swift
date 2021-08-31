@@ -18,5 +18,5 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQuery {
-public typealias _VersionedQueryResultV1 = (IrohaDataModelQuery.QueryResult)
+    public typealias _VersionedQueryResultV1 = (IrohaDataModelQuery.QueryResult)
 }

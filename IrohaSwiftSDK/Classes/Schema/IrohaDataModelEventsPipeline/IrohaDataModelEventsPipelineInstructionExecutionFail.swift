@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-public struct InstructionExecutionFail: Codable {
-    
-    public var instruction: IrohaDataModelIsi.Instruction
-    public var reason: String
-    
-    public init(instruction: IrohaDataModelIsi.Instruction, reason: String) {
-    self.instruction = instruction
-        self.reason = reason
+    public struct InstructionExecutionFail: Codable {
+        
+        public var instruction: IrohaDataModelIsi.Instruction
+        public var reason: String
+        
+        public init(
+            instruction: IrohaDataModelIsi.Instruction, 
+            reason: String
+        ) {
+            self.instruction = instruction
+            self.reason = reason
+        }
     }
-}
 }

@@ -18,5 +18,5 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAccount {
-public typealias SignatureCheckCondition = (Bool)
+    public typealias SignatureCheckCondition = (IrohaDataModelExpression.EvaluatesTo)
 }

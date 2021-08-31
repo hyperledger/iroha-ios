@@ -16,33 +16,13 @@
 
 import Foundation
 
-private struct ScaleDictionaryPair<Key: Encodable, Value: Encodable>: Encodable {
-    var key: Key
-    var value: Value
-}
+// MARK: - EncodableScaleConvertible
 
 protocol EncodableScaleConvertible {
     func encodeAsScale(to encoder: Encoder) throws
 }
 
-extension Dictionary: EncodableScaleConvertible where Key: Encodable, Value: Encodable {
-    func encodeAsScale(to encoder: Encoder) throws {
-        let pairs = map { ScaleDictionaryPair(key: $0, value: $1) }
-        try pairs.encodeAsScale(to: encoder)
-    }
-}
-
 // MARK: - Optional
-
-private enum ScaleBool: Int, Encodable {
-    case none = 0
-    case `true`
-    case `false`
-    
-    init(_ value: Bool?) {
-        self = value.map { $0 ? .true : .false } ?? .none
-    }
-}
 
 extension Optional: EncodableScaleConvertible where Wrapped: Encodable {
     func encodeAsScale(to encoder: Encoder) throws {
@@ -68,5 +48,19 @@ extension Array: EncodableScaleConvertible where Element: Encodable {
         for element in self {
             try container.encode(element)
         }
+    }
+}
+
+// MARK: - Dictionary
+
+private struct ScaleDictionaryPair<Key: Encodable, Value: Encodable>: Encodable {
+    var key: Key
+    var value: Value
+}
+
+extension Dictionary: EncodableScaleConvertible where Key: Encodable, Value: Encodable {
+    func encodeAsScale(to encoder: Encoder) throws {
+        let pairs = map { ScaleDictionaryPair(key: $0, value: $1) }
+        try pairs.encodeAsScale(to: encoder)
     }
 }

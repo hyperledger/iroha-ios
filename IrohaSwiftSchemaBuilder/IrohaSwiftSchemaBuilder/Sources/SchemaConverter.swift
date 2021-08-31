@@ -82,16 +82,26 @@ extension SchemaConverter: NamespaceResolver {
     private mutating func unwrapNames() {
         schema.forEach { name, metadata in
             let unwrappedName = unwrapTypeName(for: name)
-            if unwrappedName != name {
+            if unwrappedName != name, !Rules.typesIgnoringGeneric.contains(unwrappedName) {
                 schema.removeValue(forKey: name)
             }
         }
     }
     
     private func resolveNamespacePaths() -> [(TypeMetadata, [String])] {
-        schema.values.compactMap { metadata in
-            resolveNamespacePath(typeMetadata: metadata).map { (metadata, $0) }
+        var paths: [(TypeMetadata, [String])] = []
+        for metadata in schema.values {
+            // catch unique values
+            if paths.contains(where: { $0.0.name == metadata.name }) {
+                continue
+            }
+            
+            if let resolved = resolveNamespacePath(typeMetadata: metadata).map({ (metadata, $0) }) {
+                paths.append(resolved)
+            }
         }
+        
+        return paths
     }
     
     private func resolveNamespacePath(typeMetadata: TypeMetadata) -> [String]? {
@@ -118,6 +128,10 @@ extension SchemaConverter: NamespaceResolver {
     }
     
     private func namespacePath(for name: String) -> [String] {
+        var name = name
+        if let ignored = Rules.typesIgnoringGeneric.first(where: { name.starts(with: $0) }) {
+            name = ignored
+        }
         let parts = nativeType(for: name).components(separatedBy: "::")
         guard parts.count > 1 else { return [name] }
         return [parts.dropLast().map { $0.trimmingCharacters(in: .whitespacesAndNewlines).upperCamelCased }.joined(), parts.last!]
@@ -128,6 +142,12 @@ extension SchemaConverter: NamespaceResolver {
     }
     
     private func unwrapTypeName(for name: String) -> String {
+        for type in Rules.typesIgnoringGeneric {
+            if name.starts(with: type) {
+                return type
+            }
+        }
+        
         for type in Rules.ignoredWrappingTypes {
             if name.starts(with: type) {
                 return name
@@ -165,7 +185,11 @@ extension SchemaConverter: NameFixer {
             return fixVariableType(verbose)
         }
         
-        let genericType = TypeParser.genericType(for: name)
+        var genericType = TypeParser.genericType(for: name)
+        if !genericType.parameters.isEmpty, Rules.typesIgnoringGeneric.contains(genericType.typeName) {
+            genericType.parameters = []
+        }
+        
         return fix(genericType: genericType).description
     }
     
@@ -181,6 +205,12 @@ extension SchemaConverter: NameFixer {
         }
         
         var genericType = genericType
+        for rule in Rules.typesIgnoringGeneric {
+            if genericType.typeName.starts(with: rule) {
+                genericType.parameters = []
+                break
+            }
+        }
         for rule in Rules.ignoredNamespaces {
             if genericType.typeName.starts(with: rule) {
                 genericType.typeName = genericType.typeName.replacingOccurrences(of: rule, with: "")
@@ -304,7 +334,7 @@ extension SchemaConverter {
         
         if namespacePath.count > 1, let namespace = namespacePath.first {
             footer = "\n}"
-            header += "extension \(namespace) {\n"
+            header += "\(Rules.extensionKeyword) \(namespace) {\n"
             tabs = 1
             
             if !namespacesWritten.contains(namespace) {
@@ -319,7 +349,7 @@ extension SchemaConverter {
         do {
             var body = try writer.write()
             if header.count > 0 || footer.count > 0 {
-                let tab = tabs > 0 ? "" : Rules.tab(tabs)
+                let tab = tabs > 0 ?  Rules.tab(tabs) : ""
                 body = body.split(separator: "\n").map { tab + $0 }.joined(separator: "\n")
                 body = header.appending(body).appending(footer)
             }
@@ -365,10 +395,14 @@ private struct Rules {
     static let fileExtension = "swift"
     static let keywords = ["if", "where"]
     static let indirectKeyword: String? = "indirect"
+    static let extensionKeyword = "extension"
     private static let tab = "    "
     static func tab(_ count: Int = 1) -> String { [String](repeating: tab, count: count).joined(separator: "") }
-    static let ignoredWrappingTypes = [
-        "iroha_data_model::expression::EvaluatesTo",
+    static let ignoredWrappingTypes: [String] = [
+//        "iroha_data_model::expression::EvaluatesTo",
+    ]
+    static let typesIgnoringGeneric = [
+        "iroha_data_model::expression::EvaluatesTo"
     ]
     static let ignoredNamespaces = [
         "alloc::string::",
@@ -440,8 +474,8 @@ private struct StructWriter: TypeWriter {
     
     private func writeConstructor(variables: [(String, String)]) -> String {
         """
-        \(Rules.tab())public init(\(variables.map { "\($0): \($1)" }.joined(separator: ", "))) {
-        \(variables.map { "\(Rules.tab())self.\($0.0) = \($0.0)" }.joined(separator: "\n\(Rules.tab())"))
+        \(Rules.tab())public init(\(variables.count > 1 ? "\n\(Rules.tab(2))" : "")\(variables.map { "\($0): \($1)" }.joined(separator: ", \(variables.count > 1 ? "\n\(Rules.tab(2))" : "")"))\(variables.count > 1 ? "\n\(Rules.tab())" : "")) {
+        \(Rules.tab())\(variables.map { "\(Rules.tab())self.\($0.0) = \($0.0)" }.joined(separator: "\n\(Rules.tab())"))
         \(Rules.tab())}
         """
     }
@@ -462,9 +496,17 @@ private struct StructWriter: TypeWriter {
     }
     
     func write() -> String {
-        var interfaces = ["Codable"]
+        var interfaces = codable ? ["Codable"] : []
         if fields.count == 0 {
-            return "public struct \(name)\(writeInterfaces(interfaces)) {}"
+            if codable {
+                return """
+                public struct \(name)\(writeInterfaces(interfaces)) {
+                \(Rules.tab())public init() {}
+                }
+                """
+            } else {
+                return "public struct \(name)\(writeInterfaces(interfaces)) {}"
+            }
         }
         
         let variables = fields.map {
@@ -511,23 +553,25 @@ private struct TupleStructWriter: TypeWriter {
 
 private struct EnumWriter: TypeWriter {
     
+    typealias Case = (String, UInt8, [String]?) // Name, Discriminant, Types
+    
     let name: String
-    let cases: [(String, [String]?)]
+    let cases: [Case]
     let resolver: NamespaceResolver & NameFixer
     
-    private func writeCase(_ case: (String, [String]?)) -> String {
+    private func writeCase(_ case: Case) -> String {
         var string = "\(Rules.tab())case \(resolver.fixVariableName(`case`.0))"
-        if let values = `case`.1 {
+        if let values = `case`.2 {
             string += "(\(values.map { resolver.fixVariableType($0) }.joined(separator: ", ")))"
         }
         
         return string
     }
     
-    private func writeCaseIndexGetter(_ case: (String, [String]?), index: Int) -> String {
+    private func writeCaseDiscriminantGetter(_ case: Case) -> String {
         """
         \(Rules.tab(3))case .\(resolver.fixVariableName(`case`.0)):
-        \(Rules.tab(4))return \(index)
+        \(Rules.tab(4))return \(`case`.1)
         """
     }
     
@@ -535,19 +579,19 @@ private struct EnumWriter: TypeWriter {
         """
         \(Rules.tab())// MARK: - For Codable purpose
         \(Rules.tab())
-        \(Rules.tab())static func index(of case: Self) -> Int {
+        \(Rules.tab())static func discriminant(of case: Self) -> UInt8 {
         \(Rules.tab(2))switch `case` {
-        \(cases.enumerated().map { writeCaseIndexGetter($0.element, index: $0.offset) }.joined(separator: "\n"))
+        \(cases.map { writeCaseDiscriminantGetter($0) }.joined(separator: "\n"))
         \(Rules.tab(2))}
         \(Rules.tab())}
         """
     }
     
-    private func writeCaseInit(_ case: (String, [String]?), index: Int) -> String {
+    private func writeCaseInit(_ case: Case) -> String {
         """
-        \(Rules.tab(2))case \(index):
-        \(Rules.tab(3))\(`case`.1.map { "\($0.enumerated().map { "let val\($0.offset) = try container.decode(\(resolver.fixVariableType($0.element)).self)" }.joined(separator: "\n"))" } ?? "")
-        \(Rules.tab(3))self = .\(resolver.fixVariableName(`case`.0))\(`case`.1.map { "(\($0.enumerated().map { "val\($0.offset)" }.joined(separator: ", ")))" } ?? "")
+        \(Rules.tab(2))case \(`case`.1):
+        \(Rules.tab(3))\(`case`.2.map { "\($0.enumerated().map { "let val\($0.offset) = try container.decode(\(resolver.fixVariableType($0.element)).self)" }.joined(separator: "\n"))" } ?? "")
+        \(Rules.tab(3))self = .\(resolver.fixVariableName(`case`.0))\(`case`.2.map { "(\($0.enumerated().map { "val\($0.offset)" }.joined(separator: ", ")))" } ?? "")
         \(Rules.tab(3))break
         """
     }
@@ -558,20 +602,20 @@ private struct EnumWriter: TypeWriter {
         \(Rules.tab())
         \(Rules.tab())public init(from decoder: Decoder) throws {
         \(Rules.tab(2))var container = try decoder.unkeyedContainer()
-        \(Rules.tab(2))let index = try container.decode(Int.self)
-        \(Rules.tab(2))switch index {
-        \(cases.enumerated().map { writeCaseInit($0.element, index: $0.offset) }.joined(separator: "\n"))
+        \(Rules.tab(2))let discriminant = try container.decode(UInt8.self)
+        \(Rules.tab(2))switch discriminant {
+        \(cases.map { writeCaseInit($0) }.joined(separator: "\n"))
         \(Rules.tab(2))default:
-        \(Rules.tab(3))throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown index \\(index)")
+        \(Rules.tab(3))throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \\(discriminant)")
         \(Rules.tab(2))}
         \(Rules.tab())}
         """
     }
     
-    private func writeCaseEncode(_ case: (String, [String]?)) -> String {
+    private func writeCaseEncode(_ case: Case) -> String {
         """
-        \(Rules.tab(2))case \(`case`.1 != nil ? "let " : "").\(resolver.fixVariableName(`case`.0))\(`case`.1.map { "(\($0.enumerated().map { "val\($0.offset)" }.joined(separator: ", ")))" } ?? ""):
-        \(Rules.tab(3))\(`case`.1.map { $0.enumerated().map { "try container.encode(val\($0.offset))" }.joined(separator: "\n") } ?? "")
+        \(Rules.tab(2))case \(`case`.2 != nil ? "let " : "").\(resolver.fixVariableName(`case`.0))\(`case`.2.map { "(\($0.enumerated().map { "val\($0.offset)" }.joined(separator: ", ")))" } ?? ""):
+        \(Rules.tab(3))\(`case`.2.map { $0.enumerated().map { "try container.encode(val\($0.offset))" }.joined(separator: "\n") } ?? "")
         \(Rules.tab(3))break
         """
     }
@@ -582,7 +626,7 @@ private struct EnumWriter: TypeWriter {
         \(Rules.tab())
         \(Rules.tab())public func encode(to encoder: Encoder) throws {
         \(Rules.tab(2))var container = encoder.unkeyedContainer()
-        \(Rules.tab(2))try container.encode(\(name).index(of: self))
+        \(Rules.tab(2))try container.encode(\(name).discriminant(of: self))
         \(Rules.tab(2))switch self {
         \(cases.map { writeCaseEncode($0) }.joined(separator: "\n"))
         \(Rules.tab(2))}

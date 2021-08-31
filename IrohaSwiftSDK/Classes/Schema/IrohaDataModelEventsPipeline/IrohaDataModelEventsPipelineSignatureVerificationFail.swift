@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-public struct SignatureVerificationFail: Codable {
-    
-    public var signature: IrohaCrypto.Signature
-    public var reason: String
-    
-    public init(signature: IrohaCrypto.Signature, reason: String) {
-    self.signature = signature
-        self.reason = reason
+    public struct SignatureVerificationFail: Codable {
+        
+        public var signature: IrohaCrypto.Signature
+        public var reason: String
+        
+        public init(
+            signature: IrohaCrypto.Signature, 
+            reason: String
+        ) {
+            self.signature = signature
+            self.reason = reason
+        }
     }
-}
 }

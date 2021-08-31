@@ -18,16 +18,20 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAccount {
-public struct NewAccount: Codable {
-    
-    public var id: IrohaDataModelAccount.Id
-    public var signatories: [IrohaCrypto.PublicKey]
-    public var metadata: IrohaDataModelMetadata.Metadata
-    
-    public init(id: IrohaDataModelAccount.Id, signatories: [IrohaCrypto.PublicKey], metadata: IrohaDataModelMetadata.Metadata) {
-    self.id = id
-        self.signatories = signatories
-        self.metadata = metadata
+    public struct NewAccount: Codable {
+        
+        public var id: IrohaDataModelAccount.Id
+        public var signatories: [IrohaCrypto.PublicKey]
+        public var metadata: IrohaDataModelMetadata.Metadata
+        
+        public init(
+            id: IrohaDataModelAccount.Id, 
+            signatories: [IrohaCrypto.PublicKey], 
+            metadata: IrohaDataModelMetadata.Metadata
+        ) {
+            self.id = id
+            self.signatories = signatories
+            self.metadata = metadata
+        }
     }
-}
 }

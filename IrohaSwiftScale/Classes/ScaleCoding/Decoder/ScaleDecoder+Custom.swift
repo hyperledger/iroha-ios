@@ -16,39 +16,13 @@
 
 import Foundation
 
+// MARK: - DecodableScaleConvertible
+
 protocol DecodableScaleConvertible {
     init(asScaleFrom decoder: Decoder) throws
 }
 
-// MARK: - Dictionary
-
-private struct ScaleDictionaryPair<Key: Decodable, Value: Decodable>: Decodable {
-    var key: Key
-    var value: Value
-}
-
-extension Dictionary: DecodableScaleConvertible where Key: Decodable, Value: Decodable {
-    init(asScaleFrom decoder: Decoder) throws {
-        let pairs = try [ScaleDictionaryPair<Key, Value>](asScaleFrom: decoder)
-        self = .init(uniqueKeysWithValues: pairs.map { ($0.key, $0.value) })
-    }
-}
-
 // MARK: - Optional
-
-private enum ScaleBool: Int, Decodable {
-    case none = 0
-    case `true`
-    case `false`
-    
-    var boolValue: Optional<Bool> {
-        switch self {
-        case .none: return nil
-        case .true: return true
-        case .false: return false
-        }
-    }
-}
 
 extension Optional: DecodableScaleConvertible where Wrapped: Decodable {
     init(asScaleFrom decoder: Decoder) throws {
@@ -75,5 +49,19 @@ extension Array: DecodableScaleConvertible where Element: Decodable {
         var container = try decoder.unkeyedContainer()
         let count = try container.decode(Compact<UInt128>.self)
         self = try (0..<count.value).map { _ in try container.decode(Element.self) }
+    }
+}
+
+// MARK: - Dictionary
+
+private struct ScaleDictionaryPair<Key: Decodable, Value: Decodable>: Decodable {
+    var key: Key
+    var value: Value
+}
+
+extension Dictionary: DecodableScaleConvertible where Key: Decodable, Value: Decodable {
+    init(asScaleFrom decoder: Decoder) throws {
+        let pairs = try [ScaleDictionaryPair<Key, Value>](asScaleFrom: decoder)
+        self = .init(uniqueKeysWithValues: pairs.map { ($0.key, $0.value) })
     }
 }

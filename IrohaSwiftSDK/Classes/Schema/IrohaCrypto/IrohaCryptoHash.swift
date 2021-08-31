@@ -18,5 +18,5 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaCrypto {
-public typealias Hash = ([UInt8])
+    public typealias Hash = ([UInt8])
 }

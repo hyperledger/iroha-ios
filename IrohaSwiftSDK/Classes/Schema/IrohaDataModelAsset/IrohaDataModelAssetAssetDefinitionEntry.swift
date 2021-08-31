@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAsset {
-public struct AssetDefinitionEntry: Codable {
-    
-    public var definition: IrohaDataModelAsset.AssetDefinition
-    public var registeredBy: IrohaDataModelAccount.Id
-    
-    public init(definition: IrohaDataModelAsset.AssetDefinition, registeredBy: IrohaDataModelAccount.Id) {
-    self.definition = definition
-        self.registeredBy = registeredBy
+    public struct AssetDefinitionEntry: Codable {
+        
+        public var definition: IrohaDataModelAsset.AssetDefinition
+        public var registeredBy: IrohaDataModelAccount.Id
+        
+        public init(
+            definition: IrohaDataModelAsset.AssetDefinition, 
+            registeredBy: IrohaDataModelAccount.Id
+        ) {
+            self.definition = definition
+            self.registeredBy = registeredBy
+        }
     }
-}
 }

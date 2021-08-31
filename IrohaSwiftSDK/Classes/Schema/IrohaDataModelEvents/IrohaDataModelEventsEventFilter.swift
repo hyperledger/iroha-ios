@@ -18,54 +18,54 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEvents {
-public indirect enum EventFilter: Codable {
-    
-    case pipeline(IrohaDataModelEventsPipeline.EventFilter)
-    case data(IrohaDataModelEventsData.EventFilter)
-    
-    // MARK: - For Codable purpose
-    
-    static func index(of case: Self) -> Int {
-        switch `case` {
-            case .pipeline:
-                return 0
-            case .data:
-                return 1
+    public indirect enum EventFilter: Codable {
+        
+        case pipeline(IrohaDataModelEventsPipeline.EventFilter)
+        case data(IrohaDataModelEventsData.EventFilter)
+        
+        // MARK: - For Codable purpose
+        
+        static func discriminant(of case: Self) -> UInt8 {
+            switch `case` {
+                case .pipeline:
+                    return 0
+                case .data:
+                    return 1
+            }
+        }
+        
+        // MARK: - Decodable
+        
+        public init(from decoder: Decoder) throws {
+            var container = try decoder.unkeyedContainer()
+            let discriminant = try container.decode(UInt8.self)
+            switch discriminant {
+            case 0:
+                let val0 = try container.decode(IrohaDataModelEventsPipeline.EventFilter.self)
+                self = .pipeline(val0)
+                break
+            case 1:
+                let val0 = try container.decode(IrohaDataModelEventsData.EventFilter.self)
+                self = .data(val0)
+                break
+            default:
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+            }
+        }
+        
+        // MARK: - Encodable
+        
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.unkeyedContainer()
+            try container.encode(EventFilter.discriminant(of: self))
+            switch self {
+            case let .pipeline(val0):
+                try container.encode(val0)
+                break
+            case let .data(val0):
+                try container.encode(val0)
+                break
+            }
         }
     }
-    
-    // MARK: - Decodable
-    
-    public init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        let index = try container.decode(Int.self)
-        switch index {
-        case 0:
-            let val0 = try container.decode(IrohaDataModelEventsPipeline.EventFilter.self)
-            self = .pipeline(val0)
-            break
-        case 1:
-            let val0 = try container.decode(IrohaDataModelEventsData.EventFilter.self)
-            self = .data(val0)
-            break
-        default:
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown index \(index)")
-        }
-    }
-    
-    // MARK: - Encodable
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        try container.encode(EventFilter.index(of: self))
-        switch self {
-        case let .pipeline(val0):
-            try container.encode(val0)
-            break
-        case let .data(val0):
-            try container.encode(val0)
-            break
-        }
-    }
-}
 }

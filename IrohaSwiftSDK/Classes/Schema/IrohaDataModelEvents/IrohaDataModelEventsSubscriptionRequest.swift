@@ -18,5 +18,5 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEvents {
-public typealias SubscriptionRequest = (IrohaDataModelEvents.EventFilter)
+    public typealias SubscriptionRequest = (IrohaDataModelEvents.EventFilter)
 }

@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-public struct NotPermittedFail: Codable {
-    
-    public var reason: String
-    
-    public init(reason: String) {
-    self.reason = reason
+    public struct NotPermittedFail: Codable {
+        
+        public var reason: String
+        
+        public init(reason: String) {
+            self.reason = reason
+        }
     }
-}
 }

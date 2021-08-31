@@ -10,6 +10,8 @@
 		346AAB7926977E73000EFF62 /* TestTupleStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346AAB7626977E72000EFF62 /* TestTupleStruct.swift */; };
 		346AAB7A26977E73000EFF62 /* TestStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346AAB7726977E72000EFF62 /* TestStruct.swift */; };
 		346AAB7B26977E73000EFF62 /* TestEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346AAB7826977E72000EFF62 /* TestEnum.swift */; };
+		34DDCD2D26A1C17700698EED /* TestSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDCD2C26A1C17700698EED /* TestSDK.swift */; };
+		34FFF58126CC007C0055BF80 /* TestSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF58026CC007C0055BF80 /* TestSignature.swift */; };
 		4B47548EA462C46F43F0485A /* Pods_IrohaSwiftSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C05DCF8BCEA6334FD5B19D51 /* Pods_IrohaSwiftSDK_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -41,6 +43,9 @@
 		346AAB7626977E72000EFF62 /* TestTupleStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTupleStruct.swift; sourceTree = "<group>"; };
 		346AAB7726977E72000EFF62 /* TestStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStruct.swift; sourceTree = "<group>"; };
 		346AAB7826977E72000EFF62 /* TestEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestEnum.swift; sourceTree = "<group>"; };
+		34DDCD2C26A1C17700698EED /* TestSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSDK.swift; sourceTree = "<group>"; };
+		34FFF58026CC007C0055BF80 /* TestSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSignature.swift; sourceTree = "<group>"; };
+		34FFF59126CD437C0055BF80 /* libursa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libursa.a; path = ../IrohaSwiftSDK/Libraries/libursa.a; sourceTree = "<group>"; };
 		3CD4E47D26F608EFB345A5A5 /* Pods-IrohaSwiftSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrohaSwiftSDK_Tests.debug.xcconfig"; path = "Target Support Files/Pods-IrohaSwiftSDK_Tests/Pods-IrohaSwiftSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		44FE9B8642CEE53BA5A04AE8 /* Example */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = Example; sourceTree = "<group>"; };
 		55F7953D62110B4C7C04184C /* Pods-IrohaSwiftSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrohaSwiftSDK_Tests.release.xcconfig"; path = "Target Support Files/Pods-IrohaSwiftSDK_Tests/Pods-IrohaSwiftSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +153,7 @@
 		46C04661D1802D18A9DBE35E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				34FFF59126CD437C0055BF80 /* libursa.a */,
 				7476B63D424EED890142CABA /* Pods_IrohaSwiftSDK_Example.framework */,
 				C05DCF8BCEA6334FD5B19D51 /* Pods_IrohaSwiftSDK_Tests.framework */,
 			);
@@ -201,6 +207,8 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				34FFF58026CC007C0055BF80 /* TestSignature.swift */,
+				34DDCD2C26A1C17700698EED /* TestSDK.swift */,
 				607FACEB1AFB9204008FA782 /* TestSCALE.swift */,
 				346AAB94269DE553000EFF62 /* SCALE Types */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
@@ -279,10 +287,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 7S553Q728R;
 						LastSwiftMigration = 1250;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 7S553Q728R;
 						LastSwiftMigration = 1250;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -381,11 +391,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-IrohaSwiftSDK_Example/Pods-IrohaSwiftSDK_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/IrohaSwiftSDK/IrohaSwiftSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/IrohaSwiftScale/IrohaSwiftScale.framework",
+				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IrohaSwiftSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IrohaSwiftScale.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -409,8 +421,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACEC1AFB9204008FA782 /* TestSCALE.swift in Sources */,
+				34DDCD2D26A1C17700698EED /* TestSDK.swift in Sources */,
 				346AAB7926977E73000EFF62 /* TestTupleStruct.swift in Sources */,
 				346AAB7B26977E73000EFF62 /* TestEnum.swift in Sources */,
+				34FFF58126CC007C0055BF80 /* TestSignature.swift in Sources */,
 				346AAB7A26977E73000EFF62 /* TestStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,11 +571,15 @@
 			baseConfigurationReference = A5A9D295DE765F94C4EDBB54 /* Pods-IrohaSwiftSDK_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 7S553Q728R;
 				INFOPLIST_FILE = IrohaSwiftSDK/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 			};
@@ -572,7 +590,10 @@
 			baseConfigurationReference = B7AD81A372A0ADAA9F23DC31 /* Pods-IrohaSwiftSDK_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = 7S553Q728R;
 				INFOPLIST_FILE = IrohaSwiftSDK/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -586,6 +607,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3CD4E47D26F608EFB345A5A5 /* Pods-IrohaSwiftSDK_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 7S553Q728R;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -595,6 +617,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -608,11 +631,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 55F7953D62110B4C7C04184C /* Pods-IrohaSwiftSDK_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 7S553Q728R;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

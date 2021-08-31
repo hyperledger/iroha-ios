@@ -8,8 +8,11 @@ Pod::Spec.new do |s|
   s.author           = { 'Soramitsu Co Ltd' => 'admin@soramitsu.co.jp' }
   s.source           = { :git => 'https://github.com/hyperledger/iroha-ios.git', :tag => 'v2-' + s.version.to_s }
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '13.0'
+  s.macos.deployment_target = '10.12'
 
   s.source_files = 'IrohaSwiftSDK/Classes/**/*'
+  
   s.dependency 'IrohaSwiftScale'
+  s.dependency 'Sodium', '0.9.1'
 end

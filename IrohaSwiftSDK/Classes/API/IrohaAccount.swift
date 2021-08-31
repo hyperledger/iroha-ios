@@ -16,4 +16,22 @@
 
 import Foundation
 
-// TODO: IrohaSwiftSDK implementation
+public struct IrohaKeyPair {
+    public var publicKey: [UInt8]
+    public var privateKey: [UInt8]
+    
+    public init(publicKey: [UInt8], privateKey: [UInt8]) {
+        self.publicKey = publicKey
+        self.privateKey = privateKey
+    }
+}
+
+public struct IrohaAccount {
+    public var keyPair: IrohaKeyPair
+    public var id: IrohaDataModelAccount.Id
+    
+    public init(keyPair: IrohaKeyPair, id: IrohaDataModelAccount.Id) {
+        self.keyPair = keyPair
+        self.id = id
+    }
+}

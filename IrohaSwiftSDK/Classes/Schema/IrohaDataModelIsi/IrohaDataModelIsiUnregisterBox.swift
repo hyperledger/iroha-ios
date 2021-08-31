@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-public struct UnregisterBox: Codable {
-    
-    public var objectId: IrohaDataModel.IdBox
-    
-    public init(objectId: IrohaDataModel.IdBox) {
-    self.objectId = objectId
+    public struct UnregisterBox: Codable {
+        
+        public var objectId: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(objectId: IrohaDataModelExpression.EvaluatesTo) {
+            self.objectId = objectId
+        }
     }
-}
 }

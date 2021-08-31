@@ -18,22 +18,29 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAccount {
-public struct Account: Codable {
-    
-    public var id: IrohaDataModelAccount.Id
-    public var assets: [IrohaDataModelAsset.Id: IrohaDataModelAsset.Asset]
-    public var signatories: [IrohaCrypto.PublicKey]
-    public var permissionTokens: [IrohaDataModelPermissions.PermissionToken]
-    public var signatureCheckCondition: IrohaDataModelAccount.SignatureCheckCondition
-    public var metadata: IrohaDataModelMetadata.Metadata
-    
-    public init(id: IrohaDataModelAccount.Id, assets: [IrohaDataModelAsset.Id: IrohaDataModelAsset.Asset], signatories: [IrohaCrypto.PublicKey], permissionTokens: [IrohaDataModelPermissions.PermissionToken], signatureCheckCondition: IrohaDataModelAccount.SignatureCheckCondition, metadata: IrohaDataModelMetadata.Metadata) {
-    self.id = id
-        self.assets = assets
-        self.signatories = signatories
-        self.permissionTokens = permissionTokens
-        self.signatureCheckCondition = signatureCheckCondition
-        self.metadata = metadata
+    public struct Account: Codable {
+        
+        public var id: IrohaDataModelAccount.Id
+        public var assets: [IrohaDataModelAsset.Id: IrohaDataModelAsset.Asset]
+        public var signatories: [IrohaCrypto.PublicKey]
+        public var permissionTokens: [IrohaDataModelPermissions.PermissionToken]
+        public var signatureCheckCondition: IrohaDataModelAccount.SignatureCheckCondition
+        public var metadata: IrohaDataModelMetadata.Metadata
+        
+        public init(
+            id: IrohaDataModelAccount.Id, 
+            assets: [IrohaDataModelAsset.Id: IrohaDataModelAsset.Asset], 
+            signatories: [IrohaCrypto.PublicKey], 
+            permissionTokens: [IrohaDataModelPermissions.PermissionToken], 
+            signatureCheckCondition: IrohaDataModelAccount.SignatureCheckCondition, 
+            metadata: IrohaDataModelMetadata.Metadata
+        ) {
+            self.id = id
+            self.assets = assets
+            self.signatories = signatories
+            self.permissionTokens = permissionTokens
+            self.signatureCheckCondition = signatureCheckCondition
+            self.metadata = metadata
+        }
     }
-}
 }

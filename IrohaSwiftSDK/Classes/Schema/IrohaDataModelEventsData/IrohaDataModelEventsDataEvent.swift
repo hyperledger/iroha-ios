@@ -18,5 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsData {
-public struct Event: Codable {}
+    public struct Event: Codable {
+        public init() {}
+    }
 }

@@ -18,64 +18,64 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-public indirect enum Status: Codable {
-    
-    case validating
-    case rejected(IrohaDataModelEventsPipeline.RejectionReason)
-    case committed
-    
-    // MARK: - For Codable purpose
-    
-    static func index(of case: Self) -> Int {
-        switch `case` {
+    public indirect enum Status: Codable {
+        
+        case validating
+        case rejected(IrohaDataModelEventsPipeline.RejectionReason)
+        case committed
+        
+        // MARK: - For Codable purpose
+        
+        static func discriminant(of case: Self) -> UInt8 {
+            switch `case` {
+                case .validating:
+                    return 0
+                case .rejected:
+                    return 1
+                case .committed:
+                    return 2
+            }
+        }
+        
+        // MARK: - Decodable
+        
+        public init(from decoder: Decoder) throws {
+            var container = try decoder.unkeyedContainer()
+            let discriminant = try container.decode(UInt8.self)
+            switch discriminant {
+            case 0:
+                
+                self = .validating
+                break
+            case 1:
+                let val0 = try container.decode(IrohaDataModelEventsPipeline.RejectionReason.self)
+                self = .rejected(val0)
+                break
+            case 2:
+                
+                self = .committed
+                break
+            default:
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+            }
+        }
+        
+        // MARK: - Encodable
+        
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.unkeyedContainer()
+            try container.encode(Status.discriminant(of: self))
+            switch self {
             case .validating:
-                return 0
-            case .rejected:
-                return 1
+                
+                break
+            case let .rejected(val0):
+                try container.encode(val0)
+                break
             case .committed:
-                return 2
+                
+                break
+            }
         }
     }
-    
-    // MARK: - Decodable
-    
-    public init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        let index = try container.decode(Int.self)
-        switch index {
-        case 0:
-            
-            self = .validating
-            break
-        case 1:
-            let val0 = try container.decode(IrohaDataModelEventsPipeline.RejectionReason.self)
-            self = .rejected(val0)
-            break
-        case 2:
-            
-            self = .committed
-            break
-        default:
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown index \(index)")
-        }
-    }
-    
-    // MARK: - Encodable
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        try container.encode(Status.index(of: self))
-        switch self {
-        case .validating:
-            
-            break
-        case let .rejected(val0):
-            try container.encode(val0)
-            break
-        case .committed:
-            
-            break
-        }
-    }
-}
 }

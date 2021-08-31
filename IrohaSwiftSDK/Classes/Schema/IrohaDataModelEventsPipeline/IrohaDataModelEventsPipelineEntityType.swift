@@ -18,54 +18,54 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-public indirect enum EntityType: Codable {
-    
-    case block
-    case transaction
-    
-    // MARK: - For Codable purpose
-    
-    static func index(of case: Self) -> Int {
-        switch `case` {
+    public indirect enum EntityType: Codable {
+        
+        case block
+        case transaction
+        
+        // MARK: - For Codable purpose
+        
+        static func discriminant(of case: Self) -> UInt8 {
+            switch `case` {
+                case .block:
+                    return 0
+                case .transaction:
+                    return 1
+            }
+        }
+        
+        // MARK: - Decodable
+        
+        public init(from decoder: Decoder) throws {
+            var container = try decoder.unkeyedContainer()
+            let discriminant = try container.decode(UInt8.self)
+            switch discriminant {
+            case 0:
+                
+                self = .block
+                break
+            case 1:
+                
+                self = .transaction
+                break
+            default:
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+            }
+        }
+        
+        // MARK: - Encodable
+        
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.unkeyedContainer()
+            try container.encode(EntityType.discriminant(of: self))
+            switch self {
             case .block:
-                return 0
+                
+                break
             case .transaction:
-                return 1
+                
+                break
+            }
         }
     }
-    
-    // MARK: - Decodable
-    
-    public init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        let index = try container.decode(Int.self)
-        switch index {
-        case 0:
-            
-            self = .block
-            break
-        case 1:
-            
-            self = .transaction
-            break
-        default:
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown index \(index)")
-        }
-    }
-    
-    // MARK: - Encodable
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        try container.encode(EntityType.index(of: self))
-        switch self {
-        case .block:
-            
-            break
-        case .transaction:
-            
-            break
-        }
-    }
-}
 }

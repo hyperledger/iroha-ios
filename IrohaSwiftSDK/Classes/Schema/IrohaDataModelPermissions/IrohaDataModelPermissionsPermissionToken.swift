@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelPermissions {
-public struct PermissionToken: Codable {
-    
-    public var name: String
-    public var params: [String: IrohaDataModel.Value]
-    
-    public init(name: String, params: [String: IrohaDataModel.Value]) {
-    self.name = name
-        self.params = params
+    public struct PermissionToken: Codable {
+        
+        public var name: String
+        public var params: [String: IrohaDataModel.Value]
+        
+        public init(
+            name: String, 
+            params: [String: IrohaDataModel.Value]
+        ) {
+            self.name = name
+            self.params = params
+        }
     }
-}
 }

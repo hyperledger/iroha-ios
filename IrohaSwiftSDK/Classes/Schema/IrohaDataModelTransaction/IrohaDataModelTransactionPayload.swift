@@ -18,20 +18,26 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-public struct Payload: Codable {
-    
-    public var accountId: IrohaDataModelAccount.Id
-    public var instructions: [IrohaDataModelIsi.Instruction]
-    public var creationTime: UInt64
-    public var timeToLiveMs: UInt64
-    public var metadata: [String: IrohaDataModel.Value]
-    
-    public init(accountId: IrohaDataModelAccount.Id, instructions: [IrohaDataModelIsi.Instruction], creationTime: UInt64, timeToLiveMs: UInt64, metadata: [String: IrohaDataModel.Value]) {
-    self.accountId = accountId
-        self.instructions = instructions
-        self.creationTime = creationTime
-        self.timeToLiveMs = timeToLiveMs
-        self.metadata = metadata
+    public struct Payload: Codable {
+        
+        public var accountId: IrohaDataModelAccount.Id
+        public var instructions: [IrohaDataModelIsi.Instruction]
+        public var creationTime: UInt64
+        public var timeToLiveMs: UInt64
+        public var metadata: [String: IrohaDataModel.Value]
+        
+        public init(
+            accountId: IrohaDataModelAccount.Id, 
+            instructions: [IrohaDataModelIsi.Instruction], 
+            creationTime: UInt64, 
+            timeToLiveMs: UInt64, 
+            metadata: [String: IrohaDataModel.Value]
+        ) {
+            self.accountId = accountId
+            self.instructions = instructions
+            self.creationTime = creationTime
+            self.timeToLiveMs = timeToLiveMs
+            self.metadata = metadata
+        }
     }
-}
 }

@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQueryAccount {
-public struct FindAccountsByDomainName: Codable {
-    
-    public var domainName: String
-    
-    public init(domainName: String) {
-    self.domainName = domainName
+    public struct FindAccountsByDomainName: Codable {
+        
+        public var domainName: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(domainName: IrohaDataModelExpression.EvaluatesTo) {
+            self.domainName = domainName
+        }
     }
-}
 }

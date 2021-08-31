@@ -18,44 +18,44 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEvents {
-public indirect enum VersionedEventSocketMessage: Codable {
-    
-    case v1(IrohaDataModelEvents._VersionedEventSocketMessageV1)
-    
-    // MARK: - For Codable purpose
-    
-    static func index(of case: Self) -> Int {
-        switch `case` {
-            case .v1:
-                return 0
+    public indirect enum VersionedEventSocketMessage: Codable {
+        
+        case v1(IrohaDataModelEvents._VersionedEventSocketMessageV1)
+        
+        // MARK: - For Codable purpose
+        
+        static func discriminant(of case: Self) -> UInt8 {
+            switch `case` {
+                case .v1:
+                    return 1
+            }
+        }
+        
+        // MARK: - Decodable
+        
+        public init(from decoder: Decoder) throws {
+            var container = try decoder.unkeyedContainer()
+            let discriminant = try container.decode(UInt8.self)
+            switch discriminant {
+            case 1:
+                let val0 = try container.decode(IrohaDataModelEvents._VersionedEventSocketMessageV1.self)
+                self = .v1(val0)
+                break
+            default:
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+            }
+        }
+        
+        // MARK: - Encodable
+        
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.unkeyedContainer()
+            try container.encode(VersionedEventSocketMessage.discriminant(of: self))
+            switch self {
+            case let .v1(val0):
+                try container.encode(val0)
+                break
+            }
         }
     }
-    
-    // MARK: - Decodable
-    
-    public init(from decoder: Decoder) throws {
-        var container = try decoder.unkeyedContainer()
-        let index = try container.decode(Int.self)
-        switch index {
-        case 0:
-            let val0 = try container.decode(IrohaDataModelEvents._VersionedEventSocketMessageV1.self)
-            self = .v1(val0)
-            break
-        default:
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown index \(index)")
-        }
-    }
-    
-    // MARK: - Encodable
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        try container.encode(VersionedEventSocketMessage.index(of: self))
-        switch self {
-        case let .v1(val0):
-            try container.encode(val0)
-            break
-        }
-    }
-}
 }

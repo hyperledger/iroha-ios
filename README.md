@@ -1,7 +1,7 @@
 # IrohaSwiftSDK
 
 [![Version](https://img.shields.io/cocoapods/v/IrohaSwiftSDK.svg?style=flat)](https://cocoapods.org/pods/IrohaSwiftSDK)
-[![License](https://img.shields.io/cocoapods/l/IrohaSwiftSDK.svg?style=flat)](https://cocoapods.org/pods/IrohaSwiftSDK)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://cocoapods.org/pods/IrohaSwiftSDK)
 [![Platform](https://img.shields.io/cocoapods/p/IrohaSwiftSDK.svg?style=flat)](https://cocoapods.org/pods/IrohaSwiftSDK)
 
 ## Example

@@ -18,14 +18,17 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaCrypto {
-public struct Signature: Codable {
-    
-    public var publicKey: IrohaCrypto.PublicKey
-    public var signature: [UInt8]
-    
-    public init(publicKey: IrohaCrypto.PublicKey, signature: [UInt8]) {
-    self.publicKey = publicKey
-        self.signature = signature
+    public struct Signature: Codable {
+        
+        public var publicKey: IrohaCrypto.PublicKey
+        public var signature: [UInt8]
+        
+        public init(
+            publicKey: IrohaCrypto.PublicKey, 
+            signature: [UInt8]
+        ) {
+            self.publicKey = publicKey
+            self.signature = signature
+        }
     }
-}
 }

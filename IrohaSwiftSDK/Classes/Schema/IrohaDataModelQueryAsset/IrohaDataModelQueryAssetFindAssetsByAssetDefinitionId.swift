@@ -18,12 +18,12 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQueryAsset {
-public struct FindAssetsByAssetDefinitionId: Codable {
-    
-    public var assetDefinitionId: IrohaDataModelAsset.DefinitionId
-    
-    public init(assetDefinitionId: IrohaDataModelAsset.DefinitionId) {
-    self.assetDefinitionId = assetDefinitionId
+    public struct FindAssetsByAssetDefinitionId: Codable {
+        
+        public var assetDefinitionId: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(assetDefinitionId: IrohaDataModelExpression.EvaluatesTo) {
+            self.assetDefinitionId = assetDefinitionId
+        }
     }
-}
 }

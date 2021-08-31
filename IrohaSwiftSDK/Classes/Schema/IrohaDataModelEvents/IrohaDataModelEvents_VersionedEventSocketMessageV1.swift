@@ -18,5 +18,5 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEvents {
-public typealias _VersionedEventSocketMessageV1 = (IrohaDataModelEvents.EventSocketMessage)
+    public typealias _VersionedEventSocketMessageV1 = (IrohaDataModelEvents.EventSocketMessage)
 }

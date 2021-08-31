@@ -2,10 +2,16 @@ PODS:
   - IrohaSwiftScale (1.0.0)
   - IrohaSwiftSDK (1.0.0):
     - IrohaSwiftScale
+    - Sodium (= 0.9.1)
+  - Sodium (0.9.1)
 
 DEPENDENCIES:
   - IrohaSwiftScale (from `../`)
   - IrohaSwiftSDK (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Sodium
 
 EXTERNAL SOURCES:
   IrohaSwiftScale:
@@ -14,9 +20,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  IrohaSwiftScale: 32c5cf055d81c3afa1d535e68d8c0ffdfbfdacc1
-  IrohaSwiftSDK: 53021d6e652d65793789d36a9e2a63be0beeab21
+  IrohaSwiftScale: 20a71045072c35b1c7801d12b7b4cde0950ac31d
+  IrohaSwiftSDK: bfd442acf9f01171e5f374b8d6723b3f8b885ce6
+  Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
 
-PODFILE CHECKSUM: 50c643ab0e30b3862e4f5b9e3bdac81e2d956c5c
+PODFILE CHECKSUM: 53e2c5088365a98f17ca8dcabc8806bd244b4449
 
 COCOAPODS: 1.10.1
