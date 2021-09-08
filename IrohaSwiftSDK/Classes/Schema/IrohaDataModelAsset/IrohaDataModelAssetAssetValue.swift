@@ -22,6 +22,7 @@ extension IrohaDataModelAsset {
         
         case quantity(UInt32)
         case bigQuantity(UInt128)
+        case fixed(IrohaDataModelFixed.Fixed)
         case store(IrohaDataModelMetadata.Metadata)
         
         // MARK: - For Codable purpose
@@ -32,8 +33,10 @@ extension IrohaDataModelAsset {
                     return 0
                 case .bigQuantity:
                     return 1
-                case .store:
+                case .fixed:
                     return 2
+                case .store:
+                    return 3
             }
         }
         
@@ -52,6 +55,10 @@ extension IrohaDataModelAsset {
                 self = .bigQuantity(val0)
                 break
             case 2:
+                let val0 = try container.decode(IrohaDataModelFixed.Fixed.self)
+                self = .fixed(val0)
+                break
+            case 3:
                 let val0 = try container.decode(IrohaDataModelMetadata.Metadata.self)
                 self = .store(val0)
                 break
@@ -70,6 +77,9 @@ extension IrohaDataModelAsset {
                 try container.encode(val0)
                 break
             case let .bigQuantity(val0):
+                try container.encode(val0)
+                break
+            case let .fixed(val0):
                 try container.encode(val0)
                 break
             case let .store(val0):

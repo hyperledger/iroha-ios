@@ -45,7 +45,7 @@ extension ExitCode {
 func main() -> Int32 {
     let argv = CommandLine.arguments
     if argv.count < 2 { return ExitCode.noSchemaPath.failed() }
-
+    
     var schemaPath = ""
     var destinationPath = ""
     var importFrameworks: [String] = []
@@ -94,7 +94,7 @@ func main() -> Int32 {
     }
     
     fileManager.finalize()
-    
+
     return 0
 }
 

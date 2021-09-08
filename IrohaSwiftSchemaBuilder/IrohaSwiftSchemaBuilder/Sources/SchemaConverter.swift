@@ -106,7 +106,7 @@ extension SchemaConverter: NamespaceResolver {
     
     private func resolveNamespacePath(typeMetadata: TypeMetadata) -> [String]? {
         switch typeMetadata.kind {
-        case .struct, .tupleStruct, .enum:
+        case .struct, .tupleStruct, .enum, .fixedPoint:
             return namespacePath(for: typeMetadata.name)
         default:
             return nil
@@ -116,9 +116,14 @@ extension SchemaConverter: NamespaceResolver {
     private func nativeType(for name: String) -> String {
         switch name {
         case "u8": return "UInt8"
+        case "u16": return "UInt16"
         case "u32": return "UInt32"
         case "u64": return "UInt64"
         case "u128": return "UInt128"
+        case "i8": return "Int8"
+        case "i16": return "Int16"
+        case "i32": return "Int32"
+        case "i64": return "Int64"
         case "bool": return "Bool"
         case "Vec": return "Array"
         case "Map", "BTreeMap": return "Dictionary"
@@ -402,7 +407,8 @@ private struct Rules {
 //        "iroha_data_model::expression::EvaluatesTo",
     ]
     static let typesIgnoringGeneric = [
-        "iroha_data_model::expression::EvaluatesTo"
+        "iroha_data_model::expression::EvaluatesTo",
+        "FixedPoint"
     ]
     static let ignoredNamespaces = [
         "alloc::string::",
@@ -437,6 +443,8 @@ private struct Rules {
             return TupleStructWriter(name: name, types: types, resolver: resolver, factory: tupleStructFactory)
         case let .enum(cases):
             return EnumWriter(name: name, cases: cases, resolver: resolver)
+        case let .fixedPoint(kind, decimalPlaces):
+            return FixedPointWriter(kind: kind, decimalPlaces: decimalPlaces, resolver: resolver)
         default: return nil
         }
     }
@@ -524,6 +532,65 @@ private struct StructWriter: TypeWriter {
         \(Rules.tab())
         \(writeConstructor(variables: variables))
         \(hashableBody(variables: variables))
+        }
+        """
+    }
+}
+
+private struct FixedPointWriter: TypeWriter {
+    
+    let kind: String
+    let decimalPlaces: UInt
+    let resolver: NameFixer
+    
+    private var typeName: String { resolver.fixVariableType(kind) }
+    
+    func write() throws -> String {
+        """
+        // MARK: - Extensions
+        \(Rules.tab())
+        private extension Float {
+        \(Rules.tab())init(base: \(typeName), decimalPlaces: Float) {
+        \(Rules.tab(2))self = Float(base) / powf(10, decimalPlaces)
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())func to\(typeName)(decimalPlaces: Float) -> \(typeName) {
+        \(Rules.tab(2))\(typeName)(self * powf(10, decimalPlaces))
+        \(Rules.tab())}
+        }
+        // MARK: - FixedPoint
+        \(Rules.tab())
+        public struct FixedPoint {
+        \(Rules.tab())
+        \(Rules.tab())public let decimalPlaces: Float = \(decimalPlaces)
+        \(Rules.tab())
+        \(Rules.tab())public private(set) var base: \(typeName)
+        \(Rules.tab())
+        \(Rules.tab())public var value: Float {
+        \(Rules.tab(2))get { Float(base: base, decimalPlaces: decimalPlaces) }
+        \(Rules.tab(2))set { base = newValue.to\(typeName)(decimalPlaces: decimalPlaces) }
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public init(base: \(typeName)) {
+        \(Rules.tab(2))self.base = base
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public init(value: Float) {
+        \(Rules.tab(2))self.base = value.to\(typeName)(decimalPlaces: decimalPlaces)
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        // MARK: - Codable
+        \(Rules.tab())
+        extension FixedPoint: Codable {
+        \(Rules.tab())public init(from decoder: Decoder) throws {
+        \(Rules.tab(2))self.base = try decoder.singleValueContainer().decode(Int64.self)
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public func encode(to encoder: Encoder) throws {
+        \(Rules.tab(2))var container = encoder.singleValueContainer()
+        \(Rules.tab(2))try container.encode(base)
+        \(Rules.tab())}
         }
         """
     }

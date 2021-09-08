@@ -52,15 +52,19 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/posplaw/Soramitsu/IrohaSwift/IrohaSwiftSDK/Example/IrohaSwiftSDK/schema.json "
+            argument = "$PROJECT_FILE_PATH"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/posplaw/Soramitsu/IrohaSwift/IrohaSwiftSDK/Example/IrohaSwiftSDK.xcodeproj"
+            argument = "--dev"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "GeneratedIrohaModel"
+            argument = "/Users/posplaw/Soramitsu/iroha-ios/Example/IrohaSwiftSDK/schema.json"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/posplaw/Soramitsu/iroha-ios/IrohaSwiftSDK/Classes/Schema"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

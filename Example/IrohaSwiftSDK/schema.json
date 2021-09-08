@@ -29,6 +29,12 @@
       "value": "iroha_data_model::asset::Asset"
     }
   },
+  "FixedPoint<i64>": {
+    "FixedPoint": {
+      "base": "i64",
+      "decimal_places": 9
+    }
+  },
   "Option<iroha_crypto::Hash>": {
     "Option": "iroha_crypto::Hash"
   },
@@ -39,6 +45,9 @@
     "Option": "iroha_data_model::isi::Instruction"
   },
   "String": "String",
+  "Vec<iroha::genesis::GenesisTransaction>": {
+    "Vec": "iroha::genesis::GenesisTransaction"
+  },
   "Vec<iroha_crypto::PublicKey>": {
     "Vec": "iroha_crypto::PublicKey"
   },
@@ -64,6 +73,29 @@
     }
   },
   "bool": "Bool",
+  "i64": {
+    "Int": "FixedWidth"
+  },
+  "iroha::genesis::GenesisTransaction": {
+    "Struct": {
+      "declarations": [
+        {
+          "name": "isi",
+          "ty": "Vec<iroha_data_model::isi::Instruction>"
+        }
+      ]
+    }
+  },
+  "iroha::genesis::RawGenesisBlock": {
+    "Struct": {
+      "declarations": [
+        {
+          "name": "transactions",
+          "ty": "Vec<iroha::genesis::GenesisTransaction>"
+        }
+      ]
+    }
+  },
   "iroha_crypto::Hash": {
     "TupleStruct": {
       "types": [
@@ -221,43 +253,48 @@
           "ty": "String"
         },
         {
-          "name": "Vec",
+          "name": "Fixed",
           "discriminant": 3,
+          "ty": "iroha_data_model::fixed::Fixed"
+        },
+        {
+          "name": "Vec",
+          "discriminant": 4,
           "ty": "Vec<iroha_data_model::Value>"
         },
         {
           "name": "Id",
-          "discriminant": 4,
+          "discriminant": 5,
           "ty": "iroha_data_model::IdBox"
         },
         {
           "name": "Identifiable",
-          "discriminant": 5,
+          "discriminant": 6,
           "ty": "iroha_data_model::IdentifiableBox"
         },
         {
           "name": "PublicKey",
-          "discriminant": 6,
+          "discriminant": 7,
           "ty": "iroha_crypto::PublicKey"
         },
         {
           "name": "Parameter",
-          "discriminant": 7,
+          "discriminant": 8,
           "ty": "iroha_data_model::Parameter"
         },
         {
           "name": "SignatureCheckCondition",
-          "discriminant": 8,
+          "discriminant": 9,
           "ty": "iroha_data_model::account::SignatureCheckCondition"
         },
         {
           "name": "TransactionValue",
-          "discriminant": 9,
+          "discriminant": 10,
           "ty": "iroha_data_model::transaction::TransactionValue"
         },
         {
           "name": "PermissionToken",
-          "discriminant": 10,
+          "discriminant": 11,
           "ty": "iroha_data_model::permissions::PermissionToken"
         }
       ]
@@ -388,8 +425,13 @@
           "ty": "u128"
         },
         {
-          "name": "Store",
+          "name": "Fixed",
           "discriminant": 2,
+          "ty": "iroha_data_model::fixed::Fixed"
+        },
+        {
+          "name": "Store",
+          "discriminant": 3,
           "ty": "iroha_data_model::metadata::Metadata"
         }
       ]
@@ -409,8 +451,13 @@
           "ty": null
         },
         {
-          "name": "Store",
+          "name": "Fixed",
           "discriminant": 2,
+          "ty": null
+        },
+        {
+          "name": "Store",
+          "discriminant": 3,
           "ty": null
         }
       ]
@@ -1181,6 +1228,13 @@
           "name": "values",
           "ty": "BTreeMap<String, iroha_data_model::expression::EvaluatesTo<iroha_data_model::Value>>"
         }
+      ]
+    }
+  },
+  "iroha_data_model::fixed::Fixed": {
+    "TupleStruct": {
+      "types": [
+        "FixedPoint<i64>"
       ]
     }
   },

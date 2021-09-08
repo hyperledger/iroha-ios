@@ -23,6 +23,7 @@ extension IrohaDataModel {
         case u32(UInt32)
         case bool(Bool)
         case string(String)
+        case fixed(IrohaDataModelFixed.Fixed)
         case vec([IrohaDataModel.Value])
         case id(IrohaDataModel.IdBox)
         case identifiable(IrohaDataModel.IdentifiableBox)
@@ -42,22 +43,24 @@ extension IrohaDataModel {
                     return 1
                 case .string:
                     return 2
-                case .vec:
+                case .fixed:
                     return 3
-                case .id:
+                case .vec:
                     return 4
-                case .identifiable:
+                case .id:
                     return 5
-                case .publicKey:
+                case .identifiable:
                     return 6
-                case .parameter:
+                case .publicKey:
                     return 7
-                case .signatureCheckCondition:
+                case .parameter:
                     return 8
-                case .transactionValue:
+                case .signatureCheckCondition:
                     return 9
-                case .permissionToken:
+                case .transactionValue:
                     return 10
+                case .permissionToken:
+                    return 11
             }
         }
         
@@ -80,34 +83,38 @@ extension IrohaDataModel {
                 self = .string(val0)
                 break
             case 3:
+                let val0 = try container.decode(IrohaDataModelFixed.Fixed.self)
+                self = .fixed(val0)
+                break
+            case 4:
                 let val0 = try container.decode([IrohaDataModel.Value].self)
                 self = .vec(val0)
                 break
-            case 4:
+            case 5:
                 let val0 = try container.decode(IrohaDataModel.IdBox.self)
                 self = .id(val0)
                 break
-            case 5:
+            case 6:
                 let val0 = try container.decode(IrohaDataModel.IdentifiableBox.self)
                 self = .identifiable(val0)
                 break
-            case 6:
+            case 7:
                 let val0 = try container.decode(IrohaCrypto.PublicKey.self)
                 self = .publicKey(val0)
                 break
-            case 7:
+            case 8:
                 let val0 = try container.decode(IrohaDataModel.Parameter.self)
                 self = .parameter(val0)
                 break
-            case 8:
+            case 9:
                 let val0 = try container.decode(IrohaDataModelAccount.SignatureCheckCondition.self)
                 self = .signatureCheckCondition(val0)
                 break
-            case 9:
+            case 10:
                 let val0 = try container.decode(IrohaDataModelTransaction.TransactionValue.self)
                 self = .transactionValue(val0)
                 break
-            case 10:
+            case 11:
                 let val0 = try container.decode(IrohaDataModelPermissions.PermissionToken.self)
                 self = .permissionToken(val0)
                 break
@@ -129,6 +136,9 @@ extension IrohaDataModel {
                 try container.encode(val0)
                 break
             case let .string(val0):
+                try container.encode(val0)
+                break
+            case let .fixed(val0):
                 try container.encode(val0)
                 break
             case let .vec(val0):

@@ -7,6 +7,28 @@ class TestSCALE: XCTestCase {
     private let encoder = ScaleEncoder()
     private let decoder = ScaleDecoder()
     
+    func testFixedPoint() throws {
+        let iterations = 1000
+        
+        for _ in 0..<iterations {
+            let value = FixedPoint(base: Int64.random(in: 0...Int64.max))
+            XCTAssertEqual(value.value, Float(value.base) / powf(10, value.decimalPlaces))
+            let data = try encoder.encode(value)
+            
+            // Native coding
+            do {
+                let decoded = try decoder.decode(type(of: value), from: data)
+                XCTAssertEqual(value.value, decoded.value)
+            }
+            
+            // Internal coding confirmation
+            do {
+                XCTAssertEqual(data, try encoder.encode(value.base))
+                XCTAssertEqual(try decoder.decode(Int64.self, from: data), value.base)
+            }
+        }
+    }
+    
     func testOptional() throws {
         do {
             let value: String? = nil

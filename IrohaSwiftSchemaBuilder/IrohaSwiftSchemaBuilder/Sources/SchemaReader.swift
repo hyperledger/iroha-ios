@@ -18,12 +18,21 @@ import Foundation
 
 // MARK: - TypeKind
 
-enum TypeKind {
+indirect enum TypeKind {
+    
     case uint8
+    case uint16
     case uint32
-    case uin64
+    case uint64
     case uint128
+    
+    case int8
+    case int16
+    case int32
+    case int64
+    
     case compact
+    case fixedPoint(String, UInt)
     
     case string
     case boolean
@@ -99,18 +108,25 @@ private struct TypeResolver {
         }
     }
     
-    func resolveTypeMetadata(name: String, value: Any) -> Result<TypeMetadata, Error> {
+    func resolveTypeMetadata(name: String, value: Any? = nil) -> Result<TypeMetadata, Error> {
         let kind: TypeKind
         switch name {
         
         case "String": kind = .string
         case "bool": kind = .boolean
         case "u8": kind = .uint8
+        case "u16": kind = .uint16
         case "u32": kind = .uint32
-        case "u64": kind = .uin64
+        case "u64": kind = .uint64
         case "u128": kind = .uint128
+        case "i8": kind = .int8
+        case "i16": kind = .int16
+        case "i32": kind = .int32
+        case "i64": kind = .int64
             
         default:
+            guard let value = value else { return .failure(Error.unexpectedType) }
+            
             switch resolveTypeKind(name: name, value: value) {
             case let .success(resolvedKind):
                 kind = resolvedKind
@@ -143,6 +159,8 @@ private struct TypeResolver {
             return resolveEnum(value: value)
         } else if let value = object["Int"] {
             return resolveInt(value: value)
+        } else if let value = object["FixedPoint"] {
+            return resolveFixedPoint(value: value)
         }
         
         return .failure(.unknownType(value))
@@ -276,5 +294,21 @@ extension TypeResolver {
         }
         
         return .success(.compact)
+    }
+    
+    private func resolveFixedPoint(value: Any) -> Result<TypeKind, Error> {
+        guard let value = value as? [String: Any] else {
+            return .failure(.other("Invalid fixed point schema: it is not an appropriate object"))
+        }
+        
+        guard let decimalPlaces = value["decimal_places"] as? UInt else {
+            return .failure(.other("Invalizd fixed point schema: `decimal_places` is not UInt or not found"))
+        }
+        
+        guard let base = value["base"] as? String else {
+            return .failure(.other("Invalid fixed point schema: `base` is not String or not found"))
+        }
+        
+        return .success(.fixedPoint(base, decimalPlaces))
     }
 }

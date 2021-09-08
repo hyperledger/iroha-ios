@@ -22,6 +22,7 @@ extension IrohaDataModelAsset {
         
         case quantity
         case bigQuantity
+        case fixed
         case store
         
         // MARK: - For Codable purpose
@@ -32,8 +33,10 @@ extension IrohaDataModelAsset {
                     return 0
                 case .bigQuantity:
                     return 1
-                case .store:
+                case .fixed:
                     return 2
+                case .store:
+                    return 3
             }
         }
         
@@ -53,6 +56,10 @@ extension IrohaDataModelAsset {
                 break
             case 2:
                 
+                self = .fixed
+                break
+            case 3:
+                
                 self = .store
                 break
             default:
@@ -70,6 +77,9 @@ extension IrohaDataModelAsset {
                 
                 break
             case .bigQuantity:
+                
+                break
+            case .fixed:
                 
                 break
             case .store:
