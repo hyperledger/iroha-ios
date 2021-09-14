@@ -23,6 +23,9 @@ struct FileManager {
         case coulndCreateDirectoryAtPath(Swift.Error)
         case fileNotWritable
         case noData
+        case fileNotFound
+        case invalidSchema
+        case invalidInstruction
         
         var errorDescription: String? {
             switch self {
@@ -30,6 +33,9 @@ struct FileManager {
             case let .coulndCreateDirectoryAtPath(error): return "Couldn't make directory at provided path\n\t\(error)"
             case .fileNotWritable: return "Couldn't write file"
             case .noData: return "No data to write (IMPOSSIBLE BY DESIGN)"
+            case .fileNotFound: return "File not found"
+            case .invalidSchema: return "Invalid schema file provided"
+            case .invalidInstruction: return "Invalid instruction"
             }
         }
     }
@@ -43,16 +49,19 @@ struct FileManager {
 
 extension FileManager {
     
-    func readFile(path: String) -> [String: Any]? {
+    func readFile(path: String) throws -> [String: Any] {
         guard fileManager.fileExists(atPath: path) else {
-            return nil
+            throw Error.fileNotFound
         }
         
-        guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
-            return nil
+        let data = try Data(contentsOf: URL(fileURLWithPath: path))
+        
+        let object = try JSONSerialization.jsonObject(with: data, options: .init())
+        guard let object = object as? [String: Any] else {
+            throw Error.invalidSchema
         }
         
-        return try? JSONSerialization.jsonObject(with: data, options: .init()) as? [String: Any]
+        return object
     }
 }
 
@@ -60,29 +69,27 @@ extension FileManager {
 
 extension FileManager {
     
-    func makeDestinationPathIfNeeded() -> LocalizedError? {
+    func makeDestinationPathIfNeeded() throws {
         var isDirectory: ObjCBool = false
         if !fileManager.fileExists(atPath: tempPath, isDirectory: &isDirectory) {
             do {
                 try fileManager.createDirectory(atPath: tempPath, withIntermediateDirectories: true, attributes: nil)
             } catch let error {
-                return Error.coulndCreateDirectoryAtPath(error)
+                throw Error.coulndCreateDirectoryAtPath(error)
             }
         } else if !isDirectory.boolValue {
-            return Error.pathExistsAndIsFile
+            throw Error.pathExistsAndIsFile
         }
-        
-        return nil
     }
     
-    func writeFile(at relativePath: String, contents: String, append: Bool = false) -> LocalizedError? {
+    func writeFile(at relativePath: String, contents: String, append: Bool = false) throws {
         let path = tempPath.appending("/\(relativePath)")
-        let directory = "/" + path.split(separator: "/").dropLast().joined(separator: "/")
+        let directory = "/" + path.components(separatedBy: "/").dropLast().joined(separator: "/")
         if !fileManager.fileExists(atPath: directory) {
             do {
                 try fileManager.createDirectory(atPath: directory, withIntermediateDirectories: true, attributes: nil)
             } catch let error {
-                return (error as? LocalizedError) ?? Error.fileNotWritable
+                throw (error as? LocalizedError) ?? Error.fileNotWritable
             }
         }
         
@@ -92,32 +99,32 @@ extension FileManager {
                 try fileManager.removeItem(atPath: path)
                 fileExists = false
             } catch let error {
-                return (error as? LocalizedError) ?? Error.fileNotWritable
+                throw (error as? LocalizedError) ?? Error.fileNotWritable
             }
         }
         
         guard let data = contents.data(using: .utf8) else {
-            return Error.noData
+            throw Error.noData
         }
         
         if !fileExists {
             if !fileManager.createFile(atPath: path, contents: data, attributes: nil) {
-                return Error.fileNotWritable
+                throw Error.fileNotWritable
             }
-            return nil
+            return
         }
         
         if !append {
-            abort()
+            throw Error.invalidInstruction
         }
         
         // Appending
         guard let fileHandle = FileHandle(forWritingAtPath: path) else {
-            return Error.fileNotWritable
+            throw Error.fileNotWritable
         }
         
         guard let newline = "\n".data(using: .utf8) else {
-            return Error.noData
+            throw Error.noData
         }
         
         do {
@@ -133,26 +140,22 @@ extension FileManager {
                 }
             }
         } catch let error {
-            return (error as? LocalizedError) ?? Error.fileNotWritable
+            throw (error as? LocalizedError) ?? Error.fileNotWritable
         }
-        
-        return nil
     }
     
-    func finalize() {
-        guard let filenames = try? fileManager.contentsOfDirectory(atPath: tempPath) else {
-            abort()
-        }
+    func finalize() throws {
+        let filenames = try fileManager.contentsOfDirectory(atPath: tempPath)
         
         for filename in filenames {
             let oldPath = tempPath.appending("/\(filename)")
             let newPath = destinationPath.appending("/\(filename)")
             if fileManager.fileExists(atPath: newPath) {
-                try? fileManager.removeItem(atPath: newPath)
+                try fileManager.removeItem(atPath: newPath)
             }
-            try? fileManager.moveItem(atPath: oldPath, toPath: newPath)
+            try fileManager.moveItem(atPath: oldPath, toPath: newPath)
         }
         
-        try? fileManager.removeItem(atPath: tempPath)
+        try fileManager.removeItem(atPath: tempPath)
     }
 }

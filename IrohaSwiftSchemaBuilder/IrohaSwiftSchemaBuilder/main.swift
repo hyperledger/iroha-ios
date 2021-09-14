@@ -45,7 +45,7 @@ extension ExitCode {
 func main() -> Int32 {
     let argv = CommandLine.arguments
     if argv.count < 2 { return ExitCode.noSchemaPath.failed() }
-    
+
     var schemaPath = ""
     var destinationPath = ""
     var importFrameworks: [String] = []
@@ -72,11 +72,16 @@ func main() -> Int32 {
 
     let fileManager = FileManager(destinationPath: destinationPath)
 
-    guard let rawSchema = fileManager.readFile(path: schemaPath) else {
-        return ExitCode.invalidSchemaPath.failed()
+    let rawSchema: [String: Any]
+    do {
+        rawSchema = try fileManager.readFile(path: schemaPath)
+    } catch let error {
+        return ExitCode.invalidSchemaPath.failed(description: error.localizedDescription)
     }
 
-    if let error = fileManager.makeDestinationPathIfNeeded() {
+    do {
+        try fileManager.makeDestinationPathIfNeeded()
+    } catch let error {
         return ExitCode.other.failed(description: error.localizedDescription)
     }
     
@@ -84,7 +89,9 @@ func main() -> Int32 {
     switch schemaReader.parse() {
     case let .success(schema):
         var schemaConverter = SchemaConverter(schema: schema, fileManager: fileManager, importFrameworks: importFrameworks)
-        if let error = schemaConverter.convert() {
+        do {
+            try schemaConverter.convert()
+        } catch let error {
             return ExitCode.other.failed(description: error.localizedDescription)
         }
         
@@ -93,8 +100,12 @@ func main() -> Int32 {
         return ExitCode.other.failed(description: error.localizedDescription)
     }
     
-    fileManager.finalize()
-
+    do {
+        try fileManager.finalize()
+    } catch let error {
+        return ExitCode.other.failed(description: error.localizedDescription)
+    }
+    
     return 0
 }
 

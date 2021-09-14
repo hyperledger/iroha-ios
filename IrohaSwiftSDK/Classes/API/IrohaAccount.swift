@@ -17,8 +17,8 @@
 import Foundation
 
 public struct IrohaKeyPair {
-    public var publicKey: [UInt8]
-    public var privateKey: [UInt8]
+    public let publicKey: [UInt8]
+    public let privateKey: [UInt8]
     
     public init(publicKey: [UInt8], privateKey: [UInt8]) {
         self.publicKey = publicKey
@@ -27,8 +27,8 @@ public struct IrohaKeyPair {
 }
 
 public struct IrohaAccount {
-    public var keyPair: IrohaKeyPair
-    public var id: IrohaDataModelAccount.Id
+    public let keyPair: IrohaKeyPair
+    public let id: IrohaDataModelAccount.Id
     
     public init(keyPair: IrohaKeyPair, id: IrohaDataModelAccount.Id) {
         self.keyPair = keyPair

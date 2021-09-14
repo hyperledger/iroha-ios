@@ -33,22 +33,16 @@ struct SchemaConverter {
         self.importFrameworks = importFrameworks
     }
     
-    mutating func convert() -> LocalizedError? {
+    mutating func convert() throws {
         unwrapNames()
         let namespacePaths = resolveNamespacePaths()
         for (typeMetadata, namespacePath) in namespacePaths {
-            if let error = write(typeMetadata: typeMetadata, namespacePath: namespacePath) {
-                return error
-            }
+            try write(typeMetadata: typeMetadata, namespacePath: namespacePath)
         }
         
         for contents in Rules.finalize() {
-            if let error = fileManager.writeFile(at: stubFilename, contents: contents, append: true) {
-                return error
-            }
+            try fileManager.writeFile(at: stubFilename, contents: contents, append: true)
         }
-        
-        return nil
     }
 }
 
@@ -303,9 +297,9 @@ extension SchemaConverter {
     
     private var stubFilename: String { "NamespacesStub.\(Rules.fileExtension)" }
     
-    mutating private func write(typeMetadata: TypeMetadata, namespacePath: [String], isNamespace: Bool = false) -> LocalizedError? {
+    mutating private func write(typeMetadata: TypeMetadata, namespacePath: [String], isNamespace: Bool = false) throws {
         guard let typeName = namespacePath.last else {
-            return Error.invalidSchema
+            throw Error.invalidSchema
         }
         
         var filename = namespacePath.joined().appending(".\(Rules.fileExtension)")
@@ -319,7 +313,7 @@ extension SchemaConverter {
         })
         
         guard let writer = Rules.typeWriter(for: typeMetadata, name: typeName, resolver: self, hashable: hashable, codable: !isNamespace) else {
-            return Error.invalidSchema
+            throw Error.invalidSchema
         }
         
         var header = Rules.fileHeader + "\n"
@@ -344,29 +338,19 @@ extension SchemaConverter {
             
             if !namespacesWritten.contains(namespace) {
                 let metadata = TypeMetadata(name: namespace, kind: .struct([]))
-                if let error = write(typeMetadata: metadata, namespacePath: [namespace], isNamespace: true) {
-                    return error
-                }
+                try write(typeMetadata: metadata, namespacePath: [namespace], isNamespace: true)
                 namespacesWritten.insert(namespace)
             }
         }
         
-        do {
-            var body = try writer.write()
-            if header.count > 0 || footer.count > 0 {
-                let tab = tabs > 0 ?  Rules.tab(tabs) : ""
-                body = body.split(separator: "\n").map { tab + $0 }.joined(separator: "\n")
-                body = header.appending(body).appending(footer)
-            }
-            
-            if let error = fileManager.writeFile(at: filename, contents: body, append: isNamespace) {
-                return error
-            }
-        } catch let error {
-            return error as? LocalizedError
+        var body = try writer.write()
+        if header.count > 0 || footer.count > 0 {
+            let tab = tabs > 0 ?  Rules.tab(tabs) : ""
+            body = body.split(separator: "\n").map { tab + $0 }.joined(separator: "\n")
+            body = header.appending(body).appending(footer)
         }
         
-        return nil
+        try fileManager.writeFile(at: filename, contents: body, append: isNamespace)
     }
 }
 
@@ -401,6 +385,8 @@ private struct Rules {
     static let keywords = ["if", "where"]
     static let indirectKeyword: String? = "indirect"
     static let extensionKeyword = "extension"
+    static let fixedPointType = "Decimal"
+    static let fixedPointDecimalPlacesType = "Int16"
     private static let tab = "    "
     static func tab(_ count: Int = 1) -> String { [String](repeating: tab, count: count).joined(separator: "") }
     static let ignoredWrappingTypes: [String] = [
@@ -549,34 +535,57 @@ private struct FixedPointWriter: TypeWriter {
         """
         // MARK: - Extensions
         \(Rules.tab())
-        private extension Float {
-        \(Rules.tab())init(base: \(typeName), decimalPlaces: Float) {
-        \(Rules.tab(2))self = Float(base) / powf(10, decimalPlaces)
+        private extension NSDecimalNumber {
+        \(Rules.tab())static func roundingBehavior(scale: Int16) -> NSDecimalNumberBehaviors {
+        \(Rules.tab(2))NSDecimalNumberHandler(
+        \(Rules.tab(3))roundingMode: .plain,
+        \(Rules.tab(3))scale: scale,
+        \(Rules.tab(3))raiseOnExactness: false,
+        \(Rules.tab(3))raiseOnOverflow: false,
+        \(Rules.tab(3))raiseOnUnderflow: false,
+        \(Rules.tab(3))raiseOnDivideByZero: false
+        \(Rules.tab(2)))
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        private extension \(Rules.fixedPointType) {
+        \(Rules.tab())init(base: \(typeName), decimalPlaces: \(Rules.fixedPointDecimalPlacesType)) {
+        \(Rules.tab(2))self = NSDecimalNumber(value: base).multiplying(byPowerOf10: -decimalPlaces) as \(Rules.fixedPointType)
         \(Rules.tab())}
         \(Rules.tab())
-        \(Rules.tab())func to\(typeName)(decimalPlaces: Float) -> \(typeName) {
-        \(Rules.tab(2))\(typeName)(self * powf(10, decimalPlaces))
+        \(Rules.tab())func to\(typeName)(decimalPlaces: \(Rules.fixedPointDecimalPlacesType)) throws -> \(typeName) {
+        \(Rules.tab(2))let multiplied = (self as NSDecimalNumber)
+        \(Rules.tab(3)).multiplying(byPowerOf10: decimalPlaces, withBehavior: NSDecimalNumber.roundingBehavior(scale: decimalPlaces))
+        \(Rules.tab())
+        \(Rules.tab(2))guard (multiplied as Decimal) <= Decimal(Int64.max) else {
+        \(Rules.tab(3))throw FixedPoint.Error.decimalValueTooHigh
+        \(Rules.tab(2))}
+        \(Rules.tab())
+        \(Rules.tab(2))return multiplied.\(typeName.loweringFirstLetter)Value
         \(Rules.tab())}
         }
         // MARK: - FixedPoint
         \(Rules.tab())
         public struct FixedPoint {
         \(Rules.tab())
-        \(Rules.tab())public let decimalPlaces: Float = \(decimalPlaces)
+        \(Rules.tab())enum Error: Swift.Error {
+        \(Rules.tab(2))case decimalValueTooHigh
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static let decimalPlaces: \(Rules.fixedPointDecimalPlacesType) = \(decimalPlaces)
         \(Rules.tab())
         \(Rules.tab())public private(set) var base: \(typeName)
         \(Rules.tab())
-        \(Rules.tab())public var value: Float {
-        \(Rules.tab(2))get { Float(base: base, decimalPlaces: decimalPlaces) }
-        \(Rules.tab(2))set { base = newValue.to\(typeName)(decimalPlaces: decimalPlaces) }
+        \(Rules.tab())public var value: \(Rules.fixedPointType) {
+        \(Rules.tab(2))get { \(Rules.fixedPointType)(base: base, decimalPlaces: Self.decimalPlaces) }
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public init(base: \(typeName)) {
         \(Rules.tab(2))self.base = base
         \(Rules.tab())}
         \(Rules.tab())
-        \(Rules.tab())public init(value: Float) {
-        \(Rules.tab(2))self.base = value.to\(typeName)(decimalPlaces: decimalPlaces)
+        \(Rules.tab())public init(value: \(Rules.fixedPointType)) throws {
+        \(Rules.tab(2))self.base = try value.to\(typeName)(decimalPlaces: Self.decimalPlaces)
         \(Rules.tab())}
         }
         \(Rules.tab())
@@ -584,12 +593,87 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab())
         extension FixedPoint: Codable {
         \(Rules.tab())public init(from decoder: Decoder) throws {
-        \(Rules.tab(2))self.base = try decoder.singleValueContainer().decode(Int64.self)
+        \(Rules.tab(2))self.base = try decoder.singleValueContainer().decode(\(typeName).self)
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public func encode(to encoder: Encoder) throws {
         \(Rules.tab(2))var container = encoder.singleValueContainer()
         \(Rules.tab(2))try container.encode(base)
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        // MARK: - Comparable
+        \(Rules.tab())
+        extension FixedPoint: Comparable {
+        \(Rules.tab())public static func == (lhs: FixedPoint, rhs: FixedPoint) -> Bool {
+        \(Rules.tab(2))lhs.base == rhs.base
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static func < (lhs: FixedPoint, rhs: FixedPoint) -> Bool {
+        \(Rules.tab(2))lhs.base < rhs.base
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        // MARK: - AdditiveArithmetic
+        \(Rules.tab())
+        extension FixedPoint: AdditiveArithmetic {
+        \(Rules.tab())public static var zero: FixedPoint {
+        \(Rules.tab(2)).init(base: 0)
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static func - (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
+        \(Rules.tab(2)).init(base: lhs.base - rhs.base)
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static func + (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
+        \(Rules.tab(2)).init(base: lhs.base + rhs.base)
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        // MARK: - SignedNumeric
+        \(Rules.tab())
+        extension FixedPoint: SignedNumeric {
+        \(Rules.tab())public var magnitude: Decimal {
+        \(Rules.tab(2))value.magnitude
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public init?<T>(exactly source: T) where T : BinaryInteger {
+        \(Rules.tab(2))guard let base = try? Decimal(exactly: source)?.toInt64(decimalPlaces: Self.decimalPlaces) else {
+        \(Rules.tab(3))return nil
+        \(Rules.tab(2))}
+        \(Rules.tab())
+        \(Rules.tab(2))self.base = base
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public init(integerLiteral value: Int) {
+        \(Rules.tab(2))// Int value won't exceed Int64.max limit, so we can force unwrap
+        \(Rules.tab(2))self.base = try! Decimal(value).toInt64(decimalPlaces: Self.decimalPlaces)
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static func * (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
+        \(Rules.tab(2)).init(base: lhs.base * rhs.base)
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static func *= (lhs: inout FixedPoint, rhs: FixedPoint) {
+        \(Rules.tab(2))lhs.base *= rhs.base
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static func / (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
+        \(Rules.tab(2))// Both values are correct fixed points, can be forced
+        \(Rules.tab(2)).init(base: try! (lhs.value / rhs.value).toInt64(decimalPlaces: Self.decimalPlaces))
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static func /= (lhs: inout FixedPoint, rhs: FixedPoint) {
+        \(Rules.tab(2))// Both values are correct fixed points, can be forced
+        \(Rules.tab(2))lhs.base = try! (lhs.value / rhs.value).toInt64(decimalPlaces: Self.decimalPlaces)
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static func += (lhs: inout FixedPoint, rhs: FixedPoint) {
+        \(Rules.tab(2))lhs.base += rhs.base
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static func -= (lhs: inout FixedPoint, rhs: FixedPoint) {
+        \(Rules.tab(2))lhs.base -= rhs.base
         \(Rules.tab())}
         }
         """

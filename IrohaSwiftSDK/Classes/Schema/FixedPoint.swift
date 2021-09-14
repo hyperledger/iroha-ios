@@ -19,34 +19,57 @@ import IrohaSwiftScale
 
 // MARK: - Extensions
     
-private extension Float {
-    init(base: Int64, decimalPlaces: Float) {
-        self = Float(base) / powf(10, decimalPlaces)
+private extension NSDecimalNumber {
+    static func roundingBehavior(scale: Int16) -> NSDecimalNumberBehaviors {
+        NSDecimalNumberHandler(
+            roundingMode: .plain,
+            scale: scale,
+            raiseOnExactness: false,
+            raiseOnOverflow: false,
+            raiseOnUnderflow: false,
+            raiseOnDivideByZero: false
+        )
+    }
+}
+    
+private extension Decimal {
+    init(base: Int64, decimalPlaces: Int16) {
+        self = NSDecimalNumber(value: base).multiplying(byPowerOf10: -decimalPlaces) as Decimal
     }
     
-    func toInt64(decimalPlaces: Float) -> Int64 {
-        Int64(self * powf(10, decimalPlaces))
+    func toInt64(decimalPlaces: Int16) throws -> Int64 {
+        let multiplied = (self as NSDecimalNumber)
+            .multiplying(byPowerOf10: decimalPlaces, withBehavior: NSDecimalNumber.roundingBehavior(scale: decimalPlaces))
+    
+        guard (multiplied as Decimal) <= Decimal(Int64.max) else {
+            throw FixedPoint.Error.decimalValueTooHigh
+        }
+    
+        return multiplied.int64Value
     }
 }
 // MARK: - FixedPoint
     
 public struct FixedPoint {
     
-    public let decimalPlaces: Float = 9
+    enum Error: Swift.Error {
+        case decimalValueTooHigh
+    }
+    
+    public static let decimalPlaces: Int16 = 9
     
     public private(set) var base: Int64
     
-    public var value: Float {
-        get { Float(base: base, decimalPlaces: decimalPlaces) }
-        set { base = newValue.toInt64(decimalPlaces: decimalPlaces) }
+    public var value: Decimal {
+        get { Decimal(base: base, decimalPlaces: Self.decimalPlaces) }
     }
     
     public init(base: Int64) {
         self.base = base
     }
     
-    public init(value: Float) {
-        self.base = value.toInt64(decimalPlaces: decimalPlaces)
+    public init(value: Decimal) throws {
+        self.base = try value.toInt64(decimalPlaces: Self.decimalPlaces)
     }
 }
     
@@ -60,5 +83,80 @@ extension FixedPoint: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(base)
+    }
+}
+    
+// MARK: - Comparable
+    
+extension FixedPoint: Comparable {
+    public static func == (lhs: FixedPoint, rhs: FixedPoint) -> Bool {
+        lhs.base == rhs.base
+    }
+    
+    public static func < (lhs: FixedPoint, rhs: FixedPoint) -> Bool {
+        lhs.base < rhs.base
+    }
+}
+    
+// MARK: - AdditiveArithmetic
+    
+extension FixedPoint: AdditiveArithmetic {
+    public static var zero: FixedPoint {
+        .init(base: 0)
+    }
+    
+    public static func - (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
+        .init(base: lhs.base - rhs.base)
+    }
+    
+    public static func + (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
+        .init(base: lhs.base + rhs.base)
+    }
+}
+    
+// MARK: - SignedNumeric
+    
+extension FixedPoint: SignedNumeric {
+    public var magnitude: Decimal {
+        value.magnitude
+    }
+    
+    public init?<T>(exactly source: T) where T : BinaryInteger {
+        guard let base = try? Decimal(exactly: source)?.toInt64(decimalPlaces: Self.decimalPlaces) else {
+            return nil
+        }
+    
+        self.base = base
+    }
+    
+    public init(integerLiteral value: Int) {
+        // Int value won't exceed Int64.max limit, so we can force unwrap
+        self.base = try! Decimal(value).toInt64(decimalPlaces: Self.decimalPlaces)
+    }
+    
+    public static func * (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
+        .init(base: lhs.base * rhs.base)
+    }
+    
+    public static func *= (lhs: inout FixedPoint, rhs: FixedPoint) {
+        lhs.base *= rhs.base
+    }
+    
+    public static func / (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
+        // Both values are correct fixed points, can be forced
+        .init(base: try! (lhs.value / rhs.value).toInt64(decimalPlaces: Self.decimalPlaces))
+    }
+    
+    public static func /= (lhs: inout FixedPoint, rhs: FixedPoint) {
+        // Both values are correct fixed points, can be forced
+        lhs.base = try! (lhs.value / rhs.value).toInt64(decimalPlaces: Self.decimalPlaces)
+    }
+    
+    public static func += (lhs: inout FixedPoint, rhs: FixedPoint) {
+        lhs.base += rhs.base
+    }
+    
+    public static func -= (lhs: inout FixedPoint, rhs: FixedPoint) {
+        lhs.base -= rhs.base
     }
 }

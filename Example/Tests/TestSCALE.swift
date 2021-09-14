@@ -11,16 +11,16 @@ class TestSCALE: XCTestCase {
         let iterations = 1000
         
         for _ in 0..<iterations {
-            let value = FixedPoint(base: Int64.random(in: 0...Int64.max))
-            XCTAssertEqual(value.value, Float(value.base) / powf(10, value.decimalPlaces))
+            let base = Int64.random(in: 0...Int64.max)
+            let value = FixedPoint(base: base)
             let data = try encoder.encode(value)
-            
+
             // Native coding
             do {
                 let decoded = try decoder.decode(type(of: value), from: data)
                 XCTAssertEqual(value.value, decoded.value)
             }
-            
+
             // Internal coding confirmation
             do {
                 XCTAssertEqual(data, try encoder.encode(value.base))
