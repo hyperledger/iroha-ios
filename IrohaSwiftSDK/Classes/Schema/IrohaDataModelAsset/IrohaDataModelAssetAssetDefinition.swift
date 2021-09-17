@@ -22,13 +22,16 @@ extension IrohaDataModelAsset {
         
         public var valueType: IrohaDataModelAsset.AssetValueType
         public var id: IrohaDataModelAsset.DefinitionId
+        public var metadata: IrohaDataModelMetadata.Metadata
         
         public init(
             valueType: IrohaDataModelAsset.AssetValueType, 
-            id: IrohaDataModelAsset.DefinitionId
+            id: IrohaDataModelAsset.DefinitionId, 
+            metadata: IrohaDataModelMetadata.Metadata
         ) {
             self.valueType = valueType
             self.id = id
+            self.metadata = metadata
         }
     }
 }

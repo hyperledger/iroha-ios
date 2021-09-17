@@ -7,6 +7,55 @@ class TestSCALE: XCTestCase {
     private let encoder = ScaleEncoder()
     private let decoder = ScaleDecoder()
     
+    func testFixedSizeArrays() throws {
+        let iterations = 1000
+        
+        typealias TestFixedArrayElement = Int
+        typealias TestFixedArray = Array4<TestFixedArrayElement>
+        
+        func random() -> TestFixedArrayElement {
+            TestFixedArrayElement.random(in: 0...TestFixedArrayElement.max)
+        }
+        
+        // Test literals
+        
+        assertPreconditionFailure {
+            let _: TestFixedArray = [1, 2, 3]
+        }
+        
+        assertNoPreconditionFailure {
+            let _: TestFixedArray = [1, 2, 3, 4]
+        }
+        
+        // Test preconditions
+        
+        for i in 1...iterations {
+            let rangedArray = 1...i
+            if i == TestFixedArray.fixedSize {
+                assertNoPreconditionFailure {
+                    let _ = TestFixedArray(rangedArray)
+                }
+            } else {
+                assertPreconditionFailure {
+                    let _ = TestFixedArray(rangedArray)
+                }
+            }
+        }
+        
+        // Test subscripts
+        
+        for _ in 1...iterations {
+            let array = (1...TestFixedArray.fixedSize).map { _ in random() }
+            var fixedArray = TestFixedArray(array)
+            
+            for j in 0..<fixedArray.count {
+                let random = random()
+                fixedArray[j] = random
+                XCTAssertEqual(random, fixedArray[j])
+            }
+        }
+    }
+    
     func testFixedPoint() throws {
         let iterations = 1000
         
