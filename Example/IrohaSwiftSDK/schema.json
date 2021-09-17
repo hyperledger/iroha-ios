@@ -393,6 +393,10 @@
         {
           "name": "id",
           "ty": "iroha_data_model::asset::DefinitionId"
+        },
+        {
+          "name": "metadata",
+          "ty": "iroha_data_model::metadata::Metadata"
         }
       ]
     }
@@ -1623,28 +1627,33 @@
           "ty": "iroha_data_model::query::asset::FindAssetKeyValueByIdAndKey"
         },
         {
-          "name": "FindAllDomains",
+          "name": "FindAssetDefinitionKeyValueByIdAndKey",
           "discriminant": 15,
+          "ty": "iroha_data_model::query::asset::FindAssetDefinitionKeyValueByIdAndKey"
+        },
+        {
+          "name": "FindAllDomains",
+          "discriminant": 16,
           "ty": "iroha_data_model::query::domain::FindAllDomains"
         },
         {
           "name": "FindDomainByName",
-          "discriminant": 16,
+          "discriminant": 17,
           "ty": "iroha_data_model::query::domain::FindDomainByName"
         },
         {
           "name": "FindAllPeers",
-          "discriminant": 17,
+          "discriminant": 18,
           "ty": "iroha_data_model::query::peer::FindAllPeers"
         },
         {
           "name": "FindTransactionsByAccountId",
-          "discriminant": 18,
+          "discriminant": 19,
           "ty": "iroha_data_model::query::transaction::FindTransactionsByAccountId"
         },
         {
           "name": "FindPermissionTokensByAccountId",
-          "discriminant": 19,
+          "discriminant": 20,
           "ty": "iroha_data_model::query::permissions::FindPermissionTokensByAccountId"
         }
       ]
@@ -1772,6 +1781,20 @@
         {
           "name": "id",
           "ty": "iroha_data_model::expression::EvaluatesTo<iroha_data_model::asset::Id>"
+        }
+      ]
+    }
+  },
+  "iroha_data_model::query::asset::FindAssetDefinitionKeyValueByIdAndKey": {
+    "Struct": {
+      "declarations": [
+        {
+          "name": "id",
+          "ty": "iroha_data_model::expression::EvaluatesTo<iroha_data_model::asset::DefinitionId>"
+        },
+        {
+          "name": "key",
+          "ty": "iroha_data_model::expression::EvaluatesTo<alloc::string::String>"
         }
       ]
     }
@@ -1929,7 +1952,7 @@
         },
         {
           "name": "signatures",
-          "ty": "Vec<iroha_crypto::Signature>"
+          "ty": "BTreeSet<iroha_crypto::Signature>"
         },
         {
           "name": "rejection_reason",
@@ -1947,7 +1970,7 @@
         },
         {
           "name": "signatures",
-          "ty": "Vec<iroha_crypto::Signature>"
+          "ty": "BTreeSet<iroha_crypto::Signature>"
         }
       ]
     }

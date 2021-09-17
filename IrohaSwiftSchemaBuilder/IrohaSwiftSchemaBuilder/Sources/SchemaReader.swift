@@ -40,6 +40,7 @@ indirect enum TypeKind {
     case map(String, String) // pair of ref names
     case vector(String) // ref name,
     case array(String, UInt) // ref name + length
+    case fixedSizeArray(String, UInt) // ref name + length
 
     case `struct`([(String, String)]) // pairs of name + ref name
     case tupleStruct([String]) // array of ref names
@@ -110,6 +111,8 @@ private struct TypeResolver {
     
     func resolveTypeMetadata(name: String, value: Any? = nil) -> Result<TypeMetadata, Error> {
         let kind: TypeKind
+        var name = name
+        
         switch name {
         
         case "String": kind = .string
@@ -130,6 +133,11 @@ private struct TypeResolver {
             switch resolveTypeKind(name: name, value: value) {
             case let .success(resolvedKind):
                 kind = resolvedKind
+                
+                if case let .fixedSizeArray(fixedSizeArrayName, _) = resolvedKind {
+                    name = fixedSizeArrayName
+                }
+                
             case let .failure(error):
                 return .failure(error)
             }
@@ -148,7 +156,7 @@ private struct TypeResolver {
         } else if let value = object["Map"] {
             return resolveMap(value: value)
         } else if let value = object["Array"] {
-            return resolveArray(value: value)
+            return resolveFixedSizeArray(value: value)
         } else if let value = object["Vec"] {
             return resolveVector(value: value)
         } else if let value = object["TupleStruct"] {
@@ -195,20 +203,16 @@ extension TypeResolver {
         return .success(.map(key, value))
     }
 
-    private func resolveArray(value: Any) -> Result<TypeKind, Error> {
+    private func resolveFixedSizeArray(value: Any) -> Result<TypeKind, Error> {
         guard let value = value as? [String: Any] else {
             return .failure(.other("Invalid array schema: it is not an object"))
-        }
-        
-        guard let type = value["ty"] as? String else {
-            return .failure(.other("Invalid array schema: `ty` is not string or not found"))
         }
         
         guard let length = value["len"] as? UInt else {
             return .failure(.other("Invalid array schema: `len` is not int or not found"))
         }
         
-        return .success(.array(type, length))
+        return .success(.fixedSizeArray("Array\(length)", length))
     }
 
     private func resolveVector(value: Any) -> Result<TypeKind, Error> {

@@ -82,7 +82,7 @@ class TestSDK: XCTestCase {
     
     // MARK: - Events
     
-    func testEvents() {
+    func testSingleEvent() {
         guard let account = account else {
             XCTFail()
             return
@@ -101,6 +101,113 @@ class TestSDK: XCTestCase {
         }
         
         wait(for: [exp], timeout: 5)
+    }
+    
+    func testMultipleEvents() {
+        guard let account = account else {
+            XCTFail()
+            return
+        }
+        
+        let client = IrohaClient(serverUrlString: urlString, account: account)
+        client.debug = true
+        
+        let numberOfConnections = 20
+        var exps: [XCTestExpectation] = []
+        
+        for _ in 0..<numberOfConnections {
+            let exp = XCTestExpectation()
+            exps.append(exp)
+            
+            client.receiveDataEvents { event in
+                // do nothing
+            } subscriptionAcceptedHandler: {
+                exp.fulfill()
+            } errorHandler: { error in
+                XCTFail(error.localizedDescription)
+                exp.fulfill()
+            }
+        }
+        
+        wait(for: exps, timeout: 5)
+    }
+    
+    func testReceivingEvents() {
+        guard let account = account else {
+            XCTFail()
+            return
+        }
+        let client = IrohaClient(serverUrlString: urlString, account: account)
+        client.debug = true
+        
+        var exps: [XCTestExpectation] = []
+        
+        let subscriptionAcceptExp = XCTestExpectation()
+        exps.append(subscriptionAcceptExp)
+        
+        let eventReceivedExp = XCTestExpectation()
+        exps.append(eventReceivedExp)
+        
+        client.receivePipelineEvents { event in
+            eventReceivedExp.fulfill()
+        } subscriptionAcceptedHandler: {
+            subscriptionAcceptExp.fulfill()
+        } errorHandler: { error in
+            XCTFail(error.localizedDescription)
+            exps.forEach { $0.fulfill() }
+        }
+        
+        let submitInstructionExp = XCTestExpectation()
+        exps.append(submitInstructionExp)
+        
+        let instructions: [IrohaDataModelIsi.Instruction] = [
+            .register(
+                .init(
+                    object: .init(
+                        expression: .raw(
+                            .identifiable(
+                                .assetDefinition(
+                                    .init(
+                                        valueType: .quantity,
+                                        id: .init(name: "hydrangea", domainName: "wonderland"),
+                                        metadata: .init(map: [:])
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
+            .mint(
+                .init(
+                    object: .init(expression: .raw(.u32(13))),
+                    destinationId: .init(
+                        expression: .raw(
+                            .id(
+                                .assetId(
+                                    .init(
+                                        definitionId: .init(
+                                            name: "hydrangea",
+                                            domainName: "wonderland"
+                                        ),
+                                        accountId: .init(
+                                            name: "alice",
+                                            domainName: "wonderland")
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        ]
+        
+        client.submitInstructions(instructions) {
+            XCTAssertNil($0)
+            submitInstructionExp.fulfill()
+        }
+        
+        wait(for: exps, timeout: 5)
     }
     
     // MARK: - Health

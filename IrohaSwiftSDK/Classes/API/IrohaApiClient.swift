@@ -20,12 +20,12 @@ import IrohaSwiftScale
 /**
  * Low-level Iroha v2 API client
  */
-public final class IrohaApiClient: NSObject, URLSessionWebSocketDelegate {
+public final class IrohaApiClient: NSObject {
     
     private lazy var urlSessionConfiguration = URLSessionConfiguration.default
     private lazy var urlSession = URLSession(configuration: urlSessionConfiguration, delegate: self, delegateQueue: OperationQueue())
-    private var webSocketTasksByUrls: [URL: URLSessionWebSocketTask] = [:]
-    private var webSocketReceiversByUrls: [URL: [WebSocketMessageReceiving]] = [:]
+    private var webSocketTasksByIds: [String: URLSessionWebSocketTask] = [:]
+    private var webSocketClientsByIds: [String: WebSocketClientInternal] = [:]
     
     private let baseUrlString: String
     public var wss: Bool
@@ -38,8 +38,8 @@ public final class IrohaApiClient: NSObject, URLSessionWebSocketDelegate {
     }
     
     deinit {
-        webSocketTasksByUrls.keys.forEach {
-            stopWebSocket(at: $0)
+        webSocketTasksByIds.keys.forEach {
+            stopWebSocket(with: $0)
         }
     }
 }
@@ -149,130 +149,194 @@ extension IrohaApiClient {
 
 // MARK: - WebSockets
 
-extension IrohaApiClient {
+extension IrohaApiClient: URLSessionWebSocketDelegate {
     
-    public func readWebSocket<T: Decodable>(
+    public typealias WebSocketClient = WebSocketMessageWriting & Cancellable
+    private typealias WebSocketClientInternal = WebSocketClient & WebSocketMessageReceiving & WebSocketTaskDelegate
+    
+    @discardableResult
+    public func openWebSocket<T: Decodable>(
         at path: String,
         type: T.Type,
-        receive: @escaping (Result<T, Error>) -> Void
-    ) {
+        receive: @escaping (WebSocketClient, Result<T, Error>) -> Void
+    ) -> WebSocketClient? {
         
         guard let url = buildUrl(path: path, ws: true) else {
-            receive(.failure(IrohaQueryError.internal))
-            return
+            return nil
         }
         
-        openWebSocketIfNeeded(at: url)
-        
-        if webSocketReceiversByUrls[url] == nil {
-            webSocketReceiversByUrls[url] = []
+        let task = urlSession.webSocketTask(with: url)
+        let id = UUID().uuidString
+        let onCancel: (WebSocketMessageClient<T>) -> Void = { [weak self] receiver in
+            self?.stopWebSocket(with: receiver.id)
         }
         
-        let receiver = WebSocketMessageReceiver(type: type, receiver: receive)
-        webSocketReceiversByUrls[url]?.append(receiver)
+        let client = WebSocketMessageClient(
+            id: id,
+            type: type,
+            task: task,
+            receiver: receive,
+            responseQueue: responseQueue,
+            onCancel: onCancel
+        )
+                
+        webSocketTasksByIds[id] = task
+        webSocketClientsByIds[id] = client
+        
+        return client
     }
     
-    public func writeWebSocket(
-        at path: String,
-        value: IrohaDataModelEvents._VersionedEventSocketMessageV1,
-        completion: @escaping (Error?) -> Void
+    @discardableResult
+    private func stopWebSocket(with id: String) -> Bool {
+        webSocketClientsByIds.removeValue(forKey: id) != nil || webSocketTasksByIds.removeValue(forKey: id) != nil
+    }
+    
+    public func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
+        webSocketClientsByIds.values
+            .filter { $0.task == webSocketTask }
+            .forEach { $0.webSocketTaskDidOpen(with: `protocol`) }
+    }
+
+    public func urlSession(
+        _ session: URLSession,
+        webSocketTask: URLSessionWebSocketTask,
+        didCloseWith closeCode: URLSessionWebSocketTask.CloseCode,
+        reason: Data?
     ) {
         
-        guard let url = buildUrl(path: path, ws: true) else {
-            completion(IrohaQueryError.internal)
-            return
-        }
+        webSocketClientsByIds.values
+            .filter { $0.task == webSocketTask }
+            .forEach { $0.webSocketTaskDidClose(with: closeCode, reason: reason) }
+    }
+}
+
+// MARK: - WebSocketMessageReceiving
+
+private protocol WebSocketMessageReceiving {
+    func handle(message: Result<URLSessionWebSocketTask.Message, Error>)
+}
+
+// MARK: - WebSocketTaskDelegate
+
+private protocol WebSocketTaskDelegate {
+    var task: URLSessionWebSocketTask { get }
+    
+    func webSocketTaskDidOpen(with protocol: String?)
+    func webSocketTaskDidClose(with closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?)
+}
+
+// MARK: - WebSocketMessageWriting
+
+public protocol WebSocketMessageWriting {
+    func write(
+        value: IrohaDataModelEvents._VersionedEventSocketMessageV1,
+        completion: @escaping (IrohaApiClient.WebSocketClient, Error?) -> Void
+    )
+}
+
+// MARK: - WebSocketMessageClient
+
+private final class WebSocketMessageClient<T: Decodable> {
+    let id: String
+    let type: T.Type
+    let task: URLSessionWebSocketTask
+    let receiver: (IrohaApiClient.WebSocketClient, Result<T, Error>) -> Void
+    let responseQueue: OperationQueue
+    let onCancel: (WebSocketMessageClient<T>) -> Void
+    
+    init(
+        id: String,
+        type: T.Type,
+        task: URLSessionWebSocketTask,
+        receiver: @escaping (IrohaApiClient.WebSocketClient, Result<T, Error>) -> Void,
+        responseQueue: OperationQueue,
+        onCancel: @escaping (WebSocketMessageClient<T>) -> Void
+    ) {
+        
+        self.id = id
+        self.type = type
+        self.task = task
+        self.receiver = receiver
+        self.responseQueue = responseQueue
+        self.onCancel = onCancel
+        
+        task.resume()
+        task.receive { [weak self] in self?.handle(message: $0) }
+    }
+    
+    deinit {
+        cancel()
+    }
+}
+
+// MARK: - WebSocketMessageClient::WebSocketTaskDelegate
+
+extension WebSocketMessageClient: WebSocketTaskDelegate {
+    func webSocketTaskDidOpen(with protocol: String?) {}
+    func webSocketTaskDidClose(with closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {}
+}
+
+// MARK: WebSocketMessageClient::WebSocketMessageWriting
+
+extension WebSocketMessageClient: WebSocketMessageWriting {
+    func write(
+        value: IrohaDataModelEvents._VersionedEventSocketMessageV1,
+        completion: @escaping (IrohaApiClient.WebSocketClient, Error?) -> Void
+    ) {
         
         let message = IrohaDataModelEvents.VersionedEventSocketMessage.v1(value)
         let data: Data
         do {
             data = try ScaleEncoder().encode(message)
         } catch let error {
-            completion(IrohaQueryError.scale(error))
+            completion(self, IrohaQueryError.scale(error))
             return
         }
         
-        let task = openWebSocketIfNeeded(at: url)
         task.send(.data(data)) { [weak self] error in
-            self?.responseQueue.addOperation {
-                completion(error)
+            guard let self = self else { return }
+            self.responseQueue.addOperation {
+                completion(self, error)
             }
         }
     }
-    
-    @discardableResult
-    private func openWebSocketIfNeeded(at url: URL) -> URLSessionWebSocketTask {
-        if let task = webSocketTasksByUrls[url] {
-            return task
-        }
-        
-        let task = urlSession.webSocketTask(with: url)
-        webSocketTasksByUrls[url] = task
-        task.resume()
-        task.receive { [weak self, weak task] message in
-            guard let task = task else { return }
-            self?.receivedWebSocketMessage(message, for: task)
-        }
-        
-        return task
-    }
-    
-    private func receivedWebSocketMessage(_ message: Result<URLSessionWebSocketTask.Message, Error>, for task: URLSessionWebSocketTask) {
-        guard let url = self.webSocketTasksByUrls.first(where: { key, value in
-            value == task
-        })?.0 else { return }
-        
-        guard let receivers = self.webSocketReceiversByUrls[url] else { return }
-        
-        for receiver in receivers {
-            responseQueue.addOperation {
-                receiver.handle(message: message)
-            }
-        }
-    }
-    
-    @discardableResult
-    public func stopWebSocket(at path: String) -> Bool {
-        guard let url = buildUrl(path: path, ws: true) else {
-            return false
-        }
-        
-        return stopWebSocket(at: url)
-    }
-    
-    @discardableResult
-    private func stopWebSocket(at url: URL) -> Bool {
-        guard let task = webSocketTasksByUrls[url] else {
-            return false
-        }
-        
-        task.cancel(with: .goingAway, reason: nil)
-        
-        return webSocketReceiversByUrls.removeValue(forKey: url) != nil && webSocketTasksByUrls.removeValue(forKey: url) != nil
-    }
 }
 
-private protocol WebSocketMessageReceiving {
-    func handle(message: Result<URLSessionWebSocketTask.Message, Error>)
-}
+// MARK: - WebSocketMessageClient::WebSocketMessageReceiving
 
-private struct WebSocketMessageReceiver<T: Decodable>: WebSocketMessageReceiving {
-    let type: T.Type
-    let receiver: (Result<T, Error>) -> Void
-    
+extension WebSocketMessageClient: WebSocketMessageReceiving {
     func handle(message: Result<URLSessionWebSocketTask.Message, Error>) {
         switch message {
         case let .success(message):
             switch message {
             case let .data(data):
-                if let event = try? ScaleDecoder().decode(type, from: data) {
-                    receiver(.success(event))
-                } // else do nothing, probably different event
+                do {
+                    let event = try ScaleDecoder().decode(type, from: data)
+                    responseQueue.addOperation {
+                        self.receiver(self, .success(event))
+                    }
+                } catch let error {
+                    responseQueue.addOperation {
+                        self.receiver(self, .failure(IrohaQueryError.scale(error)))
+                    }
+                }
+                task.receive { [weak self] in self?.handle(message: $0) }
             default:
-                receiver(.failure(IrohaQueryError.internal))
+                responseQueue.addOperation {
+                    self.receiver(self, .failure(IrohaQueryError.internal))
+                }
             }
         case let .failure(error):
-            receiver(.failure(error))
+            responseQueue.addOperation {
+                self.receiver(self, .failure(error))
+            }
         }
+    }
+}
+
+extension WebSocketMessageClient: Cancellable {
+    func cancel() {
+        task.cancel(with: .goingAway, reason: nil)
+        onCancel(self)
     }
 }
