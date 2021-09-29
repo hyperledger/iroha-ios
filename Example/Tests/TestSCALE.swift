@@ -19,26 +19,17 @@ class TestSCALE: XCTestCase {
         
         // Test literals
         
-        assertPreconditionFailure {
-            let _: TestFixedArray = [1, 2, 3]
-        }
-        
-        assertNoPreconditionFailure {
-            let _: TestFixedArray = [1, 2, 3, 4]
-        }
+        XCTAssertNil(try? TestFixedArray([1, 2, 3]))
+        XCTAssertNotNil(try? TestFixedArray([1, 2, 3, 4]))
         
         // Test preconditions
         
         for i in 1...iterations {
             let rangedArray = 1...i
             if i == TestFixedArray.fixedSize {
-                assertNoPreconditionFailure {
-                    let _ = TestFixedArray(rangedArray)
-                }
+                XCTAssertNotNil(try? TestFixedArray(rangedArray))
             } else {
-                assertPreconditionFailure {
-                    let _ = TestFixedArray(rangedArray)
-                }
+                XCTAssertNil(try? TestFixedArray(rangedArray))
             }
         }
         
@@ -46,7 +37,13 @@ class TestSCALE: XCTestCase {
         
         for _ in 1...iterations {
             let array = (1...TestFixedArray.fixedSize).map { _ in random() }
-            var fixedArray = TestFixedArray(array)
+            var fixedArray: TestFixedArray
+            do {
+                fixedArray = try TestFixedArray(array)
+            } catch let error {
+                XCTFail(error.localizedDescription)
+                return
+            }
             
             for j in 0..<fixedArray.count {
                 let random = random()

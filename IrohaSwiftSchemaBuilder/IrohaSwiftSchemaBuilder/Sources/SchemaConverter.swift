@@ -951,14 +951,33 @@ private final class FixedSizeArrayFactory: SizedStructFactory {
         \(Rules.tab())
         public struct Array\(size)<Element: Codable> {
         \(Rules.tab())
+        \(Rules.tab())enum Error: LocalizedError {
+        \(Rules.tab(2))case invalidInputSequenceLength(Int, Int)
+        \(Rules.tab())
+        \(Rules.tab(2))var errorDescription: String? {
+        \(Rules.tab(3))switch self {
+        \(Rules.tab(3))case let .invalidInputSequenceLength(providedSize, requiredSize):
+        \(Rules.tab(4))return "Invalid input sequence length: \\(providedSize), length should be: \\(requiredSize)"
+        \(Rules.tab(2))}
+                }
+        \(Rules.tab())}
+        \(Rules.tab())
         \(Rules.tab())public static var fixedSize: Int { arraySize }
         \(Rules.tab())
         \(Rules.tab())private var array: Array<Element>
         \(Rules.tab())
-        \(Rules.tab())public init<S: Sequence>(_ sequence: S) where S.Iterator.Element == Element {
+        \(Rules.tab())public init<S: Sequence>(_ sequence: S) throws where S.Iterator.Element == Element {
         \(Rules.tab(2))let array = sequence.map { $0 }
-        \(Rules.tab(2))precondition(array.count == arraySize, "invalid input sequence length, length should be: \\(arraySize)")
+        \(Rules.tab(2))guard array.count == arraySize else { throw Error.invalidInputSequenceLength(arraySize, array.count) }
         \(Rules.tab(2))self.array = array
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        // MARK: - Equatable
+        \(Rules.tab())
+        extension Array\(size): Equatable where Element: Equatable {
+        \(Rules.tab())public static func ==(lhs: Array\(size), rhs: Array\(size)) -> Bool {
+        \(Rules.tab(2))lhs.array == rhs.array
         \(Rules.tab())}
         }
         \(Rules.tab())
@@ -966,14 +985,6 @@ private final class FixedSizeArrayFactory: SizedStructFactory {
         \(Rules.tab())
         extension Array\(size): CustomStringConvertible {
         \(Rules.tab())public var description: String { array.description }
-        }
-        \(Rules.tab())
-        // MARK: - ExpressibleByArrayLiteral
-        \(Rules.tab())
-        extension Array\(size): ExpressibleByArrayLiteral {
-        \(Rules.tab())public init(arrayLiteral elements: Element...) {
-        \(Rules.tab(2))self.init(elements)
-        \(Rules.tab())}
         }
         \(Rules.tab())
         // MARK: - Sequence
@@ -1010,7 +1021,7 @@ private final class FixedSizeArrayFactory: SizedStructFactory {
         \(Rules.tab())public init(from decoder: Decoder) throws {
         \(Rules.tab(2))var container = try decoder.unkeyedContainer()
         \(Rules.tab(2))let array = try (0..<arraySize).map { _ in try container.decode(Element.self) }
-        \(Rules.tab(2))self.init(array)
+        \(Rules.tab(2))try self.init(array)
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public func encode(to encoder: Encoder) throws {

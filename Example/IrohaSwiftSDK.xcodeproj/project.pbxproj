@@ -12,7 +12,6 @@
 		346AAB7B26977E73000EFF62 /* TestEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346AAB7826977E72000EFF62 /* TestEnum.swift */; };
 		34DDCD2D26A1C17700698EED /* TestSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDCD2C26A1C17700698EED /* TestSDK.swift */; };
 		34E2620A26F4A83A00AEE282 /* TestFixedSizeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2620926F4A83900AEE282 /* TestFixedSizeArray.swift */; };
-		34E2620D26F4B6EE00AEE282 /* PreconditionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2620C26F4B6EE00AEE282 /* PreconditionHandler.swift */; };
 		34FFF58126CC007C0055BF80 /* TestSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FFF58026CC007C0055BF80 /* TestSignature.swift */; };
 		4B47548EA462C46F43F0485A /* Pods_IrohaSwiftSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C05DCF8BCEA6334FD5B19D51 /* Pods_IrohaSwiftSDK_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -47,7 +46,6 @@
 		346AAB7826977E72000EFF62 /* TestEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestEnum.swift; sourceTree = "<group>"; };
 		34DDCD2C26A1C17700698EED /* TestSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSDK.swift; sourceTree = "<group>"; };
 		34E2620926F4A83900AEE282 /* TestFixedSizeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFixedSizeArray.swift; sourceTree = "<group>"; };
-		34E2620C26F4B6EE00AEE282 /* PreconditionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreconditionHandler.swift; sourceTree = "<group>"; };
 		34FFF58026CC007C0055BF80 /* TestSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSignature.swift; sourceTree = "<group>"; };
 		34FFF59126CD437C0055BF80 /* libursa.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libursa.a; path = ../IrohaSwiftSDK/Libraries/libursa.a; sourceTree = "<group>"; };
 		3CD4E47D26F608EFB345A5A5 /* Pods-IrohaSwiftSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IrohaSwiftSDK_Tests.debug.xcconfig"; path = "Target Support Files/Pods-IrohaSwiftSDK_Tests/Pods-IrohaSwiftSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,14 +142,6 @@
 			name = "SCALE Types";
 			sourceTree = "<group>";
 		};
-		34E2620B26F4B6E100AEE282 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				34E2620C26F4B6EE00AEE282 /* PreconditionHandler.swift */,
-			);
-			name = Utils;
-			sourceTree = "<group>";
-		};
 		38ACF79E5666C3FA60285198 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,7 +214,6 @@
 				34DDCD2C26A1C17700698EED /* TestSDK.swift */,
 				607FACEB1AFB9204008FA782 /* TestSCALE.swift */,
 				346AAB94269DE553000EFF62 /* SCALE Types */,
-				34E2620B26F4B6E100AEE282 /* Utils */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -434,7 +423,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34E2620D26F4B6EE00AEE282 /* PreconditionHandler.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* TestSCALE.swift in Sources */,
 				34DDCD2D26A1C17700698EED /* TestSDK.swift in Sources */,
 				346AAB7926977E73000EFF62 /* TestTupleStruct.swift in Sources */,

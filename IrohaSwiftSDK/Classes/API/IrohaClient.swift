@@ -56,26 +56,40 @@ public final class IrohaClient {
 
 extension IrohaClient {
     
-    public func submitInstructions(_ instructions: [IrohaDataModelIsi.Instruction], completion: @escaping (Error?) -> Void) {
+    public func submitInstructions(
+        _ instructions: [IrohaDataModelIsi.Instruction],
+        completion: @escaping (IrohaDataModelTransaction.Transaction?, Error?) -> Void
+    ) {
+        
         let payload = IrohaDataModelTransaction.Payload(accountId: account.id,
                                                         instructions: instructions,
                                                         creationTime: Date().milliseconds,
                                                         timeToLiveMs: ttl.milliseconds,
                                                         metadata: [:])
-
+        print("Submitting instructions with creation time: \(payload.creationTime)")
         do {
             let signature = try IrohaCrypto.Signature(signing: payload, with: account.keyPair)
             let transaction = IrohaDataModelTransaction.Transaction(payload: payload, signatures: [signature])
             apiClient.runQuery(SubmitInstructions(), request: .v1(transaction)) { response in
                 switch response {
                 case let .failure(error):
-                    completion(error)
+                    completion(transaction, error)
                 default:
-                    completion(nil)
+                    completion(transaction, nil)
                 }
             }
         } catch let error {
-            completion(error)
+            completion(nil, error)
+        }
+    }
+    
+    public func submitInstruction(
+        _ instruction: IrohaDataModelIsi.Instruction,
+        completion: @escaping (IrohaDataModelTransaction.Transaction?, Error?) -> Void
+    ) {
+     
+        submitInstructions([instruction]) {
+            completion($0, $1)
         }
     }
 }

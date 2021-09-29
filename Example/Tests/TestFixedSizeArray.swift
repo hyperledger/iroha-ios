@@ -20,25 +20,30 @@ private let arraySize = 4
 
 struct Array4<Element: Codable> {
     
+    enum Error: LocalizedError {
+        case invalidInputSequenceLength(Int, Int)
+        
+        var errorDescription: String? {
+            switch self {
+            case let .invalidInputSequenceLength(providedSize, requiredSize):
+                return "Invalid input sequence length: \(providedSize), length should be: \(requiredSize)"
+            }
+        }
+    }
+    
     static var fixedSize: Int { arraySize }
     
     private var array: Array<Element>
 
-    init<S: Sequence>(_ sequence: S) where S.Iterator.Element == Element {
+    init<S: Sequence>(_ sequence: S) throws where S.Iterator.Element == Element {
         let array = sequence.map { $0 }
-        precondition(array.count == arraySize, "invalid input sequence length, length should be: \(arraySize)")
+        guard array.count == arraySize else { throw Error.invalidInputSequenceLength(arraySize, array.count) }
         self.array = array
     }
 }
 
 extension Array4: CustomStringConvertible {
     var description: String { array.description }
-}
-
-extension Array4: ExpressibleByArrayLiteral {
-    init(arrayLiteral elements: Element...) {
-        self.init(elements)
-    }
 }
 
 extension Array4: Sequence {
@@ -69,7 +74,7 @@ extension Array4: Codable {
     init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let array = try (0..<arraySize).map { _ in try container.decode(Element.self) }
-        self.init(array)
+        try self.init(array)
     }
     
     func encode(to encoder: Encoder) throws {

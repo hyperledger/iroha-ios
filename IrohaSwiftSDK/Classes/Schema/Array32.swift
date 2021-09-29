@@ -23,14 +23,33 @@ private let arraySize = 32
     
 public struct Array32<Element: Codable> {
     
+    enum Error: LocalizedError {
+        case invalidInputSequenceLength(Int, Int)
+    
+        var errorDescription: String? {
+            switch self {
+            case let .invalidInputSequenceLength(providedSize, requiredSize):
+                return "Invalid input sequence length: \(providedSize), length should be: \(requiredSize)"
+        }
+        }
+    }
+    
     public static var fixedSize: Int { arraySize }
     
     private var array: Array<Element>
     
-    public init<S: Sequence>(_ sequence: S) where S.Iterator.Element == Element {
+    public init<S: Sequence>(_ sequence: S) throws where S.Iterator.Element == Element {
         let array = sequence.map { $0 }
-        precondition(array.count == arraySize, "invalid input sequence length, length should be: \(arraySize)")
+        guard array.count == arraySize else { throw Error.invalidInputSequenceLength(arraySize, array.count) }
         self.array = array
+    }
+}
+    
+// MARK: - Equatable
+    
+extension Array32: Equatable where Element: Equatable {
+    public static func ==(lhs: Array32, rhs: Array32) -> Bool {
+        lhs.array == rhs.array
     }
 }
     
@@ -38,14 +57,6 @@ public struct Array32<Element: Codable> {
     
 extension Array32: CustomStringConvertible {
     public var description: String { array.description }
-}
-    
-// MARK: - ExpressibleByArrayLiteral
-    
-extension Array32: ExpressibleByArrayLiteral {
-    public init(arrayLiteral elements: Element...) {
-        self.init(elements)
-    }
 }
     
 // MARK: - Sequence
@@ -82,7 +93,7 @@ extension Array32: Codable {
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let array = try (0..<arraySize).map { _ in try container.decode(Element.self) }
-        self.init(array)
+        try self.init(array)
     }
     
     public func encode(to encoder: Encoder) throws {
