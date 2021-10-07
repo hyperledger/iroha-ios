@@ -16,6 +16,11 @@
 
 import Foundation
 
+struct File {
+    let typeName: String
+    let contents: String
+}
+
 struct SchemaConverter {
     
     enum Error: LocalizedError {
@@ -40,8 +45,8 @@ struct SchemaConverter {
             try write(typeMetadata: typeMetadata, namespacePath: namespacePath)
         }
         
-        for contents in Rules.finalize() {
-            try fileManager.writeFile(at: stubFilename, contents: contents, append: true)
+        for file in Rules.finalize() {
+            try write(companion: file)
         }
     }
 }
@@ -100,7 +105,7 @@ extension SchemaConverter: NamespaceResolver {
     
     private func resolveNamespacePath(typeMetadata: TypeMetadata) -> [String]? {
         switch typeMetadata.kind {
-        case .struct, .tupleStruct, .enum, .fixedPoint:
+        case .struct, .tupleStruct, .enum, .fixedPoint, .fixedSizeArray:
             return namespacePath(for: typeMetadata.name)
         default:
             return nil
@@ -164,7 +169,7 @@ extension SchemaConverter: NamespaceResolver {
 
 private protocol NameFixer {
     func fixVariableName(_ name: String) -> String
-    func fixVariableType(_ name: String) -> String
+    func fixVariableType(_ name: String) throws -> String
 }
 
 extension SchemaConverter: NameFixer {
@@ -177,11 +182,17 @@ extension SchemaConverter: NameFixer {
         return name
     }
     
-    func fixVariableType(_ name: String) -> String {
+    func fixVariableType(_ name: String) throws -> String {
         if name.starts(with: "["), name.hasSuffix("]"), name.contains(";") {
             let typeName = name.split(separator: ";")[0].dropFirst()
-            let verbose = "Vec<\(typeName)>"
-            return fixVariableType(verbose)
+            let fixedSize = name.split(separator: ";")[1].dropLast().trimmingCharacters(in: .whitespaces)
+            
+            guard let fixedSize = UInt(fixedSize) else {
+                throw Error.invalidSchema
+            }
+            
+            let verbose = "\(Rules.fixedSizeArrayFactory.structName(size: fixedSize))<\(typeName)>"
+            return try fixVariableType(verbose)
         }
         
         var genericType = TypeParser.genericType(for: name)
@@ -297,6 +308,25 @@ extension SchemaConverter {
     
     private var stubFilename: String { "NamespacesStub.\(Rules.fileExtension)" }
     
+    private var fileHeader: String {
+        var header = Rules.fileHeader + "\n"
+        
+        let importFrameworks = Rules.importFrameworks(from: importFrameworks)
+        if importFrameworks.count > 0 {
+            header += importFrameworks.sorted().map { "import \($0)" }.joined(separator: "\n")
+            header += "\n"
+        }
+        
+        return header
+    }
+    
+    mutating private func write(companion file: File) throws {
+        let fileName = file.typeName.appending(".\(Rules.fileExtension)")
+        let body = fileHeader + file.contents
+        
+        try fileManager.writeFile(at: fileName, contents: body)
+    }
+    
     mutating private func write(typeMetadata: TypeMetadata, namespacePath: [String], isNamespace: Bool = false) throws {
         guard let typeName = namespacePath.last else {
             throw Error.invalidSchema
@@ -316,13 +346,7 @@ extension SchemaConverter {
             throw Error.invalidSchema
         }
         
-        var header = Rules.fileHeader + "\n"
-        
-        let importFrameworks = Rules.importFrameworks(from: importFrameworks)
-        if importFrameworks.count > 0 {
-            header += importFrameworks.sorted().map { "import \($0)" }.joined(separator: "\n")
-            header += "\n\n"
-        }
+        var header = fileHeader + "\n"
         
         var tabs = 0
         if isNamespace && namespacesWritten.count > 0 {
@@ -413,6 +437,7 @@ private struct Rules {
     ]
     
     private static var tupleStructFactory = TupleStructFactory()
+    fileprivate static var fixedSizeArrayFactory = FixedSizeArrayFactory()
     
     static func typeWriter(
         for typeMetadata: TypeMetadata,
@@ -431,11 +456,16 @@ private struct Rules {
             return EnumWriter(name: name, cases: cases, resolver: resolver)
         case let .fixedPoint(kind, decimalPlaces):
             return FixedPointWriter(kind: kind, decimalPlaces: decimalPlaces, resolver: resolver)
+        case let .fixedSizeArray(_, size):
+            return FixedSizeArrayWriter(size: size, factory: fixedSizeArrayFactory)
         default: return nil
         }
     }
     
-    static func finalize() -> [String] {
+    static func finalize() -> [File] {
+        // FixedSizeArray are declared in root of schema and are separate types,
+        // while TupleStruct types even though declared in root of schema,
+        // factory provided helper files are separate files, thus needed to be written
         tupleStructFactory.files
     }
 }
@@ -489,7 +519,7 @@ private struct StructWriter: TypeWriter {
         """.split(separator: "\n").map { "\(Rules.tab())\($0)" }.joined(separator: "\n")
     }
     
-    func write() -> String {
+    func write() throws -> String {
         var interfaces = codable ? ["Codable"] : []
         if fields.count == 0 {
             if codable {
@@ -503,8 +533,8 @@ private struct StructWriter: TypeWriter {
             }
         }
         
-        let variables = fields.map {
-            (resolver.fixVariableName($0.0), resolver.fixVariableType($0.1))
+        let variables = try fields.map {
+            (resolver.fixVariableName($0.0), try resolver.fixVariableType($0.1))
         }
         
         if hashable {
@@ -523,13 +553,22 @@ private struct StructWriter: TypeWriter {
     }
 }
 
+private struct FixedSizeArrayWriter: TypeWriter {
+    let size: UInt
+    let factory: FixedSizeArrayFactory
+    
+    func write() throws -> String {
+        try factory.make(size: size)
+    }
+}
+
 private struct FixedPointWriter: TypeWriter {
     
     let kind: String
     let decimalPlaces: UInt
     let resolver: NameFixer
     
-    private var typeName: String { resolver.fixVariableType(kind) }
+    private func typeName() throws -> String { try resolver.fixVariableType(kind) }
     
     func write() throws -> String {
         """
@@ -549,11 +588,11 @@ private struct FixedPointWriter: TypeWriter {
         }
         \(Rules.tab())
         private extension \(Rules.fixedPointType) {
-        \(Rules.tab())init(base: \(typeName), decimalPlaces: \(Rules.fixedPointDecimalPlacesType)) {
+        \(Rules.tab())init(base: \(try typeName()), decimalPlaces: \(Rules.fixedPointDecimalPlacesType)) {
         \(Rules.tab(2))self = NSDecimalNumber(value: base).multiplying(byPowerOf10: -decimalPlaces) as \(Rules.fixedPointType)
         \(Rules.tab())}
         \(Rules.tab())
-        \(Rules.tab())func to\(typeName)(decimalPlaces: \(Rules.fixedPointDecimalPlacesType)) throws -> \(typeName) {
+        \(Rules.tab())func to\(try typeName())(decimalPlaces: \(Rules.fixedPointDecimalPlacesType)) throws -> \(try typeName()) {
         \(Rules.tab(2))let multiplied = (self as NSDecimalNumber)
         \(Rules.tab(3)).multiplying(byPowerOf10: decimalPlaces, withBehavior: NSDecimalNumber.roundingBehavior(scale: decimalPlaces))
         \(Rules.tab())
@@ -561,7 +600,7 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab(3))throw FixedPoint.Error.decimalValueTooHigh
         \(Rules.tab(2))}
         \(Rules.tab())
-        \(Rules.tab(2))return multiplied.\(typeName.loweringFirstLetter)Value
+        \(Rules.tab(2))return multiplied.\(try typeName().loweringFirstLetter)Value
         \(Rules.tab())}
         }
         // MARK: - FixedPoint
@@ -574,18 +613,18 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab())
         \(Rules.tab())public static let decimalPlaces: \(Rules.fixedPointDecimalPlacesType) = \(decimalPlaces)
         \(Rules.tab())
-        \(Rules.tab())public private(set) var base: \(typeName)
+        \(Rules.tab())public private(set) var base: \(try typeName())
         \(Rules.tab())
         \(Rules.tab())public var value: \(Rules.fixedPointType) {
         \(Rules.tab(2))get { \(Rules.fixedPointType)(base: base, decimalPlaces: Self.decimalPlaces) }
         \(Rules.tab())}
         \(Rules.tab())
-        \(Rules.tab())public init(base: \(typeName)) {
+        \(Rules.tab())public init(base: \(try typeName())) {
         \(Rules.tab(2))self.base = base
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public init(value: \(Rules.fixedPointType)) throws {
-        \(Rules.tab(2))self.base = try value.to\(typeName)(decimalPlaces: Self.decimalPlaces)
+        \(Rules.tab(2))self.base = try value.to\(try typeName())(decimalPlaces: Self.decimalPlaces)
         \(Rules.tab())}
         }
         \(Rules.tab())
@@ -593,7 +632,7 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab())
         extension FixedPoint: Codable {
         \(Rules.tab())public init(from decoder: Decoder) throws {
-        \(Rules.tab(2))self.base = try decoder.singleValueContainer().decode(\(typeName).self)
+        \(Rules.tab(2))self.base = try decoder.singleValueContainer().decode(\(try typeName()).self)
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public func encode(to encoder: Encoder) throws {
@@ -690,15 +729,18 @@ private struct TupleStructWriter: TypeWriter {
     func write() throws -> String {
         if types.isEmpty {
             // Empty tuples doesn't work with Codable, so let's use empty struct
-            return StructWriter(name: name, fields: [], resolver: resolver, hashable: false, codable: true).write()
+            return try StructWriter(name: name, fields: [], resolver: resolver, hashable: false, codable: true).write()
         }
         
         if types.count == 1 {
-            return "public typealias \(name) = (\(types.map { resolver.fixVariableType($0) }.joined(separator: ", ")))"
+            return "public typealias \(name) = (\(try types.map { try resolver.fixVariableType($0) }.joined(separator: ", ")))"
         }
         
-        let typeName = try factory.make(varsCount: types.count)
-        return "public typealias \(name) = \(typeName)<\(types.map { resolver.fixVariableType($0) }.joined(separator: ", "))>"
+        let count = UInt(types.count)
+        let typeName = factory.structName(size: count)
+        try factory.make(size: UInt(types.count))
+        
+        return "public typealias \(name) = \(typeName)<\(try types.map { try resolver.fixVariableType($0) }.joined(separator: ", "))>"
     }
 }
 
@@ -710,10 +752,10 @@ private struct EnumWriter: TypeWriter {
     let cases: [Case]
     let resolver: NamespaceResolver & NameFixer
     
-    private func writeCase(_ case: Case) -> String {
+    private func writeCase(_ case: Case) throws -> String {
         var string = "\(Rules.tab())case \(resolver.fixVariableName(`case`.0))"
         if let values = `case`.2 {
-            string += "(\(values.map { resolver.fixVariableType($0) }.joined(separator: ", ")))"
+            string += "(\(try values.map { try resolver.fixVariableType($0) }.joined(separator: ", ")))"
         }
         
         return string
@@ -738,16 +780,16 @@ private struct EnumWriter: TypeWriter {
         """
     }
     
-    private func writeCaseInit(_ case: Case) -> String {
+    private func writeCaseInit(_ case: Case) throws -> String {
         """
         \(Rules.tab(2))case \(`case`.1):
-        \(Rules.tab(3))\(`case`.2.map { "\($0.enumerated().map { "let val\($0.offset) = try container.decode(\(resolver.fixVariableType($0.element)).self)" }.joined(separator: "\n"))" } ?? "")
+        \(Rules.tab(3))\(try `case`.2.map { "\(try $0.enumerated().map { "let val\($0.offset) = try container.decode(\(try resolver.fixVariableType($0.element)).self)" }.joined(separator: "\n"))" } ?? "")
         \(Rules.tab(3))self = .\(resolver.fixVariableName(`case`.0))\(`case`.2.map { "(\($0.enumerated().map { "val\($0.offset)" }.joined(separator: ", ")))" } ?? "")
         \(Rules.tab(3))break
         """
     }
     
-    private func writeInitWithDecoder() -> String {
+    private func writeInitWithDecoder() throws -> String {
         """
         \(Rules.tab())// MARK: - Decodable
         \(Rules.tab())
@@ -755,7 +797,7 @@ private struct EnumWriter: TypeWriter {
         \(Rules.tab(2))var container = try decoder.unkeyedContainer()
         \(Rules.tab(2))let discriminant = try container.decode(UInt8.self)
         \(Rules.tab(2))switch discriminant {
-        \(cases.map { writeCaseInit($0) }.joined(separator: "\n"))
+        \(try cases.map { try writeCaseInit($0) }.joined(separator: "\n"))
         \(Rules.tab(2))default:
         \(Rules.tab(3))throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \\(discriminant)")
         \(Rules.tab(2))}
@@ -785,16 +827,16 @@ private struct EnumWriter: TypeWriter {
         """
     }
     
-    func write() -> String {
+    func write() throws -> String {
         // It's too complicated to calculate if enum can chainly call itself, so let's declare all enums indirect by default
         """
         public \(Rules.indirectKeyword.map { $0.appending(" ") } ?? "")enum \(name)\(writeInterfaces(["Codable"])) {
         \(Rules.tab())
-        \(cases.map { writeCase($0) }.joined(separator: "\n"))
+        \(try cases.map { try writeCase($0) }.joined(separator: "\n"))
         \(Rules.tab())
         \(writeScaleEnumIterableConformance())
         \(Rules.tab())
-        \(writeInitWithDecoder())
+        \(try writeInitWithDecoder())
         \(Rules.tab())
         \(writeEncode())
         }
@@ -802,21 +844,43 @@ private struct EnumWriter: TypeWriter {
     }
 }
 
-private final class TupleStructFactory {
-    
+open class SizedStructFactory {
     enum Error: LocalizedError {
         case invalidVarsCount
         var errorDescription: String? { "Variables count should be > 1" }
     }
     
-    private var filesByCount: [Int: String] = [:]
-    var files: [String] { filesByCount.values.map { $0 } }
+    private var filesByCount: [UInt: File] = [:]
+    var files: [File] { filesByCount.values.map { $0 } }
     
-    private func writeGenerics(varsCount: Int) -> String {
+    open func structName(size: UInt) -> String {
+        fatalError("Not implemented")
+    }
+    
+    open func write(size: UInt) throws -> String {
+        fatalError("Not implemented")
+    }
+    
+    @discardableResult
+    func make(size: UInt) throws -> String {
+        let structName = structName(size: size)
+        guard filesByCount[size] == nil else {
+            return structName
+        }
+        
+        let file = try write(size: size)
+        filesByCount[size] = File(typeName: structName, contents: file)
+        return file
+    }
+}
+
+private final class TupleStructFactory: SizedStructFactory {
+    
+    private func writeGenerics(varsCount: UInt) -> String {
         (1...varsCount).map { "T\($0): Codable" }.joined(separator: ", ")
     }
     
-    private func writeTupleVar(count: Int) -> String {
+    private func writeTupleVar(count: UInt) -> String {
         """
         \(Rules.tab())public var tuple: (\((1...count).map { "T\($0)" }.joined(separator: ", "))) {
         \(Rules.tab(2))get { (\((0..<count).map { "_\($0)" }.joined(separator: ", "))) }
@@ -828,7 +892,7 @@ private final class TupleStructFactory {
     }
     
     /// Required to ignore tuple var
-    private func writeCodingKeys(varsCount: Int) -> String {
+    private func writeCodingKeys(varsCount: UInt) -> String {
         """
         \(Rules.tab())/// Ignore tuple var
         \(Rules.tab())private enum CodingKeys: String, CodingKey {
@@ -837,11 +901,11 @@ private final class TupleStructFactory {
         """
     }
     
-    private func writeVariables(count: Int) -> String {
+    private func writeVariables(count: UInt) -> String {
         (1...count).map { Rules.tab() + "public var _\($0-1): T\($0)" }.joined(separator: "\n")
     }
     
-    private func writeInit(varsCount: Int) -> String {
+    private func writeInit(varsCount: UInt) -> String {
         """
         \(Rules.tab())public init(\((1...varsCount).map { "_ _\($0-1): T\($0)" }.joined(separator: ", "))) {
         \((0..<varsCount).map { Rules.tab(2) + "self._\($0) = _\($0)" }.joined(separator: "\n"))
@@ -849,32 +913,124 @@ private final class TupleStructFactory {
         """
     }
     
-    func make(varsCount: Int) throws -> String {
-        guard varsCount > 1 else {
+    override func structName(size: UInt) -> String {
+        "Tuple\(size)"
+    }
+    
+    override func write(size: UInt) throws -> String {
+        guard size > 1 else {
             throw Error.invalidVarsCount
         }
         
-        let structName = "Tuple\(varsCount)"
-        guard filesByCount[varsCount] == nil else {
-            return structName
-        }
-        
-        let file = """
+        return """
         \(Rules.tab())
-        public struct \(structName)<\(writeGenerics(varsCount: varsCount))>: Codable {
+        public struct \(structName(size: size))<\(writeGenerics(varsCount: size))>: Codable {
         \(Rules.tab())
-        \(writeCodingKeys(varsCount: varsCount))
+        \(writeCodingKeys(varsCount: size))
         \(Rules.tab())
-        \(writeTupleVar(count: varsCount))
+        \(writeTupleVar(count: size))
         \(Rules.tab())
-        \(writeVariables(count: varsCount))
+        \(writeVariables(count: size))
         \(Rules.tab())
-        \(writeInit(varsCount: varsCount))
+        \(writeInit(varsCount: size))
         }
         """
-        
-        filesByCount[varsCount] = file
-        
-        return structName
+    }
+}
+
+private final class FixedSizeArrayFactory: SizedStructFactory {
+    override func structName(size: UInt) -> String {
+        "Array\(size)"
+    }
+    
+    override func write(size: UInt) throws -> String {
+        """
+        private let arraySize = \(size)
+        \(Rules.tab())
+        // MARK: Array\(size)
+        \(Rules.tab())
+        public struct Array\(size)<Element: Codable> {
+        \(Rules.tab())
+        \(Rules.tab())enum Error: LocalizedError {
+        \(Rules.tab(2))case invalidInputSequenceLength(Int, Int)
+        \(Rules.tab())
+        \(Rules.tab(2))var errorDescription: String? {
+        \(Rules.tab(3))switch self {
+        \(Rules.tab(3))case let .invalidInputSequenceLength(providedSize, requiredSize):
+        \(Rules.tab(4))return "Invalid input sequence length: \\(providedSize), length should be: \\(requiredSize)"
+        \(Rules.tab(2))}
+                }
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public static var fixedSize: Int { arraySize }
+        \(Rules.tab())
+        \(Rules.tab())private var array: Array<Element>
+        \(Rules.tab())
+        \(Rules.tab())public init<S: Sequence>(_ sequence: S) throws where S.Iterator.Element == Element {
+        \(Rules.tab(2))let array = sequence.map { $0 }
+        \(Rules.tab(2))guard array.count == arraySize else { throw Error.invalidInputSequenceLength(arraySize, array.count) }
+        \(Rules.tab(2))self.array = array
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        // MARK: - Equatable
+        \(Rules.tab())
+        extension Array\(size): Equatable where Element: Equatable {
+        \(Rules.tab())public static func ==(lhs: Array\(size), rhs: Array\(size)) -> Bool {
+        \(Rules.tab(2))lhs.array == rhs.array
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        // MARK: - CustomStringConvertible
+        \(Rules.tab())
+        extension Array\(size): CustomStringConvertible {
+        \(Rules.tab())public var description: String { array.description }
+        }
+        \(Rules.tab())
+        // MARK: - Sequence
+        \(Rules.tab())
+        extension Array\(size): Sequence {
+        \(Rules.tab())public typealias Iterator = IndexingIterator<Array<Element>>
+        \(Rules.tab())
+        \(Rules.tab())public func makeIterator() -> Iterator {
+        \(Rules.tab(2))array.makeIterator()
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        // MARK: - Collection
+        \(Rules.tab())
+        extension Array\(size): Collection {
+        \(Rules.tab())public typealias Index = Array<Element>.Index
+        \(Rules.tab())
+        \(Rules.tab())public var startIndex: Index { array.startIndex }
+        \(Rules.tab())public var endIndex: Index { array.endIndex }
+        \(Rules.tab())
+        \(Rules.tab())public subscript(position: Index) -> Element {
+        \(Rules.tab(2))get { array[position] }
+        \(Rules.tab(2))set { array[position] = newValue }
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public func index(after i: Index) -> Index {
+        \(Rules.tab(2))array.index(after: i)
+        \(Rules.tab())}
+        }
+        \(Rules.tab())
+        // MARK: - Codable
+        \(Rules.tab())
+        extension Array\(size): Codable {
+        \(Rules.tab())public init(from decoder: Decoder) throws {
+        \(Rules.tab(2))var container = try decoder.unkeyedContainer()
+        \(Rules.tab(2))let array = try (0..<arraySize).map { _ in try container.decode(Element.self) }
+        \(Rules.tab(2))try self.init(array)
+        \(Rules.tab())}
+        \(Rules.tab())
+        \(Rules.tab())public func encode(to encoder: Encoder) throws {
+        \(Rules.tab(2))var container = encoder.unkeyedContainer()
+        \(Rules.tab(2))for element in array {
+        \(Rules.tab(3))try container.encode(element)
+        \(Rules.tab(2))}
+        \(Rules.tab())}
+        }
+        """
     }
 }

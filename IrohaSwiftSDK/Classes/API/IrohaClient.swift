@@ -19,6 +19,7 @@ import IrohaSwiftScale
 
 public enum IrohaClientError: Swift.Error {
     case invalidResponse
+    case webSocketNotEstablished
 }
 
 /**
@@ -55,7 +56,11 @@ public final class IrohaClient {
 
 extension IrohaClient {
     
-    public func submitInstructions(_ instructions: [IrohaDataModelIsi.Instruction], completion: @escaping (Error?) -> Void) {
+    public func submitInstructions(
+        _ instructions: [IrohaDataModelIsi.Instruction],
+        completion: @escaping (IrohaDataModelTransaction.Transaction?, Error?) -> Void
+    ) {
+        
         let payload = IrohaDataModelTransaction.Payload(accountId: account.id,
                                                         instructions: instructions,
                                                         creationTime: Date().milliseconds,
@@ -68,13 +73,23 @@ extension IrohaClient {
             apiClient.runQuery(SubmitInstructions(), request: .v1(transaction)) { response in
                 switch response {
                 case let .failure(error):
-                    completion(error)
+                    completion(transaction, error)
                 default:
-                    completion(nil)
+                    completion(transaction, nil)
                 }
             }
         } catch let error {
-            completion(error)
+            completion(nil, error)
+        }
+    }
+    
+    public func submitInstruction(
+        _ instruction: IrohaDataModelIsi.Instruction,
+        completion: @escaping (IrohaDataModelTransaction.Transaction?, Error?) -> Void
+    ) {
+     
+        submitInstructions([instruction]) {
+            completion($0, $1)
         }
     }
 }
@@ -125,33 +140,39 @@ extension IrohaClient {
         
         let eventsPath = "/events"
         
-        let internalErrorHandler: (Error?) -> Void = { [weak self] in
-            if let error = $0 {
-                self?.apiClient.stopWebSocket(at: eventsPath)
+        let internalErrorHandler: (IrohaApiClient.WebSocketClient, Error?) -> Void = {
+            if let error = $1 {
+                $0.cancel()
                 errorHandler?(error)
             }
         }
         
-        apiClient.readWebSocket(at: eventsPath, type: IrohaDataModelEvents.EventSocketMessage.self) { [weak self] result in
+        let client = apiClient.openWebSocket(at: eventsPath, type: IrohaDataModelEvents.VersionedEventSocketMessage.self) { client, result in
             switch result {
-            case let .success(message):
-                switch message {
-                case .subscriptionAccepted:
-                    subscriptionAcceptedHandler?()
-                case let .event(event):
-                    self?.apiClient.writeWebSocket(at: eventsPath, value: .eventReceived, completion: internalErrorHandler)
-                    eventHandler(event)
-                default:
-                    break // do nothing
+            case let .success(versioned):
+                switch versioned {
+                case let .v1(message):
+                    switch message {
+                    case .subscriptionAccepted:
+                        subscriptionAcceptedHandler?()
+                    case let .event(event):
+                        client.write(value: .eventReceived, completion: internalErrorHandler)
+                        eventHandler(event)
+                    default:
+                        break // do nothing
+                    }
                 }
             case let .failure(error):
-                internalErrorHandler(error)
+                internalErrorHandler(client, error)
             }
         }
         
-        apiClient.writeWebSocket(at: eventsPath, value: .subscriptionRequest(eventsFilter)) {
-            internalErrorHandler($0)
+        guard let client = client else {
+            errorHandler?(IrohaClientError.webSocketNotEstablished)
+            return
         }
+        
+        client.write(value: .subscriptionRequest(eventsFilter), completion: internalErrorHandler)
     }
     
     public func receivePipelineEvents(

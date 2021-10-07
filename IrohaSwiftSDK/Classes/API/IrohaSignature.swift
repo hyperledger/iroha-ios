@@ -21,21 +21,30 @@ import Sodium
 
 extension IrohaCrypto.Signature {
     
+    public typealias Hash = IrohaCrypto.Hash
+    
     enum Error: Swift.Error {
         case hashingFailed
         case signingFailed(Swift.Error)
     }
     
+    public static func hash(_ data: Data) throws -> Hash? {
+        guard let hashBytes = Sodium().genericHash.hash(message: data.map { $0 }, outputLength: Hash.fixedSize) else { return nil }
+        return try Hash(hashBytes)
+    }
+    
+    public static func hash<T: Encodable>(_ value: T) throws -> Hash? {
+        let data = try ScaleEncoder().encode(value)
+        return try hash(data)
+    }
+    
     public init(signing data: Data, with keyPair: IrohaKeyPair) throws {
-        guard let hash = Sodium().genericHash.hash(message: data.map { $0 }, outputLength: 32) else {
-            throw Error.hashingFailed
-        }
-        
+        guard let hash = try Self.hash(data) else { throw Error.hashingFailed }
         publicKey = IrohaCrypto.PublicKey(digestFunction: "ed25519", payload: keyPair.publicKey)
         
         do {
             let privateKey = try Curve25519.Signing.PrivateKey(rawRepresentation: keyPair.privateKey)
-            signature = try privateKey.signature(for: hash).map { $0 }
+            signature = try privateKey.signature(for: hash.map { $0 }).map { $0 }
         } catch let error {
             throw Error.signingFailed(error)
         }

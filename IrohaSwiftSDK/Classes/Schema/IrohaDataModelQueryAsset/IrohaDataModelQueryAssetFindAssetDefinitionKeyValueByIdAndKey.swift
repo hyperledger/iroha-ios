@@ -17,6 +17,18 @@
 import Foundation
 import IrohaSwiftScale
 
-extension IrohaCrypto {
-    public typealias Hash = (Array32<UInt8>)
+extension IrohaDataModelQueryAsset {
+    public struct FindAssetDefinitionKeyValueByIdAndKey: Codable {
+        
+        public var id: IrohaDataModelExpression.EvaluatesTo
+        public var key: IrohaDataModelExpression.EvaluatesTo
+        
+        public init(
+            id: IrohaDataModelExpression.EvaluatesTo, 
+            key: IrohaDataModelExpression.EvaluatesTo
+        ) {
+            self.id = id
+            self.key = key
+        }
+    }
 }

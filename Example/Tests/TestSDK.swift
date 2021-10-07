@@ -52,7 +52,8 @@ class TestSDK: XCTestCase {
         
         let exp = XCTestExpectation()
         client.submitInstructions([]) {
-            XCTAssertNil($0)
+            XCTAssertNotNil($0)
+            XCTAssertNil($1)
             exp.fulfill()
         }
         
@@ -82,7 +83,7 @@ class TestSDK: XCTestCase {
     
     // MARK: - Events
     
-    func testEvents() {
+    func testSingleEvent() {
         guard let account = account else {
             XCTFail()
             return
@@ -101,6 +102,229 @@ class TestSDK: XCTestCase {
         }
         
         wait(for: [exp], timeout: 5)
+    }
+    
+    func testMultipleEvents() {
+        guard let account = account else {
+            XCTFail()
+            return
+        }
+        
+        let client = IrohaClient(serverUrlString: urlString, account: account)
+        client.debug = true
+        
+        let numberOfConnections = 20
+        var exps: [XCTestExpectation] = []
+        
+        for _ in 0..<numberOfConnections {
+            let exp = XCTestExpectation()
+            exps.append(exp)
+            
+            client.receiveDataEvents { event in
+                // do nothing
+            } subscriptionAcceptedHandler: {
+                exp.fulfill()
+            } errorHandler: { error in
+                XCTFail(error.localizedDescription)
+                exp.fulfill()
+            }
+        }
+        
+        wait(for: exps, timeout: 5)
+    }
+    
+    func testReceivingEvents() {
+        guard let account = account else {
+            XCTFail()
+            return
+        }
+        let client = IrohaClient(serverUrlString: urlString, account: account)
+        client.debug = true
+        
+        // Test pre-requisites
+        let eventsCount = 20
+        let assetName = "hydrangea"
+        let accountName = "alice"
+        let accountDomainName = "wonderland"
+        
+        // Expectations
+        
+        var exps: [XCTestExpectation] = []
+        
+        let subscriptionAcceptExp = XCTestExpectation()
+        exps.append(subscriptionAcceptExp)
+        
+        var transactionSubmittedExps: [XCTestExpectation] = []
+        var eventsReceivedExps: [XCTestExpectation] = []
+        
+        for _ in 0..<eventsCount {
+            // Submit
+            do {
+                let exp = XCTestExpectation()
+                transactionSubmittedExps.append(exp)
+            }
+            // Receive
+            do {
+                let validatingExp = XCTestExpectation()
+                eventsReceivedExps.append(validatingExp)
+                let commitedOrRejectedExp = XCTestExpectation()
+                eventsReceivedExps.append(commitedOrRejectedExp)
+            }
+        }
+        
+        exps.append(contentsOf: transactionSubmittedExps)
+        exps.append(contentsOf: eventsReceivedExps)
+        
+        func failTest(_ message: String? = nil) {
+            if let message = message {
+                XCTFail(message)
+            } else {
+                XCTFail()
+            }
+            
+            exps.forEach { $0.fulfill() }
+        }
+        
+        // Submitting instructions
+        
+        // - Register
+        let registerInstruction = IrohaDataModelIsi.Instruction.register(
+            .init(
+                object: .init(
+                    expression: .raw(
+                        .identifiable(
+                            .assetDefinition(
+                                .init(
+                                    valueType: .quantity,
+                                    id: .init(name: assetName, domainName: accountDomainName),
+                                    metadata: .init(map: [:])
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        
+        let registerTransactionExp = XCTestExpectation()
+        exps.append(registerTransactionExp)
+        
+        do {
+            let validatingExp = XCTestExpectation()
+            eventsReceivedExps.append(validatingExp)
+            let commitedOrRejectedExp = XCTestExpectation()
+            eventsReceivedExps.append(commitedOrRejectedExp)
+        }
+        
+        func submitRegisterAssetInstruction() {
+            client.submitInstruction(registerInstruction) {
+                guard $1 == nil else {
+                    failTest()
+                    return
+                }
+                
+                guard let transaction = $0 else {
+                    failTest()
+                    return
+                }
+                
+                transactions.append(transaction)
+                registerTransactionExp.fulfill()
+            }
+        }
+        
+        // - Mint
+        
+        func makeMintInstruction(amount: UInt32) -> IrohaDataModelIsi.Instruction {
+            .mint(
+                .init(
+                    object: .init(expression: .raw(.u32(amount))),
+                    destinationId: .init(
+                        expression: .raw(
+                            .id(
+                                .assetId(
+                                    .init(
+                                        definitionId: .init(
+                                            name: assetName,
+                                            domainName: accountDomainName
+                                        ),
+                                        accountId: .init(
+                                            name: accountName,
+                                            domainName: accountDomainName)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        }
+        
+        func submitMintInstructions() {
+            for _ in 0..<eventsCount {
+                client.submitInstruction(makeMintInstruction(amount: UInt32.random(in: 1...100))) {
+                    guard $1 == nil else {
+                        failTest()
+                        return
+                    }
+                    guard let transaction = $0 else {
+                        failTest()
+                        return
+                    }
+                    
+                    transactions.append(transaction)
+                    guard let exp = transactionSubmittedExps.popLast() else {
+                        failTest()
+                        return
+                    }
+                    
+                    exp.fulfill()
+                }
+            }
+        }
+        
+        // Receiving pipeline events
+        
+        var transactions: [IrohaDataModelTransaction.Transaction] = []
+        
+        client.receivePipelineEvents { event in
+            guard event.entityType == .transaction else { return } // Ignore non-transaction events
+            guard let transaction = transactions.first(where: { $0.hash == event.hash }) else { return } // Ignore non-test case transactions
+            
+            guard let exp = eventsReceivedExps.popLast() else {
+                failTest()
+                return
+            }
+            
+            switch transaction.payload.instructions[0] {
+                
+            case .register:
+                exp.fulfill() // pass any way, during repeating tests it might be rejected as already existing asset
+                
+                switch event.status {
+                case .committed, .rejected: submitMintInstructions()
+                default: break // Do nothing
+                }
+                
+            case .mint:
+                switch event.status {
+                case .validating: exp.fulfill()
+                case .committed: exp.fulfill()
+                case .rejected: failTest()
+                }
+                
+            default:
+                failTest()
+                
+            }
+        } subscriptionAcceptedHandler: {
+            subscriptionAcceptExp.fulfill()
+            submitRegisterAssetInstruction()
+        } errorHandler: { error in
+            failTest(error.localizedDescription)
+        }
+        
+        wait(for: exps, timeout: TimeInterval(eventsCount * 5))
     }
     
     // MARK: - Health

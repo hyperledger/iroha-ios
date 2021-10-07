@@ -35,6 +35,7 @@ extension IrohaDataModelQuery {
         case findAssetsByDomainNameAndAssetDefinitionId(IrohaDataModelQueryAsset.FindAssetsByDomainNameAndAssetDefinitionId)
         case findAssetQuantityById(IrohaDataModelQueryAsset.FindAssetQuantityById)
         case findAssetKeyValueByIdAndKey(IrohaDataModelQueryAsset.FindAssetKeyValueByIdAndKey)
+        case findAssetDefinitionKeyValueByIdAndKey(IrohaDataModelQueryAsset.FindAssetDefinitionKeyValueByIdAndKey)
         case findAllDomains(IrohaDataModelQueryDomain.FindAllDomains)
         case findDomainByName(IrohaDataModelQueryDomain.FindDomainByName)
         case findAllPeers(IrohaDataModelQueryPeer.FindAllPeers)
@@ -75,16 +76,18 @@ extension IrohaDataModelQuery {
                     return 13
                 case .findAssetKeyValueByIdAndKey:
                     return 14
-                case .findAllDomains:
+                case .findAssetDefinitionKeyValueByIdAndKey:
                     return 15
-                case .findDomainByName:
+                case .findAllDomains:
                     return 16
-                case .findAllPeers:
+                case .findDomainByName:
                     return 17
-                case .findTransactionsByAccountId:
+                case .findAllPeers:
                     return 18
-                case .findPermissionTokensByAccountId:
+                case .findTransactionsByAccountId:
                     return 19
+                case .findPermissionTokensByAccountId:
+                    return 20
             }
         }
         
@@ -155,22 +158,26 @@ extension IrohaDataModelQuery {
                 self = .findAssetKeyValueByIdAndKey(val0)
                 break
             case 15:
+                let val0 = try container.decode(IrohaDataModelQueryAsset.FindAssetDefinitionKeyValueByIdAndKey.self)
+                self = .findAssetDefinitionKeyValueByIdAndKey(val0)
+                break
+            case 16:
                 let val0 = try container.decode(IrohaDataModelQueryDomain.FindAllDomains.self)
                 self = .findAllDomains(val0)
                 break
-            case 16:
+            case 17:
                 let val0 = try container.decode(IrohaDataModelQueryDomain.FindDomainByName.self)
                 self = .findDomainByName(val0)
                 break
-            case 17:
+            case 18:
                 let val0 = try container.decode(IrohaDataModelQueryPeer.FindAllPeers.self)
                 self = .findAllPeers(val0)
                 break
-            case 18:
+            case 19:
                 let val0 = try container.decode(IrohaDataModelQueryTransaction.FindTransactionsByAccountId.self)
                 self = .findTransactionsByAccountId(val0)
                 break
-            case 19:
+            case 20:
                 let val0 = try container.decode(IrohaDataModelQueryPermissions.FindPermissionTokensByAccountId.self)
                 self = .findPermissionTokensByAccountId(val0)
                 break
@@ -228,6 +235,9 @@ extension IrohaDataModelQuery {
                 try container.encode(val0)
                 break
             case let .findAssetKeyValueByIdAndKey(val0):
+                try container.encode(val0)
+                break
+            case let .findAssetDefinitionKeyValueByIdAndKey(val0):
                 try container.encode(val0)
                 break
             case let .findAllDomains(val0):

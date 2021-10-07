@@ -15,8 +15,9 @@
 //
 
 import Foundation
-import IrohaSwiftScale
 
-extension IrohaCrypto {
-    public typealias Hash = (Array32<UInt8>)
+extension IrohaDataModelTransaction.Transaction {
+    public var hash: IrohaCrypto.Hash? {
+        try? IrohaCrypto.Signature.hash(payload)
+    }
 }

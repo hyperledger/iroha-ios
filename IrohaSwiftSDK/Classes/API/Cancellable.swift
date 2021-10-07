@@ -15,8 +15,7 @@
 //
 
 import Foundation
-import IrohaSwiftScale
 
-extension IrohaCrypto {
-    public typealias Hash = (Array32<UInt8>)
+public protocol Cancellable {
+    func cancel()
 }
