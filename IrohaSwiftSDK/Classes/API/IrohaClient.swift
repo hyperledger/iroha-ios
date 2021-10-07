@@ -66,7 +66,7 @@ extension IrohaClient {
                                                         creationTime: Date().milliseconds,
                                                         timeToLiveMs: ttl.milliseconds,
                                                         metadata: [:])
-        print("Submitting instructions with creation time: \(payload.creationTime)")
+
         do {
             let signature = try IrohaCrypto.Signature(signing: payload, with: account.keyPair)
             let transaction = IrohaDataModelTransaction.Transaction(payload: payload, signatures: [signature])

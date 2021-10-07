@@ -236,7 +236,7 @@ class TestSDK: XCTestCase {
         // - Mint
         
         func makeMintInstruction(amount: UInt32) -> IrohaDataModelIsi.Instruction {
-            print("made mint instruction with amount: \(amount)"); return   .mint(
+            .mint(
                 .init(
                     object: .init(expression: .raw(.u32(amount))),
                     destinationId: .init(
