@@ -26,9 +26,9 @@ Pod::Spec.new do |s|
 
   s.dependency 'IrohaCrypto/Iroha', '~> 0.3.0'
   s.dependency 'gRPC-ProtoRPC', '~> 1.11.0'
-  s.dependency 'Protobuf', '~> 3.5.0'
+  s.dependency 'Protobuf', '~> 3.12'
   s.dependency 'BoringSSL', '~> 10.0.3'
-  s.dependency 'nanopb', '~> 0.3.8'
+  s.dependency 'nanopb', '~> 0.3.901'
 
   s.pod_target_xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1' }
 
