@@ -61,11 +61,13 @@ extension IrohaClient {
         completion: @escaping (IrohaDataModelTransaction.Transaction?, Error?) -> Void
     ) {
         
-        let payload = IrohaDataModelTransaction.Payload(accountId: account.id,
-                                                        instructions: instructions,
-                                                        creationTime: Date().milliseconds,
-                                                        timeToLiveMs: ttl.milliseconds,
-                                                        metadata: [:])
+        let payload = IrohaDataModelTransaction.Payload(
+            accountId: account.id,
+            instructions: instructions,
+            creationTime: Date().milliseconds,
+            timeToLiveMs: ttl.milliseconds,
+            nonce: Int64.random(in: Int64.min...Int64.max),
+            metadata: [:])
 
         do {
             let signature = try IrohaCrypto.Signature(signing: payload, with: account.keyPair)

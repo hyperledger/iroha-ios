@@ -1937,6 +1937,10 @@
           "ty": "u64"
         },
         {
+          "name": "nonce",
+          "ty": "Option<i64>"
+        },
+        {
           "name": "metadata",
           "ty": "BTreeMap<String, iroha_data_model::Value>"
         }

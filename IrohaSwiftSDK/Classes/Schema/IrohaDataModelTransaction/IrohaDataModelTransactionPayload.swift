@@ -24,6 +24,7 @@ extension IrohaDataModelTransaction {
         public var instructions: [IrohaDataModelIsi.Instruction]
         public var creationTime: UInt64
         public var timeToLiveMs: UInt64
+        public var nonce: Int64?
         public var metadata: [String: IrohaDataModel.Value]
         
         public init(
@@ -31,12 +32,14 @@ extension IrohaDataModelTransaction {
             instructions: [IrohaDataModelIsi.Instruction], 
             creationTime: UInt64, 
             timeToLiveMs: UInt64, 
+            nonce: Int64?, 
             metadata: [String: IrohaDataModel.Value]
         ) {
             self.accountId = accountId
             self.instructions = instructions
             self.creationTime = creationTime
             self.timeToLiveMs = timeToLiveMs
+            self.nonce = nonce
             self.metadata = metadata
         }
     }
