@@ -238,64 +238,54 @@
     "Enum": {
       "variants": [
         {
-          "name": "U32",
-          "discriminant": 0,
-          "ty": "u32"
-        },
-        {
           "name": "Bool",
-          "discriminant": 1,
+          "discriminant": 0,
           "ty": "bool"
         },
         {
           "name": "String",
-          "discriminant": 2,
+          "discriminant": 1,
           "ty": "String"
         },
         {
-          "name": "Fixed",
-          "discriminant": 3,
-          "ty": "iroha_data_model::fixed::Fixed"
-        },
-        {
           "name": "Vec",
-          "discriminant": 4,
+          "discriminant": 3,
           "ty": "Vec<iroha_data_model::Value>"
         },
         {
           "name": "Id",
-          "discriminant": 5,
+          "discriminant": 8,
           "ty": "iroha_data_model::IdBox"
         },
         {
           "name": "Identifiable",
-          "discriminant": 6,
+          "discriminant": 9,
           "ty": "iroha_data_model::IdentifiableBox"
         },
         {
           "name": "PublicKey",
-          "discriminant": 7,
+          "discriminant": 10,
           "ty": "iroha_crypto::PublicKey"
         },
         {
-          "name": "Parameter",
-          "discriminant": 8,
-          "ty": "iroha_data_model::Parameter"
-        },
-        {
           "name": "SignatureCheckCondition",
-          "discriminant": 9,
+          "discriminant": 11,
           "ty": "iroha_data_model::account::SignatureCheckCondition"
         },
         {
           "name": "TransactionValue",
-          "discriminant": 10,
+          "discriminant": 12,
           "ty": "iroha_data_model::transaction::TransactionValue"
         },
         {
           "name": "PermissionToken",
-          "discriminant": 11,
+          "discriminant": 14,
           "ty": "iroha_data_model::permissions::PermissionToken"
+        },
+        {
+          "name": "U32",
+          "discriminant": 20,
+          "ty": "u32"
         }
       ]
     }

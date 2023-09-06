@@ -39,7 +39,7 @@ extension IrohaDataModel {
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
                 case .u32:
-                    return 0
+                    return 20
                 case .bool:
                     return 1
                 case .string:
@@ -49,7 +49,7 @@ extension IrohaDataModel {
                 case .vec:
                     return 4
                 case .id:
-                    return 5
+                    return 8
                 case .identifiable:
                     return 6
                 case .publicKey:
