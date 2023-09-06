@@ -16,9 +16,10 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaDataModelExpression {
-    public indirect enum Expression: Codable {
+    public indirect enum Expression: Swift.Codable {
         
         case add(IrohaDataModelExpression.Add)
         case subtract(IrohaDataModelExpression.Subtract)
@@ -90,7 +91,7 @@ extension IrohaDataModelExpression {
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -175,13 +176,13 @@ extension IrohaDataModelExpression {
                 self = .contextValue(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(Expression.discriminant(of: self))
             switch self {
@@ -249,3 +250,21 @@ extension IrohaDataModelExpression {
         }
     }
 }
+
+extension IrohaDataModelExpression.Expression : ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : Encoder {
+        try encoder.encode(IrohaDataModelExpression.Expression.discriminant(of: self))
+        switch self {
+        case let .raw(val0):
+            try encoder.encode(val0)
+            break
+        default:
+            break
+            // todo: доделать
+        }
+    }
+
+
+    //try container.encode(Expression.discriminant(of: self))
+}
+    //public indirect enum Expression: Swift.Codable

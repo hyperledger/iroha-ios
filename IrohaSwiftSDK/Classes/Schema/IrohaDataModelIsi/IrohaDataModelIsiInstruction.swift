@@ -16,9 +16,10 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaDataModelIsi {
-    public indirect enum Instruction: Codable {
+    public indirect enum Instruction: Swift.Codable {
         
         case register(IrohaDataModelIsi.RegisterBox)
         case unregister(IrohaDataModelIsi.UnregisterBox)
@@ -66,7 +67,7 @@ extension IrohaDataModelIsi {
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -119,13 +120,13 @@ extension IrohaDataModelIsi {
                 self = .grant(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(Instruction.discriminant(of: self))
             switch self {
@@ -167,5 +168,20 @@ extension IrohaDataModelIsi {
                 break
             }
         }
+    }
+}
+
+extension IrohaDataModelIsi.Instruction: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
+        try encoder.encode(IrohaDataModelIsi.Instruction.discriminant(of: self))
+        switch self {
+        case let .transfer(val0):
+            try encoder.encode(val0)
+            break
+        default:
+            break
+        }
+
+        // todo: доделать
     }
 }

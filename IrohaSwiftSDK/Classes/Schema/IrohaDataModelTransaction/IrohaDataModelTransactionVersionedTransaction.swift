@@ -15,10 +15,11 @@
 //
 
 import Foundation
-import IrohaSwiftScale
+import ScaleCodec
+//import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public indirect enum VersionedTransaction: Codable {
+    public indirect enum VersionedTransaction: Swift.Codable {
         
         case v1(IrohaDataModelTransaction._VersionedTransactionV1)
         
@@ -33,7 +34,7 @@ extension IrohaDataModelTransaction {
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -42,13 +43,13 @@ extension IrohaDataModelTransaction {
                 self = .v1(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(VersionedTransaction.discriminant(of: self))
             switch self {
@@ -56,6 +57,17 @@ extension IrohaDataModelTransaction {
                 try container.encode(val0)
                 break
             }
+        }
+    }
+}
+
+extension IrohaDataModelTransaction.VersionedTransaction: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
+        try encoder.encode(IrohaDataModelTransaction.VersionedTransaction.discriminant(of: self))
+        switch self {
+        case let .v1(val0):
+            try encoder.encode(val0)
+            break
         }
     }
 }

@@ -16,9 +16,10 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaDataModelAsset {
-    public struct Id: Codable, Hashable {
+    public struct Id: Swift.Codable, Hashable {
         
         public var definitionId: IrohaDataModelAsset.DefinitionId
         public var accountId: IrohaDataModelAccount.Id
@@ -37,5 +38,12 @@ extension IrohaDataModelAsset {
             hasher.combine(definitionId)
             hasher.combine(accountId)
         }
+    }
+}
+
+extension IrohaDataModelAsset.Id: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : Encoder {
+        try encoder.encode(definitionId)
+        try encoder.encode(accountId)
     }
 }

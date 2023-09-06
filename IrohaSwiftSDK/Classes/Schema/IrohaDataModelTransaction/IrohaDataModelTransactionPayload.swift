@@ -16,9 +16,10 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaDataModelTransaction {
-    public struct Payload: Codable {
+    public struct Payload: Swift.Codable {
         
         public var accountId: IrohaDataModelAccount.Id
         public var instructions: [IrohaDataModelIsi.Instruction]
@@ -42,5 +43,14 @@ extension IrohaDataModelTransaction {
             self.nonce = nonce
             self.metadata = metadata
         }
+    }
+}
+
+extension IrohaDataModelTransaction.Payload: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
+        try encoder.encode(accountId)
+        try encoder.encode(instructions)
+
+        // todo: доделать остальные
     }
 }

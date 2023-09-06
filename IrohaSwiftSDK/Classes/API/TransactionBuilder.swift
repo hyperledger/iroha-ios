@@ -31,6 +31,10 @@ public class TransationBuilder {
 
     private var description: String?
 
+    private var timeToLiveMs: UInt64?
+
+    private var nonce: Int64?
+
     public func withCreatedDate(date: Date) -> Self {
         self.createdDate = date
 
@@ -45,6 +49,18 @@ public class TransationBuilder {
 
     public func withDescription(description: String?) -> Self {
         self.description = description
+
+        return self
+    }
+
+    public func withTimeToLiveMs(timeToLiveMs: UInt64?) -> Self {
+        self.timeToLiveMs = timeToLiveMs
+
+        return self
+    }
+
+    public func withNonce(nonce: Int64?) -> Self {
+        self.nonce = nonce
 
         return self
     }
@@ -90,8 +106,8 @@ public class TransationBuilder {
             accountId: accountId,
             instructions: instructions,
             creationTime: createdDate.milliseconds,
-            timeToLiveMs: Constants.timeToLive.milliseconds,
-            nonce: Int64.random(in: Int64.min...Int64.max),
+            timeToLiveMs: timeToLiveMs ?? Constants.timeToLive.milliseconds,
+            nonce: nonce ?? Int64.random(in: Int64.min...Int64.max),
             metadata: metadata
         )
 

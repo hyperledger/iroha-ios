@@ -82,70 +82,105 @@ final class ScaleSingleValueEncodingContainer: SingleValueEncodingContainer, Sca
         }
         
         _data = data + bytes
+
+        _data?.debug()
     }
     
     func encode(_ value: Int) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode(_ value: Int8) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode(_ value: Int16) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode(_ value: Int32) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode(_ value: Int64) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode(_ value: UInt) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode(_ value: UInt8) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode(_ value: UInt16) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode(_ value: UInt32) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode(_ value: UInt64) throws {
         try checkCanEncode(value: value)
         var value = value
         _data = withUnsafeBytes(of: &value, { Data($0) })
+
+        _data?.debug()
     }
     
     func encode<T>(_ value: T) throws where T : Encodable {
         try checkCanEncode(value: value)
         _data = try ScaleEncoder(codingPath: codingPath, userInfo: userInfo).encode(value)
+    }
+}
+
+#warning("remove me")
+extension Data {
+    func debug() {
+        debugPrint("ScaleSingleValueEncodingContainer \(Array(self).toSigned())")
+    }
+}
+
+extension Array where Element == UInt8 {
+    func toSigned() -> [Int8] {
+        self.map { Int8(bitPattern: $0) }
     }
 }

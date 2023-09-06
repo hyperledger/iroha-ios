@@ -16,9 +16,10 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaDataModelIsi {
-    public struct TransferBox: Codable {
+    public struct TransferBox: Swift.Codable {
         
         public var sourceId: IrohaDataModelExpression.EvaluatesTo
         public var object: IrohaDataModelExpression.EvaluatesTo
@@ -33,5 +34,13 @@ extension IrohaDataModelIsi {
             self.object = object
             self.destinationId = destinationId
         }
+    }
+}
+
+extension IrohaDataModelIsi.TransferBox: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
+        try encoder.encode(sourceId)
+        try encoder.encode(object)
+        try encoder.encode(destinationId)
     }
 }

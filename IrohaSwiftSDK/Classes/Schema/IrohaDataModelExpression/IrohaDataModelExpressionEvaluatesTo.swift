@@ -16,14 +16,21 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaDataModelExpression {
-    public struct EvaluatesTo: Codable {
+    public struct EvaluatesTo: Swift.Codable {
         
         public var expression: IrohaDataModelExpression.Expression
         
         public init(expression: IrohaDataModelExpression.Expression) {
             self.expression = expression
         }
+    }
+}
+
+extension IrohaDataModelExpression.EvaluatesTo: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
+        try encoder.encode(expression)
     }
 }

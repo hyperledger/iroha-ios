@@ -135,14 +135,14 @@
     "Enum": {
       "variants": [
         {
-          "name": "AccountId",
+          "name": "DomainName",
           "discriminant": 0,
-          "ty": "iroha_data_model::account::Id"
+          "ty": "String"
         },
         {
-          "name": "AssetId",
+          "name": "AccountId",
           "discriminant": 1,
-          "ty": "iroha_data_model::asset::Id"
+          "ty": "iroha_data_model::account::Id"
         },
         {
           "name": "AssetDefinitionId",
@@ -150,9 +150,9 @@
           "ty": "iroha_data_model::asset::DefinitionId"
         },
         {
-          "name": "DomainName",
+          "name": "AssetId",
           "discriminant": 3,
-          "ty": "String"
+          "ty": "iroha_data_model::asset::Id"
         },
         {
           "name": "PeerId",

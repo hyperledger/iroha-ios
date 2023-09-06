@@ -15,10 +15,11 @@
 //
 
 import Foundation
+import ScaleCodec
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public indirect enum TransactionValue: Codable {
+    public indirect enum TransactionValue: Swift.Codable {
         
         case transaction(IrohaDataModelTransaction.VersionedTransaction)
         case rejectedTransaction(IrohaDataModelTransaction.VersionedRejectedTransaction)
@@ -36,7 +37,7 @@ extension IrohaDataModelTransaction {
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -49,13 +50,13 @@ extension IrohaDataModelTransaction {
                 self = .rejectedTransaction(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(TransactionValue.discriminant(of: self))
             switch self {
@@ -66,6 +67,21 @@ extension IrohaDataModelTransaction {
                 try container.encode(val0)
                 break
             }
+        }
+    }
+}
+
+extension IrohaDataModelTransaction.TransactionValue: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
+        try encoder.encode(IrohaDataModelTransaction.TransactionValue.discriminant(of: self))
+        switch self {
+        case let .transaction(val0):
+            try encoder.encode(val0)
+            break
+        case let .rejectedTransaction(val0):
+            // todo
+            //try encoder.encode(val0)
+            break
         }
     }
 }
