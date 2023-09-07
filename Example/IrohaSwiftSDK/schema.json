@@ -283,9 +283,9 @@
           "ty": "iroha_data_model::permissions::PermissionToken"
         },
         {
-          "name": "U32",
+          "name": "Numeric",
           "discriminant": 20,
-          "ty": "u32"
+          "ty": "iroha_data_model::transaction::NumericValue"
         }
       ]
     }
@@ -1516,6 +1516,32 @@
         {
           "name": "params",
           "ty": "BTreeMap<String, iroha_data_model::Value>"
+        }
+      ]
+    }
+  },
+  "iroha_data_model::transaction::NumericValue": {
+    "Enum": {
+      "variants": [
+        {
+          "tag": "U32",
+          "discriminant": 0,
+          "ty": "u32"
+        },
+        {
+          "tag": "U64",
+          "discriminant": 1,
+          "ty": "u64"
+        },
+        {
+          "tag": "U128",
+          "discriminant": 2,
+          "ty": "u128"
+        },
+        {
+          "tag": "Fixed",
+          "discriminant": 3,
+          "ty": "Fixed"
         }
       ]
     }
