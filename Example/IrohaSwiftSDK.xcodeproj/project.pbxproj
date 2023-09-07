@@ -394,13 +394,17 @@
 				"${PODS_ROOT}/Target Support Files/Pods-IrohaSwiftSDK_Example/Pods-IrohaSwiftSDK_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/IrohaSwiftSDK/IrohaSwiftSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/IrohaSwiftScale/IrohaSwiftScale.framework",
+				"${BUILT_PRODUCTS_DIR}/ScaleCodec/ScaleCodec.framework",
 				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
+				"${BUILT_PRODUCTS_DIR}/Tuples/Tuples.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IrohaSwiftSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IrohaSwiftScale.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScaleCodec.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tuples.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

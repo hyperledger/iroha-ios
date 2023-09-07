@@ -22,7 +22,7 @@ extension IrohaDataModelTransaction {
     public struct Payload: Swift.Codable {
         
         public var accountId: IrohaDataModelAccount.Id
-        public var instructions: [IrohaDataModelIsi.Instruction]
+        public var executable: IrohaDataModelIsi.Executable
         public var creationTime: UInt64
         public var timeToLiveMs: UInt64
         public var nonce: Int64?
@@ -30,14 +30,14 @@ extension IrohaDataModelTransaction {
         
         public init(
             accountId: IrohaDataModelAccount.Id, 
-            instructions: [IrohaDataModelIsi.Instruction], 
+            executable: IrohaDataModelIsi.Executable,
             creationTime: UInt64, 
             timeToLiveMs: UInt64, 
             nonce: Int64?, 
             metadata: [String: IrohaDataModel.Value]
         ) {
             self.accountId = accountId
-            self.instructions = instructions
+            self.executable = executable
             self.creationTime = creationTime
             self.timeToLiveMs = timeToLiveMs
             self.nonce = nonce
@@ -49,7 +49,7 @@ extension IrohaDataModelTransaction {
 extension IrohaDataModelTransaction.Payload: ScaleCodec.Encodable {
     public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
         try encoder.encode(accountId)
-        try encoder.encode(instructions)
+        try encoder.encode(executable)
 
         // todo: доделать остальные
     }

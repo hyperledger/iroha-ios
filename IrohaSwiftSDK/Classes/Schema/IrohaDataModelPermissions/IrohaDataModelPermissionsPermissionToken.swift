@@ -16,9 +16,10 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaDataModelPermissions {
-    public struct PermissionToken: Codable {
+    public struct PermissionToken: Swift.Codable {
         
         public var name: String
         public var params: [String: IrohaDataModel.Value]
@@ -30,5 +31,11 @@ extension IrohaDataModelPermissions {
             self.name = name
             self.params = params
         }
+    }
+}
+
+extension IrohaDataModelPermissions.PermissionToken: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : Encoder {
+        // todo:
     }
 }

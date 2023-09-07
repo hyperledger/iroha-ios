@@ -1524,22 +1524,22 @@
     "Enum": {
       "variants": [
         {
-          "tag": "U32",
+          "name": "U32",
           "discriminant": 0,
           "ty": "u32"
         },
         {
-          "tag": "U64",
+          "name": "U64",
           "discriminant": 1,
           "ty": "u64"
         },
         {
-          "tag": "U128",
+          "name": "U128",
           "discriminant": 2,
           "ty": "u128"
         },
         {
-          "tag": "Fixed",
+          "name": "Fixed",
           "discriminant": 3,
           "ty": "Fixed"
         }
@@ -1942,7 +1942,7 @@
         },
         {
           "name": "instructions",
-          "ty": "Vec<iroha_data_model::isi::Instruction>"
+          "ty": "iroha_data_model::isi::Executable"
         },
         {
           "name": "creation_time",
@@ -1961,6 +1961,17 @@
           "ty": "BTreeMap<String, iroha_data_model::Value>"
         }
       ]
+    }
+  },
+  "iroha_data_model::isi::Executable": {
+    "Enum": {
+        "variants": [
+          {
+            "name": "Instructions",
+            "discriminant": 0,
+            "ty": "Vec<iroha_data_model::isi::Instruction>"
+          }
+        ]
     }
   },
   "iroha_data_model::transaction::RejectedTransaction": {

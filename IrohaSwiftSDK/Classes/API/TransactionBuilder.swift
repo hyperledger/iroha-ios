@@ -5,6 +5,7 @@
 //  Created by Nikolai Zhukov on 8/21/23.
 //
 
+import ScaleCodec
 import Foundation
 
 public class TransationBuilder {
@@ -65,11 +66,11 @@ public class TransationBuilder {
         return self
     }
 
-    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: UInt32, receiverID: IrohaDataModelAccount.Id) -> Self {
+    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: ScaleCodec.UInt128, receiverID: IrohaDataModelAccount.Id) -> Self {
         let sourceID = IrohaDataModel.IdBox.assetId(assetID)
         let source: IrohaDataModel.Value = .id(sourceID)
 
-        let uValue: IrohaDataModel.Value = .u32(value)
+        let uValue: IrohaDataModel.Value = .numeric(.u128(value))
 
         let destinationID = IrohaDataModel.IdBox.accountId(receiverID)
         let destination: IrohaDataModel.Value = .id(destinationID)
@@ -99,12 +100,9 @@ public class TransationBuilder {
             metadata[Constants.metadataStringKey] = .string(description)
         }
 
-        //debugPrint(Int64.min)
-        //debugPrint(Int64.max)
-
         let payload = IrohaDataModelTransaction.Payload(
             accountId: accountId,
-            instructions: instructions,
+            executable: .instructions(instructions),
             creationTime: createdDate.milliseconds,
             timeToLiveMs: timeToLiveMs ?? Constants.timeToLive.milliseconds,
             nonce: nonce ?? Int64.random(in: Int64.min...Int64.max),

@@ -2,8 +2,12 @@ PODS:
   - IrohaSwiftScale (1.0.0)
   - IrohaSwiftSDK (1.0.0):
     - IrohaSwiftScale
+    - ScaleCodec
     - Sodium (= 0.9.1)
+  - ScaleCodec (0.3.1):
+    - Tuples (~> 0.1.0)
   - Sodium (0.9.1)
+  - Tuples (0.1.3)
 
 DEPENDENCIES:
   - IrohaSwiftScale (from `../`)
@@ -11,7 +15,9 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - ScaleCodec
     - Sodium
+    - Tuples
 
 EXTERNAL SOURCES:
   IrohaSwiftScale:
@@ -21,8 +27,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   IrohaSwiftScale: 20a71045072c35b1c7801d12b7b4cde0950ac31d
-  IrohaSwiftSDK: bfd442acf9f01171e5f374b8d6723b3f8b885ce6
+  IrohaSwiftSDK: 507d6ab55b3ac1fd1de393b15d866688c63913e5
+  ScaleCodec: 272c14379e30ba2457b6f3d3141539ba1cc5fb71
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
+  Tuples: 58fe2ee073bb674c9885b31450e32f78110f7446
 
 PODFILE CHECKSUM: 53e2c5088365a98f17ca8dcabc8806bd244b4449
 

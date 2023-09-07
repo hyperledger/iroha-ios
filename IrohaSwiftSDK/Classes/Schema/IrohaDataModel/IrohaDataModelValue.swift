@@ -21,47 +21,41 @@ import ScaleCodec
 extension IrohaDataModel {
     public indirect enum Value: Swift.Codable {
         
-        case u32(UInt32)
         case bool(Bool)
         case string(String)
-        case fixed(IrohaDataModelFixed.Fixed)
         case vec([IrohaDataModel.Value])
         case id(IrohaDataModel.IdBox)
         case identifiable(IrohaDataModel.IdentifiableBox)
         case publicKey(IrohaCrypto.PublicKey)
-        case parameter(IrohaDataModel.Parameter)
         case signatureCheckCondition(IrohaDataModelAccount.SignatureCheckCondition)
         case transactionValue(IrohaDataModelTransaction.TransactionValue)
         case permissionToken(IrohaDataModelPermissions.PermissionToken)
+        case numeric(IrohaDataModelTransaction.NumericValue)
         
         // MARK: - For Codable purpose
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .u32:
-                    return 20
                 case .bool:
-                    return 1
+                    return 0
                 case .string:
-                    return 2
-                case .fixed:
-                    return 3
+                    return 1
                 case .vec:
-                    return 4
+                    return 3
                 case .id:
                     return 8
                 case .identifiable:
-                    return 6
-                case .publicKey:
-                    return 7
-                case .parameter:
-                    return 8
-                case .signatureCheckCondition:
                     return 9
-                case .transactionValue:
+                case .publicKey:
                     return 10
-                case .permissionToken:
+                case .signatureCheckCondition:
                     return 11
+                case .transactionValue:
+                    return 12
+                case .permissionToken:
+                    return 14
+                case .numeric:
+                    return 20
             }
         }
         
@@ -72,52 +66,44 @@ extension IrohaDataModel {
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
             case 0:
-                let val0 = try container.decode(UInt32.self)
-                self = .u32(val0)
-                break
-            case 1:
                 let val0 = try container.decode(Bool.self)
                 self = .bool(val0)
                 break
-            case 2:
+            case 1:
                 let val0 = try container.decode(String.self)
                 self = .string(val0)
                 break
             case 3:
-                let val0 = try container.decode(IrohaDataModelFixed.Fixed.self)
-                self = .fixed(val0)
-                break
-            case 4:
                 let val0 = try container.decode([IrohaDataModel.Value].self)
                 self = .vec(val0)
                 break
-            case 5:
+            case 8:
                 let val0 = try container.decode(IrohaDataModel.IdBox.self)
                 self = .id(val0)
                 break
-            case 6:
+            case 9:
                 let val0 = try container.decode(IrohaDataModel.IdentifiableBox.self)
                 self = .identifiable(val0)
                 break
-            case 7:
+            case 10:
                 let val0 = try container.decode(IrohaCrypto.PublicKey.self)
                 self = .publicKey(val0)
                 break
-            case 8:
-                let val0 = try container.decode(IrohaDataModel.Parameter.self)
-                self = .parameter(val0)
-                break
-            case 9:
+            case 11:
                 let val0 = try container.decode(IrohaDataModelAccount.SignatureCheckCondition.self)
                 self = .signatureCheckCondition(val0)
                 break
-            case 10:
+            case 12:
                 let val0 = try container.decode(IrohaDataModelTransaction.TransactionValue.self)
                 self = .transactionValue(val0)
                 break
-            case 11:
+            case 14:
                 let val0 = try container.decode(IrohaDataModelPermissions.PermissionToken.self)
                 self = .permissionToken(val0)
+                break
+            case 20:
+                let val0 = try container.decode(IrohaDataModelTransaction.NumericValue.self)
+                self = .numeric(val0)
                 break
             default:
                 throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
@@ -130,16 +116,10 @@ extension IrohaDataModel {
             var container = encoder.unkeyedContainer()
             try container.encode(Value.discriminant(of: self))
             switch self {
-            case let .u32(val0):
-                try container.encode(val0)
-                break
             case let .bool(val0):
                 try container.encode(val0)
                 break
             case let .string(val0):
-                try container.encode(val0)
-                break
-            case let .fixed(val0):
                 try container.encode(val0)
                 break
             case let .vec(val0):
@@ -154,9 +134,6 @@ extension IrohaDataModel {
             case let .publicKey(val0):
                 try container.encode(val0)
                 break
-            case let .parameter(val0):
-                try container.encode(val0)
-                break
             case let .signatureCheckCondition(val0):
                 try container.encode(val0)
                 break
@@ -164,6 +141,9 @@ extension IrohaDataModel {
                 try container.encode(val0)
                 break
             case let .permissionToken(val0):
+                try container.encode(val0)
+                break
+            case let .numeric(val0):
                 try container.encode(val0)
                 break
             }
@@ -175,7 +155,7 @@ extension IrohaDataModel.Value: ScaleCodec.Encodable {
     public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
         try encoder.encode(Self.discriminant(of: self))
         switch self {
-        case let .u32(val0):
+        case let .numeric(val0):
             try encoder.encode(val0)
             break
         case let .id(val0):

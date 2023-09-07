@@ -63,7 +63,7 @@ extension IrohaClient {
         
         let payload = IrohaDataModelTransaction.Payload(
             accountId: account.id,
-            instructions: instructions,
+            executable: .instructions(instructions),
             creationTime: Date().milliseconds,
             timeToLiveMs: ttl.milliseconds,
             nonce: Int64.random(in: Int64.min...Int64.max),
