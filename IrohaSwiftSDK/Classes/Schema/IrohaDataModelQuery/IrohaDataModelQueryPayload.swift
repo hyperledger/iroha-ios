@@ -16,16 +16,17 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaDataModelQuery {
-    public struct Payload: Codable {
+    public struct Payload: Swift.Codable {
         
-        public var timestampMs: Compact<UInt128>
+        public var timestampMs: IrohaSwiftScale.Compact<IrohaSwiftScale.UInt128>
         public var query: IrohaDataModelQuery.QueryBox
         public var accountId: IrohaDataModelAccount.Id
         
         public init(
-            timestampMs: Compact<UInt128>, 
+            timestampMs: IrohaSwiftScale.Compact<IrohaSwiftScale.UInt128>,
             query: IrohaDataModelQuery.QueryBox, 
             accountId: IrohaDataModelAccount.Id
         ) {
@@ -33,5 +34,17 @@ extension IrohaDataModelQuery {
             self.query = query
             self.accountId = accountId
         }
+    }
+}
+
+extension IrohaDataModelQuery.Payload: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : Encoder {
+        #warning("check")
+        let data = timestampMs.value.data(littleEndian: true, trimmed: true)
+        let time = try ScaleCodec.UInt128(decoding: data)
+
+        try encoder.encode(time)
+        try encoder.encode(query)
+        try encoder.encode(accountId)
     }
 }

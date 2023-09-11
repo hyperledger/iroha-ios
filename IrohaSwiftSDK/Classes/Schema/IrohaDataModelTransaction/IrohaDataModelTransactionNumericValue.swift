@@ -23,7 +23,7 @@ extension IrohaDataModelTransaction {
         
         case u32(UInt32)
         case u64(UInt64)
-        case u128(ScaleCodec.UInt128)
+        case u128(IrohaSwiftScale.UInt128)
         case fixed(Int64)
         
         // MARK: - For Codable purpose
@@ -56,7 +56,8 @@ extension IrohaDataModelTransaction {
                 self = .u64(val0)
                 break
             case 2:
-                fatalError("Incorrect")
+                let val0 = try container.decode(IrohaSwiftScale.UInt128.self)
+                self = .u128(val0)
                 break
             case 3:
                 let val0 = try container.decode(Int64.self)
@@ -80,7 +81,7 @@ extension IrohaDataModelTransaction {
                 try container.encode(val0)
                 break
             case let .u128(val0):
-                fatalError("Incorrect")
+                try container.encode(val0)
                 break
             case let .fixed(val0):
                 try container.encode(val0)
@@ -98,7 +99,11 @@ extension IrohaDataModelTransaction.NumericValue: ScaleCodec.Encodable {
             try encoder.encode(val0)
             break
         case let .u128(val0):
-            try encoder.encode(val0)
+            #warning("check")
+            let data = val0.data(littleEndian: true, trimmed: false)
+            let val = try ScaleCodec.UInt128(decoding: data)
+
+            try encoder.encode(val)
         case let .fixed(val0):
             let data = withUnsafeBytes(of: val0) { Data($0) }
             try encoder.encode(data, .fixed(9))

@@ -16,9 +16,10 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaDataModelQuery {
-    public struct SignedQueryRequest: Codable {
+    public struct SignedQueryRequest: Swift.Codable {
         
         public var payload: IrohaDataModelQuery.Payload
         public var signature: IrohaCrypto.Signature
@@ -30,5 +31,12 @@ extension IrohaDataModelQuery {
             self.payload = payload
             self.signature = signature
         }
+    }
+}
+
+extension IrohaDataModelQuery.SignedQueryRequest: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : Encoder {
+        try encoder.encode(payload)
+        try encoder.encode(signature)
     }
 }

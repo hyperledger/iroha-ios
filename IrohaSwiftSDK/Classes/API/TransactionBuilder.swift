@@ -7,6 +7,7 @@
 
 import ScaleCodec
 import Foundation
+import IrohaSwiftScale
 
 public class TransationBuilder {
     private enum Constants {
@@ -66,7 +67,7 @@ public class TransationBuilder {
         return self
     }
 
-    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: ScaleCodec.UInt128, receiverID: IrohaDataModelAccount.Id) -> Self {
+    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: IrohaSwiftScale.UInt128, receiverID: IrohaDataModelAccount.Id) -> Self {
         let sourceID = IrohaDataModel.IdBox.assetId(assetID)
         let source: IrohaDataModel.Value = .id(sourceID)
 

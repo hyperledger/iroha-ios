@@ -16,9 +16,10 @@
 
 import Foundation
 import IrohaSwiftScale
+import ScaleCodec
 
 extension IrohaCrypto {
-    public struct Signature: Codable {
+    public struct Signature: Swift.Codable {
         
         public var publicKey: IrohaCrypto.PublicKey
         public var signature: [UInt8]
@@ -30,5 +31,16 @@ extension IrohaCrypto {
             self.publicKey = publicKey
             self.signature = signature
         }
+    }
+}
+
+extension IrohaCrypto.Signature: ScaleCodec.Encodable {
+    public func encode<E>(in encoder: inout E) throws where E : Encoder {
+        debugPrint("Before:")
+        debugPrint(Array(encoder.output).toSigned())
+        try encoder.encode(publicKey)
+        debugPrint("After:")
+        debugPrint(Array(encoder.output).toSigned())
+        try encoder.encode(signature)
     }
 }

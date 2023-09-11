@@ -37,8 +37,18 @@ extension IrohaDataModelTransaction {
 extension IrohaDataModelTransaction.Transaction: ScaleCodec.Encodable {
     public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
         try encoder.encode(payload)
-        // todo signatures!
+
+        debugPrint("Before:")
+        debugPrint(Array(encoder.output).toSigned())
+        try encoder.encode(signatures)
+        debugPrint("After:")
+        debugPrint(Array(encoder.output).toSigned())
     }
 }
 
-
+// todo: remove that
+extension Array where Element == UInt8 {
+    func toSigned() -> [Int8] {
+        self.map { Int8(bitPattern: $0) }
+    }
+}
