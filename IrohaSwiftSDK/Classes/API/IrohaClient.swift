@@ -67,7 +67,7 @@ extension IrohaClient {
             executable: .instructions(instructions),
             creationTime: Date().milliseconds,
             timeToLiveMs: ttl.milliseconds,
-            nonce: Int64.random(in: Int64.min...Int64.max),
+            nonce: UInt32.random(in: 0...UInt32.max),
             metadata: [:])
 
         do {

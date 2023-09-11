@@ -40,17 +40,19 @@ extension IrohaCrypto.Signature {
         return try hash(data)
     }
     
-    public init(signing data: Data, with keyPair: IrohaKeyPair) throws {
-        guard let hash = try Self.hash(data) else { throw Error.hashingFailed }
-        publicKey = IrohaCrypto.PublicKey(digestFunction: "ed25519", payload: keyPair.publicKey)
-        
-        do {
-            let privateKey = try Curve25519.Signing.PrivateKey(rawRepresentation: keyPair.privateKey)
-            signature = try privateKey.signature(for: hash.map { $0 }).map { $0 }
-        } catch let error {
-            throw Error.signingFailed(error)
-        }
+public init(signing data: Data, with keyPair: IrohaKeyPair) throws {
+    //guard let hashBytes = Sodium().genericHash.hash(message: data.map { $0 }, outputLength: Hash.fixedSize) else { throw Error.hashingFailed }
+    //let hash = try Hash(hashBytes)
+
+    publicKey = IrohaCrypto.PublicKey(digestFunction: .ed25519, payload: keyPair.publicKey)
+
+    do {
+        let privateKey = try Curve25519.Signing.PrivateKey(rawRepresentation: keyPair.privateKey)
+        signature = try privateKey.signature(for: data).map { $0 }
+    } catch let error {
+        throw Error.signingFailed(error)
     }
+}
     
     public init<T: ScaleCodec.Encodable>(signing value: T, with keyPair: IrohaKeyPair) throws {
         try self.init(signing: try ScaleCodec.encode(value), with: keyPair)

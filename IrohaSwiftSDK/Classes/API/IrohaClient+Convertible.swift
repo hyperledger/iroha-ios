@@ -26,7 +26,7 @@ extension TimeInterval {
     }
 }
 
-extension Date {
+public extension Date {
     init(milliseconds: UInt64) {
         self.init(timeIntervalSince1970: TimeInterval(milliseconds: milliseconds))
     }

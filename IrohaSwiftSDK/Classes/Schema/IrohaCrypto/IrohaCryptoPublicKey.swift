@@ -21,11 +21,11 @@ import ScaleCodec
 extension IrohaCrypto {
     public struct PublicKey: Swift.Codable {
         
-        public var digestFunction: String
-        public var payload: [UInt8]
+        public var digestFunction: IrohaCrypto.Algorithm
+        public var payload: [UInt8] // verified
         
         public init(
-            digestFunction: String, 
+            digestFunction: IrohaCrypto.Algorithm,
             payload: [UInt8]
         ) {
             self.digestFunction = digestFunction

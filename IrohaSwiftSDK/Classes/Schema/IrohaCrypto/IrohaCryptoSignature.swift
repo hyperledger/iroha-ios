@@ -41,6 +41,10 @@ extension IrohaCrypto.Signature: ScaleCodec.Encodable {
         try encoder.encode(publicKey)
         debugPrint("After:")
         debugPrint(Array(encoder.output).toSigned())
+
+
+        debugPrint(publicKey.payload.toSigned())
+        debugPrint(signature.toSigned())
         try encoder.encode(signature)
     }
 }

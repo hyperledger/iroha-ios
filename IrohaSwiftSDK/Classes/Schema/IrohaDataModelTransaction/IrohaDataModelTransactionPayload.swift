@@ -25,7 +25,7 @@ extension IrohaDataModelTransaction {
         public var executable: IrohaDataModelIsi.Executable
         public var creationTime: UInt64
         public var timeToLiveMs: UInt64
-        public var nonce: Int64?
+        public var nonce: UInt32?
         public var metadata: [String: IrohaDataModel.Value]
         
         public init(
@@ -33,7 +33,7 @@ extension IrohaDataModelTransaction {
             executable: IrohaDataModelIsi.Executable,
             creationTime: UInt64, 
             timeToLiveMs: UInt64, 
-            nonce: Int64?, 
+            nonce: UInt32?, 
             metadata: [String: IrohaDataModel.Value]
         ) {
             self.accountId = accountId
@@ -50,7 +50,9 @@ extension IrohaDataModelTransaction.Payload: ScaleCodec.Encodable {
     public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
         try encoder.encode(accountId)
         try encoder.encode(executable)
-
-        // todo: доделать остальные
+        try encoder.encode(creationTime)
+        try encoder.encode(timeToLiveMs)
+        try encoder.encode(nonce)
+        try encoder.encode(metadata)
     }
 }
