@@ -36,15 +36,15 @@ extension IrohaCrypto {
 
 extension IrohaCrypto.Signature: ScaleCodec.Encodable {
     public func encode<E>(in encoder: inout E) throws where E : Encoder {
-        debugPrint("Before:")
-        debugPrint(Array(encoder.output).toSigned())
+        //debugPrint("Before:")
+        //debugPrint(Array(encoder.output).toSigned())
         try encoder.encode(publicKey)
-        debugPrint("After:")
-        debugPrint(Array(encoder.output).toSigned())
+        //debugPrint("After:")
+        //debugPrint(Array(encoder.output).toSigned())
 
 
-        debugPrint(publicKey.payload.toSigned())
-        debugPrint(signature.toSigned())
+        //debugPrint(publicKey.payload.toSigned())
+        //debugPrint(signature.toSigned())
         try encoder.encode(signature)
     }
 }

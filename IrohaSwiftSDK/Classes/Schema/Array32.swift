@@ -35,6 +35,10 @@ public struct Array32<Element: Codable> {
     }
     
     public static var fixedSize: Int { arraySize }
+
+    public var data: Data {
+        Data(bytes: array, count: array.count)
+    }
     
     private var array: Array<Element>
     

@@ -16,4 +16,5 @@ Pod::Spec.new do |s|
   s.dependency 'IrohaSwiftScale'
   s.dependency 'Sodium', '0.9.1'
   s.dependency 'ScaleCodec'
+  s.dependency 'Blake2'
 end

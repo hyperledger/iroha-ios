@@ -38,11 +38,11 @@ extension IrohaDataModelTransaction.Transaction: ScaleCodec.Encodable {
     public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
         try encoder.encode(payload)
 
-        debugPrint("Before:")
-        debugPrint(Array(encoder.output).toSigned())
+        //debugPrint("Before:")
+        ///debugPrint(Array(encoder.output).toSigned())
         try encoder.encode(signatures)
-        debugPrint("After:")
-        debugPrint(Array(encoder.output).toSigned())
+        //debugPrint("After:")
+        //debugPrint(Array(encoder.output).toSigned())
     }
 }
 
