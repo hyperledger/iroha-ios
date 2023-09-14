@@ -71,7 +71,10 @@ public class TransationBuilder {
         let sourceID = IrohaDataModel.IdBox.assetId(assetID)
         let source: IrohaDataModel.Value = .id(sourceID)
 
-        let uValue: IrohaDataModel.Value = .numeric(.u128(value))
+        let am = UInt1281(value.description)
+        let data = am!.data(littleEndian: true, trimmed: false)
+        let correct = IrohaSwiftScale.UInt128(data: data, littleEndian: true, trimmed: false)!
+        let uValue: IrohaDataModel.Value = .numeric(.u128(correct))
 
         let destinationID = IrohaDataModel.IdBox.accountId(receiverID)
         let destination: IrohaDataModel.Value = .id(destinationID)
