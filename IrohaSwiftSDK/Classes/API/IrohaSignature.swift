@@ -67,7 +67,14 @@ extension IrohaCrypto.Signature {
         publicKey = IrohaCrypto.PublicKey(digestFunction: .ed25519, payload: keyPair.publicKey)
 
         do {
-            let hash = try Blake2.hash(.b2b, size: 32, data: data)
+            var hash = try Blake2.hash(.b2b, size: 32, data: data)
+            var hashArray: [UInt8] = Array(hash)
+            hashArray[hashArray.count - 1] = hashArray[hashArray.count - 1] | 1
+            hash = Data(hashArray)
+
+            //bytes[bytes.size - 1] = bytes[bytes.size - 1] or 1
+
+
             //let hash = try Blake2.hash(.b2b, size: 32, data: data)
             debugPrint("Blake2: \(Array(hash).toSigned())")
 
