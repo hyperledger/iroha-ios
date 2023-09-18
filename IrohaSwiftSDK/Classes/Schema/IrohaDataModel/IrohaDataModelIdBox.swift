@@ -16,7 +16,6 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModel {
     public indirect enum IdBox: Swift.Codable {
@@ -108,28 +107,5 @@ extension IrohaDataModel {
                 break
             }
         }
-    }
-}
-
-extension IrohaDataModel.IdBox: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : Encoder {
-        try encoder.encode(Self.discriminant(of: self))
-        switch self {
-        case let .accountId(val0):
-            try encoder.encode(val0)
-            break
-        case let .assetId(val0):
-            try encoder.encode(val0)
-            break
-        case let .assetDefinitionId(val0):
-            try encoder.encode(val0)
-            break
-        case let .domainName(val0):
-            try encoder.encode(val0)
-            break
-        default:
-            break
-        }
-        // todo: доделать
     }
 }

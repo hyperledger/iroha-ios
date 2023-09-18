@@ -16,7 +16,6 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModelIsi {
     public indirect enum Instruction: Swift.Codable {
@@ -168,20 +167,5 @@ extension IrohaDataModelIsi {
                 break
             }
         }
-    }
-}
-
-extension IrohaDataModelIsi.Instruction: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
-        try encoder.encode(IrohaDataModelIsi.Instruction.discriminant(of: self))
-        switch self {
-        case let .transfer(val0):
-            try encoder.encode(val0)
-            break
-        default:
-            break
-        }
-
-        // todo: доделать
     }
 }

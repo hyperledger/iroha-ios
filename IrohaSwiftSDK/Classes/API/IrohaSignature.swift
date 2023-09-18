@@ -14,13 +14,11 @@
 // limitations under the License.
 //
 
-import Blake2
+//import Blake2
 import CryptoKit
-import Foundation
+//import Foundation
 import IrohaSwiftScale
 import Sodium
-
-import ScaleCodec
 
 extension IrohaCrypto.Signature {
     
@@ -36,8 +34,8 @@ extension IrohaCrypto.Signature {
         return try Hash(hashBytes)
     }
     
-    public static func hash<T: ScaleCodec.Encodable>(_ value: T) throws -> Hash? {
-        let data = try ScaleCodec.encode(value)
+    public static func hash<T: Encodable>(_ value: T) throws -> Hash? {
+        let data = try ScaleEncoder().encode(value)
         return try hash(data)
     }
     
@@ -54,7 +52,7 @@ extension IrohaCrypto.Signature {
         }
     }
     
-    public init<T: ScaleCodec.Encodable>(signing value: T, with keyPair: IrohaKeyPair) throws {
-        try self.init(signing: try IrohaSwiftScale.enc .encode(value), with: keyPair)
+    public init<T: Encodable>(signing value: T, with keyPair: IrohaKeyPair) throws {
+        try self.init(signing: try ScaleEncoder().encode(value), with: keyPair)
     }
 }

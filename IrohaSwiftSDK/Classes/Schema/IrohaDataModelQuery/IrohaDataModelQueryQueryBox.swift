@@ -16,7 +16,6 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModelQuery {
     public indirect enum QueryBox: Swift.Codable {
@@ -261,7 +260,7 @@ extension IrohaDataModelQuery {
     }
 }
 
-
+/*
 extension IrohaDataModelQuery.QueryBox: Encodable {
     public func encode<E>(in encoder: inout E) throws where E : Encoder {
         try encoder.encode(Self.discriminant(of: self))
@@ -269,3 +268,4 @@ extension IrohaDataModelQuery.QueryBox: Encodable {
     }
 
 }
+*/

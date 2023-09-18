@@ -16,7 +16,6 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModelTransaction {
     public struct Transaction: Swift.Codable {
@@ -34,15 +33,11 @@ extension IrohaDataModelTransaction {
     }
 }
 
+/*
 extension IrohaDataModelTransaction.Transaction: ScaleCodec.Encodable {
     public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
         try encoder.encode(payload)
-
-        //debugPrint("Before:")
-        ///debugPrint(Array(encoder.output).toSigned())
         try encoder.encode(signatures)
-        //debugPrint("After:")
-        //debugPrint(Array(encoder.output).toSigned())
     }
 }
 
@@ -52,3 +47,4 @@ extension Array where Element == UInt8 {
         self.map { Int8(bitPattern: $0) }
     }
 }
+*/

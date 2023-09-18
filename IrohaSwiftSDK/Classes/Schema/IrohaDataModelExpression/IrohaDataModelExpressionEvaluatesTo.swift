@@ -16,7 +16,6 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModelExpression {
     public struct EvaluatesTo: Swift.Codable {
@@ -26,11 +25,5 @@ extension IrohaDataModelExpression {
         public init(expression: IrohaDataModelExpression.Expression) {
             self.expression = expression
         }
-    }
-}
-
-extension IrohaDataModelExpression.EvaluatesTo: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
-        try encoder.encode(expression)
     }
 }

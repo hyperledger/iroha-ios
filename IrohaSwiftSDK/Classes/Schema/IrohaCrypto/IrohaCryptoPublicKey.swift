@@ -15,14 +15,12 @@
 //
 
 import Foundation
-import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaCrypto {
-    public struct PublicKey: Swift.Codable {
+    public struct PublicKey: Codable {
         
         public var digestFunction: IrohaCrypto.Algorithm
-        public var payload: [UInt8] // verified
+        public var payload: [UInt8]
         
         public init(
             digestFunction: IrohaCrypto.Algorithm,
@@ -31,12 +29,5 @@ extension IrohaCrypto {
             self.digestFunction = digestFunction
             self.payload = payload
         }
-    }
-}
-
-extension IrohaCrypto.PublicKey: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : Encoder {
-        try encoder.encode(digestFunction)
-        try encoder.encode(payload)
     }
 }

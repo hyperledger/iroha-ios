@@ -16,7 +16,6 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModelAsset {
     public struct DefinitionId: Swift.Codable, Hashable {
@@ -38,12 +37,5 @@ extension IrohaDataModelAsset {
             hasher.combine(name)
             hasher.combine(domainName)
         }
-    }
-}
-
-extension IrohaDataModelAsset.DefinitionId: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
-        try encoder.encode(name)
-        try encoder.encode(domainName)
     }
 }

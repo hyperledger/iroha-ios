@@ -58,7 +58,7 @@ public final class ScaleEncoder: ScaleEncoderProvider {
         _ScaleEncoder(provider: self, codingPath: codingPath, userInfo: userInfo)
     }
 
-    public func encode<T>(_ value: T) throws -> Data where T : Encodable {
+    public func encode<T: Encodable>(_ value: T) throws -> Data {
         let encoder = encoder()
         if let value = value as? EncodableScaleConvertible {
             try value.encodeAsScale(to: encoder)

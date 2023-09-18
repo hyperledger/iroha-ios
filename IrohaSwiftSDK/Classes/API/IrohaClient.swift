@@ -14,9 +14,8 @@
 // limitations under the License.
 //
 
-import Foundation
 import IrohaSwiftScale
-import ScaleCodec
+import Foundation
 
 public enum IrohaClientError: Swift.Error {
     case invalidResponse
@@ -109,7 +108,7 @@ extension IrohaClient {
         completion: @escaping (IrohaDataModelQuery.QueryResult?, Error?) -> Void
     ) {
         
-        let timestampMs = IrohaSwiftScale.Compact(IrohaSwiftScale.UInt128(date.milliseconds))
+        let timestampMs = Compact(UInt64(date.milliseconds))
         let payload = IrohaDataModelQuery.Payload(timestampMs: timestampMs, query: queryBox, accountId: account.id)
         
         guard let signature = try? IrohaCrypto.Signature(signing: payload, with: account.keyPair) else {

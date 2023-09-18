@@ -16,7 +16,6 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModelTransaction {
     public indirect enum NumericValue: Swift.Codable {
@@ -91,25 +90,6 @@ extension IrohaDataModelTransaction {
                 try container.encode(val0)
                 break
             }
-        }
-    }
-}
-
-extension IrohaDataModelTransaction.NumericValue: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : Encoder {
-        try encoder.encode(Self.discriminant(of: self))
-        switch self {
-        case let .u32(val0):
-            try encoder.encode(val0)
-            break
-        case let .u128(val0):
-            try encoder.encode(val0)
-        case let .fixed(val0):
-            let data = withUnsafeBytes(of: val0) { Data($0) }
-            try encoder.encode(data, .fixed(9))
-        default:
-            // todo: доделать
-            break
         }
     }
 }

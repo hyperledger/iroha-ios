@@ -16,7 +16,6 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModelIsi {
     public indirect enum Executable: Swift.Codable {
@@ -51,22 +50,12 @@ extension IrohaDataModelIsi {
         
         public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
-            try container.encode(Executable.discriminant(of: self))
+            try container.encode(Self.discriminant(of: self))
             switch self {
             case let .instructions(val0):
                 try container.encode(val0)
                 break
             }
-        }
-    }
-}
-
-extension IrohaDataModelIsi.Executable: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : Encoder {
-        try encoder.encode(Self.discriminant(of: self))
-
-        if case let .instructions(val0) = self {
-            try encoder.encode(val0)
         }
     }
 }

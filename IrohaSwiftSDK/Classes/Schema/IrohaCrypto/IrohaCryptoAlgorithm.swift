@@ -16,10 +16,9 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaCrypto {
-    public indirect enum Algorithm: Swift.Codable {
+    public indirect enum Algorithm: Codable {
         
         case ed25519
         case secp256k1
@@ -43,7 +42,7 @@ extension IrohaCrypto {
         
         // MARK: - Decodable
         
-        public init(from decoder: Swift.Decoder) throws {
+        public init(from decoder: Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -64,15 +63,15 @@ extension IrohaCrypto {
                 self = .blsSmall
                 break
             default:
-                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Swift.Encoder) throws {
+        public func encode(to encoder: Encoder) throws {
             var container = encoder.unkeyedContainer()
-            try container.encode(Algorithm.discriminant(of: self))
+            try container.encode(Self.discriminant(of: self))
             switch self {
             case .ed25519:
                 
@@ -88,11 +87,5 @@ extension IrohaCrypto {
                 break
             }
         }
-    }
-}
-
-extension IrohaCrypto.Algorithm: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
-        try encoder.encode(Self.discriminant(of: self))
     }
 }

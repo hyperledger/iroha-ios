@@ -15,7 +15,6 @@
 //
 
 import Foundation
-import ScaleCodec
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
@@ -71,6 +70,7 @@ extension IrohaDataModelTransaction {
     }
 }
 
+/*
 extension IrohaDataModelTransaction.TransactionValue: ScaleCodec.Encodable {
     public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
         try encoder.encode(IrohaDataModelTransaction.TransactionValue.discriminant(of: self))
@@ -85,3 +85,4 @@ extension IrohaDataModelTransaction.TransactionValue: ScaleCodec.Encodable {
         }
     }
 }
+*/

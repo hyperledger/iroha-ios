@@ -5,7 +5,6 @@
 //  Created by Nikolai Zhukov on 8/21/23.
 //
 
-import ScaleCodec
 import Foundation
 import IrohaSwiftScale
 
@@ -68,16 +67,12 @@ public class TransationBuilder {
         return self
     }
 
-    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: IrohaSwiftScale.UInt128, receiverID: IrohaDataModelAccount.Id) throws -> Self {
+    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: UInt64, receiverID: IrohaDataModelAccount.Id) -> Self {
         let sourceID = IrohaDataModel.IdBox.assetId(assetID)
         let source: IrohaDataModel.Value = .id(sourceID)
         let destinationID = IrohaDataModel.IdBox.accountId(receiverID)
         let destination: IrohaDataModel.Value = .id(destinationID)
-
-        guard let amount = UInt64(value.description) else {
-            throw TransationError.notNumber
-        }
-        let number: IrohaDataModel.Value = .numeric(.u128(amount))
+        let number: IrohaDataModel.Value = .numeric(.u128(value))
 
         let box = IrohaDataModelIsi.TransferBox(
             sourceId: source.evaluatesTo,

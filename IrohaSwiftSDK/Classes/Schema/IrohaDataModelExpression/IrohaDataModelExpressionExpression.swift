@@ -16,7 +16,6 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModelExpression {
     public indirect enum Expression: Swift.Codable {
@@ -250,21 +249,3 @@ extension IrohaDataModelExpression {
         }
     }
 }
-
-extension IrohaDataModelExpression.Expression : ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : Encoder {
-        try encoder.encode(IrohaDataModelExpression.Expression.discriminant(of: self))
-        switch self {
-        case let .raw(val0):
-            try encoder.encode(val0)
-            break
-        default:
-            break
-            // todo: доделать
-        }
-    }
-
-
-    //try container.encode(Expression.discriminant(of: self))
-}
-    //public indirect enum Expression: Swift.Codable

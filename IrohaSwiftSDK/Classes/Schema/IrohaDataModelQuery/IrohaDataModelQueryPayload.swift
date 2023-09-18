@@ -16,17 +16,16 @@
 
 import Foundation
 import IrohaSwiftScale
-import ScaleCodec
 
 extension IrohaDataModelQuery {
     public struct Payload: Swift.Codable {
         
-        public var timestampMs: IrohaSwiftScale.Compact<IrohaSwiftScale.UInt128>
+        public var timestampMs: IrohaSwiftScale.Compact<UInt64>
         public var query: IrohaDataModelQuery.QueryBox
         public var accountId: IrohaDataModelAccount.Id
         
         public init(
-            timestampMs: IrohaSwiftScale.Compact<IrohaSwiftScale.UInt128>,
+            timestampMs: IrohaSwiftScale.Compact<UInt64>,
             query: IrohaDataModelQuery.QueryBox, 
             accountId: IrohaDataModelAccount.Id
         ) {
@@ -34,17 +33,14 @@ extension IrohaDataModelQuery {
             self.query = query
             self.accountId = accountId
         }
-    }
-}
 
-extension IrohaDataModelQuery.Payload: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : Encoder {
-        #warning("check")
-        let data = timestampMs.value.data(littleEndian: true, trimmed: true)
-        let time = try ScaleCodec.UInt128(decoding: data)
-
-        try encoder.encode(time)
-        try encoder.encode(query)
-        try encoder.encode(accountId)
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: IrohaDataModelQuery.Payload.CodingKeys.self)
+            try container.encode(self.timestampMs, forKey: IrohaDataModelQuery.Payload.CodingKeys.timestampMs)
+            // todo: check
+            try container.encode([0, 0, 0, 0, 0, 0, 0, 0], forKey: IrohaDataModelQuery.Payload.CodingKeys.timestampMs)
+            try container.encode(self.query, forKey: IrohaDataModelQuery.Payload.CodingKeys.query)
+            try container.encode(self.accountId, forKey: IrohaDataModelQuery.Payload.CodingKeys.accountId)
+        }
     }
 }
