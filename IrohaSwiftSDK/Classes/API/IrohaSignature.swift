@@ -45,13 +45,9 @@ extension IrohaCrypto.Signature {
         publicKey = IrohaCrypto.PublicKey(digestFunction: .ed25519, payload: keyPair.publicKey)
 
         do {
-            var hash = try Blake2.hash(.b2b, size: 32, data: data)
-            var hashArray: [UInt8] = Array(hash)
-            hashArray[hashArray.count - 1] = hashArray[hashArray.count - 1] | 1
-            hash = Data(hashArray)
-
+            let hash = try data.blakeHash()
             let privateKey = try Curve25519.Signing.PrivateKey(rawRepresentation: keyPair.privateKey)
-            
+
             signature = try privateKey.signature(for: hash.map { $0 }).map { $0 }
         } catch let error {
             throw Error.signingFailed(error)
@@ -59,6 +55,6 @@ extension IrohaCrypto.Signature {
     }
     
     public init<T: ScaleCodec.Encodable>(signing value: T, with keyPair: IrohaKeyPair) throws {
-        try self.init(signing: try ScaleCodec.encode(value), with: keyPair)
+        try self.init(signing: try IrohaSwiftScale.enc .encode(value), with: keyPair)
     }
 }

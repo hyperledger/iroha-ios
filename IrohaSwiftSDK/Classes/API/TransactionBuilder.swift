@@ -20,6 +20,7 @@ public class TransationBuilder {
     public enum TransationError: Error {
         case noAccountId
         case noCreationDate
+        case notNumber
     }
 
     public init() {
@@ -67,21 +68,20 @@ public class TransationBuilder {
         return self
     }
 
-    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: IrohaSwiftScale.UInt128, receiverID: IrohaDataModelAccount.Id) -> Self {
+    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: IrohaSwiftScale.UInt128, receiverID: IrohaDataModelAccount.Id) throws -> Self {
         let sourceID = IrohaDataModel.IdBox.assetId(assetID)
         let source: IrohaDataModel.Value = .id(sourceID)
-
-        let am = UInt1281(value.description)
-        let data = am!.data(littleEndian: true, trimmed: false)
-        let correct = IrohaSwiftScale.UInt128(data: data, littleEndian: true, trimmed: false)!
-        let uValue: IrohaDataModel.Value = .numeric(.u128(correct))
-
         let destinationID = IrohaDataModel.IdBox.accountId(receiverID)
         let destination: IrohaDataModel.Value = .id(destinationID)
 
+        guard let amount = UInt64(value.description) else {
+            throw TransationError.notNumber
+        }
+        let number: IrohaDataModel.Value = .numeric(.u128(amount))
+
         let box = IrohaDataModelIsi.TransferBox(
             sourceId: source.evaluatesTo,
-            object: uValue.evaluatesTo,
+            object: number.evaluatesTo,
             destinationId: destination.evaluatesTo)
 
         instructions.append(.transfer(box))
@@ -115,13 +115,6 @@ public class TransationBuilder {
 
         let signature = try IrohaCrypto.Signature(signing: payload, with: keyPair)
         let transaction = IrohaDataModelTransaction.Transaction(payload: payload, signatures: [signature])
-
-        let jsonEncoder = JSONEncoder()
-        jsonEncoder.outputFormatting = [.withoutEscapingSlashes, .prettyPrinted]
-        let jsonData = try jsonEncoder.encode(transaction)
-        let json = String(data: jsonData, encoding: .utf8)
-
-        print(json!.replacingOccurrences(of: "\\/", with: "/") )
 
         return .v1(transaction)
     }

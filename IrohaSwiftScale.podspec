@@ -12,4 +12,6 @@ Pod::Spec.new do |s|
   s.macos.deployment_target = '10.12'
 
   s.source_files = 'IrohaSwiftScale/Classes/**/*'
+
+  s.dependency 'Blake2'
 end
