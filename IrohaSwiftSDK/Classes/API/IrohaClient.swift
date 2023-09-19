@@ -108,7 +108,7 @@ extension IrohaClient {
         completion: @escaping (IrohaDataModelQuery.QueryResult?, Error?) -> Void
     ) {
         
-        let timestampMs = Compact(UInt64(date.milliseconds))
+        let timestampMs = MyUint128(uint64: UInt64(date.milliseconds))
         let payload = IrohaDataModelQuery.Payload(timestampMs: timestampMs, query: queryBox, accountId: account.id)
         
         guard let signature = try? IrohaCrypto.Signature(signing: payload, with: account.keyPair) else {

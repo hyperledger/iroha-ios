@@ -18,11 +18,11 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public indirect enum NumericValue: Swift.Codable {
+    public indirect enum NumericValue: Codable {
         
         case u32(UInt32)
         case u64(UInt64)
-        case u128(UInt64)
+        case u128(MyUint128)
         case fixed(Int64)
         
         // MARK: - For Codable purpose
@@ -42,7 +42,7 @@ extension IrohaDataModelTransaction {
         
         // MARK: - Decodable
         
-        public init(from decoder: Swift.Decoder) throws {
+        public init(from decoder: Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -55,7 +55,7 @@ extension IrohaDataModelTransaction {
                 self = .u64(val0)
                 break
             case 2:
-                let val0 = try container.decode(UInt64.self)
+                let val0 = try container.decode(MyUint128.self)
                 self = .u128(val0)
                 break
             case 3:
@@ -63,13 +63,13 @@ extension IrohaDataModelTransaction {
                 self = .fixed(val0)
                 break
             default:
-                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Swift.Encoder) throws {
+        public func encode(to encoder: Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(NumericValue.discriminant(of: self))
             switch self {
@@ -81,10 +81,6 @@ extension IrohaDataModelTransaction {
                 break
             case let .u128(val0):
                 try container.encode(val0)
-
-                // The following stub is used to extend u64 to u128.
-                let u128Stub: [UInt8] = [0, 0, 0, 0, 0, 0, 0, 0]
-                try container.encode(u128Stub)
                 break
             case let .fixed(val0):
                 try container.encode(val0)

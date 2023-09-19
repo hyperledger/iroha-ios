@@ -18,14 +18,14 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQuery {
-    public struct Payload: Swift.Codable {
+    public struct Payload: Codable {
         
-        public var timestampMs: IrohaSwiftScale.Compact<UInt64>
+        public var timestampMs: MyUint128
         public var query: IrohaDataModelQuery.QueryBox
         public var accountId: IrohaDataModelAccount.Id
         
         public init(
-            timestampMs: IrohaSwiftScale.Compact<UInt64>,
+            timestampMs: MyUint128,
             query: IrohaDataModelQuery.QueryBox, 
             accountId: IrohaDataModelAccount.Id
         ) {
@@ -37,8 +37,6 @@ extension IrohaDataModelQuery {
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: IrohaDataModelQuery.Payload.CodingKeys.self)
             try container.encode(self.timestampMs, forKey: IrohaDataModelQuery.Payload.CodingKeys.timestampMs)
-            // todo: check
-            try container.encode([0, 0, 0, 0, 0, 0, 0, 0], forKey: IrohaDataModelQuery.Payload.CodingKeys.timestampMs)
             try container.encode(self.query, forKey: IrohaDataModelQuery.Payload.CodingKeys.query)
             try container.encode(self.accountId, forKey: IrohaDataModelQuery.Payload.CodingKeys.accountId)
         }
