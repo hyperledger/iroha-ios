@@ -67,12 +67,12 @@ public class TransationBuilder {
         return self
     }
 
-    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: MyUint128, receiverID: IrohaDataModelAccount.Id) -> Self {
+    public func transferAsset(assetID: IrohaDataModelAsset.Id, value: IrohaDataModelTransaction.NumericValue, receiverID: IrohaDataModelAccount.Id) -> Self {
         let sourceID = IrohaDataModel.IdBox.assetId(assetID)
         let source: IrohaDataModel.Value = .id(sourceID)
         let destinationID = IrohaDataModel.IdBox.accountId(receiverID)
         let destination: IrohaDataModel.Value = .id(destinationID)
-        let number: IrohaDataModel.Value = .numeric(.u128(value))
+        let number: IrohaDataModel.Value = .numeric(value)
 
         let box = IrohaDataModelIsi.TransferBox(
             sourceId: source.evaluatesTo,
