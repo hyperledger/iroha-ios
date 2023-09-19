@@ -13,5 +13,5 @@ Pod::Spec.new do |s|
 
   s.source_files = 'IrohaSwiftScale/Classes/**/*'
 
-  s.dependency 'Blake2'
+  s.dependency 'Blake2', '0.1.2'
 end
