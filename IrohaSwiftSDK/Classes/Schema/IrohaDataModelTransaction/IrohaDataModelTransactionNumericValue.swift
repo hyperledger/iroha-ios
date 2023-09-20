@@ -23,7 +23,7 @@ extension IrohaDataModelTransaction {
         case u32(UInt32)
         case u64(UInt64)
         case u128(MyUint128)
-        case fixed(Int64)
+        case fixed(Double)
         
         // MARK: - For Codable purpose
         
@@ -59,7 +59,7 @@ extension IrohaDataModelTransaction {
                 self = .u128(val0)
                 break
             case 3:
-                let val0 = try container.decode(Int64.self)
+                let val0 = try container.decode(Double.self)
                 self = .fixed(val0)
                 break
             default:
@@ -83,7 +83,9 @@ extension IrohaDataModelTransaction {
                 try container.encode(val0)
                 break
             case let .fixed(val0):
-                try container.encode(val0)
+                let scale: Double = 1_000_000_000
+                let correct = UInt64(val0 * scale)
+                try container.encode(correct)
                 break
             }
         }
