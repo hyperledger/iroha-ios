@@ -42,17 +42,5 @@ extension IrohaDataModelTransaction {
             self.nonce = nonce
             self.metadata = metadata
         }
-
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: IrohaDataModelTransaction.Payload.CodingKeys.self)
-            try container.encode(self.accountId, forKey: IrohaDataModelTransaction.Payload.CodingKeys.accountId)
-            try container.encode(self.executable, forKey: IrohaDataModelTransaction.Payload.CodingKeys.executable)
-            try container.encode(self.creationTime, forKey: IrohaDataModelTransaction.Payload.CodingKeys.creationTime)
-            try container.encode(self.timeToLiveMs, forKey: IrohaDataModelTransaction.Payload.CodingKeys.timeToLiveMs)
-            try container.encodeIfPresent(self.nonce, forKey: IrohaDataModelTransaction.Payload.CodingKeys.nonce)
-            try container.encode(self.metadata, forKey: IrohaDataModelTransaction.Payload.CodingKeys.metadata)
-
-            debugPrint(#function)
-        }
     }
 }
