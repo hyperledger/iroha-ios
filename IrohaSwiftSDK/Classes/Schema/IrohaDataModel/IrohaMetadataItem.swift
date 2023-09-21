@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct IrohaDataModelName: Codable {
+public struct IrohaMetadataItem: Codable {
     private let name: String
     private let value: IrohaDataModel.Value
 

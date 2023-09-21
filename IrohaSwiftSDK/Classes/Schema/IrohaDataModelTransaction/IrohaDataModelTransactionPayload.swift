@@ -25,7 +25,7 @@ extension IrohaDataModelTransaction {
         public var creationTime: UInt64
         public var timeToLiveMs: UInt64
         public var nonce: UInt32?
-        public var metadata: [IrohaDataModelName]
+        public var metadata: [IrohaMetadataItem]
         
         public init(
             accountId: IrohaDataModelAccount.Id, 
@@ -33,7 +33,7 @@ extension IrohaDataModelTransaction {
             creationTime: UInt64, 
             timeToLiveMs: UInt64, 
             nonce: UInt32?, 
-            metadata: [IrohaDataModelName] = []
+            metadata: [IrohaMetadataItem] = []
         ) {
             self.accountId = accountId
             self.executable = executable

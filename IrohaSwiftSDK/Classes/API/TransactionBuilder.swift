@@ -91,9 +91,9 @@ public class TransationBuilder {
             throw TransationError.noCreationDate
         }
 
-        var metadata: [IrohaDataModelName] = []
+        var metadata: [IrohaMetadataItem] = []
         if let description {
-            let item = IrohaDataModelName(name: Constants.metadataDescription, value: .string(description))
+            let item = IrohaMetadataItem(name: Constants.metadataDescription, value: .string(description))
             metadata.append(item)
         }
 
