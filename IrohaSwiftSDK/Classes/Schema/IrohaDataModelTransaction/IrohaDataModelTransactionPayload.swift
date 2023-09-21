@@ -18,14 +18,14 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public struct Payload: Swift.Codable {
+    public struct Payload: Codable {
         
         public var accountId: IrohaDataModelAccount.Id
         public var executable: IrohaDataModelIsi.Executable
         public var creationTime: UInt64
         public var timeToLiveMs: UInt64
         public var nonce: UInt32?
-        public var metadata: [String: IrohaDataModel.Value]
+        public var metadata: [IrohaDataModelName]
         
         public init(
             accountId: IrohaDataModelAccount.Id, 
@@ -33,7 +33,7 @@ extension IrohaDataModelTransaction {
             creationTime: UInt64, 
             timeToLiveMs: UInt64, 
             nonce: UInt32?, 
-            metadata: [String: IrohaDataModel.Value]
+            metadata: [IrohaDataModelName] = []
         ) {
             self.accountId = accountId
             self.executable = executable
@@ -42,17 +42,17 @@ extension IrohaDataModelTransaction {
             self.nonce = nonce
             self.metadata = metadata
         }
+
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: IrohaDataModelTransaction.Payload.CodingKeys.self)
+            try container.encode(self.accountId, forKey: IrohaDataModelTransaction.Payload.CodingKeys.accountId)
+            try container.encode(self.executable, forKey: IrohaDataModelTransaction.Payload.CodingKeys.executable)
+            try container.encode(self.creationTime, forKey: IrohaDataModelTransaction.Payload.CodingKeys.creationTime)
+            try container.encode(self.timeToLiveMs, forKey: IrohaDataModelTransaction.Payload.CodingKeys.timeToLiveMs)
+            try container.encodeIfPresent(self.nonce, forKey: IrohaDataModelTransaction.Payload.CodingKeys.nonce)
+            try container.encode(self.metadata, forKey: IrohaDataModelTransaction.Payload.CodingKeys.metadata)
+
+            debugPrint(#function)
+        }
     }
 }
-/*
-extension IrohaDataModelTransaction.Payload: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
-        try encoder.encode(accountId)
-        try encoder.encode(executable)
-        try encoder.encode(creationTime)
-        try encoder.encode(timeToLiveMs)
-        try encoder.encode(nonce)
-        try encoder.encode(metadata)
-    }
-}
-*/

@@ -11,8 +11,8 @@ import IrohaSwiftScale
 public class TransationBuilder {
     private enum Constants {
         static var timeToLive: TimeInterval = 100
-        static var metadataNameKey = "name"
-        static var metadataStringKey = "string"
+        //static var metadataNameKey = "name"
+        //static var metadataStringKey = "string"
         static var metadataDescription = "description"
     }
 
@@ -93,10 +93,10 @@ public class TransationBuilder {
             throw TransationError.noCreationDate
         }
 
-        var metadata: [String: IrohaDataModel.Value] = [:]
+        var metadata: [IrohaDataModelName] = []
         if let description {
-            metadata[Constants.metadataNameKey] = .string(Constants.metadataDescription)
-            metadata[Constants.metadataStringKey] = .string(description)
+            let item = IrohaDataModelName(name: Constants.metadataDescription, value: .string(description))
+            metadata.append(item)
         }
 
         let payload = IrohaDataModelTransaction.Payload(
@@ -104,7 +104,8 @@ public class TransationBuilder {
             executable: .instructions(instructions),
             creationTime: createdDate.milliseconds,
             timeToLiveMs: timeToLiveMs ?? Constants.timeToLive.milliseconds,
-            nonce: nonce ?? UInt32.random(in: 0...UInt32.max),
+            //nonce: nonce ?? UInt32.random(in: 0...UInt32.max),
+            nonce: 100,
             metadata: metadata
         )
 

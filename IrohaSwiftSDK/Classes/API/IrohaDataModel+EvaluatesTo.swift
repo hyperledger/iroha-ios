@@ -17,7 +17,9 @@ public extension IrohaDataModel.Value {
         case .bool(let bool):
             fatalError()
         case .string(let string):
-            fatalError()
+            return .init(expression: .raw(self))
+        case .name(let string):
+            return .init(expression: .raw(self))
         case .vec(let array):
             fatalError()
         case .identifiable(let identifiableBox):

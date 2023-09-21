@@ -179,7 +179,7 @@ extension Data {
     }
 }
 
-extension Array where Element == UInt8 {
+public extension Array where Element == UInt8 {
     func toSigned() -> [Int8] {
         self.map { Int8(bitPattern: $0) }
     }

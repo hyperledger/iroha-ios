@@ -18,10 +18,11 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModel {
-    public indirect enum Value: Swift.Codable {
+    public indirect enum Value: Codable {
         
         case bool(Bool)
         case string(String)
+        case name(String)
         case vec([IrohaDataModel.Value])
         case id(IrohaDataModel.IdBox)
         case identifiable(IrohaDataModel.IdentifiableBox)
@@ -39,6 +40,8 @@ extension IrohaDataModel {
                     return 0
                 case .string:
                     return 1
+                case .name:
+                    return 2
                 case .vec:
                     return 3
                 case .id:
@@ -71,6 +74,10 @@ extension IrohaDataModel {
             case 1:
                 let val0 = try container.decode(String.self)
                 self = .string(val0)
+                break
+            case 2:
+                let val0 = try container.decode(String.self)
+                self = .name(val0)
                 break
             case 3:
                 let val0 = try container.decode([IrohaDataModel.Value].self)
@@ -105,7 +112,7 @@ extension IrohaDataModel {
                 self = .numeric(val0)
                 break
             default:
-                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
@@ -119,6 +126,9 @@ extension IrohaDataModel {
                 try container.encode(val0)
                 break
             case let .string(val0):
+                try container.encode(val0)
+                break
+            case let .name(val0):
                 try container.encode(val0)
                 break
             case let .vec(val0):

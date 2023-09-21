@@ -66,8 +66,8 @@ extension IrohaClient {
             executable: .instructions(instructions),
             creationTime: Date().milliseconds,
             timeToLiveMs: ttl.milliseconds,
-            nonce: UInt32.random(in: 0...UInt32.max),
-            metadata: [:])
+            nonce: UInt32.random(in: 0...UInt32.max)
+        )
 
         do {
             let signature = try IrohaCrypto.Signature(signing: payload, with: account.keyPair)

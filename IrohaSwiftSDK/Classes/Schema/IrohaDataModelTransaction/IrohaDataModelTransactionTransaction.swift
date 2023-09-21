@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public struct Transaction: Swift.Codable {
+    public struct Transaction: Codable {
         
         public var payload: IrohaDataModelTransaction.Payload
         public var signatures: [IrohaCrypto.Signature]
@@ -32,19 +32,3 @@ extension IrohaDataModelTransaction {
         }
     }
 }
-
-/*
-extension IrohaDataModelTransaction.Transaction: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
-        try encoder.encode(payload)
-        try encoder.encode(signatures)
-    }
-}
-
-// todo: remove that
-extension Array where Element == UInt8 {
-    func toSigned() -> [Int8] {
-        self.map { Int8(bitPattern: $0) }
-    }
-}
-*/
