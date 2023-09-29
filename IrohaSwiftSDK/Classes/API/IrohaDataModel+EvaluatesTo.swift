@@ -31,7 +31,7 @@ public extension IrohaDataModel.Value {
         case .transactionValue(let transactionValue):
             fatalError()
         case .permissionToken(let permissionToken):
-            fatalError()
+            return .init(expression: .raw(self))
         }
     }
 }

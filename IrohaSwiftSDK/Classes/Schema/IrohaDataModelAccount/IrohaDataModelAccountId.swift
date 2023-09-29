@@ -18,8 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAccount {
-    public struct Id: Swift.Codable, Hashable {
-        
+    public struct Id: Codable, Hashable {
         public var name: String
         public var domainName: String
         

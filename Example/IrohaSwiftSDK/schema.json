@@ -1368,14 +1368,14 @@
           "ty": "iroha_data_model::isi::SetKeyValueBox"
         },
         {
-          "name": "RemoveKeyValue",
+          "name": "Grant",
           "discriminant": 10,
-          "ty": "iroha_data_model::isi::RemoveKeyValueBox"
+          "ty": "iroha_data_model::isi::GrantBox"
         },
         {
-          "name": "Grant",
+          "name": "RemoveKeyValue",
           "discriminant": 11,
-          "ty": "iroha_data_model::isi::GrantBox"
+          "ty": "iroha_data_model::isi::RemoveKeyValueBox"
         }
       ]
     }

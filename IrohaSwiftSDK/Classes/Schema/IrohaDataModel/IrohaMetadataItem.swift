@@ -11,8 +11,8 @@ public struct IrohaMetadataItem: Codable {
     private let name: String
     private let value: IrohaDataModel.Value
 
-    public init(name: String, value: IrohaDataModel.Value) {
-        self.name = name
+    public init(name: IdKey, value: IrohaDataModel.Value) {
+        self.name = name.rawValue
         self.value = value
     }
 

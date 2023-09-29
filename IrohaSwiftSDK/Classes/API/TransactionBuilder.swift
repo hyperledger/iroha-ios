@@ -10,8 +10,7 @@ import IrohaSwiftScale
 
 public class TransationBuilder {
     private enum Constants {
-        static var timeToLive: TimeInterval = 100
-        static var metadataDescription = "description"
+        static var durationOf24HoursInMilliseconds: UInt64 = 86_400_000
     }
 
     public enum TransationError: Error {
@@ -82,26 +81,36 @@ public class TransationBuilder {
         return self
     }
 
+    public func grantPermissionToken(permission: Permission, params: IrohaMetadataItem..., destinationId: IrohaDataModelAccount.Id) -> Self {
+        let token = IrohaDataModelPermissions.PermissionToken(name: permission.rawValue, params: params)
+        let permissionToken: IrohaDataModel.Value = .permissionToken(token)
+        let destinationId = IrohaDataModel.IdBox.accountId(destinationId)
+        let destination: IrohaDataModel.Value = .id(destinationId)
+
+        let box = IrohaDataModelIsi.GrantBox(object: permissionToken.evaluatesTo, destinationId: destination.evaluatesTo)
+
+        instructions.append(.grant(box))
+
+        return self
+    }
+
     public func buildSigned(keyPair: IrohaKeyPair) throws -> IrohaDataModelTransaction.VersionedTransaction {
         guard let accountId else {
             throw TransationError.noAccountId
         }
 
-        guard let createdDate else {
-            throw TransationError.noCreationDate
-        }
-
         var metadata: [IrohaMetadataItem] = []
         if let description {
-            let item = IrohaMetadataItem(name: Constants.metadataDescription, value: .string(description))
+            let item = IrohaMetadataItem(name: .description, value: .string(description))
             metadata.append(item)
         }
 
         let payload = IrohaDataModelTransaction.Payload(
             accountId: accountId,
             executable: .instructions(instructions),
-            creationTime: createdDate.milliseconds,
-            timeToLiveMs: timeToLiveMs ?? Constants.timeToLive.milliseconds,
+            creationTime: (createdDate ?? Date()).milliseconds,
+            //creationTime: 1695911365263,
+            timeToLiveMs: timeToLiveMs ?? Constants.durationOf24HoursInMilliseconds,
             nonce: nonce ?? UInt32.random(in: 0...UInt32.max),
             metadata: metadata
         )

@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-    public indirect enum Instruction: Swift.Codable {
+    public indirect enum Instruction: Codable {
         
         case register(IrohaDataModelIsi.RegisterBox)
         case unregister(IrohaDataModelIsi.UnregisterBox)
@@ -57,16 +57,16 @@ extension IrohaDataModelIsi {
                     return 8
                 case .setKeyValue:
                     return 9
-                case .removeKeyValue:
-                    return 10
                 case .grant:
+                    return 10
+                case .removeKeyValue:
                     return 11
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Swift.Decoder) throws {
+        public init(from decoder: Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -111,21 +111,21 @@ extension IrohaDataModelIsi {
                 self = .setKeyValue(val0)
                 break
             case 10:
-                let val0 = try container.decode(IrohaDataModelIsi.RemoveKeyValueBox.self)
-                self = .removeKeyValue(val0)
-                break
-            case 11:
                 let val0 = try container.decode(IrohaDataModelIsi.GrantBox.self)
                 self = .grant(val0)
                 break
+            case 11:
+                let val0 = try container.decode(IrohaDataModelIsi.RemoveKeyValueBox.self)
+                self = .removeKeyValue(val0)
+                break
             default:
-                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Swift.Encoder) throws {
+        public func encode(to encoder: Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(Instruction.discriminant(of: self))
             switch self {
