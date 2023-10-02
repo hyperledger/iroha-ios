@@ -30,6 +30,8 @@ public class TransationBuilder {
 
     private var description: String?
 
+    private var crosschainAddress: (network: String, address: String)?
+
     private var timeToLiveMs: UInt64?
 
     private var nonce: UInt32?
@@ -105,11 +107,18 @@ public class TransationBuilder {
             metadata.append(item)
         }
 
+        if let (network, address) = crosschainAddress {
+            let networkItem = IrohaMetadataItem(name: .network, value: .string(network))
+            metadata.append(networkItem)
+
+            let addressItem = IrohaMetadataItem(name: .address, value: .string(address))
+            metadata.append(addressItem)
+        }
+
         let payload = IrohaDataModelTransaction.Payload(
             accountId: accountId,
             executable: .instructions(instructions),
             creationTime: (createdDate ?? Date()).milliseconds,
-            //creationTime: 1695911365263,
             timeToLiveMs: timeToLiveMs ?? Constants.durationOf24HoursInMilliseconds,
             nonce: nonce ?? UInt32.random(in: 0...UInt32.max),
             metadata: metadata

@@ -13,4 +13,6 @@ public enum IdKey: String {
     case assetDefinitionId = "asset_definition_id"
     case domainId = "domain_id"
     case description = "description"
+    case network = "network"
+    case address = "address"
 }
