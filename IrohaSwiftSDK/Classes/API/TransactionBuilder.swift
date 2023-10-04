@@ -30,7 +30,7 @@ public class TransationBuilder {
 
     private var description: String?
 
-    private var crosschainAddress: (network: String, address: String)?
+    private var crosschainAddress: CrosschainAddress?
 
     private var timeToLiveMs: UInt64?
 
@@ -50,6 +50,12 @@ public class TransationBuilder {
 
     public func withDescription(description: String?) -> Self {
         self.description = description
+
+        return self
+    }
+
+    public func withCrosschainAddress(crosschainAddress: CrosschainAddress?) -> Self {
+        self.crosschainAddress = crosschainAddress
 
         return self
     }
@@ -107,11 +113,11 @@ public class TransationBuilder {
             metadata.append(item)
         }
 
-        if let (network, address) = crosschainAddress {
-            let networkItem = IrohaMetadataItem(name: .network, value: .string(network))
+        if let crosschainAddress = crosschainAddress {
+            let networkItem = IrohaMetadataItem(name: .network, value: .string(crosschainAddress.network))
             metadata.append(networkItem)
 
-            let addressItem = IrohaMetadataItem(name: .address, value: .string(address))
+            let addressItem = IrohaMetadataItem(name: .address, value: .string(crosschainAddress.address))
             metadata.append(addressItem)
         }
 
