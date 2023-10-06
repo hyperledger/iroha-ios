@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct IrohaMetadataItem: Codable {
+public struct IrohaMetadataItem: Codable, Comparable {
     private let name: String
     private let value: IrohaDataModel.Value
 
@@ -20,5 +20,13 @@ public struct IrohaMetadataItem: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(value, forKey: .value)
+    }
+
+    public static func < (lhs: IrohaMetadataItem, rhs: IrohaMetadataItem) -> Bool {
+        lhs.name < rhs.name
+    }
+
+    public static func == (lhs: IrohaMetadataItem, rhs: IrohaMetadataItem) -> Bool {
+        lhs.name == rhs.name
     }
 }

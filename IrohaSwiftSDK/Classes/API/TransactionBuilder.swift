@@ -112,16 +112,14 @@ public class TransationBuilder {
         if let crosschainAddress = crosschainAddress {
             let addressItem = IrohaMetadataItem(name: .address, value: .string(crosschainAddress.address))
             metadata.append(addressItem)
+
+            let networkItem = IrohaMetadataItem(name: .network, value: .string(crosschainAddress.network))
+            metadata.append(networkItem)
         }
 
         if let description {
             let item = IrohaMetadataItem(name: .description, value: .string(description))
             metadata.append(item)
-        }
-
-        if let crosschainAddress = crosschainAddress {
-            let networkItem = IrohaMetadataItem(name: .network, value: .string(crosschainAddress.network))
-            metadata.append(networkItem)
         }
 
         let payload = IrohaDataModelTransaction.Payload(
@@ -130,7 +128,7 @@ public class TransationBuilder {
             creationTime: (createdDate ?? Date()).milliseconds,
             timeToLiveMs: timeToLiveMs ?? Constants.durationOf24HoursInMilliseconds,
             nonce: nonce ?? UInt32.random(in: 0...UInt32.max),
-            metadata: metadata
+            metadata: metadata.sorted()
         )
 
         let signature = try IrohaCrypto.Signature(signing: payload, with: keyPair)
