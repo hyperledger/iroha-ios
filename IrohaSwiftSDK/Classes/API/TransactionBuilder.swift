@@ -108,6 +108,12 @@ public class TransationBuilder {
         }
 
         var metadata: [IrohaMetadataItem] = []
+
+        if let crosschainAddress = crosschainAddress {
+            let addressItem = IrohaMetadataItem(name: .address, value: .string(crosschainAddress.address))
+            metadata.append(addressItem)
+        }
+
         if let description {
             let item = IrohaMetadataItem(name: .description, value: .string(description))
             metadata.append(item)
@@ -116,9 +122,6 @@ public class TransationBuilder {
         if let crosschainAddress = crosschainAddress {
             let networkItem = IrohaMetadataItem(name: .network, value: .string(crosschainAddress.network))
             metadata.append(networkItem)
-
-            let addressItem = IrohaMetadataItem(name: .address, value: .string(crosschainAddress.address))
-            metadata.append(addressItem)
         }
 
         let payload = IrohaDataModelTransaction.Payload(
