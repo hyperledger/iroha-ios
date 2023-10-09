@@ -62,16 +62,16 @@ extension IrohaClient {
     ) {
         
         let payload = IrohaDataModelTransaction.Payload(
-            accountId: account.id,
+            creationTimeMs: Date().milliseconds,
+            authority: account.id,
             executable: .instructions(instructions),
-            creationTime: Date().milliseconds,
             timeToLiveMs: ttl.milliseconds,
             nonce: UInt32.random(in: 0...UInt32.max)
         )
 
         do {
             let signature = try IrohaCrypto.Signature(signing: payload, with: account.keyPair)
-            let transaction = IrohaDataModelTransaction.Transaction(payload: payload, signatures: [signature])
+            let transaction = IrohaDataModelTransaction.Transaction(signatures: [signature], payload: payload)
             apiClient.runQuery(SubmitInstructions(), request: .v1(transaction)) { response in
                 switch response {
                 case let .failure(error):

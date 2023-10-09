@@ -20,15 +20,15 @@ import IrohaSwiftScale
 extension IrohaDataModelPermissions {
     public struct PermissionToken: Codable {
         
-        public var name: String
-        public var params: [IrohaMetadataItem]
+        public var definitionId: String
+        public var payload: String
         
         public init(
-            name: String, 
-            params: [IrohaMetadataItem]
+            definitionId: String,
+            payload: String
         ) {
-            self.name = name
-            self.params = params
+            self.definitionId = definitionId
+            self.payload = payload
         }
     }
 }

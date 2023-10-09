@@ -19,25 +19,25 @@ import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
     public struct Payload: Codable {
-        
-        public var accountId: IrohaDataModelAccount.Id
+
+        public var creationTimeMs: UInt64
+        public var authority: IrohaDataModelAccount.Id
         public var executable: IrohaDataModelIsi.Executable
-        public var creationTime: UInt64
-        public var timeToLiveMs: UInt64
+        public var timeToLiveMs: UInt64?
         public var nonce: UInt32?
         public var metadata: [IrohaMetadataItem]
         
         public init(
-            accountId: IrohaDataModelAccount.Id, 
+            creationTimeMs: UInt64,
+            authority: IrohaDataModelAccount.Id,
             executable: IrohaDataModelIsi.Executable,
-            creationTime: UInt64, 
-            timeToLiveMs: UInt64, 
+            timeToLiveMs: UInt64?, 
             nonce: UInt32?, 
             metadata: [IrohaMetadataItem] = []
         ) {
-            self.accountId = accountId
+            self.creationTimeMs = creationTimeMs
+            self.authority = authority
             self.executable = executable
-            self.creationTime = creationTime
             self.timeToLiveMs = timeToLiveMs
             self.nonce = nonce
             self.metadata = metadata

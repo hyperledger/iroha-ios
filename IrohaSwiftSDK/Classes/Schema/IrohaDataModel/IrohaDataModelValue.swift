@@ -55,7 +55,7 @@ extension IrohaDataModel {
                 case .transactionValue:
                     return 12
                 case .permissionToken:
-                    return 14
+                    return 13
                 case .numeric:
                     return 20
             }
@@ -103,7 +103,7 @@ extension IrohaDataModel {
                 let val0 = try container.decode(IrohaDataModelTransaction.TransactionValue.self)
                 self = .transactionValue(val0)
                 break
-            case 14:
+            case 13:
                 let val0 = try container.decode(IrohaDataModelPermissions.PermissionToken.self)
                 self = .permissionToken(val0)
                 break

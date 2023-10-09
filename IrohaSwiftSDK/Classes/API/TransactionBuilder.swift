@@ -89,8 +89,8 @@ public class TransationBuilder {
         return self
     }
 
-    public func grantPermissionToken(permission: Permission, params: IrohaMetadataItem..., destinationId: IrohaDataModelAccount.Id) -> Self {
-        let token = IrohaDataModelPermissions.PermissionToken(name: permission.rawValue, params: params)
+    public func grantPermissionToken(permission: Permission, payload: String, destinationId: IrohaDataModelAccount.Id) -> Self {
+        let token = IrohaDataModelPermissions.PermissionToken(definitionId: permission.rawValue, payload: payload)
         let permissionToken: IrohaDataModel.Value = .permissionToken(token)
         let destinationId = IrohaDataModel.IdBox.accountId(destinationId)
         let destination: IrohaDataModel.Value = .id(destinationId)
@@ -123,16 +123,16 @@ public class TransationBuilder {
         }
 
         let payload = IrohaDataModelTransaction.Payload(
-            accountId: accountId,
+            creationTimeMs: (createdDate ?? Date()).milliseconds,
+            authority: accountId,
             executable: .instructions(instructions),
-            creationTime: (createdDate ?? Date()).milliseconds,
             timeToLiveMs: timeToLiveMs ?? Constants.durationOf24HoursInMilliseconds,
             nonce: nonce ?? UInt32.random(in: 0...UInt32.max),
             metadata: metadata.sorted()
         )
 
         let signature = try IrohaCrypto.Signature(signing: payload, with: keyPair)
-        let transaction = IrohaDataModelTransaction.Transaction(payload: payload, signatures: [signature])
+        let transaction = IrohaDataModelTransaction.Transaction(signatures: [signature], payload: payload)
 
         return .v1(transaction)
     }

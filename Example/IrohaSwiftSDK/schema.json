@@ -1963,7 +1963,11 @@
     "Struct": {
       "declarations": [
         {
-          "name": "account_id",
+          "name": "creation_time_ms",
+          "ty": "u64"
+        },
+        {
+          "name": "authority",
           "ty": "iroha_data_model::account::Id"
         },
         {
@@ -1971,16 +1975,12 @@
           "ty": "iroha_data_model::isi::Executable"
         },
         {
-          "name": "creation_time",
-          "ty": "u64"
-        },
-        {
           "name": "time_to_live_ms",
-          "ty": "u64"
+          "ty": "Option<u64>"
         },
         {
           "name": "nonce",
-          "ty": "Option<i64>"
+          "ty": "Option<u32>"
         },
         {
           "name": "metadata",
@@ -2022,12 +2022,12 @@
     "Struct": {
       "declarations": [
         {
-          "name": "payload",
-          "ty": "iroha_data_model::transaction::Payload"
-        },
-        {
           "name": "signatures",
           "ty": "BTreeSet<iroha_crypto::Signature>"
+        },
+        {
+          "name": "payload",
+          "ty": "iroha_data_model::transaction::Payload"
         }
       ]
     }

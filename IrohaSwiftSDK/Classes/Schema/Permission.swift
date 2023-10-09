@@ -8,7 +8,9 @@
 import Foundation
 
 public enum Permission: String {
-    case canUnregisterAccount = "can_unregister_account"
-    case canMintUserPublicKeys = "can_mint_user_public_keys"
-    case canBurnUserPublicKeys = "can_burn_user_public_keys"
+    case canMintUserPublicKeys = "CanMintUserPublicKeys"
+    case canBurnUserPublicKeys = "CanBurnUserPublicKeys"
 }
+
+
+
