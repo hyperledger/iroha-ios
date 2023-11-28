@@ -55,17 +55,14 @@ func main() -> Int32 {
         schemaPath = argv[2]
         if argv.count < 4 { return ExitCode.noDestinationPath.failed() }
         destinationPath = argv[3]
-        importFrameworks = argv[4].split(separator: ",").map { String($0) }
     } else {
         // Normal mode
         schemaPath = argv[1]
         if argv.count < 3 { return ExitCode.noXcodeprojPath.failed() }
         if argv.count < 4 { return ExitCode.noXcodeprojGroup.failed() }
-        if argv.count < 5 { return ExitCode.noImportFrameworks.failed() }
         
         let xcodeprojPath = argv[2]
         let xcodeprojGroupPath = argv[3]
-        importFrameworks = argv[4].split(separator: ",").map { String($0) }
         
         destinationPath = "/" + xcodeprojPath.split(separator: "/").dropLast().joined(separator: "/") + "/" + xcodeprojGroupPath
     }
