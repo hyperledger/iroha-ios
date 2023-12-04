@@ -763,8 +763,8 @@ private struct EnumWriter: TypeWriter {
     
     private func writeCaseDiscriminantGetter(_ case: Case) -> String {
         """
-        \(Rules.tab(3))case .\(resolver.fixVariableName(`case`.0)):
-        \(Rules.tab(4))return \(`case`.1)
+        \(Rules.tab(2))case .\(resolver.fixVariableName(`case`.0)):
+        \(Rules.tab(3))return \(`case`.1)
         """
     }
     
@@ -831,7 +831,7 @@ private struct EnumWriter: TypeWriter {
         // It's too complicated to calculate if enum can chainly call itself, so let's declare all enums indirect by default
         """
         public \(Rules.indirectKeyword.map { $0.appending(" ") } ?? "")enum \(name)\(writeInterfaces(["Swift.Codable"])) {
-        \(Rules.tab())
+        
         \(try cases.map { try writeCase($0) }.joined(separator: "\n"))
         \(Rules.tab())
         \(writeScaleEnumIterableConformance())
