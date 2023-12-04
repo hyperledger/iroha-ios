@@ -631,7 +631,7 @@ private struct FixedPointWriter: TypeWriter {
         // MARK: - Codable
         \(Rules.tab())
         extension FixedPoint: Swift.Codable {
-        \(Rules.tab())public init(from decoder: Decoder) throws {
+        \(Rules.tab())public init(from decoder: Swift.Decoder) throws {
         \(Rules.tab(2))self.base = try decoder.singleValueContainer().decode(\(try typeName()).self)
         \(Rules.tab())}
         \(Rules.tab())
@@ -793,7 +793,7 @@ private struct EnumWriter: TypeWriter {
         """
         \(Rules.tab())// MARK: - Decodable
         \(Rules.tab())
-        \(Rules.tab())public init(from decoder: Decoder) throws {
+        \(Rules.tab())public init(from decoder: Swift.Decoder) throws {
         \(Rules.tab(2))var container = try decoder.unkeyedContainer()
         \(Rules.tab(2))let discriminant = try container.decode(UInt8.self)
         \(Rules.tab(2))switch discriminant {
@@ -831,7 +831,7 @@ private struct EnumWriter: TypeWriter {
         // It's too complicated to calculate if enum can chainly call itself, so let's declare all enums indirect by default
         """
         public \(Rules.indirectKeyword.map { $0.appending(" ") } ?? "")enum \(name)\(writeInterfaces(["Swift.Codable"])) {
-        
+
         \(try cases.map { try writeCase($0) }.joined(separator: "\n"))
         \(Rules.tab())
         \(writeScaleEnumIterableConformance())
@@ -1018,7 +1018,7 @@ private final class FixedSizeArrayFactory: SizedStructFactory {
         // MARK: - Codable
         \(Rules.tab())
         extension Array\(size): Swift.Codable {
-        \(Rules.tab())public init(from decoder: Decoder) throws {
+        \(Rules.tab())public init(from decoder: Swift.Decoder) throws {
         \(Rules.tab(2))var container = try decoder.unkeyedContainer()
         \(Rules.tab(2))let array = try (0..<arraySize).map { _ in try container.decode(Element.self) }
         \(Rules.tab(2))try self.init(array)
