@@ -274,6 +274,11 @@
           "ty": "String"
         },
         {
+          "name": "Name",
+          "discriminant": 2,
+          "ty": "String"
+        },
+        {
           "name": "Vec",
           "discriminant": 3,
           "ty": "Vec<iroha_data_model::Value>"
@@ -305,7 +310,7 @@
         },
         {
           "name": "PermissionToken",
-          "discriminant": 14,
+          "discriminant": 13,
           "ty": "iroha_data_model::permissions::PermissionToken"
         },
         {
