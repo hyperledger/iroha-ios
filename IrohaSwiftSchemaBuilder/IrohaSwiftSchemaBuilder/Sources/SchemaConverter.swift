@@ -635,7 +635,7 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab(2))self.base = try decoder.singleValueContainer().decode(\(try typeName()).self)
         \(Rules.tab())}
         \(Rules.tab())
-        \(Rules.tab())public func encode(to encoder: Encoder) throws {
+        \(Rules.tab())public func encode(to encoder: Swift.Encoder) throws {
         \(Rules.tab(2))var container = encoder.singleValueContainer()
         \(Rules.tab(2))try container.encode(base)
         \(Rules.tab())}
@@ -799,7 +799,7 @@ private struct EnumWriter: TypeWriter {
         \(Rules.tab(2))switch discriminant {
         \(try cases.map { try writeCaseInit($0) }.joined(separator: "\n"))
         \(Rules.tab(2))default:
-        \(Rules.tab(3))throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \\(discriminant)")
+        \(Rules.tab(3))throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \\(discriminant)")
         \(Rules.tab(2))}
         \(Rules.tab())}
         """
@@ -817,7 +817,7 @@ private struct EnumWriter: TypeWriter {
         """
         \(Rules.tab())// MARK: - Encodable
         \(Rules.tab())
-        \(Rules.tab())public func encode(to encoder: Encoder) throws {
+        \(Rules.tab())public func encode(to encoder: Swift.Encoder) throws {
         \(Rules.tab(2))var container = encoder.unkeyedContainer()
         \(Rules.tab(2))try container.encode(\(name).discriminant(of: self))
         \(Rules.tab(2))switch self {
@@ -1024,7 +1024,7 @@ private final class FixedSizeArrayFactory: SizedStructFactory {
         \(Rules.tab(2))try self.init(array)
         \(Rules.tab())}
         \(Rules.tab())
-        \(Rules.tab())public func encode(to encoder: Encoder) throws {
+        \(Rules.tab())public func encode(to encoder: Swift.Encoder) throws {
         \(Rules.tab(2))var container = encoder.unkeyedContainer()
         \(Rules.tab(2))for element in array {
         \(Rules.tab(3))try container.encode(element)
