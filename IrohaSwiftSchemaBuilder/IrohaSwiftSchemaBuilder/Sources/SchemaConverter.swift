@@ -498,7 +498,7 @@ private struct StructWriter: TypeWriter {
     
     private func writeConstructor(variables: [(String, String)]) -> String {
         """
-        \(Rules.tab())public init(\(variables.count > 1 ? "\n\(Rules.tab(2))" : "")\(variables.map { "\($0): \($1)" }.joined(separator: ", \(variables.count > 1 ? "\n\(Rules.tab(2))" : "")"))\(variables.count > 1 ? "\n\(Rules.tab())" : "")) {
+        \(Rules.tab())public init(\(variables.count > 1 ? "\n\(Rules.tab(2))" : "")\(variables.map { "\($0): \($1)" }.joined(separator: ",\(variables.count > 1 ? "\n\(Rules.tab(2))" : "")"))\(variables.count > 1 ? "\n\(Rules.tab())" : "")) {
         \(Rules.tab())\(variables.map { "\(Rules.tab())self.\($0.0) = \($0.0)" }.joined(separator: "\n\(Rules.tab())"))
         \(Rules.tab())}
         """
@@ -520,7 +520,7 @@ private struct StructWriter: TypeWriter {
     }
     
     func write() throws -> String {
-        var interfaces = codable ? ["Codable"] : []
+        var interfaces = codable ? ["Swift.Codable"] : []
         if fields.count == 0 {
             if codable {
                 return """
@@ -630,7 +630,7 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab())
         // MARK: - Codable
         \(Rules.tab())
-        extension FixedPoint: Codable {
+        extension FixedPoint: Swift.Codable {
         \(Rules.tab())public init(from decoder: Decoder) throws {
         \(Rules.tab(2))self.base = try decoder.singleValueContainer().decode(\(try typeName()).self)
         \(Rules.tab())}
@@ -830,7 +830,7 @@ private struct EnumWriter: TypeWriter {
     func write() throws -> String {
         // It's too complicated to calculate if enum can chainly call itself, so let's declare all enums indirect by default
         """
-        public \(Rules.indirectKeyword.map { $0.appending(" ") } ?? "")enum \(name)\(writeInterfaces(["Codable"])) {
+        public \(Rules.indirectKeyword.map { $0.appending(" ") } ?? "")enum \(name)\(writeInterfaces(["Swift.Codable"])) {
         \(Rules.tab())
         \(try cases.map { try writeCase($0) }.joined(separator: "\n"))
         \(Rules.tab())
@@ -877,7 +877,7 @@ open class SizedStructFactory {
 private final class TupleStructFactory: SizedStructFactory {
     
     private func writeGenerics(varsCount: UInt) -> String {
-        (1...varsCount).map { "T\($0): Codable" }.joined(separator: ", ")
+        (1...varsCount).map { "T\($0): Swift.Codable" }.joined(separator: ", ")
     }
     
     private func writeTupleVar(count: UInt) -> String {
@@ -924,7 +924,7 @@ private final class TupleStructFactory: SizedStructFactory {
         
         return """
         \(Rules.tab())
-        public struct \(structName(size: size))<\(writeGenerics(varsCount: size))>: Codable {
+        public struct \(structName(size: size))<\(writeGenerics(varsCount: size))>: Swift.Codable {
         \(Rules.tab())
         \(writeCodingKeys(varsCount: size))
         \(Rules.tab())
@@ -949,7 +949,7 @@ private final class FixedSizeArrayFactory: SizedStructFactory {
         \(Rules.tab())
         // MARK: Array\(size)
         \(Rules.tab())
-        public struct Array\(size)<Element: Codable> {
+        public struct Array\(size)<Element: Swift.Codable> {
         \(Rules.tab())
         \(Rules.tab())enum Error: LocalizedError {
         \(Rules.tab(2))case invalidInputSequenceLength(Int, Int)
@@ -1017,7 +1017,7 @@ private final class FixedSizeArrayFactory: SizedStructFactory {
         \(Rules.tab())
         // MARK: - Codable
         \(Rules.tab())
-        extension Array\(size): Codable {
+        extension Array\(size): Swift.Codable {
         \(Rules.tab())public init(from decoder: Decoder) throws {
         \(Rules.tab(2))var container = try decoder.unkeyedContainer()
         \(Rules.tab(2))let array = try (0..<arraySize).map { _ in try container.decode(Element.self) }

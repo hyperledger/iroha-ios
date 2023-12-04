@@ -57,7 +57,7 @@ if [ true = "$DEV_MODE" ]; then
 else
   SCHEMA_BUILDER_ARGS="$(abspath "$JSON_SCHEMA_PATH") $(abspath "$2") $3 $4"
 fi
-${SCRIPT_DIR}/iroha-build-swift-schema $SCHEMA_BUILDER_ARGS
+${SCRIPT_DIR}/IrohaSwiftSchemaBuilder $SCHEMA_BUILDER_ARGS
 
 if [ true = "$DEV_MODE" ]; then
   # No need to inject files to .xcodeproj
