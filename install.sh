@@ -16,7 +16,7 @@
 #
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-${SCRIPT_DIR}/bin/iroha-install-swift-schema.sh --dev ${SCRIPT_DIR}/Example/IrohaSwiftSDK/schema.json ${SCRIPT_DIR}/IrohaSwiftSDK/Classes/Schema
+${SCRIPT_DIR}/bin/iroha-install-swift-schema.sh --dev ${SCRIPT_DIR}/Example/IrohaSwiftSDK/schema.json ${SCRIPT_DIR}/IrohaSwiftSDK/Classes/Schema IrohaSwiftScale
 cd ${SCRIPT_DIR}/Example
 bundle install
 bundle exec arch -x86_64 pod install
