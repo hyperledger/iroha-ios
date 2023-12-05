@@ -64,7 +64,8 @@ private extension String {
     }
     
     var loweringFirstLetter: String {
-        prefix(1).lowercased() + dropFirst()
+        let lowercaseCount = prefix(1).lowercased() == "u" ? 2 : 1
+        return prefix(lowercaseCount).lowercased() + dropFirst(lowercaseCount)
     }
     
     var lowerCamelCased: String {
@@ -118,7 +119,7 @@ extension SchemaConverter: NamespaceResolver {
         case "u16": return "UInt16"
         case "u32": return "UInt32"
         case "u64": return "UInt64"
-        case "u128": return "UInt128"
+        case "u128": return "MyUint128"
         case "i8": return "Int8"
         case "i16": return "Int16"
         case "i32": return "Int32"
@@ -596,7 +597,7 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab(2))let multiplied = (self as NSDecimalNumber)
         \(Rules.tab(3)).multiplying(byPowerOf10: decimalPlaces, withBehavior: NSDecimalNumber.roundingBehavior(scale: decimalPlaces))
         \(Rules.tab())
-        \(Rules.tab(2))guard (multiplied as Decimal) <= Decimal(Int64.max) else {
+        \(Rules.tab(2))guard (multiplied as Decimal) <= Decimal(UInt64.max) else {
         \(Rules.tab(3))throw FixedPoint.Error.decimalValueTooHigh
         \(Rules.tab(2))}
         \(Rules.tab())
@@ -677,7 +678,7 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public init?<T>(exactly source: T) where T : BinaryInteger {
-        \(Rules.tab(2))guard let base = try? Decimal(exactly: source)?.toInt64(decimalPlaces: Self.decimalPlaces) else {
+        \(Rules.tab(2))guard let base = try? Decimal(exactly: source)?.toUInt64(decimalPlaces: Self.decimalPlaces) else {
         \(Rules.tab(3))return nil
         \(Rules.tab(2))}
         \(Rules.tab())
@@ -685,8 +686,8 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public init(integerLiteral value: Int) {
-        \(Rules.tab(2))// Int value won't exceed Int64.max limit, so we can force unwrap
-        \(Rules.tab(2))self.base = try! Decimal(value).toInt64(decimalPlaces: Self.decimalPlaces)
+        \(Rules.tab(2))// Int value won't exceed UInt64.max limit, so we can force unwrap
+        \(Rules.tab(2))self.base = try! Decimal(value).toUInt64(decimalPlaces: Self.decimalPlaces)
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public static func * (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
@@ -699,12 +700,12 @@ private struct FixedPointWriter: TypeWriter {
         \(Rules.tab())
         \(Rules.tab())public static func / (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
         \(Rules.tab(2))// Both values are correct fixed points, can be forced
-        \(Rules.tab(2)).init(base: try! (lhs.value / rhs.value).toInt64(decimalPlaces: Self.decimalPlaces))
+        \(Rules.tab(2)).init(base: try! (lhs.value / rhs.value).toUInt64(decimalPlaces: Self.decimalPlaces))
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public static func /= (lhs: inout FixedPoint, rhs: FixedPoint) {
         \(Rules.tab(2))// Both values are correct fixed points, can be forced
-        \(Rules.tab(2))lhs.base = try! (lhs.value / rhs.value).toInt64(decimalPlaces: Self.decimalPlaces)
+        \(Rules.tab(2))lhs.base = try! (lhs.value / rhs.value).toUInt64(decimalPlaces: Self.decimalPlaces)
         \(Rules.tab())}
         \(Rules.tab())
         \(Rules.tab())public static func += (lhs: inout FixedPoint, rhs: FixedPoint) {

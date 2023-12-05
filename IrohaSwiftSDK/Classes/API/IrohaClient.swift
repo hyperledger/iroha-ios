@@ -66,7 +66,8 @@ extension IrohaClient {
             authority: account.id,
             executable: .instructions(instructions),
             timeToLiveMs: ttl.milliseconds,
-            nonce: UInt32.random(in: 0...UInt32.max)
+            nonce: UInt32.random(in: 0...UInt32.max),
+            metadata: []
         )
 
         do {

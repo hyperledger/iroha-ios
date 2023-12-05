@@ -29,9 +29,9 @@
       "value": "iroha_data_model::asset::Asset"
     }
   },
-  "FixedPoint<i64>": {
+  "FixedPoint<u64>": {
     "FixedPoint": {
-      "base": "i64",
+      "base": "u64",
       "decimal_places": 9
     }
   },
@@ -452,7 +452,7 @@
         {
           "name": "Fixed",
           "discriminant": 2,
-          "ty": "iroha_data_model::fixed::Fixed"
+          "ty": "FixedPoint"
         },
         {
           "name": "Store",
@@ -1256,13 +1256,6 @@
       ]
     }
   },
-  "iroha_data_model::fixed::Fixed": {
-    "TupleStruct": {
-      "types": [
-        "FixedPoint<i64>"
-      ]
-    }
-  },
   "iroha_data_model::isi::BurnBox": {
     "Struct": {
       "declarations": [
@@ -1541,12 +1534,12 @@
     "Struct": {
       "declarations": [
         {
-          "name": "name",
+          "name": "definitionId",
           "ty": "String"
         },
         {
-          "name": "params",
-          "ty": "BTreeMap<String, iroha_data_model::Value>"
+          "name": "payload",
+          "ty": "String"
         }
       ]
     }
@@ -1572,7 +1565,7 @@
         {
           "name": "Fixed",
           "discriminant": 3,
-          "ty": "Fixed"
+          "ty": "FixedPoint"
         }
       ]
     }
@@ -1582,7 +1575,7 @@
       "declarations": [
         {
           "name": "timestamp_ms",
-          "ty": "iroha_schema::Compact<u128>"
+          "ty": "iroha_schema::MyUint128"
         },
         {
           "name": "query",
@@ -1976,7 +1969,7 @@
           "ty": "iroha_data_model::account::Id"
         },
         {
-          "name": "instructions",
+          "name": "executable",
           "ty": "iroha_data_model::isi::Executable"
         },
         {
@@ -1989,7 +1982,7 @@
         },
         {
           "name": "metadata",
-          "ty": "BTreeMap<String, iroha_data_model::Value>"
+          "ty": "Vec<IrohaMetadataItem>"
         }
       ]
     }
