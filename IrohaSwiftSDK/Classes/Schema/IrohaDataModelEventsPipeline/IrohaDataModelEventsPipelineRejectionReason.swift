@@ -18,8 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-    public indirect enum RejectionReason: Codable {
-        
+    public indirect enum RejectionReason: Swift.Codable {
         case block(IrohaDataModelEventsPipeline.BlockRejectionReason)
         case transaction(IrohaDataModelEventsPipeline.TransactionRejectionReason)
         
@@ -27,16 +26,16 @@ extension IrohaDataModelEventsPipeline {
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .block:
-                    return 0
-                case .transaction:
-                    return 1
+            case .block:
+                return 0
+            case .transaction:
+                return 1
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -49,13 +48,13 @@ extension IrohaDataModelEventsPipeline {
                 self = .transaction(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(RejectionReason.discriminant(of: self))
             switch self {

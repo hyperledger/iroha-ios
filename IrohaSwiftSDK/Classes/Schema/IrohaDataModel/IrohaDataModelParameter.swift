@@ -18,31 +18,30 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModel {
-    public indirect enum Parameter: Codable {
-        
+    public indirect enum Parameter: Swift.Codable {
         case maximumFaultyPeersAmount(UInt32)
-        case blockTime(UInt128)
-        case commitTime(UInt128)
-        case transactionReceiptTime(UInt128)
+        case blockTime(MyUint128)
+        case commitTime(MyUint128)
+        case transactionReceiptTime(MyUint128)
         
         // MARK: - For Codable purpose
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .maximumFaultyPeersAmount:
-                    return 0
-                case .blockTime:
-                    return 1
-                case .commitTime:
-                    return 2
-                case .transactionReceiptTime:
-                    return 3
+            case .maximumFaultyPeersAmount:
+                return 0
+            case .blockTime:
+                return 1
+            case .commitTime:
+                return 2
+            case .transactionReceiptTime:
+                return 3
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -51,25 +50,25 @@ extension IrohaDataModel {
                 self = .maximumFaultyPeersAmount(val0)
                 break
             case 1:
-                let val0 = try container.decode(UInt128.self)
+                let val0 = try container.decode(MyUint128.self)
                 self = .blockTime(val0)
                 break
             case 2:
-                let val0 = try container.decode(UInt128.self)
+                let val0 = try container.decode(MyUint128.self)
                 self = .commitTime(val0)
                 break
             case 3:
-                let val0 = try container.decode(UInt128.self)
+                let val0 = try container.decode(MyUint128.self)
                 self = .transactionReceiptTime(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(Parameter.discriminant(of: self))
             switch self {

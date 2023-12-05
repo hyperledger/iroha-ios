@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaGenesis {
-    public struct GenesisTransaction: Codable {
+    public struct GenesisTransaction: Swift.Codable {
         
         public var isi: [IrohaDataModelIsi.Instruction]
         

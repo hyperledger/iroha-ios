@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-    public struct UnregisterBox: Codable {
+    public struct UnregisterBox: Swift.Codable {
         
         public var objectId: IrohaDataModelExpression.EvaluatesTo
         

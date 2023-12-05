@@ -18,8 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModel {
-    public indirect enum Value: Codable {
-        
+    public indirect enum Value: Swift.Codable {
         case bool(Bool)
         case string(String)
         case name(String)
@@ -36,28 +35,28 @@ extension IrohaDataModel {
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .bool:
-                    return 0
-                case .string:
-                    return 1
-                case .name:
-                    return 2
-                case .vec:
-                    return 3
-                case .id:
-                    return 8
-                case .identifiable:
-                    return 9
-                case .publicKey:
-                    return 10
-                case .signatureCheckCondition:
-                    return 11
-                case .transactionValue:
-                    return 12
-                case .permissionToken:
-                    return 13
-                case .numeric:
-                    return 20
+            case .bool:
+                return 0
+            case .string:
+                return 1
+            case .name:
+                return 2
+            case .vec:
+                return 3
+            case .id:
+                return 8
+            case .identifiable:
+                return 9
+            case .publicKey:
+                return 10
+            case .signatureCheckCondition:
+                return 11
+            case .transactionValue:
+                return 12
+            case .permissionToken:
+                return 13
+            case .numeric:
+                return 20
             }
         }
         
@@ -112,7 +111,7 @@ extension IrohaDataModel {
                 self = .numeric(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         

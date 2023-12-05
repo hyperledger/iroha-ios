@@ -18,13 +18,13 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAsset {
-    public struct Asset: Codable {
+    public struct Asset: Swift.Codable {
         
         public var id: IrohaDataModelAsset.Id
         public var value: IrohaDataModelAsset.AssetValue
         
         public init(
-            id: IrohaDataModelAsset.Id, 
+            id: IrohaDataModelAsset.Id,
             value: IrohaDataModelAsset.AssetValue
         ) {
             self.id = id

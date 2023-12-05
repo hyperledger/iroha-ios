@@ -18,13 +18,13 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelExpression {
-    public struct Contains: Codable {
+    public struct Contains: Swift.Codable {
         
         public var collection: IrohaDataModelExpression.EvaluatesTo
         public var element: IrohaDataModelExpression.EvaluatesTo
         
         public init(
-            collection: IrohaDataModelExpression.EvaluatesTo, 
+            collection: IrohaDataModelExpression.EvaluatesTo,
             element: IrohaDataModelExpression.EvaluatesTo
         ) {
             self.collection = collection

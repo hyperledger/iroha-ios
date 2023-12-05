@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQueryPeer {
-    public struct FindAllPeers: Codable {
+    public struct FindAllPeers: Swift.Codable {
         public init() {}
     }
 }

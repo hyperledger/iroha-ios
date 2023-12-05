@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelExpression {
-    public struct Not: Codable {
+    public struct Not: Swift.Codable {
         
         public var expression: IrohaDataModelExpression.EvaluatesTo
         

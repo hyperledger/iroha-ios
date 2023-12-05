@@ -18,13 +18,13 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQueryAccount {
-    public struct FindAccountKeyValueByIdAndKey: Codable {
+    public struct FindAccountKeyValueByIdAndKey: Swift.Codable {
         
         public var id: IrohaDataModelExpression.EvaluatesTo
         public var key: IrohaDataModelExpression.EvaluatesTo
         
         public init(
-            id: IrohaDataModelExpression.EvaluatesTo, 
+            id: IrohaDataModelExpression.EvaluatesTo,
             key: IrohaDataModelExpression.EvaluatesTo
         ) {
             self.id = id

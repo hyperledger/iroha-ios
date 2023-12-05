@@ -18,15 +18,15 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public struct RejectedTransaction: Codable {
+    public struct RejectedTransaction: Swift.Codable {
         
         public var payload: IrohaDataModelTransaction.Payload
         public var signatures: [IrohaCrypto.Signature]
         public var rejectionReason: IrohaDataModelEventsPipeline.TransactionRejectionReason
         
         public init(
-            payload: IrohaDataModelTransaction.Payload, 
-            signatures: [IrohaCrypto.Signature], 
+            payload: IrohaDataModelTransaction.Payload,
+            signatures: [IrohaCrypto.Signature],
             rejectionReason: IrohaDataModelEventsPipeline.TransactionRejectionReason
         ) {
             self.payload = payload

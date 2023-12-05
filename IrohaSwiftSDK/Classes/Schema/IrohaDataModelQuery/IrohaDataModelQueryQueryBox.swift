@@ -19,7 +19,6 @@ import IrohaSwiftScale
 
 extension IrohaDataModelQuery {
     public indirect enum QueryBox: Swift.Codable {
-        
         case findAllAccounts(IrohaDataModelQueryAccount.FindAllAccounts)
         case findAccountById(IrohaDataModelQueryAccount.FindAccountById)
         case findAccountKeyValueByIdAndKey(IrohaDataModelQueryAccount.FindAccountKeyValueByIdAndKey)
@@ -46,48 +45,48 @@ extension IrohaDataModelQuery {
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .findAllAccounts:
-                    return 0
-                case .findAccountById:
-                    return 1
-                case .findAccountKeyValueByIdAndKey:
-                    return 2
-                case .findAccountsByName:
-                    return 3
-                case .findAccountsByDomainName:
-                    return 4
-                case .findAllAssets:
-                    return 5
-                case .findAllAssetsDefinitions:
-                    return 6
-                case .findAssetById:
-                    return 7
-                case .findAssetsByName:
-                    return 8
-                case .findAssetsByAccountId:
-                    return 9
-                case .findAssetsByAssetDefinitionId:
-                    return 10
-                case .findAssetsByDomainName:
-                    return 11
-                case .findAssetsByDomainNameAndAssetDefinitionId:
-                    return 12
-                case .findAssetQuantityById:
-                    return 13
-                case .findAssetKeyValueByIdAndKey:
-                    return 14
-                case .findAssetDefinitionKeyValueByIdAndKey:
-                    return 15
-                case .findAllDomains:
-                    return 16
-                case .findDomainByName:
-                    return 17
-                case .findAllPeers:
-                    return 18
-                case .findTransactionsByAccountId:
-                    return 19
-                case .findPermissionTokensByAccountId:
-                    return 20
+            case .findAllAccounts:
+                return 0
+            case .findAccountById:
+                return 1
+            case .findAccountKeyValueByIdAndKey:
+                return 2
+            case .findAccountsByName:
+                return 3
+            case .findAccountsByDomainName:
+                return 4
+            case .findAllAssets:
+                return 5
+            case .findAllAssetsDefinitions:
+                return 6
+            case .findAssetById:
+                return 7
+            case .findAssetsByName:
+                return 8
+            case .findAssetsByAccountId:
+                return 9
+            case .findAssetsByAssetDefinitionId:
+                return 10
+            case .findAssetsByDomainName:
+                return 11
+            case .findAssetsByDomainNameAndAssetDefinitionId:
+                return 12
+            case .findAssetQuantityById:
+                return 13
+            case .findAssetKeyValueByIdAndKey:
+                return 14
+            case .findAssetDefinitionKeyValueByIdAndKey:
+                return 15
+            case .findAllDomains:
+                return 16
+            case .findDomainByName:
+                return 17
+            case .findAllPeers:
+                return 18
+            case .findTransactionsByAccountId:
+                return 19
+            case .findPermissionTokensByAccountId:
+                return 20
             }
         }
         
@@ -259,13 +258,3 @@ extension IrohaDataModelQuery {
         }
     }
 }
-
-/*
-extension IrohaDataModelQuery.QueryBox: Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : Encoder {
-        try encoder.encode(Self.discriminant(of: self))
-        fatalError("check")
-    }
-
-}
-*/

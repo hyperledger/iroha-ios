@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaGenesis {
-    public struct RawGenesisBlock: Codable {
+    public struct RawGenesisBlock: Swift.Codable {
         
         public var transactions: [IrohaGenesis.GenesisTransaction]
         

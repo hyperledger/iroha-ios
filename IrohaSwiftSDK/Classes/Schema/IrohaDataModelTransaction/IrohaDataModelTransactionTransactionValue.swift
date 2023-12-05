@@ -19,7 +19,6 @@ import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
     public indirect enum TransactionValue: Swift.Codable {
-        
         case transaction(IrohaDataModelTransaction.VersionedTransaction)
         case rejectedTransaction(IrohaDataModelTransaction.VersionedRejectedTransaction)
         
@@ -27,10 +26,10 @@ extension IrohaDataModelTransaction {
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .transaction:
-                    return 0
-                case .rejectedTransaction:
-                    return 1
+            case .transaction:
+                return 0
+            case .rejectedTransaction:
+                return 1
             }
         }
         
@@ -69,20 +68,3 @@ extension IrohaDataModelTransaction {
         }
     }
 }
-
-/*
-extension IrohaDataModelTransaction.TransactionValue: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : ScaleCodec.Encoder {
-        try encoder.encode(IrohaDataModelTransaction.TransactionValue.discriminant(of: self))
-        switch self {
-        case let .transaction(val0):
-            try encoder.encode(val0)
-            break
-        case let .rejectedTransaction(val0):
-            // todo
-            //try encoder.encode(val0)
-            break
-        }
-    }
-}
-*/

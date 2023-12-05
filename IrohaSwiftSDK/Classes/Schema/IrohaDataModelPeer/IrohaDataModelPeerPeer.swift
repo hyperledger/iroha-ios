@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelPeer {
-    public struct Peer: Codable {
+    public struct Peer: Swift.Codable {
         
         public var id: IrohaDataModelPeer.Id
         

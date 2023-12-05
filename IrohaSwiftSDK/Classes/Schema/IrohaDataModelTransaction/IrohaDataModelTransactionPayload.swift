@@ -18,8 +18,8 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public struct Payload: Codable {
-
+    public struct Payload: Swift.Codable {
+        
         public var creationTimeMs: UInt64
         public var authority: IrohaDataModelAccount.Id
         public var executable: IrohaDataModelIsi.Executable
@@ -31,9 +31,9 @@ extension IrohaDataModelTransaction {
             creationTimeMs: UInt64,
             authority: IrohaDataModelAccount.Id,
             executable: IrohaDataModelIsi.Executable,
-            timeToLiveMs: UInt64?, 
-            nonce: UInt32?, 
-            metadata: [IrohaMetadataItem] = []
+            timeToLiveMs: UInt64?,
+            nonce: UInt32?,
+            metadata: [IrohaMetadataItem]
         ) {
             self.creationTimeMs = creationTimeMs
             self.authority = authority

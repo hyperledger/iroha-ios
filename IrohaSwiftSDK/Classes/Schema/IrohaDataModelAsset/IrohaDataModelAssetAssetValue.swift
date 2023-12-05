@@ -18,31 +18,30 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAsset {
-    public indirect enum AssetValue: Codable {
-        
+    public indirect enum AssetValue: Swift.Codable {
         case quantity(UInt32)
-        case bigQuantity(UInt128)
-        case fixed(IrohaDataModelFixed.Fixed)
+        case bigQuantity(MyUint128)
+        case fixed(FixedPoint)
         case store(IrohaDataModelMetadata.Metadata)
         
         // MARK: - For Codable purpose
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .quantity:
-                    return 0
-                case .bigQuantity:
-                    return 1
-                case .fixed:
-                    return 2
-                case .store:
-                    return 3
+            case .quantity:
+                return 0
+            case .bigQuantity:
+                return 1
+            case .fixed:
+                return 2
+            case .store:
+                return 3
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -51,11 +50,11 @@ extension IrohaDataModelAsset {
                 self = .quantity(val0)
                 break
             case 1:
-                let val0 = try container.decode(UInt128.self)
+                let val0 = try container.decode(MyUint128.self)
                 self = .bigQuantity(val0)
                 break
             case 2:
-                let val0 = try container.decode(IrohaDataModelFixed.Fixed.self)
+                let val0 = try container.decode(FixedPoint.self)
                 self = .fixed(val0)
                 break
             case 3:
@@ -63,13 +62,13 @@ extension IrohaDataModelAsset {
                 self = .store(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(AssetValue.discriminant(of: self))
             switch self {

@@ -18,8 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-    public indirect enum Instruction: Codable {
-        
+    public indirect enum Instruction: Swift.Codable {
         case register(IrohaDataModelIsi.RegisterBox)
         case unregister(IrohaDataModelIsi.UnregisterBox)
         case mint(IrohaDataModelIsi.MintBox)
@@ -30,43 +29,43 @@ extension IrohaDataModelIsi {
         case sequence(IrohaDataModelIsi.SequenceBox)
         case fail(IrohaDataModelIsi.FailBox)
         case setKeyValue(IrohaDataModelIsi.SetKeyValueBox)
-        case removeKeyValue(IrohaDataModelIsi.RemoveKeyValueBox)
         case grant(IrohaDataModelIsi.GrantBox)
+        case removeKeyValue(IrohaDataModelIsi.RemoveKeyValueBox)
         
         // MARK: - For Codable purpose
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .register:
-                    return 0
-                case .unregister:
-                    return 1
-                case .mint:
-                    return 2
-                case .burn:
-                    return 3
-                case .transfer:
-                    return 4
-                case .`if`:
-                    return 5
-                case .pair:
-                    return 6
-                case .sequence:
-                    return 7
-                case .fail:
-                    return 8
-                case .setKeyValue:
-                    return 9
-                case .grant:
-                    return 10
-                case .removeKeyValue:
-                    return 11
+            case .register:
+                return 0
+            case .unregister:
+                return 1
+            case .mint:
+                return 2
+            case .burn:
+                return 3
+            case .transfer:
+                return 4
+            case .`if`:
+                return 5
+            case .pair:
+                return 6
+            case .sequence:
+                return 7
+            case .fail:
+                return 8
+            case .setKeyValue:
+                return 9
+            case .grant:
+                return 10
+            case .removeKeyValue:
+                return 11
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -119,13 +118,13 @@ extension IrohaDataModelIsi {
                 self = .removeKeyValue(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(Instruction.discriminant(of: self))
             switch self {
@@ -159,10 +158,10 @@ extension IrohaDataModelIsi {
             case let .setKeyValue(val0):
                 try container.encode(val0)
                 break
-            case let .removeKeyValue(val0):
+            case let .grant(val0):
                 try container.encode(val0)
                 break
-            case let .grant(val0):
+            case let .removeKeyValue(val0):
                 try container.encode(val0)
                 break
             }

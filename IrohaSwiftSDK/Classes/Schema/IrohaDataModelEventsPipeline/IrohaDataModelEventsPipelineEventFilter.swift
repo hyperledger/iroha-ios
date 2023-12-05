@@ -18,13 +18,13 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-    public struct EventFilter: Codable {
+    public struct EventFilter: Swift.Codable {
         
         public var entity: IrohaDataModelEventsPipeline.EntityType?
         public var hash: IrohaCrypto.Hash?
         
         public init(
-            entity: IrohaDataModelEventsPipeline.EntityType?, 
+            entity: IrohaDataModelEventsPipeline.EntityType?,
             hash: IrohaCrypto.Hash?
         ) {
             self.entity = entity

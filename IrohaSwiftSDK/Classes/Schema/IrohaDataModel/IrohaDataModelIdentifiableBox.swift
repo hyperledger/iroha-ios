@@ -18,8 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModel {
-    public indirect enum IdentifiableBox: Codable {
-        
+    public indirect enum IdentifiableBox: Swift.Codable {
         case account(IrohaDataModelAccount.Account)
         case newAccount(IrohaDataModelAccount.NewAccount)
         case asset(IrohaDataModelAsset.Asset)
@@ -32,26 +31,26 @@ extension IrohaDataModel {
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .account:
-                    return 0
-                case .newAccount:
-                    return 1
-                case .asset:
-                    return 2
-                case .assetDefinition:
-                    return 3
-                case .domain:
-                    return 4
-                case .peer:
-                    return 5
-                case .world:
-                    return 6
+            case .account:
+                return 0
+            case .newAccount:
+                return 1
+            case .asset:
+                return 2
+            case .assetDefinition:
+                return 3
+            case .domain:
+                return 4
+            case .peer:
+                return 5
+            case .world:
+                return 6
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -84,13 +83,13 @@ extension IrohaDataModel {
                 self = .world
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(IdentifiableBox.discriminant(of: self))
             switch self {

@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelMetadata {
-    public struct Metadata: Codable {
+    public struct Metadata: Swift.Codable {
         
         public var map: [String: IrohaDataModel.Value]
         

@@ -18,15 +18,15 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAsset {
-    public struct AssetDefinition: Codable {
+    public struct AssetDefinition: Swift.Codable {
         
         public var valueType: IrohaDataModelAsset.AssetValueType
         public var id: IrohaDataModelAsset.DefinitionId
         public var metadata: IrohaDataModelMetadata.Metadata
         
         public init(
-            valueType: IrohaDataModelAsset.AssetValueType, 
-            id: IrohaDataModelAsset.DefinitionId, 
+            valueType: IrohaDataModelAsset.AssetValueType,
+            id: IrohaDataModelAsset.DefinitionId,
             metadata: IrohaDataModelMetadata.Metadata
         ) {
             self.valueType = valueType

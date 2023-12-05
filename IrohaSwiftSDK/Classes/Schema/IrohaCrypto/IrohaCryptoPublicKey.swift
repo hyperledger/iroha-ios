@@ -15,9 +15,10 @@
 //
 
 import Foundation
+import IrohaSwiftScale
 
 extension IrohaCrypto {
-    public struct PublicKey: Codable {
+    public struct PublicKey: Swift.Codable {
         
         public var digestFunction: IrohaCrypto.Algorithm
         public var payload: [UInt8]

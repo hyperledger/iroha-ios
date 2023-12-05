@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQueryAccount {
-    public struct FindAccountsByName: Codable {
+    public struct FindAccountsByName: Swift.Codable {
         
         public var name: IrohaDataModelExpression.EvaluatesTo
         

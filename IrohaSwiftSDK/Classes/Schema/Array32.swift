@@ -21,7 +21,7 @@ private let arraySize = 32
     
 // MARK: Array32
     
-public struct Array32<Element: Codable> {
+public struct Array32<Element: Swift.Codable> {
     
     enum Error: LocalizedError {
         case invalidInputSequenceLength(Int, Int)
@@ -35,10 +35,6 @@ public struct Array32<Element: Codable> {
     }
     
     public static var fixedSize: Int { arraySize }
-
-    public var data: Data {
-        Data(bytes: array, count: array.count)
-    }
     
     private var array: Array<Element>
     
@@ -93,14 +89,14 @@ extension Array32: Collection {
     
 // MARK: - Codable
     
-extension Array32: Codable {
-    public init(from decoder: Decoder) throws {
+extension Array32: Swift.Codable {
+    public init(from decoder: Swift.Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let array = try (0..<arraySize).map { _ in try container.decode(Element.self) }
         try self.init(array)
     }
     
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Swift.Encoder) throws {
         var container = encoder.unkeyedContainer()
         for element in array {
             try container.encode(element)

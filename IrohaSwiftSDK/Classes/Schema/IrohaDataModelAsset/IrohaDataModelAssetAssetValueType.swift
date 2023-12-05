@@ -18,8 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAsset {
-    public indirect enum AssetValueType: Codable {
-        
+    public indirect enum AssetValueType: Swift.Codable {
         case quantity
         case bigQuantity
         case fixed
@@ -29,20 +28,20 @@ extension IrohaDataModelAsset {
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .quantity:
-                    return 0
-                case .bigQuantity:
-                    return 1
-                case .fixed:
-                    return 2
-                case .store:
-                    return 3
+            case .quantity:
+                return 0
+            case .bigQuantity:
+                return 1
+            case .fixed:
+                return 2
+            case .store:
+                return 3
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -63,13 +62,13 @@ extension IrohaDataModelAsset {
                 self = .store
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(AssetValueType.discriminant(of: self))
             switch self {

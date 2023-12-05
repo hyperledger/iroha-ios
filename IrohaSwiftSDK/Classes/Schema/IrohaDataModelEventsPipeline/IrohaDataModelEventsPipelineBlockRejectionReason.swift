@@ -18,22 +18,21 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEventsPipeline {
-    public indirect enum BlockRejectionReason: Codable {
-        
+    public indirect enum BlockRejectionReason: Swift.Codable {
         case consensusBlockRejection
         
         // MARK: - For Codable purpose
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .consensusBlockRejection:
-                    return 0
+            case .consensusBlockRejection:
+                return 0
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -42,13 +41,13 @@ extension IrohaDataModelEventsPipeline {
                 self = .consensusBlockRejection
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(BlockRejectionReason.discriminant(of: self))
             switch self {

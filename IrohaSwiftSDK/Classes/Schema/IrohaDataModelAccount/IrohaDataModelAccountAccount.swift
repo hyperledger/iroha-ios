@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelAccount {
-    public struct Account: Codable {
+    public struct Account: Swift.Codable {
         
         public var id: IrohaDataModelAccount.Id
         public var assets: [IrohaDataModelAsset.Id: IrohaDataModelAsset.Asset]
@@ -28,11 +28,11 @@ extension IrohaDataModelAccount {
         public var metadata: IrohaDataModelMetadata.Metadata
         
         public init(
-            id: IrohaDataModelAccount.Id, 
-            assets: [IrohaDataModelAsset.Id: IrohaDataModelAsset.Asset], 
-            signatories: [IrohaCrypto.PublicKey], 
-            permissionTokens: [IrohaDataModelPermissions.PermissionToken], 
-            signatureCheckCondition: IrohaDataModelAccount.SignatureCheckCondition, 
+            id: IrohaDataModelAccount.Id,
+            assets: [IrohaDataModelAsset.Id: IrohaDataModelAsset.Asset],
+            signatories: [IrohaCrypto.PublicKey],
+            permissionTokens: [IrohaDataModelPermissions.PermissionToken],
+            signatureCheckCondition: IrohaDataModelAccount.SignatureCheckCondition,
             metadata: IrohaDataModelMetadata.Metadata
         ) {
             self.id = id

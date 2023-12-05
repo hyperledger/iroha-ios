@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelExpression {
-    public struct ContextValue: Codable {
+    public struct ContextValue: Swift.Codable {
         
         public var valueName: String
         

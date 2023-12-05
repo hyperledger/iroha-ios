@@ -19,11 +19,10 @@ import IrohaSwiftScale
 
 extension IrohaDataModel {
     public indirect enum IdBox: Swift.Codable {
-        
-        case accountId(IrohaDataModelAccount.Id)
-        case assetId(IrohaDataModelAsset.Id)
-        case assetDefinitionId(IrohaDataModelAsset.DefinitionId)
         case domainName(String)
+        case accountId(IrohaDataModelAccount.Id)
+        case assetDefinitionId(IrohaDataModelAsset.DefinitionId)
+        case assetId(IrohaDataModelAsset.Id)
         case peerId(IrohaDataModelPeer.Id)
         case worldId
         
@@ -53,20 +52,20 @@ extension IrohaDataModel {
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
             case 0:
-                let val0 = try container.decode(IrohaDataModelAccount.Id.self)
-                self = .accountId(val0)
+                let val0 = try container.decode(String.self)
+                self = .domainName(val0)
                 break
             case 1:
-                let val0 = try container.decode(IrohaDataModelAsset.Id.self)
-                self = .assetId(val0)
+                let val0 = try container.decode(IrohaDataModelAccount.Id.self)
+                self = .accountId(val0)
                 break
             case 2:
                 let val0 = try container.decode(IrohaDataModelAsset.DefinitionId.self)
                 self = .assetDefinitionId(val0)
                 break
             case 3:
-                let val0 = try container.decode(String.self)
-                self = .domainName(val0)
+                let val0 = try container.decode(IrohaDataModelAsset.Id.self)
+                self = .assetId(val0)
                 break
             case 4:
                 let val0 = try container.decode(IrohaDataModelPeer.Id.self)
@@ -87,16 +86,16 @@ extension IrohaDataModel {
             var container = encoder.unkeyedContainer()
             try container.encode(IdBox.discriminant(of: self))
             switch self {
-            case let .accountId(val0):
+            case let .domainName(val0):
                 try container.encode(val0)
                 break
-            case let .assetId(val0):
+            case let .accountId(val0):
                 try container.encode(val0)
                 break
             case let .assetDefinitionId(val0):
                 try container.encode(val0)
                 break
-            case let .domainName(val0):
+            case let .assetId(val0):
                 try container.encode(val0)
                 break
             case let .peerId(val0):

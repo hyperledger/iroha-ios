@@ -24,7 +24,7 @@ extension IrohaDataModelAsset {
         public var domainName: String
         
         public init(
-            name: String, 
+            name: String,
             domainName: String
         ) {
             self.name = name

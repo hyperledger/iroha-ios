@@ -33,19 +33,19 @@ private extension NSDecimalNumber {
 }
     
 private extension Decimal {
-    init(base: Int64, decimalPlaces: Int16) {
+    init(base: UInt64, decimalPlaces: Int16) {
         self = NSDecimalNumber(value: base).multiplying(byPowerOf10: -decimalPlaces) as Decimal
     }
     
-    func toInt64(decimalPlaces: Int16) throws -> Int64 {
+    func toUInt64(decimalPlaces: Int16) throws -> UInt64 {
         let multiplied = (self as NSDecimalNumber)
             .multiplying(byPowerOf10: decimalPlaces, withBehavior: NSDecimalNumber.roundingBehavior(scale: decimalPlaces))
     
-        guard (multiplied as Decimal) <= Decimal(Int64.max) else {
+        guard (multiplied as Decimal) <= Decimal(UInt64.max) else {
             throw FixedPoint.Error.decimalValueTooHigh
         }
     
-        return multiplied.int64Value
+        return multiplied.uint64Value
     }
 }
 // MARK: - FixedPoint
@@ -58,29 +58,29 @@ public struct FixedPoint {
     
     public static let decimalPlaces: Int16 = 9
     
-    public private(set) var base: Int64
+    public private(set) var base: UInt64
     
     public var value: Decimal {
         get { Decimal(base: base, decimalPlaces: Self.decimalPlaces) }
     }
     
-    public init(base: Int64) {
+    public init(base: UInt64) {
         self.base = base
     }
     
     public init(value: Decimal) throws {
-        self.base = try value.toInt64(decimalPlaces: Self.decimalPlaces)
+        self.base = try value.toUInt64(decimalPlaces: Self.decimalPlaces)
     }
 }
     
 // MARK: - Codable
     
-extension FixedPoint: Codable {
-    public init(from decoder: Decoder) throws {
-        self.base = try decoder.singleValueContainer().decode(Int64.self)
+extension FixedPoint: Swift.Codable {
+    public init(from decoder: Swift.Decoder) throws {
+        self.base = try decoder.singleValueContainer().decode(UInt64.self)
     }
     
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Swift.Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(base)
     }
@@ -122,7 +122,7 @@ extension FixedPoint: SignedNumeric {
     }
     
     public init?<T>(exactly source: T) where T : BinaryInteger {
-        guard let base = try? Decimal(exactly: source)?.toInt64(decimalPlaces: Self.decimalPlaces) else {
+        guard let base = try? Decimal(exactly: source)?.toUInt64(decimalPlaces: Self.decimalPlaces) else {
             return nil
         }
     
@@ -130,8 +130,8 @@ extension FixedPoint: SignedNumeric {
     }
     
     public init(integerLiteral value: Int) {
-        // Int value won't exceed Int64.max limit, so we can force unwrap
-        self.base = try! Decimal(value).toInt64(decimalPlaces: Self.decimalPlaces)
+        // Int value won't exceed UInt64.max limit, so we can force unwrap
+        self.base = try! Decimal(value).toUInt64(decimalPlaces: Self.decimalPlaces)
     }
     
     public static func * (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
@@ -144,12 +144,12 @@ extension FixedPoint: SignedNumeric {
     
     public static func / (lhs: FixedPoint, rhs: FixedPoint) -> FixedPoint {
         // Both values are correct fixed points, can be forced
-        .init(base: try! (lhs.value / rhs.value).toInt64(decimalPlaces: Self.decimalPlaces))
+        .init(base: try! (lhs.value / rhs.value).toUInt64(decimalPlaces: Self.decimalPlaces))
     }
     
     public static func /= (lhs: inout FixedPoint, rhs: FixedPoint) {
         // Both values are correct fixed points, can be forced
-        lhs.base = try! (lhs.value / rhs.value).toInt64(decimalPlaces: Self.decimalPlaces)
+        lhs.base = try! (lhs.value / rhs.value).toUInt64(decimalPlaces: Self.decimalPlaces)
     }
     
     public static func += (lhs: inout FixedPoint, rhs: FixedPoint) {

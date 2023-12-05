@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public struct Transaction: Codable {
+    public struct Transaction: Swift.Codable {
         
         public var signatures: [IrohaCrypto.Signature]
         public var payload: IrohaDataModelTransaction.Payload
@@ -26,7 +26,6 @@ extension IrohaDataModelTransaction {
         public init(
             signatures: [IrohaCrypto.Signature],
             payload: IrohaDataModelTransaction.Payload
-
         ) {
             self.signatures = signatures
             self.payload = payload

@@ -18,8 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelEvents {
-    public indirect enum EventSocketMessage: Codable {
-        
+    public indirect enum EventSocketMessage: Swift.Codable {
         case subscriptionRequest(IrohaDataModelEvents.SubscriptionRequest)
         case subscriptionAccepted
         case event(IrohaDataModelEvents.Event)
@@ -29,20 +28,20 @@ extension IrohaDataModelEvents {
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .subscriptionRequest:
-                    return 0
-                case .subscriptionAccepted:
-                    return 1
-                case .event:
-                    return 2
-                case .eventReceived:
-                    return 3
+            case .subscriptionRequest:
+                return 0
+            case .subscriptionAccepted:
+                return 1
+            case .event:
+                return 2
+            case .eventReceived:
+                return 3
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -63,13 +62,13 @@ extension IrohaDataModelEvents {
                 self = .eventReceived
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(EventSocketMessage.discriminant(of: self))
             switch self {

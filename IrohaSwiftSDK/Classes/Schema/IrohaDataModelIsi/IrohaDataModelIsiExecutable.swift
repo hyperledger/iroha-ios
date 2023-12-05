@@ -19,15 +19,14 @@ import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
     public indirect enum Executable: Swift.Codable {
-        
         case instructions([IrohaDataModelIsi.Instruction])
         
         // MARK: - For Codable purpose
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .instructions:
-                    return 0
+            case .instructions:
+                return 0
             }
         }
         
@@ -50,7 +49,7 @@ extension IrohaDataModelIsi {
         
         public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
-            try container.encode(Self.discriminant(of: self))
+            try container.encode(Executable.discriminant(of: self))
             switch self {
             case let .instructions(val0):
                 try container.encode(val0)

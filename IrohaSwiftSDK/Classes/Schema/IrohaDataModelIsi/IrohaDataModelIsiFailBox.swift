@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-    public struct FailBox: Codable {
+    public struct FailBox: Swift.Codable {
         
         public var message: String
         

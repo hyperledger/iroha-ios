@@ -25,8 +25,8 @@ extension IrohaDataModelIsi {
         public var destinationId: IrohaDataModelExpression.EvaluatesTo
         
         public init(
-            sourceId: IrohaDataModelExpression.EvaluatesTo, 
-            object: IrohaDataModelExpression.EvaluatesTo, 
+            sourceId: IrohaDataModelExpression.EvaluatesTo,
+            object: IrohaDataModelExpression.EvaluatesTo,
             destinationId: IrohaDataModelExpression.EvaluatesTo
         ) {
             self.sourceId = sourceId

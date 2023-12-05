@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelPermissions {
-    public struct PermissionToken: Codable {
+    public struct PermissionToken: Swift.Codable {
         
         public var definitionId: String
         public var payload: String

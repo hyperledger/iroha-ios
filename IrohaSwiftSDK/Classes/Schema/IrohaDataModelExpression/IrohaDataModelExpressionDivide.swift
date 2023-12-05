@@ -18,13 +18,13 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelExpression {
-    public struct Divide: Codable {
+    public struct Divide: Swift.Codable {
         
         public var left: IrohaDataModelExpression.EvaluatesTo
         public var right: IrohaDataModelExpression.EvaluatesTo
         
         public init(
-            left: IrohaDataModelExpression.EvaluatesTo, 
+            left: IrohaDataModelExpression.EvaluatesTo,
             right: IrohaDataModelExpression.EvaluatesTo
         ) {
             self.left = left

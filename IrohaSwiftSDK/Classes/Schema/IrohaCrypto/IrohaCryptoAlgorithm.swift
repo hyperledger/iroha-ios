@@ -18,8 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaCrypto {
-    public indirect enum Algorithm: Codable {
-        
+    public indirect enum Algorithm: Swift.Codable {
         case ed25519
         case secp256k1
         case blsNormal
@@ -29,20 +28,20 @@ extension IrohaCrypto {
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .ed25519:
-                    return 0
-                case .secp256k1:
-                    return 1
-                case .blsNormal:
-                    return 2
-                case .blsSmall:
-                    return 3
+            case .ed25519:
+                return 0
+            case .secp256k1:
+                return 1
+            case .blsNormal:
+                return 2
+            case .blsSmall:
+                return 3
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -63,15 +62,15 @@ extension IrohaCrypto {
                 self = .blsSmall
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
-            try container.encode(Self.discriminant(of: self))
+            try container.encode(Algorithm.discriminant(of: self))
             switch self {
             case .ed25519:
                 

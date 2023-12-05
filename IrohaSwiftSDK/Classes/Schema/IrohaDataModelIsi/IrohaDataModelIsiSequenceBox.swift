@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-    public struct SequenceBox: Codable {
+    public struct SequenceBox: Swift.Codable {
         
         public var instructions: [IrohaDataModelIsi.Instruction]
         

@@ -19,7 +19,6 @@ import IrohaSwiftScale
 
 extension IrohaDataModelExpression {
     public indirect enum Expression: Swift.Codable {
-        
         case add(IrohaDataModelExpression.Add)
         case subtract(IrohaDataModelExpression.Subtract)
         case multiply(IrohaDataModelExpression.Multiply)
@@ -45,46 +44,46 @@ extension IrohaDataModelExpression {
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .add:
-                    return 0
-                case .subtract:
-                    return 1
-                case .multiply:
-                    return 2
-                case .divide:
-                    return 3
-                case .mod:
-                    return 4
-                case .raiseTo:
-                    return 5
-                case .greater:
-                    return 6
-                case .less:
-                    return 7
-                case .equal:
-                    return 8
-                case .not:
-                    return 9
-                case .and:
-                    return 10
-                case .or:
-                    return 11
-                case .`if`:
-                    return 12
-                case .raw:
-                    return 13
-                case .query:
-                    return 14
-                case .contains:
-                    return 15
-                case .containsAll:
-                    return 16
-                case .containsAny:
-                    return 17
-                case .`where`:
-                    return 18
-                case .contextValue:
-                    return 19
+            case .add:
+                return 0
+            case .subtract:
+                return 1
+            case .multiply:
+                return 2
+            case .divide:
+                return 3
+            case .mod:
+                return 4
+            case .raiseTo:
+                return 5
+            case .greater:
+                return 6
+            case .less:
+                return 7
+            case .equal:
+                return 8
+            case .not:
+                return 9
+            case .and:
+                return 10
+            case .or:
+                return 11
+            case .`if`:
+                return 12
+            case .raw:
+                return 13
+            case .query:
+                return 14
+            case .contains:
+                return 15
+            case .containsAll:
+                return 16
+            case .containsAny:
+                return 17
+            case .`where`:
+                return 18
+            case .contextValue:
+                return 19
             }
         }
         

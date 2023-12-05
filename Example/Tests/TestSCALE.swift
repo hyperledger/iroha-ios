@@ -57,7 +57,7 @@ class TestSCALE: XCTestCase {
         let iterations = 1000
         
         for _ in 0..<iterations {
-            let base = Int64.random(in: 0...Int64.max)
+            let base = UInt64.random(in: 0...UInt64.max)
             let value = FixedPoint(base: base)
             let data = try encoder.encode(value)
 
@@ -70,7 +70,7 @@ class TestSCALE: XCTestCase {
             // Internal coding confirmation
             do {
                 XCTAssertEqual(data, try encoder.encode(value.base))
-                XCTAssertEqual(try decoder.decode(Int64.self, from: data), value.base)
+                XCTAssertEqual(try decoder.decode(UInt64.self, from: data), value.base)
             }
         }
     }
@@ -522,7 +522,7 @@ class TestSCALE: XCTestCase {
     }
     
     func testTupleStructs() throws {
-        let value = TestTupleStruct(16, "Foo", UInt128("273846587234658723"), true)
+        let value = TestTupleStruct(16, "Foo", UInt128(stringLiteral: "273846587234658723"), true)
         let data = try encoder.encode(value)
         let decoded = try decoder.decode(TestTupleStruct.self, from: data)
         XCTAssertEqual(value._0, decoded._0)

@@ -238,7 +238,7 @@ class TestSDK: XCTestCase {
         func makeMintInstruction(amount: UInt32) -> IrohaDataModelIsi.Instruction {
             .mint(
                 .init(
-                    object: .init(expression: .raw(.u32(amount))),
+                    object: .init(expression: .raw(.numeric(.u32(amount)))),
                     destinationId: .init(
                         expression: .raw(
                             .id(
@@ -291,13 +291,16 @@ class TestSDK: XCTestCase {
             guard event.entityType == .transaction else { return } // Ignore non-transaction events
             guard let transaction = transactions.first(where: { $0.hash == event.hash }) else { return } // Ignore non-test case transactions
             
-            guard let exp = eventsReceivedExps.popLast() else {
+            guard
+                let exp = eventsReceivedExps.popLast(),
+                case .instructions(let instructions) = transaction.payload.executable
+            else {
                 failTest()
                 return
             }
-            
-            switch transaction.payload.instructions[0] {
-                
+
+            switch instructions[0] {
+
             case .register:
                 exp.fulfill() // pass any way, during repeating tests it might be rejected as already existing asset
                 

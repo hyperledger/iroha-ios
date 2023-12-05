@@ -24,7 +24,7 @@ extension IrohaDataModelQuery {
         public var signature: IrohaCrypto.Signature
         
         public init(
-            payload: IrohaDataModelQuery.Payload, 
+            payload: IrohaDataModelQuery.Payload,
             signature: IrohaCrypto.Signature
         ) {
             self.payload = payload
@@ -32,12 +32,3 @@ extension IrohaDataModelQuery {
         }
     }
 }
-
-/*
-extension IrohaDataModelQuery.SignedQueryRequest: ScaleCodec.Encodable {
-    public func encode<E>(in encoder: inout E) throws where E : Encoder {
-        try encoder.encode(payload)
-        try encoder.encode(signature)
-    }
-}
-*/

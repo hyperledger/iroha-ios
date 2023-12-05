@@ -18,13 +18,13 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelIsi {
-    public struct MintBox: Codable {
+    public struct MintBox: Swift.Codable {
         
         public var object: IrohaDataModelExpression.EvaluatesTo
         public var destinationId: IrohaDataModelExpression.EvaluatesTo
         
         public init(
-            object: IrohaDataModelExpression.EvaluatesTo, 
+            object: IrohaDataModelExpression.EvaluatesTo,
             destinationId: IrohaDataModelExpression.EvaluatesTo
         ) {
             self.object = object

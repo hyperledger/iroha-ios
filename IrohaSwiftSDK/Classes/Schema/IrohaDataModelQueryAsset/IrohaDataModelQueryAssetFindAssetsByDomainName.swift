@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQueryAsset {
-    public struct FindAssetsByDomainName: Codable {
+    public struct FindAssetsByDomainName: Swift.Codable {
         
         public var domainName: IrohaDataModelExpression.EvaluatesTo
         

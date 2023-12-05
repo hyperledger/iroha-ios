@@ -18,31 +18,30 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public indirect enum NumericValue: Codable {
-        
+    public indirect enum NumericValue: Swift.Codable {
         case u32(UInt32)
         case u64(UInt64)
         case u128(MyUint128)
-        case fixed(Double)
+        case fixed(FixedPoint)
         
         // MARK: - For Codable purpose
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .u32:
-                    return 0
-                case .u64:
-                    return 1
-                case .u128:
-                    return 2
-                case .fixed:
-                    return 3
+            case .u32:
+                return 0
+            case .u64:
+                return 1
+            case .u128:
+                return 2
+            case .fixed:
+                return 3
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -59,17 +58,17 @@ extension IrohaDataModelTransaction {
                 self = .u128(val0)
                 break
             case 3:
-                let val0 = try container.decode(Double.self)
+                let val0 = try container.decode(FixedPoint.self)
                 self = .fixed(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(NumericValue.discriminant(of: self))
             switch self {
@@ -83,9 +82,7 @@ extension IrohaDataModelTransaction {
                 try container.encode(val0)
                 break
             case let .fixed(val0):
-                let scale: Double = 1_000_000_000
-                let correct = UInt64(val0 * scale)
-                try container.encode(correct)
+                try container.encode(val0)
                 break
             }
         }

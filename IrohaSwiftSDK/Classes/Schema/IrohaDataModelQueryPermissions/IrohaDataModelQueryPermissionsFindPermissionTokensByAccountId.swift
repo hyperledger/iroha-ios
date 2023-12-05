@@ -18,7 +18,7 @@ import Foundation
 import IrohaSwiftScale
 
 extension IrohaDataModelQueryPermissions {
-    public struct FindPermissionTokensByAccountId: Codable {
+    public struct FindPermissionTokensByAccountId: Swift.Codable {
         
         public var id: IrohaDataModelExpression.EvaluatesTo
         

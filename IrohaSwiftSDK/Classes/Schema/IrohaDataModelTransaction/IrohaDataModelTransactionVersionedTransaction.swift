@@ -15,24 +15,24 @@
 //
 
 import Foundation
+import IrohaSwiftScale
 
 extension IrohaDataModelTransaction {
-    public indirect enum VersionedTransaction: Codable {
-        
+    public indirect enum VersionedTransaction: Swift.Codable {
         case v1(IrohaDataModelTransaction._VersionedTransactionV1)
         
         // MARK: - For Codable purpose
         
         static func discriminant(of case: Self) -> UInt8 {
             switch `case` {
-                case .v1:
-                    return 1
+            case .v1:
+                return 1
             }
         }
         
         // MARK: - Decodable
         
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: Swift.Decoder) throws {
             var container = try decoder.unkeyedContainer()
             let discriminant = try container.decode(UInt8.self)
             switch discriminant {
@@ -41,13 +41,13 @@ extension IrohaDataModelTransaction {
                 self = .v1(val0)
                 break
             default:
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
+                throw Swift.DecodingError.dataCorruptedError(in: container, debugDescription: "Unknown discriminant \(discriminant)")
             }
         }
         
         // MARK: - Encodable
         
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Swift.Encoder) throws {
             var container = encoder.unkeyedContainer()
             try container.encode(VersionedTransaction.discriminant(of: self))
             switch self {
